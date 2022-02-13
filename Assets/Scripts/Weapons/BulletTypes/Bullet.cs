@@ -5,8 +5,8 @@ using UnityEngine;
 public interface Bullet
 {
     int clipSize { get; }
-    int fireRate { get; } // shots per second
-    int damage { get; }
+    float fireRate { get; } // shots per second
+    float damage { get; }
     
     void onShoot();
     void onHit();

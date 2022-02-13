@@ -12,19 +12,19 @@ public class BulletPeashooter : MonoBehaviour, Bullet
         }
     }
 
-    public int fireRate
+    public float fireRate
     {
         get
         {
-            return 1;
+            return 1f;
         }
     }
 
-    public int damage
+    public float damage
     {
         get
         {
-            return 1;
+            return 1f;
         }
     }
     public void onShoot()
