@@ -22,7 +22,7 @@ public class PlayerControls : MonoBehaviour
     {
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {
-            MouseLook.RotatePlayer(_player, _camera);
+            Movement.RotatePlayer(_player, _camera);
         }
 
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
