@@ -5,9 +5,9 @@ using UnityEngine;
 public class Globals : MonoBehaviour
 {
     // Start is called before the first frame update
-    public static class Guns
+    public static class Weapons
     {
-        public static Dictionary<int, Bullet> bulletTypes = new Dictionary<int, Bullet>(){
+        public static Dictionary<int, IHitBehaviour> hitBehaviours = new Dictionary<int, IHitBehaviour>(){
             {0, new BulletPeashooter()}
         };
     }

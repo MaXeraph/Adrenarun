@@ -2,43 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletPeashooter : MonoBehaviour, Bullet
-{   
-    public int clipSize
-    {
-        get
-        {
-            return 100;
-        }
-    }
+public class BulletPeashooter : MonoBehaviour, IHitBehaviour
+{
+    public float damage { get { return 1f;} }
 
-    public float fireRate
+    public void startBehaviour()
     {
-        get
-        {
-            return 1f;
-        }
-    }
-
-    public float damage
-    {
-        get
-        {
-            return 1f;
-        }
-    }
-    public void onShoot()
-    {
-        Debug.Log("Peashooter Shooting");
+        Debug.Log("BulletPeashooter is created");
     }
 
     public void onHit()
     {
         Debug.Log("Peashooter Hit something");
-    }
-
-    public void onDestroy()
-    {
-        Debug.Log("Peashooter Destroyed");
     }
 }
