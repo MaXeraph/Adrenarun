@@ -8,7 +8,7 @@ public class Globals : MonoBehaviour
     public static class Weapons
     {
         public static Dictionary<int, IHitBehaviour> hitBehaviours = new Dictionary<int, IHitBehaviour>(){
-            {0, new BulletPeashooter()}
+            {0, new BulletBehaviour()}
         };
     }
 

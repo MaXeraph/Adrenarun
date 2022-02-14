@@ -4,33 +4,41 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    private Dictionary<string, int> _firingBehavior = new Dictionary<string, int>()
+    private Dictionary<string, bool> _firingBehavior = new Dictionary<string, bool>()
     {
-        { "singleShot", 0 },
-        { "shotgun", 0 },
-        { "repeater", 0 }
+        { "singleShot", true },
+        { "shotgun", false },
+        { "repeater", false }
     };
-    private IHitBehaviour _bulletType;
+
     private float _fireRate; // shots per second
-    private int _currentClip;
-    private Dictionary<string, float> _modifiers = new Dictionary<string, float>()
+    private int _magazineSize;
+
+    private int _currentMagazine;
+
+    private IHitBehaviour _hitBehaviour;
+    private Dictionary<string, bool> _hitTypeModifiers = new Dictionary<string, bool>()
     {
-        { "fireRate", 0 },
-        { "maxClip", 0 },
-        { "damage", 0 }
+        { "exploding", false },
+        { "pierceThrough", false }
+    };
+    private Dictionary<string, float> _hitStatsModifiers = new Dictionary<string, float>()
+    {
+        { "damage", 10f }
     };
 
     void Start(){
-        _bulletType = new BulletPeashooter();
+        _hitBehaviour = new BulletBehaviour();
         _fireRate = 1f;
-        _currentClip = 100;
+        _magazineSize = 100;
+        _currentMagazine = 100;
     }
 
     void Fire()
     {
-        if (_currentClip > 0)
+        if (_currentMagazine > 0)
         {
-            _bulletType.startBehaviour();
+            _hitBehaviour.startBehaviour();
         }
         else
         {
@@ -40,6 +48,6 @@ public class Weapon : MonoBehaviour
 
     void Reload()
     {
-        _currentClip = 100;
+        _currentMagazine = _magazineSize;
     }
 }
