@@ -2,13 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletBehaviour : MonoBehaviour, IHitBehaviour
+public class BulletBehaviour : IHitBehaviour
 {
-    public float damage { get { return 1f;} }
+    float _damage;
+    public float Damage 
+    { 
+        get => _damage; 
+        set => _damage = value; 
+    }
+    float _bulletSpeed = 1f;
+    public float BulletSpeed {
+        get => _bulletSpeed;
+        set => _bulletSpeed = value;
+    }
 
-    public void startBehaviour()
+    public void startBehaviour(Vector3 position, Vector3 direction, int damage, float bulletSpeed)
     {
-        Debug.Log("BulletPeashooter is created");
+        BulletMono.create(position, direction, damage, bulletSpeed); 
     }
 
     public void onHit()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IHitBehaviour 
 {
-    float damage { get; }
-    void startBehaviour();
+    float Damage { get; set;}
+    void startBehaviour(Vector3 position, Vector3 direction, int damage, float bulletSpeed);
     void onHit();
 }

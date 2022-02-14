@@ -7,7 +7,7 @@ public class PlayerControls : MonoBehaviour
     // Start is called before the first frame update
     private GameObject _player;
     private GameObject _camera;
-    private GameObject _gun;
+    private Weapon _weapon;
 
     private Vector3 _velocity;
 
@@ -18,7 +18,7 @@ public class PlayerControls : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         _player = GameObject.FindWithTag("Player");
         _camera = GameObject.FindWithTag("MainCamera");
-        // _gun = GameObject.FindWithTag("Gun");
+        _weapon = GetComponent<Weapon>();
     }
 
     // Update is called once per frame
@@ -46,9 +46,13 @@ public class PlayerControls : MonoBehaviour
             Movement.playerDash(_player);
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetButtonDown("Fire1"))
         {
-            ShootControl.Shoot(_gun);
+            _weapon.Attack();
+        }
+        if (Input.GetButtonDown("Reload"))
+        {
+            _weapon.Reload();
         }
 
 

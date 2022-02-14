@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    GameObject cameraView;
     private Dictionary<string, bool> _firingBehavior = new Dictionary<string, bool>()
     {
         { "singleShot", true },
@@ -28,17 +29,20 @@ public class Weapon : MonoBehaviour
     };
 
     void Start(){
+        cameraView = transform.GetChild(0).gameObject;
         _hitBehaviour = new BulletBehaviour();
         _fireRate = 1f;
-        _magazineSize = 100;
-        _currentMagazine = 100;
+        _magazineSize = 10;
+        _currentMagazine = 10;
     }
 
-    void Fire()
+    public void Attack()
     {
         if (_currentMagazine > 0)
         {
-            _hitBehaviour.startBehaviour();
+            _hitBehaviour.startBehaviour(Camera.main.transform.forward + Camera.main.transform.position, cameraView.transform.forward, 25, 20f);
+            _currentMagazine -= 1;
+            Debug.Log("Current magazine: " + _currentMagazine);
         }
         else
         {
@@ -46,8 +50,9 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    void Reload()
+    public void Reload()
     {
         _currentMagazine = _magazineSize;
+        Debug.Log("Reloaded");
     }
 }
