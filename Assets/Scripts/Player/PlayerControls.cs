@@ -9,6 +9,10 @@ public class PlayerControls : MonoBehaviour
     private GameObject _camera;
     private GameObject _gun;
 
+    private Vector3 _velocity;
+
+    bool isGrounded;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -20,6 +24,8 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        checkGround();
+
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {
             Movement.RotatePlayer(_player, _camera);
@@ -30,14 +36,58 @@ public class PlayerControls : MonoBehaviour
             Movement.MoveXY(_player);
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            Movement.Jump(_player);
+            _velocity.y += Movement.jumpVelocity;
+        }
+        
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            Movement.playerDash(_player);
         }
 
         if (Input.GetMouseButton(0))
         {
             ShootControl.Shoot(_gun);
         }
+
+
+        
+        applyGravity();
+        resetYVelocity();
+
+    }
+
+    private void checkGround()
+    {
+        Vector3 origin = new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * .5f), transform.position.z);
+        Vector3 direction = transform.TransformDirection(Vector3.down);
+        float distance = 1.1f;
+
+        if (Physics.Raycast(origin, direction, out RaycastHit hit, distance))
+        {
+            Debug.DrawRay(origin, direction * distance, Color.red);
+            isGrounded = true;
+
+        }
+        else
+        {
+            isGrounded = false;
+        }
+
+    }
+
+    private void resetYVelocity()
+    {
+        if(isGrounded && _velocity.y < 0){
+            _velocity.y = 0f;
+        }
+    }    
+    
+    private void applyGravity()
+    {
+        CharacterController char_controller = _player.GetComponent<CharacterController>();
+        _velocity.y += -45.81f * Time.deltaTime;
+        char_controller.Move(_velocity * Time.deltaTime);
     }
 }
