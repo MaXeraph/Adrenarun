@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IHitBehaviour 
 {
-    void startBehaviour(Vector3 position, Vector3 direction, Dictionary<string, float> statsModifiers);
+    void startBehaviour(Vector3 position, Vector3 direction);
 }

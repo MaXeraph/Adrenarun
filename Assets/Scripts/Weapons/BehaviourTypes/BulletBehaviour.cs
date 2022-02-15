@@ -4,8 +4,29 @@ using UnityEngine;
 
 public class BulletBehaviour : IHitBehaviour
 {
-    public void startBehaviour(Vector3 position, Vector3 direction, Dictionary<string, float> statsModifiers)
+    public Dictionary<string, int> _hitTypeModifiers;
+    public Dictionary<string, float> _hitStatsModifiers;
+
+    public BulletBehaviour()
     {
-        BulletMono.create(position, direction, statsModifiers); 
+        _hitTypeModifiers = new Dictionary<string, int>()
+    {
+        { "exploding", 0 },
+        { "pierceThrough", 0 }
+    };
+        _hitStatsModifiers = new Dictionary<string, float>()
+    {
+        { "damage", 10f },
+        { "bulletSpeed", 20f }
+    };
+    }
+    public BulletBehaviour(Dictionary<string, int> typeModifiers, Dictionary<string, float> statsModifiers)
+    {
+        _hitTypeModifiers = typeModifiers;
+        _hitStatsModifiers = statsModifiers;
+    }
+    public void startBehaviour(Vector3 position, Vector3 direction)
+    {
+        BulletMono.create(position, direction, _hitStatsModifiers); 
     }
 }

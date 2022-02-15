@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    GameObject cameraView;
-
     Dictionary<string, bool> _firingBehavior = new Dictionary<string, bool>()
     {
         { "singleShot", true }, // singleShot == !repeater
@@ -19,37 +17,21 @@ public class Weapon : MonoBehaviour
     int _currentMagazine;
     double lastShot = 0;
 
-    Dictionary<string, bool> _hitTypeModifiers = new Dictionary<string, bool>()
-    {
-        { "exploding", false },
-        { "pierceThrough", false }
-    };
-    Dictionary<string, float> _hitStatsModifiers = new Dictionary<string, float>()
-    {
-        { "damage", 10f },
-        { "bulletSpeed", 20f }
-    };
-
     void Start()
     {
-        cameraView = transform.GetChild(0).gameObject;
-
         _hitBehaviour = new BulletBehaviour();
         _fireRate = 0.1f; 
         _magazineSize = 10;
         _currentMagazine = _magazineSize;
     }
 
-    public void Attack()
+    public void Attack(Vector3 position, Vector3 direction)
     {
         if (Time.time - lastShot > _fireRate)
         {
             if (_currentMagazine > 0)
             {
-                Vector3 bulletPosition = Camera.main.transform.forward + Camera.main.transform.position;
-                Vector3 bulletDirection = Camera.main.transform.forward;
-                _hitBehaviour.startBehaviour(bulletPosition, bulletDirection, _hitStatsModifiers);
-
+                _hitBehaviour.startBehaviour(position, direction);
                 // _currentMagazine -= 1; // Comment out for infinite ammo
                 lastShot = Time.time;
             }

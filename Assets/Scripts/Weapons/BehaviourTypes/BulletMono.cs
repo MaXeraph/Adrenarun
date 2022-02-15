@@ -4,18 +4,9 @@ using UnityEngine;
 
 public class BulletMono : MonoBehaviour
 {
-    float _damage;
-    public float Damage 
-    { 
-        get => _damage; 
-        set => _damage = value; 
-    }
+    float _damage = 10;
 
     float _bulletSpeed = 1f;
-    public float BulletSpeed {
-        get => _bulletSpeed;
-        set => _bulletSpeed = value;
-    }
 
     float _bulletSpawnTime;
 
@@ -26,22 +17,14 @@ public class BulletMono : MonoBehaviour
         newObject.transform.forward = direction;
 
         BulletMono bulletComponent = newObject.GetComponent<BulletMono>();
-        bulletComponent.Damage = statsModifiers["damage"];
-        bulletComponent.BulletSpeed = statsModifiers["bulletSpeed"];
-    }
-
-    void Start()
-    {
-        _bulletSpawnTime = Time.time;
+        bulletComponent._damage += statsModifiers["damage"];
+        bulletComponent._bulletSpeed += statsModifiers["bulletSpeed"];
     }
 
     void Update()
     {
         transform.position += transform.forward * _bulletSpeed * Time.deltaTime; 
-        if (Time.time - _bulletSpawnTime > 10f)
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 
     void OnTriggerEnter(Collider c){
