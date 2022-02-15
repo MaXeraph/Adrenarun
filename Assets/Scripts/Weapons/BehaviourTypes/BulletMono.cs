@@ -24,7 +24,6 @@ public class BulletMono : MonoBehaviour
     void Update()
     {
         transform.position += transform.forward * _bulletSpeed * Time.deltaTime; 
-        Destroy(gameObject);
     }
 
     void OnTriggerEnter(Collider c){
