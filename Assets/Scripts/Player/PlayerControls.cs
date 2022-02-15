@@ -46,7 +46,7 @@ public class PlayerControls : MonoBehaviour
             Movement.playerDash(_player);
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
             _weapon.Attack();
         }
