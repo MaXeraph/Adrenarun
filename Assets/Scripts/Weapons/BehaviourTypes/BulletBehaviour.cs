@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BulletBehaviour : IHitBehaviour
 {
-    public void startBehaviour(Vector3 position, Vector3 direction, int damage, float bulletSpeed)
+    public void startBehaviour(Vector3 position, Vector3 direction, Dictionary<string, float> statsModifiers)
     {
-        BulletMono.create(position, direction, damage, bulletSpeed); 
+        BulletMono.create(position, direction, statsModifiers); 
     }
 }

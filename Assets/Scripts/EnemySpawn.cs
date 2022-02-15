@@ -10,7 +10,7 @@ public class EnemySpawn : MonoBehaviour
     private bool _cooldown = false;
     private float _cooldownDelay = SpeedManager.enemySpawnScaling;
 
-    private const float _abovePlatformHeight = 1f; //TODO:  check this value
+    private const float _abovePlatformHeight = 0.6f; //TODO:  check this value
     private const float _platformOffset = 1f; //TODO:  check this value
 
 
