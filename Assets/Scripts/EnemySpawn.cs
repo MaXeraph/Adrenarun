@@ -40,6 +40,7 @@ public class EnemySpawn : MonoBehaviour
 
     void SpawnEnemy()
     {
+        //TODO: consider if we want to preset Enemy data in Prefab or upon method call
         _enemySpawn.x = _platformTransform.position[0] + Random.Range(-_platformSize.x, _platformSize.x);
         _enemySpawn.z = _platformTransform.position[2] + Random.Range(-_platformSize.z, _platformSize.z);
         _enemySpawn.y = _platformTransform.position[1] + _platformSize.y;
