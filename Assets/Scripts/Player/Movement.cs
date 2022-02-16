@@ -5,12 +5,12 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     // Movement variables
-    static float speed = 12f;
-    static float dashSpeed = 3f;
+    public static float speed = 12f;
+    public static float dashSpeed = 3f;
 
     // Jump variables
     // NOTE: -45.81 is an experimental value for gravity
-    static float jumpHeight = 3f;
+    public static float jumpHeight = 3f;
     public static float jumpVelocity = Mathf.Sqrt(jumpHeight * -2f * -45.81f);
 
     // MouseLook variables

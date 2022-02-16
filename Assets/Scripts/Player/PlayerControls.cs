@@ -8,8 +8,10 @@ public class PlayerControls : MonoBehaviour
     private GameObject _player;
     private GameObject _camera;
     private GameObject _gun;
+    private PlayerStats stats;
 
     private Vector3 _velocity;
+    private float last_shot;
 
     bool isGrounded;
 
@@ -18,6 +20,7 @@ public class PlayerControls : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         _player = GameObject.FindWithTag("Player");
         _camera = GameObject.FindWithTag("MainCamera");
+        stats = GetComponent<PlayerStats>();
         // _gun = GameObject.FindWithTag("Gun");
     }
 
@@ -48,7 +51,12 @@ public class PlayerControls : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            ShootControl.Shoot(_gun);
+            if (Time.time >= last_shot + stats.fireRate)
+            {
+                last_shot = Time.time;
+                ShootControl.Shoot(_gun);
+                stats.Ammo -= 1;
+            }
         }
 
 
