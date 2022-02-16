@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//To be attached to Player or Enemy Objects
 public class Weapon : MonoBehaviour
 {
     Dictionary<string, bool> _firingBehavior = new Dictionary<string, bool>()
@@ -19,7 +20,7 @@ public class Weapon : MonoBehaviour
 
     void Start()
     {
-        _hitBehaviour = new BulletBehaviour();
+        _hitBehaviour = new BulletBehaviour(); //TODO: make this to be passable instead of a default
         _fireRate = 0.1f; 
         _magazineSize = 10;
         _currentMagazine = _magazineSize;
