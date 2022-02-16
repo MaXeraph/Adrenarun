@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using Lean.Gui;
+//using Lean.Gui;
 
 public class UI_health : MonoBehaviour
 {
@@ -13,7 +13,7 @@ public class UI_health : MonoBehaviour
     public Image slider_fill;
     public Image slow_fill;
     private float current;
-    public LeanShake shake;
+    public Shaker shake;
 
     private Animation anim;
     private bool dead = false;
