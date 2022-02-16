@@ -16,8 +16,8 @@ public class BulletBehaviour : IHitBehaviour
         };
         _hitStatsModifiers = new Dictionary<string, float>()
         {
-            { "damage", 10f },
-            { "bulletSpeed", 20f }
+            { "damage", 0 },
+            { "bulletSpeed", 0 }
         };
     }
     public BulletBehaviour(Dictionary<string, int> typeModifiers, Dictionary<string, float> statsModifiers)

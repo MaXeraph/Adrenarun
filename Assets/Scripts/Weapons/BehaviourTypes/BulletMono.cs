@@ -5,9 +5,9 @@ using UnityEngine;
 //To be attached to Bullet Objects
 public class BulletMono : MonoBehaviour
 {
-    float _damage = 10;
+    float _damage = 10f;
 
-    float _bulletSpeed = 1f;
+    float _bulletSpeed = 10f;
 
     float _bulletSpawnTime;
 
