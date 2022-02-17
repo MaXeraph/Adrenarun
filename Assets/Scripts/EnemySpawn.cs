@@ -10,7 +10,6 @@ public class EnemySpawn : MonoBehaviour
     private float _cooldownDelay = SpeedManager.enemySpawnScaling;
     private const float platformRadius = 175/2;
 
-    // public UpdatePlayerInfo UpdatePlayerInfo;
     // Start is called before the first frame update
     void Start()
     {
