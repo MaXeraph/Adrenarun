@@ -37,7 +37,7 @@ public class PlayerControls : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            _velocity.y += Movement.jumpVelocity * SpeedManager.playerMovementScaling;
+            _velocity.y += Movement.jumpVelocity;
         }
         
         if (Input.GetKey(KeyCode.LeftShift))
@@ -67,7 +67,7 @@ public class PlayerControls : MonoBehaviour
     {
         Vector3 origin = new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * .5f), transform.position.z);
         Vector3 direction = transform.TransformDirection(Vector3.down);
-        float distance = 1.1f;
+        float distance = 0.6f;
 
         if (Physics.Raycast(origin, direction, out RaycastHit hit, distance))
         {
@@ -92,7 +92,7 @@ public class PlayerControls : MonoBehaviour
     private void applyGravity()
     {
         CharacterController char_controller = _player.GetComponent<CharacterController>();
-        _velocity.y += -45.81f * Time.deltaTime;
-        char_controller.Move(_velocity * Time.deltaTime);
+        _velocity.y += -45.81f * Time.deltaTime * SpeedManager.playerMovementScaling;
+        char_controller.Move(_velocity * Time.deltaTime * SpeedManager.playerMovementScaling);
     }
 }

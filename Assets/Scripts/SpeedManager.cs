@@ -21,8 +21,8 @@ public class SpeedManager : MonoBehaviour
 
     static void updateGameObjectSpeed(){
         playerMovementScaling = coreSpeed;
-        bulletSpeedScaling = 1 / coreSpeed;
-        enemySpawnScaling = coreSpeed;
+        bulletSpeedScaling = coreSpeed;
+        enemySpawnScaling = 1 / coreSpeed;
     }
 
 }
