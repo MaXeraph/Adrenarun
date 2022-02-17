@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IHitBehaviour 
+public abstract class IHitBehaviour
 {
-    void startBehaviour(Vector3 position, Vector3 direction);
+    protected EntityType _owner;
+    public abstract void startBehaviour(Vector3 position, Vector3 direction);
 }

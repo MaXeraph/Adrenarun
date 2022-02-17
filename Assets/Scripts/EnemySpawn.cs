@@ -67,7 +67,7 @@ public class EnemySpawn : MonoBehaviour
         Vector3 targetSpawn;
         if (RandomPoint(platformRadius, out targetSpawn)) {
             Debug.DrawRay(targetSpawn, Vector3.up, Color.blue, 1.0f);
-            GameObject.Instantiate(Resources.Load("Enemy"), targetSpawn, Quaternion.identity);
+            EnemyFactory.Instance.CreateEnemy("Enemy", targetSpawn);
         }
     }
 

@@ -15,7 +15,7 @@ public class EnemyBehaviour : MonoBehaviour
     private Vector3 _direction;
     private bool _cooldown = false;
     private float _cooldownDelay = 1f;
-    // _weapon = new Weapon();
+    private Weapon _weapon;
 
     // Method to pathfind from Transform to Transform, returns Vector3, the direction to move in next.
     private Func<Transform, Transform, Vector3> Pathfind;
@@ -35,10 +35,11 @@ public class EnemyBehaviour : MonoBehaviour
         GameObject target, 
         Func<Transform, Transform, Vector3> pathfind, 
         Func<Transform, Transform, Vector3> aim, 
-        Action<Transform, Vector3> move)
+        Action<Transform, Vector3> move,
+        Weapon weapon)
     {
         EnemyBehaviour eb = gameObject.AddComponent<EnemyBehaviour>();
-        eb.Initialize(target, pathfind, aim, move);
+        eb.Initialize(target, pathfind, aim, move, weapon);
 
         return eb;
     }
@@ -48,11 +49,13 @@ public class EnemyBehaviour : MonoBehaviour
     public bool Initialize(GameObject target, 
         Func<Transform, Transform, Vector3> pathfind, 
         Func<Transform, Transform, Vector3> aim,
-        Action<Transform, Vector3> move)
+        Action<Transform, Vector3> move,
+        Weapon weapon)
     {
         if (_initialized) return false;
         _initialized = true;
 
+        _weapon = weapon;
         _targetTransform = target.GetComponent<Transform>();
         Pathfind = pathfind;
         GetAimDirection = aim;
@@ -82,13 +85,8 @@ public class EnemyBehaviour : MonoBehaviour
         
         // Aim. Determine firing direction.
         Vector3 aimDirection = GetAimDirection(transform, _targetTransform);
-        
-        // Fire.
-        if (!_cooldown)
-        {
-            // _weapon.Fire(aimDirection);
-            _cooldown = true;
-            StartCoroutine(Cooldown());
-        }
+
+        // TODO: spawn bullet outside of model
+        _weapon.Attack(transform.position + aimDirection*2, aimDirection);
     }
 }
