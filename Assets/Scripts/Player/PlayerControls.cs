@@ -5,13 +5,11 @@ using UnityEngine;
 public class PlayerControls : MonoBehaviour
 {
     private GameObject _player;
-
+    private GameObject _camera;
+    private GameObject _gun;
     private PlayerStats stats;
 
-    private Weapon _weapon;
-
     private Vector3 _velocity;
-    private Camera _camera;
 
     bool isGrounded;
 
@@ -19,9 +17,9 @@ public class PlayerControls : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         _player = GameObject.FindWithTag("Player");
+        _camera = GameObject.FindWithTag("MainCamera");
         stats = GetComponent<PlayerStats>();
-        _camera = Camera.main;
-        _weapon = GetComponent<Weapon>();
+        // _gun = GameObject.FindWithTag("Gun");
     }
 
     void Update()
@@ -30,7 +28,7 @@ public class PlayerControls : MonoBehaviour
 
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {
-            Movement.RotatePlayer(_player, _camera.gameObject);
+            Movement.RotatePlayer(_player, _camera);
         }
 
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
@@ -49,17 +47,10 @@ public class PlayerControls : MonoBehaviour
             Movement.playerDash(_player);
         }
 
-        if (Input.GetButton("Fire1"))
+        if (Input.GetMouseButtonDown(0))
         {
-            Vector3 position = _camera.transform.forward + _camera.transform.position;
-            Vector3 direction = _camera.transform.forward;
-            _weapon.Attack(position, direction);
+            ShootControl.Shoot(_gun);
             stats.Ammo -= 1;
-        }
-        if (Input.GetButtonDown("Reload"))
-        {
-            _weapon.Reload();
-            stats.Reloading = true;
         }
 
 
