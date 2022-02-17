@@ -22,7 +22,9 @@ public class PlayerStats : MonoBehaviour
             reloading = value;
             AmmoBar.UpdateAmmo(ammo, reloading);
             if (reloading)
-            { DOTween.To(() => Ammo, x => Ammo = x, ammoCapacity, reloadSpeed); }
+            {
+                if (ammo != 0) { AmmoBar.UpdateAmmo(ammo - 1, reloading); }
+                DOTween.To(() => Ammo, x => Ammo = x, ammoCapacity, reloadSpeed); }
         }
     }
     private bool reloading = false;
@@ -66,9 +68,10 @@ public class PlayerStats : MonoBehaviour
         set
         {
             ammo = Mathf.Clamp(value, 0, ammoCapacity);
-            if (ammo == 0) { Reloading = true; }
+            if (ammo <= 0) { Reloading = true;}
             else if (ammo == ammoCapacity) { Reloading = false; }
-            AmmoBar.UpdateAmmo(ammo,reloading);
+            AmmoBar.UpdateAmmo(ammo, reloading);
+
         }
     }
     private int ammo;
@@ -108,7 +111,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] float maxHealth = 100f;
 
     void Awake()
-        {
+    {
         MaxHealth = maxHealth;
         Health = maxHealth;
         AmmoCapacity = ammoCapacity;
@@ -116,7 +119,7 @@ public class PlayerStats : MonoBehaviour
         Speed = speed;
         JumpHeight = jumpHeight;
         DashSpeed = dashSpeed;
-        }
+    }
 
 
     void Update()

@@ -3,24 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-//using Lean.Gui;
 
 public class UI_health : MonoBehaviour
 {
-   // public GameObject gameOver;
-   // public Animation deathAnim;
     public Slider slider;
     public Image slider_fill;
     public Image slow_fill;
     private float current;
-    public Shaker shake;
 
     private Animation anim;
-    private bool dead = false;
+    private bool dead = false;  
+    
 
     void Start()
     {
-        anim = GetComponent<Animation>();
         ColorChanger();
     }
 
@@ -35,21 +31,28 @@ public class UI_health : MonoBehaviour
     {
         if (health < current)
         {
-            shake.Shake(5);
-            DOTween.To(() => shake.Strength, x => shake.Strength = x, 0f, 0.25f);
+                impact_fill(health);
         }
+
+        else { slow_fill.fillAmount = health / slider.maxValue; }
 
         current = health;
         slider.value = current;
         ColorChanger();
-        slow_fill.DOFillAmount(current / slider.maxValue, 0.5f);
+
         if (current <= 0 && !dead)
         {
             dead = true;
             Cursor.lockState = CursorLockMode.None;
-            //gameOver.SetActive(true);
-            //deathAnim.Play();
         }
+    }
+
+    void impact_fill(float fill)
+    {
+        Sequence damaged = DOTween.Sequence();
+        damaged.Append(transform.DOShakePosition(0.075f, new Vector3(2f, 2f, 2f), 10, 15f).SetLoops(3));
+        damaged.Insert(0,transform.DOShakeRotation(0.075f, new Vector3(2, 2, 2), 10, 15f).SetLoops(3));
+        damaged.Append(slow_fill.DOFillAmount(fill / slider.maxValue, 0.4f));
     }
 
     void ColorChanger()

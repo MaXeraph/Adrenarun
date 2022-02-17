@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
-    // Start is called before the first frame update
     private GameObject _player;
     private GameObject _camera;
     private GameObject _gun;
     private PlayerStats stats;
 
     private Vector3 _velocity;
-    private float last_shot;
 
     bool isGrounded;
 
@@ -24,7 +22,6 @@ public class PlayerControls : MonoBehaviour
         // _gun = GameObject.FindWithTag("Gun");
     }
 
-    // Update is called once per frame
     void Update()
     {
         checkGround();
@@ -37,6 +34,7 @@ public class PlayerControls : MonoBehaviour
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
             Movement.MoveXY(_player);
+            if (isGrounded) { GetComponent<bob>().update_bob(); }
         }
 
         if (Input.GetButtonDown("Jump") && isGrounded)
@@ -49,14 +47,10 @@ public class PlayerControls : MonoBehaviour
             Movement.playerDash(_player);
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Time.time >= last_shot + stats.fireRate)
-            {
-                last_shot = Time.time;
-                ShootControl.Shoot(_gun);
-                stats.Ammo -= 1;
-            }
+            ShootControl.Shoot(_gun);
+            stats.Ammo -= 1;
         }
 
 
