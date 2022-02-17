@@ -37,7 +37,7 @@ public class PlayerControls : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            _velocity.y += Movement.jumpVelocity;
+            _velocity.y += Movement.jumpVelocity * SpeedManager.playerMovementScaling;
         }
         
         if (Input.GetKey(KeyCode.LeftShift))

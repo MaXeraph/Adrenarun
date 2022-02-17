@@ -16,6 +16,9 @@ public class Stats : MonoBehaviour
 
     void Start(){
         isPlayer = gameObject.tag == "Player";
+        // TODO: we need to refactor Stats.cs and decide to 
+        //       add the component to the prefab, or through a script.
+        maxHealth = 100f;
         currentHealth = maxHealth;
     }
 
