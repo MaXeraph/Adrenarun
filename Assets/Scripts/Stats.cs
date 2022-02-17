@@ -26,7 +26,9 @@ public class Stats : MonoBehaviour
     void Update()
     {
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        SpeedManager.updateSpeeds(currentHealth / maxHealth);
+        if(isPlayer) {
+            SpeedManager.updateSpeeds(currentHealth / maxHealth);
+        }
     }
 
     public void takeDamage(float damage)
