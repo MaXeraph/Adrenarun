@@ -70,5 +70,4 @@ public class UIManager : MonoBehaviour
         }
     }
     [SerializeField] static float maxHealth = 100f;
-
 }

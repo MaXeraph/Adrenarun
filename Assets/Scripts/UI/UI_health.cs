@@ -11,6 +11,7 @@ public class UI_health : MonoBehaviour
     public static Image slow_fill;
     private static float current;
     private static float max;
+    private static Vector3 start_pos;
 
     private static bool dead = false;  
 
@@ -18,7 +19,7 @@ public class UI_health : MonoBehaviour
 
     void Awake()
     {
-        instance = this; 
+        instance = this;
         slider = GetComponent<Slider>();
         slider_fill = GameObject.Find("Fill").GetComponent<Image>();
         slow_fill = transform.Find("Slow").GetComponent<Image>();
@@ -26,6 +27,7 @@ public class UI_health : MonoBehaviour
 
     void Start()
     {
+        start_pos = transform.position;
         ColorChanger();
     }
 
@@ -63,6 +65,8 @@ public class UI_health : MonoBehaviour
         damaged.Append(instance.transform.DOShakePosition(0.075f, new Vector3(2f, 2f, 2f), 10, 15f).SetLoops(3));
         damaged.Insert(0, instance.transform.DOShakeRotation(0.075f, new Vector3(2, 2, 2), 10, 15f).SetLoops(3));
         damaged.Append(slow_fill.DOFillAmount(fill / max, 0.4f));
+        damaged.Insert(1, instance.transform.DOMove(start_pos, 0.1f));
+        damaged.Insert(1, instance.transform.DORotate(new Vector3(0, 0, 0), 0.1f));
     }
 
     public static void ColorChanger()
