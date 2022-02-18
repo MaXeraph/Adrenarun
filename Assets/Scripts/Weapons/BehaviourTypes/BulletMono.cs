@@ -11,9 +11,9 @@ public class BulletMono : MonoBehaviour
 
     float _bulletSpawnTime;
 
-    bool _playerBullet;
+    EntityType _owner;
 
-    public static void create(Vector3 position, Vector3 direction, Dictionary<string, float> statsModifiers, bool playerBullet = true)
+    public static void create(Vector3 position, Vector3 direction, Dictionary<string, float> statsModifiers, EntityType owner)
     {
         GameObject newObject = Instantiate(Resources.Load("Bullet")) as GameObject;
         newObject.transform.position = position;
@@ -22,7 +22,7 @@ public class BulletMono : MonoBehaviour
         BulletMono bulletComponent = newObject.GetComponent<BulletMono>();
         bulletComponent._damage += statsModifiers["damage"];
         bulletComponent._bulletSpeed += statsModifiers["bulletSpeed"];
-        bulletComponent._playerBullet = playerBullet;
+        bulletComponent._owner = owner;
     }
 
     void Update()
@@ -33,7 +33,7 @@ public class BulletMono : MonoBehaviour
     void OnTriggerEnter(Collider c){
         Stats statsComponent = c.gameObject.GetComponent<Stats>();
         if (statsComponent){
-            if (statsComponent.isPlayer != _playerBullet){
+            if (statsComponent.owner != _owner){
                 statsComponent.takeDamage(_damage);
                 Destroy(gameObject); // bullet
             }

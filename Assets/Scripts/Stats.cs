@@ -2,20 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// To be attached to Player Object
+// TODO: refactor away from MonoBehaviour
 public class Stats : MonoBehaviour
 {
     public float currentHealth;
     public float maxHealth;
-    public bool isPlayer;
+    public EntityType owner;
 
     public Stats(float maxHealth = 100f)
     {
         this.maxHealth = maxHealth;
     }
 
-    void Start(){
-        isPlayer = gameObject.tag == "Player";
+    void Start()
+    {
+        // TODO: refactor for more dynamic assignment
+        if (gameObject.tag == "Player") owner = EntityType.PLAYER;
+        else owner = EntityType.ENEMY;
         currentHealth = maxHealth;
     }
 

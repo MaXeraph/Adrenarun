@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Globals : MonoBehaviour
+public class Globals
 {
-    // Start is called before the first frame update
-    public static class Weapon
-    {
-        public static Dictionary<int, IHitBehaviour> hitBehaviours = new Dictionary<int, IHitBehaviour>(){
-            {0, new BulletBehaviour()}
-        };
-    }
+	public static Vector3 DirectTargeting(Transform from, Transform to) {
+		Vector3 direction = (to.position - from.position).normalized;
+		return direction;
+	}
+}
 
+public enum EntityType {
+	PLAYER,
+	ENEMY
 }
