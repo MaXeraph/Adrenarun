@@ -19,6 +19,7 @@ public class Stats : MonoBehaviour
         // TODO: refactor for more dynamic assignment
         if (gameObject.tag == "Player") owner = EntityType.PLAYER;
         else owner = EntityType.ENEMY;
+        maxHealth = 100f;
         currentHealth = maxHealth;
     }
 
@@ -26,6 +27,9 @@ public class Stats : MonoBehaviour
     void Update()
     {
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        if(owner == EntityType.PLAYER) {
+            SpeedManager.updateSpeeds(currentHealth / maxHealth);
+        }
     }
 
     public void takeDamage(float damage)

@@ -27,7 +27,7 @@ public class BulletMono : MonoBehaviour
 
     void Update()
     {
-        transform.position += transform.forward * _bulletSpeed * Time.deltaTime; 
+        transform.position += transform.forward * _bulletSpeed * Time.deltaTime * SpeedManager.bulletSpeedScaling;
     }
 
     void OnTriggerEnter(Collider c){

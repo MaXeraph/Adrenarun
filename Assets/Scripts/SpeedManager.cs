@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpeedManager : MonoBehaviour
 {
-    public static float coreSpeed = 5f; // 1:1 with health percentage
+    public static float coreSpeed = 1f; // 1:1 with health percentage
     public static float playerMovementScaling;
     public static float bulletSpeedScaling;
     public static float enemySpawnScaling;
@@ -22,7 +22,7 @@ public class SpeedManager : MonoBehaviour
     static void updateGameObjectSpeed(){
         playerMovementScaling = coreSpeed;
         bulletSpeedScaling = coreSpeed;
-        enemySpawnScaling = coreSpeed;
+        enemySpawnScaling = 1 / coreSpeed;
     }
 
 }
