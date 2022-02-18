@@ -7,7 +7,7 @@ public class PlayerControls : MonoBehaviour
     private GameObject _player;
     private GameObject _camera;
     private GameObject _gun;
-    private PlayerStats stats;
+    //private PlayerStats stats;
 
     private Vector3 _velocity;
 
@@ -18,13 +18,21 @@ public class PlayerControls : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         _player = GameObject.FindWithTag("Player");
         _camera = GameObject.FindWithTag("MainCamera");
-        stats = GetComponent<PlayerStats>();
-        // _gun = GameObject.FindWithTag("Gun");
+
+        UIManager.AmmoCapacity = 16;
+        UIManager.Ammo = 16;
+        UIManager.MaxHealth = 100;
+        UIManager.Health = 100;
     }
 
     void Update()
     {
         checkGround();
+
+        if (Input.GetKeyDown(KeyCode.Equals)) { UIManager.Health += 10f; }
+        if (Input.GetKeyDown(KeyCode.Minus)) { UIManager.Health -= 10f; }
+
+
 
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {
@@ -34,7 +42,6 @@ public class PlayerControls : MonoBehaviour
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
             Movement.MoveXY(_player);
-            if (isGrounded) { GetComponent<bob>().update_bob(); }
         }
 
         if (Input.GetButtonDown("Jump") && isGrounded)
@@ -50,7 +57,7 @@ public class PlayerControls : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             ShootControl.Shoot(_gun);
-            stats.Ammo -= 1;
+           // PlayerStats.Ammo -= 1;
         }
 
 
