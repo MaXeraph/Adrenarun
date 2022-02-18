@@ -2,22 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// To be attached to Player Object
+// TODO: refactor away from MonoBehaviour
 public class Stats : MonoBehaviour
 {
     public float currentHealth;
     public float maxHealth;
-    public bool isPlayer;
+    public EntityType owner;
 
     public Stats(float maxHealth = 100f)
     {
         this.maxHealth = maxHealth;
     }
 
-    void Start(){
-        isPlayer = gameObject.tag == "Player";
-        // TODO: we need to refactor Stats.cs and decide to 
-        //       add the component to the prefab, or through a script.
+    void Start()
+    {
+        // TODO: refactor for more dynamic assignment
+        if (gameObject.tag == "Player") owner = EntityType.PLAYER;
+        else owner = EntityType.ENEMY;
         maxHealth = 100f;
         currentHealth = maxHealth;
     }

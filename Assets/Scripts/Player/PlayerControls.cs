@@ -17,7 +17,7 @@ public class PlayerControls : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         _player = GameObject.FindWithTag("Player");
         _camera = Camera.main;
-        _weapon = GetComponent<Weapon>();
+        _weapon = new Weapon(new BulletBehaviour(EntityType.PLAYER));
     }
 
     // Update is called once per frame
@@ -56,8 +56,6 @@ public class PlayerControls : MonoBehaviour
             _weapon.Reload();
         }
 
-
-        
         applyGravity();
         resetYVelocity();
 

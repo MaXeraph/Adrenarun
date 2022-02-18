@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //To be attached to Player or Enemy Objects
-public class Weapon : MonoBehaviour
+public class Weapon
 {
     Dictionary<string, bool> _firingBehavior = new Dictionary<string, bool>()
     {
@@ -18,12 +18,12 @@ public class Weapon : MonoBehaviour
     int _currentMagazine;
     double lastShot = 0;
 
-    void Start()
+    public Weapon(IHitBehaviour hitBehaviour, float fireRate = 0.1f, int magSize = 1)
     {
-        _hitBehaviour = new BulletBehaviour(); //TODO: make this to be passable instead of a default
-        _fireRate = 0.1f; 
-        _magazineSize = 10;
-        _currentMagazine = _magazineSize;
+        _hitBehaviour = hitBehaviour;
+        _fireRate = fireRate; 
+        _magazineSize = magSize;
+        _currentMagazine = magSize;
     }
 
     public void Attack(Vector3 position, Vector3 direction)

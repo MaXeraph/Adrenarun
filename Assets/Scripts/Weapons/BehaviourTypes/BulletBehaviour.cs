@@ -7,8 +7,9 @@ public class BulletBehaviour : IHitBehaviour
     public Dictionary<string, int> _hitTypeModifiers;
     public Dictionary<string, float> _hitStatsModifiers;
 
-    public BulletBehaviour()
+    public BulletBehaviour(EntityType owner)
     {
+        _owner = owner;
         _hitTypeModifiers = new Dictionary<string, int>()
         {
             { "exploding", 0 },
@@ -25,8 +26,8 @@ public class BulletBehaviour : IHitBehaviour
         _hitTypeModifiers = typeModifiers;
         _hitStatsModifiers = statsModifiers;
     }
-    public void startBehaviour(Vector3 position, Vector3 direction)
+    public override void startBehaviour(Vector3 position, Vector3 direction)
     {
-        BulletMono.create(position, direction, _hitStatsModifiers);
+        BulletMono.create(position, direction, _hitStatsModifiers, _owner);
     }
 }
