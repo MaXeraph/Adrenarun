@@ -162,7 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 0
-  isPlayer: 0
+  owner: 0
 --- !u!1 &5841979812240164344
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +174,6 @@ GameObject:
   - component: {fileID: 5841979812240164345}
   - component: {fileID: 5841979812240164348}
   - component: {fileID: 5841979812240164351}
-  - component: {fileID: 5841979812240164350}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -245,17 +244,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5841979812240164350
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5841979812240164344}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
