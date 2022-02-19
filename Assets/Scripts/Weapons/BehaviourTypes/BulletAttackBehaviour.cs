@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Bullet-type attack. Spawns a bullet to determine hits.
+ */
 public class BulletAttackBehaviour : AbstractAttackBehaviour
 {
+    public float _bulletSpeed;
     public Dictionary<string, int> _hitTypeModifiers;
     public Dictionary<string, float> _hitStatsModifiers;
 
-    public BulletAttackBehaviour(EntityType owner)
+    public BulletAttackBehaviour(EntityType owner, float damage = 10f, float bulletSpeed = 10f) 
+        : base(owner, damage)
     {
-        _owner = owner;
+        _bulletSpeed = bulletSpeed;
         _hitTypeModifiers = new Dictionary<string, int>()
         {
             { "exploding", 0 },
@@ -21,13 +26,25 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
             { "bulletSpeed", 0 }
         };
     }
-    public BulletAttackBehaviour(Dictionary<string, int> typeModifiers, Dictionary<string, float> statsModifiers)
-    {
-        _hitTypeModifiers = typeModifiers;
-        _hitStatsModifiers = statsModifiers;
-    }
+
     public override void initiateAttack(Vector3 position, Vector3 direction)
     {
-        BulletMono.create(position, direction, _hitStatsModifiers, _owner);
+        BulletMono.create(this, position, direction);
+    }
+
+    public override bool onHit(GameObject target)
+    {
+        Stats statsComponent = target.GetComponent<Stats>();
+        if (statsComponent)
+        {
+            if (statsComponent.owner != _owner)
+            {
+                statsComponent.takeDamage(_damage);
+                return false; // destroy the bullet
+            }
+        }
+        else return false;
+
+        return true;
     }
 }
