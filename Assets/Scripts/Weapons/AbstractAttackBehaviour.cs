@@ -5,5 +5,5 @@ using UnityEngine;
 public abstract class AbstractAttackBehaviour
 {
     protected EntityType _owner;
-    public abstract void startBehaviour(Vector3 position, Vector3 direction);
+    public abstract void initiateAttack(Vector3 position, Vector3 direction);
 }

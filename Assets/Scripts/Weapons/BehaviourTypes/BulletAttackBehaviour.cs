@@ -26,7 +26,7 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
         _hitTypeModifiers = typeModifiers;
         _hitStatsModifiers = statsModifiers;
     }
-    public override void startBehaviour(Vector3 position, Vector3 direction)
+    public override void initiateAttack(Vector3 position, Vector3 direction)
     {
         BulletMono.create(position, direction, _hitStatsModifiers, _owner);
     }
