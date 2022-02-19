@@ -12,13 +12,13 @@ public class Weapon
         { "repeater", false }
     };
 
-    IHitBehaviour _hitBehaviour;
+    AbstractAttackBehaviour _hitBehaviour;
     float _fireRate; // shots per second
     int _magazineSize;
     int _currentMagazine;
     double lastShot = 0;
 
-    public Weapon(IHitBehaviour hitBehaviour, float fireRate = 0.1f, int magSize = 1)
+    public Weapon(AbstractAttackBehaviour hitBehaviour, float fireRate = 0.1f, int magSize = 1)
     {
         _hitBehaviour = hitBehaviour;
         _fireRate = fireRate; 

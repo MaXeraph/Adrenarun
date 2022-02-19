@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletBehaviour : IHitBehaviour
+public class BulletAttackBehaviour : AbstractAttackBehaviour
 {
     public Dictionary<string, int> _hitTypeModifiers;
     public Dictionary<string, float> _hitStatsModifiers;
 
-    public BulletBehaviour(EntityType owner)
+    public BulletAttackBehaviour(EntityType owner)
     {
         _owner = owner;
         _hitTypeModifiers = new Dictionary<string, int>()
@@ -21,7 +21,7 @@ public class BulletBehaviour : IHitBehaviour
             { "bulletSpeed", 0 }
         };
     }
-    public BulletBehaviour(Dictionary<string, int> typeModifiers, Dictionary<string, float> statsModifiers)
+    public BulletAttackBehaviour(Dictionary<string, int> typeModifiers, Dictionary<string, float> statsModifiers)
     {
         _hitTypeModifiers = typeModifiers;
         _hitStatsModifiers = statsModifiers;
