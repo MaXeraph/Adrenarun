@@ -43,6 +43,7 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
                 return false; // destroy the bullet
             }
         }
+        else if (target.GetComponent<BulletMono>() != null) return true; // do not collide with other bullets
         else return false;
 
         return true;
