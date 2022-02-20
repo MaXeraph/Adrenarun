@@ -7,6 +7,11 @@ public class PowerUpManager : MonoBehaviour
     private int numPowerUps = 3;
     private PowerUpContainer[] powerUpList = new PowerUpContainer[3];
     private GameObject _player;
+    private Weapon _weapon;
+
+    void Start(){
+        _player = GameObject.FindWithTag("Player");
+    }
 
     private void generatePowerUps(){
 
@@ -43,42 +48,42 @@ public class PowerUpManager : MonoBehaviour
     }
 
     // TODO: implement the powerup effects
-    public void applyPowerUp(int choice)
+    public void applyPowerUp(PowerUpEffect powerUp)
     {
-        switch (powerUpList[choice].effect)
-        {
-            case "damage":
-                Debug.Log("Damage Powerup To Be Implemented");
-                break;
-            case "firerate":
-                Debug.Log("Fire Rate Powerup To Be Implemented");
-                break;
-            case "reload":
-                Debug.Log("Reload Speed Powerup To Be Implemented");
-                break;
-            case "clip":
-                Debug.Log("Clip Size Powerup To Be Implemented");
-                break;
-            case "adrenalin":
-                Debug.Log("Adrenalin Powerup Applied");
-                break;
-        }
+        // switch (powerUpList[choice].effect)
+        // {
+        //     case PowerUpEffect.DAMAGE:
+        //         Debug.Log("Damage Powerup To Be Implemented");
+        //         break;
+        //     case PowerUpEffect.FIRERATE:
+        //         Debug.Log("Fire Rate Powerup To Be Implemented");
+        //         break;
+        //     case PowerUpEffect.RELOADSPD:
+        //         Debug.Log("Reload Speed Powerup To Be Implemented");
+        //         break;
+        //     case PowerUpEffect.CLIPSIZE:
+        //         Debug.Log("Clip Size Powerup To Be Implemented");
+        //         break;
+        //     case PowerUpEffect.ADRENALIN:
+        //         Debug.Log("Adrenalin Powerup Applied");
+        //         break;
+        // }
     }
 
     IEnumerator waitForSelection()
     {
-        int selection = -1;
-        while (selection == -1){
+        PowerUpEffect selection = PowerUpEffect.NONE;
+        while (selection == PowerUpEffect.NONE){
             if (Input.GetKeyDown(KeyCode.Alpha1)){
-                selection = 0;
+                selection = powerUpList[0].effect;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2)){
-                selection = 1;
+                selection = powerUpList[1].effect;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3)){
-                selection = 2;
+                selection = powerUpList[2].effect;
             }
-            yield return null;    
+            yield return null;
         }
         applyPowerUp(selection);
         Time.timeScale = 1;

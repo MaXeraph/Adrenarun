@@ -14,3 +14,12 @@ public enum EntityType {
 	PLAYER,
 	ENEMY
 }
+
+public enum PowerUpEffect {
+	NONE,
+	DAMAGE,
+	FIRERATE,
+	RELOADSPD,
+	CLIPSIZE,
+	ADRENALIN
+}
