@@ -12,7 +12,6 @@ public abstract class AbstractAttackBehaviour
     
     /**
      * Called to initiate an attack from position in direction.
-     * Should call onHit().
      */
     public abstract void initiateAttack(Vector3 position, Vector3 direction);
 
