@@ -7,7 +7,7 @@ public class BulletMono : MonoBehaviour
 {
     private BulletAttackBehaviour _attackBehaviour;
 
-    public static void create(BulletAttackBehaviour attackBehaviour, Vector3 position, Vector3 direction)
+    public static GameObject create(BulletAttackBehaviour attackBehaviour, Vector3 position, Vector3 direction)
     {
         GameObject newBullet = Instantiate(Resources.Load("Bullet")) as GameObject;
 
@@ -15,6 +15,8 @@ public class BulletMono : MonoBehaviour
         
         newBullet.transform.position = position;
         newBullet.transform.forward = direction;
+
+        return newBullet;
     }
 
     void Update()
@@ -24,9 +26,6 @@ public class BulletMono : MonoBehaviour
 
     void OnTriggerEnter(Collider c)
     {
-        if (!_attackBehaviour.onHit(c.gameObject))
-        {
-            Destroy(gameObject);
-        }
+        _attackBehaviour.onHit(this, c.gameObject);
     }
 }

@@ -15,12 +15,6 @@ public abstract class AbstractAttackBehaviour
      * Should call onHit().
      */
     public abstract void initiateAttack(Vector3 position, Vector3 direction);
-    
-    /**
-     * Called on the game object that is hit by this attack.
-     * Returns true if the attack should continue, false otherwise.
-     */
-    public abstract bool onHit(GameObject target);
 
     protected AbstractAttackBehaviour(EntityType owner, float damage)
     {

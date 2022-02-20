@@ -32,7 +32,7 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
         BulletMono.create(this, position, direction);
     }
 
-    public override bool onHit(GameObject target)
+    public void onHit(BulletMono bm, GameObject target)
     {
         Stats statsComponent = target.GetComponent<Stats>();
         if (statsComponent)
@@ -40,12 +40,12 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
             if (statsComponent.owner != _owner)
             {
                 statsComponent.takeDamage(_damage);
-                return false; // destroy the bullet
+                GameObject.Destroy(bm.gameObject);
             }
         }
-        else if (target.GetComponent<BulletMono>() != null) return true; // do not collide with other bullets
-        else return false;
-
-        return true;
+        else if (target.GetComponent<BulletMono>() == null) // if not another bullet...
+        {
+            GameObject.Destroy(bm.gameObject);
+        }
     }
 }
