@@ -3,12 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[System.Serializable]
+public class Wave
+{
+    public string waveName;
+    public int numOfEnemies;
+    public GameObject[] typeOfEnemies;
+    public float spawnInterval;
+}
+
 public class EnemySpawn : MonoBehaviour
 {
     private Vector3 _enemySpawn = Vector3.zero;
     private bool _cooldown = false;
     private float _cooldownDelay = SpeedManager.enemySpawnScaling;
     private const float platformRadius = 175/2;
+
+    public Wave[] waves;
+    public Transform[] spawnPoints;
 
     // Start is called before the first frame update
     void Start()
