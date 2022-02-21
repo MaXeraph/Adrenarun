@@ -15,7 +15,7 @@ public enum EntityType {
 	ENEMY
 }
 
-public enum PowerUpEffect {
+public enum PowerUpType {
 	NONE,
 	DAMAGE,
 	FIRERATE,
