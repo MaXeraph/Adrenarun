@@ -12,15 +12,15 @@ public class Weapon
         { "repeater", false }
     };
 
-    IHitBehaviour _hitBehaviour;
+    AbstractAttackBehaviour _attackBehaviour;
     float _fireRate; // shots per second
     int _magazineSize;
     int _currentMagazine;
     double lastShot = 0;
 
-    public Weapon(IHitBehaviour hitBehaviour, float fireRate = 0.1f, int magSize = 1)
+    public Weapon(AbstractAttackBehaviour attackBehaviour, float fireRate = 0.1f, int magSize = 1)
     {
-        _hitBehaviour = hitBehaviour;
+        _attackBehaviour = attackBehaviour;
         _fireRate = fireRate; 
         _magazineSize = magSize;
         _currentMagazine = magSize;
@@ -32,7 +32,7 @@ public class Weapon
         {
             if (_currentMagazine > 0)
             {
-                _hitBehaviour.startBehaviour(position, direction);
+                _attackBehaviour.initiateAttack(position, direction);
                 // _currentMagazine -= 1; // Comment out for infinite ammo
                 lastShot = Time.time;
             }

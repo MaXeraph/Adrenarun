@@ -64,7 +64,7 @@ public class EnemyFactory
             _defaultFunc, 
             Globals.DirectTargeting, 
             _defaultMove, 
-            new Weapon(new BulletBehaviour(EntityType.ENEMY), 1f));
+            new Weapon(new BulletAttackBehaviour(EntityType.ENEMY), 1f));
         if (_enemySetups.ContainsKey(enemyName)) _enemySetups[enemyName](eb);
 
         return newEnemyObject;
