@@ -17,12 +17,14 @@ public class PlayerControls : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         _player = GameObject.FindWithTag("Player");
-        _camera = GameObject.FindWithTag("MainCamera");
-
         UIManager.AmmoCapacity = 16;
         UIManager.Ammo = 16;
         UIManager.MaxHealth = 100;
         UIManager.Health = 100;
+
+        _camera = Camera.main;
+        _weapon = new Weapon(new BulletAttackBehaviour(EntityType.PLAYER));
+
     }
 
     void Update()
@@ -48,7 +50,7 @@ public class PlayerControls : MonoBehaviour
         {
             _velocity.y += Movement.jumpVelocity;
         }
-        
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
             Movement.playerDash(_player);
@@ -60,8 +62,6 @@ public class PlayerControls : MonoBehaviour
            // PlayerStats.Ammo -= 1;
         }
 
-
-        
         applyGravity();
         resetYVelocity();
 
@@ -71,7 +71,7 @@ public class PlayerControls : MonoBehaviour
     {
         Vector3 origin = new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * .5f), transform.position.z);
         Vector3 direction = transform.TransformDirection(Vector3.down);
-        float distance = 1.1f;
+        float distance = 0.6f;
 
         if (Physics.Raycast(origin, direction, out RaycastHit hit, distance))
         {
@@ -91,12 +91,12 @@ public class PlayerControls : MonoBehaviour
         if(isGrounded && _velocity.y < 0){
             _velocity.y = 0f;
         }
-    }    
-    
+    }
+
     private void applyGravity()
     {
         CharacterController char_controller = _player.GetComponent<CharacterController>();
-        _velocity.y += -45.81f * Time.deltaTime;
-        char_controller.Move(_velocity * Time.deltaTime);
+        _velocity.y += -45.81f * Time.deltaTime * SpeedManager.playerMovementScaling;
+        char_controller.Move(_velocity * Time.deltaTime * SpeedManager.playerMovementScaling);
     }
 }

@@ -52,11 +52,19 @@ public class EnemyFactory
         // We expect enemyName to be the name of the resource.
         GameObject newEnemyObject = GameObject.Instantiate(Resources.Load(enemyName)) as GameObject;
         Transform enemyTransform = newEnemyObject.GetComponent<Transform>();
-        enemyTransform.position = position;
+        
+        // TODO: change default vector to dynamically adjust height of enemy spawn so they don't spawn under the ground.
+        enemyTransform.position = position + new Vector3(0, 1, 0);
         
         // TODO: Determine whether we're including EnemyBehvaviour in the prefab, or adding it as component.
         // I'll just go with adding it for now.
-        EnemyBehaviour eb = EnemyBehaviour.AddToGameObject(newEnemyObject, _defaultTarget, _defaultFunc, _defaultFunc, _defaultMove);
+        EnemyBehaviour eb = EnemyBehaviour.AddToGameObject(
+            newEnemyObject, 
+            _defaultTarget, 
+            _defaultFunc, 
+            Globals.DirectTargeting, 
+            _defaultMove, 
+            new Weapon(new BulletAttackBehaviour(EntityType.ENEMY), 1f));
         if (_enemySetups.ContainsKey(enemyName)) _enemySetups[enemyName](eb);
 
         return newEnemyObject;

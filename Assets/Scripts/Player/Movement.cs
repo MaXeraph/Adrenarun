@@ -36,7 +36,7 @@ public class Movement : MonoBehaviour
         float y = Input.GetAxis("Vertical");
 
         Vector3 move = player.transform.right * x + player.transform.forward * y;
-        char_controller.Move(move * speed * Time.deltaTime );
+        char_controller.Move(move * speed * Time.deltaTime * SpeedManager.playerMovementScaling);
     }
 
     public static void playerDash(GameObject player)
@@ -47,6 +47,6 @@ public class Movement : MonoBehaviour
         
         Vector3 move = player.transform.right * x + player.transform.forward * y;
 
-        char_controller.Move(move * speed * Time.deltaTime * dashSpeed);
+        char_controller.Move(move * speed * Time.deltaTime * dashSpeed * SpeedManager.playerMovementScaling);
     }
 }
