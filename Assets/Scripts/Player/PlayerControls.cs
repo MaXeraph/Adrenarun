@@ -17,7 +17,10 @@ public class PlayerControls : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         _player = GameObject.FindWithTag("Player");
         _camera = Camera.main;
-        _weapon = new Weapon(new BulletAttackBehaviour(EntityType.PLAYER));
+        
+        
+        _weapon = _player.AddComponent<Weapon>();
+        _weapon.Initialize(new BulletAttackBehaviour(EntityType.PLAYER));
     }
 
     // Update is called once per frame
