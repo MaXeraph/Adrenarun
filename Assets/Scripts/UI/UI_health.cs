@@ -12,8 +12,10 @@ public class UI_health : MonoBehaviour
     private static float current;
     private static float max;
     private static Vector3 start_pos;
+    private static bool dead = false;
 
-    private static bool dead = false;  
+    private static float shake_duration = 0.075f;
+    private static float fill_duration = 0.5f;
 
     public static UI_health instance;
 
@@ -62,9 +64,9 @@ public class UI_health : MonoBehaviour
     public static void impact_fill(float fill)
     {
         Sequence damaged = DOTween.Sequence();
-        damaged.Append(instance.transform.DOShakePosition(0.075f, new Vector3(2f, 2f, 2f), 10, 15f).SetLoops(3));
-        damaged.Insert(0, instance.transform.DOShakeRotation(0.075f, new Vector3(2, 2, 2), 10, 15f).SetLoops(3));
-        damaged.Append(slow_fill.DOFillAmount(fill / max, 0.4f));
+        damaged.Append(instance.transform.DOShakePosition(shake_duration, new Vector3(2f, 2f, 2f), 10, 15f).SetLoops(3));
+        damaged.Insert(0, instance.transform.DOShakeRotation(shake_duration, new Vector3(2, 2, 2), 10, 15f).SetLoops(3));
+        damaged.Append(slow_fill.DOFillAmount(fill / max, fill_duration));
         damaged.Insert(1, instance.transform.DOMove(start_pos, 0.1f));
         damaged.Insert(1, instance.transform.DORotate(new Vector3(0, 0, 0), 0.1f));
     }

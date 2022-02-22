@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerControls : MonoBehaviour
 {
     private GameObject _player;
-    private GameObject _camera;
-    private GameObject _gun;
+    private Camera _camera;
+    private Weapon _weapon;
     //private PlayerStats stats;
 
     private Vector3 _velocity;
@@ -17,14 +17,22 @@ public class PlayerControls : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         _player = GameObject.FindWithTag("Player");
-        UIManager.AmmoCapacity = 16;
-        UIManager.Ammo = 16;
-        UIManager.MaxHealth = 100;
-        UIManager.Health = 100;
 
         _camera = Camera.main;
-        _weapon = new Weapon(new BulletAttackBehaviour(EntityType.PLAYER));
+        setWeapon(new Weapon(new BulletAttackBehaviour(EntityType.PLAYER), 0.2f, 16, 1f));
+        //_weapon = new Weapon(new BulletAttackBehaviour(EntityType.PLAYER),0.1f,16);
 
+
+
+    }
+
+    void setWeapon(Weapon weapon)
+    {
+        _weapon = weapon;
+        UIManager._weapon = _weapon;
+        UIManager.AmmoCapacity = _weapon._magazineSize;
+        UIManager.Ammo = _weapon._magazineSize;
+        UIManager.reloadSpeed = _weapon._reloadSpeed;
     }
 
     void Update()
@@ -56,10 +64,16 @@ public class PlayerControls : MonoBehaviour
             Movement.playerDash(_player);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetButton("Fire1"))
         {
-            ShootControl.Shoot(_gun);
-           // PlayerStats.Ammo -= 1;
+            Vector3 position = _camera.transform.forward + _camera.transform.position;
+            Vector3 direction = _camera.transform.forward;
+            if (_weapon.Attack(position, direction)) { UIManager.Ammo -= 1; }
+        }
+        if (Input.GetButtonDown("Reload"))
+        {
+            _weapon.Reload();
+            UIManager.Reloading = true;
         }
 
         applyGravity();

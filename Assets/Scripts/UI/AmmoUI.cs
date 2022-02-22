@@ -32,7 +32,6 @@ public class AmmoUI : MonoBehaviour
     {
         instance = this;
         Clip = transform.GetChild(1);
-        Debug.Log(Clip.GetChild(0));
         AmmoSlot = Clip.GetChild(0).gameObject;
         AmmoCounter = transform.GetChild(0).GetComponent<Text>();
 

@@ -17,7 +17,7 @@ public class Movement : MonoBehaviour
     static float mouseSensitivity = 500f;
     static float xRotation = 0f;
 
-    public static void RotatePlayer(GameObject player, GameObject camera)
+    public static void RotatePlayer(GameObject player, Camera camera)
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;

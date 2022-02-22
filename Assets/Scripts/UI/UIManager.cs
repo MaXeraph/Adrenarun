@@ -6,6 +6,8 @@ using DG.Tweening;
 public class UIManager : MonoBehaviour
 {
     //Temporary until reload speed in weapon class is implemented
+    public static Weapon _weapon;
+
     public static float reloadSpeed = 1f;
 
     public static bool Reloading
@@ -30,7 +32,7 @@ public class UIManager : MonoBehaviour
         {
             ammo = Mathf.Clamp(value, 0, ammoCapacity);
             if (ammo <= 0) { Reloading = true;}
-            else if (ammo == ammoCapacity) { Reloading = false; }
+            else if (ammo == ammoCapacity) { Reloading = false;}
             AmmoUI.UpdateAmmo(ammo, reloading);
 
         }
