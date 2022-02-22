@@ -56,6 +56,9 @@ public class EnemyFactory
         // TODO: change default vector to dynamically adjust height of enemy spawn so they don't spawn under the ground.
         enemyTransform.position = position + new Vector3(0, 1, 0);
         
+        Weapon enemyWeapon = newEnemyObject.AddComponent<Weapon>();
+        enemyWeapon.Initialize(new BulletAttackBehaviour(EntityType.ENEMY), 1f);
+        
         // TODO: Determine whether we're including EnemyBehvaviour in the prefab, or adding it as component.
         // I'll just go with adding it for now.
         EnemyBehaviour eb = EnemyBehaviour.AddToGameObject(
@@ -64,7 +67,7 @@ public class EnemyFactory
             _defaultFunc, 
             Globals.DirectTargeting, 
             _defaultMove, 
-            new Weapon(new BulletAttackBehaviour(EntityType.ENEMY), 1f));
+            enemyWeapon);
         if (_enemySetups.ContainsKey(enemyName)) _enemySetups[enemyName](eb);
 
         return newEnemyObject;

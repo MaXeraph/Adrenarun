@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //To be attached to Player or Enemy Objects
-public class Weapon
+public class Weapon : MonoBehaviour
 {
+    private bool _initialized = false;
     Dictionary<string, bool> _firingBehavior = new Dictionary<string, bool>()
     {
         { "singleShot", true }, // singleShot == !repeater
@@ -18,12 +19,17 @@ public class Weapon
     int _currentMagazine;
     double lastShot = 0;
 
-    public Weapon(AbstractAttackBehaviour attackBehaviour, float fireRate = 0.1f, int magSize = 1)
+    public bool Initialize(AbstractAttackBehaviour attackBehaviour, float fireRate = 0.1f, int magSize = 1)
     {
+        if (_initialized) return false;
+        _initialized = true;
+        
         _attackBehaviour = attackBehaviour;
         _fireRate = fireRate; 
         _magazineSize = magSize;
         _currentMagazine = magSize;
+
+        return true;
     }
 
     public void Attack(Vector3 position, Vector3 direction)
