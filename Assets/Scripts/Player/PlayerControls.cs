@@ -26,9 +26,8 @@ public class PlayerControls : MonoBehaviour
 
     }
 
-    void setWeapon(BulletAttackBehaviour bullet, fireRate, magSize, reloadSpeed)
+    void setWeapon(BulletAttackBehaviour bullet, float fireRate, int magSize, float reloadSpeed)
     {
-        _weapon = weapon;
         _weapon = _player.AddComponent<Weapon>();
         _weapon.Initialize(bullet, fireRate, magSize, reloadSpeed);
         UIManager._weapon = _weapon;
