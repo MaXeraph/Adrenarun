@@ -19,16 +19,18 @@ public class PlayerControls : MonoBehaviour
         _player = GameObject.FindWithTag("Player");
 
         _camera = Camera.main;
-        setWeapon(new Weapon(new BulletAttackBehaviour(EntityType.PLAYER), 0.2f, 16, 1f));
+        setWeapon(new BulletAttackBehaviour(EntityType.PLAYER), 0.2f, 16, 1f);
         //_weapon = new Weapon(new BulletAttackBehaviour(EntityType.PLAYER),0.1f,16);
 
 
 
     }
 
-    void setWeapon(Weapon weapon)
+    void setWeapon(BulletAttackBehaviour bullet, fireRate, magSize, reloadSpeed)
     {
         _weapon = weapon;
+        _weapon = _player.AddComponent<Weapon>();
+        _weapon.Initialize(bullet, fireRate, magSize, reloadSpeed);
         UIManager._weapon = _weapon;
         UIManager.AmmoCapacity = _weapon._magazineSize;
         UIManager.Ammo = _weapon._magazineSize;
