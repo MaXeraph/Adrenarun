@@ -83,4 +83,8 @@ public class UIManager : MonoBehaviour
     }
     private static float maxHealth;
 
+    public static void UpdateWeapon()
+    {
+        UIManager.weapon = _weapon;
+    }
 }

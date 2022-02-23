@@ -18,25 +18,16 @@ public class PlayerControls : MonoBehaviour
         _player = GameObject.FindWithTag("Player");
 
         _camera = Camera.main;
-        setWeapon(new BulletAttackBehaviour(EntityType.PLAYER), 0.2f, 16, 1f);
+        //setWeapon(new BulletAttackBehaviour(EntityType.PLAYER), 0.2f, 16, 1f);
 
-    }
-
-    void setWeapon(BulletAttackBehaviour bullet, float fireRate, int magSize, float reloadSpeed)
-    {
         _weapon = _player.AddComponent<Weapon>();
-        _weapon.Initialize(bullet, fireRate, magSize, reloadSpeed);
-        UIManager.weapon = _weapon;
+        _weapon.Initialize(new BulletAttackBehaviour(EntityType.PLAYER), 0.2f, 16, 1f);
     }
+
 
     void Update()
     {
         checkGround();
-
-        if (Input.GetKeyDown(KeyCode.Equals)) { UIManager.Health += 10f; }
-        if (Input.GetKeyDown(KeyCode.Minus)) { UIManager.Health -= 10f; }
-
-
 
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {

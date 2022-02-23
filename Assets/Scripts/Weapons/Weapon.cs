@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour
         { "repeater", false }
     };
 
-    AbstractAttackBehaviour _attackBehaviour;
+    public AbstractAttackBehaviour _attackBehaviour;
     float _fireRate; // shots per second
     public float _reloadSpeed;
     bool _reloading = false;
@@ -32,11 +32,18 @@ public class Weapon : MonoBehaviour
         _magazineSize = magSize;
         _currentMagazine = magSize;
         _reloadSpeed = reloadSpeed;
+
+        if (_attackBehaviour.Owner.ToString() == "PLAYER") 
+        {
+            UIManager.weapon = this;
+        }
+
         return true;
     }
 
     public bool Attack(Vector3 position, Vector3 direction)
     {
+
         if (Time.time - lastShot > _fireRate && !_reloading)
         {
             if (_currentMagazine > 0)
