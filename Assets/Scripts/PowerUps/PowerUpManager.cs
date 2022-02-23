@@ -13,7 +13,6 @@ public class PowerUpManager : MonoBehaviour
     public List<AbstractPowerUp> appliedPowerUps;
 
     private Weapon _weapon; 
-    private AbstractAttackBehaviour _bullet;
 
     // Start is called before the first frame update
     void Start()

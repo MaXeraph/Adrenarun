@@ -17,7 +17,7 @@ public class Weapon : MonoBehaviour
     public float _fireRate; // shots per second
     public int _magazineSize;
     int _currentMagazine;
-    public double lastShot = 0;
+    double lastShot = 0;
 
     public bool Initialize(AbstractAttackBehaviour attackBehaviour, float fireRate = 0.1f, int magSize = 1)
     {
