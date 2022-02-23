@@ -8,8 +8,16 @@ public class Wave
 {
     public string waveName;
     public int numOfEnemies;
-    public GameObject[] typeOfEnemies;
+    public string[] typeOfEnemies;
     public float spawnInterval;
+
+    public Wave(string name, int num, string[] types, float interval)
+    {
+        waveName = name;
+        numOfEnemies = num;
+        typeOfEnemies = types;
+        spawnInterval = interval;
+    }
 }
 
 public class EnemySpawn : MonoBehaviour
@@ -19,17 +27,54 @@ public class EnemySpawn : MonoBehaviour
     private float _cooldownDelay = SpeedManager.enemySpawnScaling;
     private const float platformRadius = 175/2;
 
+    private bool canSpawn = false;
+    private bool startSpawn = false;
+    private float nextSpawnTime;
+    private Wave currentWave;
+    private int currentWaveNumber = 0;
+
+    private const int totalWaveNumber = 3;
+    private const int enemiesPerWave = 5;
+    private const int spawnInterval = 0;
+
     public Wave[] waves;
-    public Transform[] spawnPoints;
+    public Vector3[] spawnPoints;
 
     // Start is called before the first frame update
     void Start()
     {
+        waves = new Wave[totalWaveNumber];
+        string[] enemy = new string[1];
+        enemy[0] = "Enemy";
+
+        for (int i = 0; i < totalWaveNumber; i++)
+        {
+            string name = "wave " + i.ToString();
+            waves[i] = new Wave(name, enemiesPerWave, enemy, spawnInterval);
+        }
+
+        StartSpawningWave();
+    }
+
+    void StartSpawningWave()
+    {
+        canSpawn = true;
+        startSpawn = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        currentWave = waves[currentWaveNumber];
+        SpawnWave();
+
+        GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+
+
+
+
         if (!_cooldown)
         {
             _cooldownDelay = SpeedManager.enemySpawnScaling;
@@ -39,6 +84,10 @@ public class EnemySpawn : MonoBehaviour
         }
     }
 
+    void SpawnWave()
+    {
+
+    }
     bool RandomPoint(float radius, out Vector3 result)
     {
         Vector3 randomPoint = Random.insideUnitSphere * radius;
