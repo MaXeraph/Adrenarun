@@ -33,13 +33,11 @@ public class EnemyBehaviour : MonoBehaviour
     public static EnemyBehaviour AddToGameObject(
         GameObject gameObject, 
         GameObject target, 
-        Func<Transform, Transform, Vector3> pathfind, 
-        Func<Transform, Transform, Vector3> aim, 
-        Action<Transform, Vector3> move,
+        EnemyInfo info,
         Weapon weapon)
     {
         EnemyBehaviour eb = gameObject.AddComponent<EnemyBehaviour>();
-        eb.Initialize(target, pathfind, aim, move, weapon);
+        eb.Initialize(target, info, weapon);
 
         return eb;
     }
@@ -47,9 +45,7 @@ public class EnemyBehaviour : MonoBehaviour
     // Initialize must be run for the Update loop to run.
     // This is because the mechanisms (Pathfind, Aim, etc.) aren't set until Initialize is called.
     public bool Initialize(GameObject target, 
-        Func<Transform, Transform, Vector3> pathfind, 
-        Func<Transform, Transform, Vector3> aim,
-        Action<Transform, Vector3> move,
+        EnemyInfo info,
         Weapon weapon)
     {
         if (_initialized) return false;
@@ -57,9 +53,9 @@ public class EnemyBehaviour : MonoBehaviour
 
         _weapon = weapon;
         _targetTransform = target.GetComponent<Transform>();
-        Pathfind = pathfind;
-        GetAimDirection = aim;
-        Move = move;
+        Pathfind = info.pathfind;
+        GetAimDirection = info.aim;
+        Move = info.move;
         
         return true;
     }
