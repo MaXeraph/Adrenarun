@@ -76,9 +76,7 @@ public class EnemyFactory
         EnemyBehaviour eb = EnemyBehaviour.AddToGameObject(
             newEnemyObject, 
             _defaultTarget, 
-            enemyInfo.pathfind, 
-            enemyInfo.aim, 
-            enemyInfo.move, 
+            enemyInfo,
             enemyWeapon);
         if (_enemyPostSetups.ContainsKey(enemyType)) _enemyPostSetups[enemyType](eb);
 
