@@ -12,7 +12,6 @@ public class PowerUpManager : MonoBehaviour
     private bool includeNone = false;
     public List<AbstractPowerUp> appliedPowerUps;
 
-    private PlayerControls _player;
     private Weapon _weapon; 
     private AbstractAttackBehaviour _bullet;
 
@@ -22,11 +21,9 @@ public class PowerUpManager : MonoBehaviour
         generatorList = Enumerable.Range(0, System.Enum.GetNames(typeof(PowerUpType)).Length).ToArray();
         powerUpSelectionList = new PowerUpType[numPowerUpOptions];
         appliedPowerUps = new List<AbstractPowerUp>();
-
-        _player = GameObject.FindWithTag("Player").GetComponent<PlayerControls>();
     }
 
-
+    // we generate powerups randomly by shuffling a premade list
     private void generatePowerUps()
     {
         shuffleGeneratorList();
@@ -34,18 +31,21 @@ public class PowerUpManager : MonoBehaviour
         {
             powerUpSelectionList[i] = (PowerUpType)generatorList[i];
 
+            // if we don't want none, we take the next index instead
             if(!includeNone && generatorList[i] == 0)
             {
                 powerUpSelectionList[i] = (PowerUpType)generatorList[3];
             }
         }
 
-        Debug.Log(powerUpSelectionList[0]);
-        Debug.Log(powerUpSelectionList[1]);
-        Debug.Log(powerUpSelectionList[2]);
+        // uncomment to see what powerups are generated
+        // Debug.Log(powerUpSelectionList[0]);
+        // Debug.Log(powerUpSelectionList[1]);
+        // Debug.Log(powerUpSelectionList[2]);
 
     }
 
+    // the knuth shuffle
     private void shuffleGeneratorList()
     {
         Random rand = new Random();
@@ -59,7 +59,7 @@ public class PowerUpManager : MonoBehaviour
         }
     }
 
-    // 
+    // call this method to present the power ups
     public void presentPowerUps()
     {
 
@@ -70,11 +70,10 @@ public class PowerUpManager : MonoBehaviour
         //  the three powerups generated are in powerUpSelectionList
     }
 
-    //
+    // apply stat powerups directly, or add non stat ones to a powerup list
     private void applyPowerUp(PowerUpType type)
     {
         AbstractPowerUp powerUp = Globals.StatPowerUpDictionary[type];
-        Debug.Log(powerUp.modifier);
         switch (type)
         {
             case PowerUpType.NONE:
@@ -99,7 +98,8 @@ public class PowerUpManager : MonoBehaviour
                 Debug.Log("Clip Size PowerUp Applied: " + _weapon._magazineSize);
                 break;                
             case PowerUpType.ADRENALIN:
-                // TODO: apply adrenalin
+                SpeedManager.adrenalinModifier += powerUp.modifier;
+                Debug.Log("Adrenalin PowerUp Applied: " + SpeedManager.adrenalinModifier);
                 break;                
             default:
                 appliedPowerUps.Add(powerUp);

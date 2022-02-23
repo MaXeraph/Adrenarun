@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShotgunFiringPowerUp : AbstractPowerUp
+public abstract class AbstractFiringPowerUp : AbstractPowerUp
+{
+}
+
+public class ShotgunFiringPowerUp : AbstractFiringPowerUp
 {
     public override Vector3[] applyPowerUp(Vector3[] direction)
     {
@@ -11,7 +15,7 @@ public class ShotgunFiringPowerUp : AbstractPowerUp
 
 }
 
-public class RepeaterFiringPowerUp : AbstractPowerUp
+public class RepeaterFiringPowerUp : AbstractFiringPowerUp
 {
     public override Vector3[] applyPowerUp(Vector3[] direction)
     {
@@ -20,7 +24,7 @@ public class RepeaterFiringPowerUp : AbstractPowerUp
 
 }
 
-public class AutomaticFiringPowerUp : AbstractPowerUp
+public class AutomaticFiringPowerUp : AbstractFiringPowerUp
 {
     public override Vector3[] applyPowerUp(Vector3[] direction)
     {
@@ -29,7 +33,7 @@ public class AutomaticFiringPowerUp : AbstractPowerUp
     
 }
 
-public class ChargeShotFiringPowerUp : AbstractPowerUp
+public class ChargeShotFiringPowerUp : AbstractFiringPowerUp
 {
     public override Vector3[] applyPowerUp(Vector3[] direction)
     {
