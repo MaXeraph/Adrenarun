@@ -7,7 +7,6 @@ public class PlayerControls : MonoBehaviour
     private GameObject _player;
     private Camera _camera;
     private Weapon _weapon;
-    //private PlayerStats stats;
 
     private Vector3 _velocity;
 
@@ -20,9 +19,6 @@ public class PlayerControls : MonoBehaviour
 
         _camera = Camera.main;
         setWeapon(new BulletAttackBehaviour(EntityType.PLAYER), 0.2f, 16, 1f);
-        //_weapon = new Weapon(new BulletAttackBehaviour(EntityType.PLAYER),0.1f,16);
-
-
 
     }
 
@@ -30,10 +26,7 @@ public class PlayerControls : MonoBehaviour
     {
         _weapon = _player.AddComponent<Weapon>();
         _weapon.Initialize(bullet, fireRate, magSize, reloadSpeed);
-        UIManager._weapon = _weapon;
-        UIManager.AmmoCapacity = _weapon._magazineSize;
-        UIManager.Ammo = _weapon._magazineSize;
-        UIManager.reloadSpeed = _weapon._reloadSpeed;
+        UIManager.weapon = _weapon;
     }
 
     void Update()
@@ -48,6 +41,7 @@ public class PlayerControls : MonoBehaviour
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {
             Movement.RotatePlayer(_player, _camera);
+            CompassUI.updateCompass();
         }
 
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)

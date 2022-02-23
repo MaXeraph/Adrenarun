@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class CompassUI : MonoBehaviour
 {
     public static CompassUI Instance;
-    private Transform CameraTransform;
-    private RectTransform CompassBar;
+    private static Transform CameraTransform;
+    private static RectTransform CompassBar;
 
-    private RectTransform[] directionTransforms = new RectTransform[8];
+    private static RectTransform[] directionTransforms = new RectTransform[8];
 
-    private string[] directionNames = new string[] { "North", "South", "East", "West", "NW", "NE", "SW", "SE" };
+    private static string[] directionNames = new string[] { "North", "South", "East", "West", "NW", "NE", "SW", "SE" };
 
-    private Vector3[] directionVectors = new Vector3[] {Vector3.forward* 1000, Vector3.back* 1000, Vector3.right* 1000, Vector3.left* 1000,
+    private static Vector3[] directionVectors = new Vector3[] {Vector3.forward* 1000, Vector3.back* 1000, Vector3.right* 1000, Vector3.left* 1000,
                                                        (Vector3.right + Vector3.forward)* 1000, (Vector3.left + Vector3.forward)* 1000, (Vector3.right + Vector3.back)* 1000, (Vector3.left + Vector3.back)* 1000 };
 
     void Awake()
@@ -27,7 +27,7 @@ public class CompassUI : MonoBehaviour
         }
     }
 
-    void Update()
+    public static void updateCompass()
     {
         for (int i = 0; i < directionNames.Length; i++)
         {
@@ -35,7 +35,7 @@ public class CompassUI : MonoBehaviour
         }
     }
 
-    private void SetMarkerPosition(RectTransform markerTransform, Vector3 worldPosition)
+    private static void SetMarkerPosition(RectTransform markerTransform, Vector3 worldPosition)
     {
         Vector3 directionToTarget = worldPosition - CameraTransform.position;
         float angle = Vector2.SignedAngle(new Vector2(directionToTarget.x, directionToTarget.z), new Vector2(CameraTransform.transform.forward.x, CameraTransform.transform.forward.z));

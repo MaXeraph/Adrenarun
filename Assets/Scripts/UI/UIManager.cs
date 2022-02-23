@@ -5,10 +5,20 @@ using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
-    //Temporary until reload speed in weapon class is implemented
-    public static Weapon _weapon;
+    public static Weapon weapon
+    {
+        get { return _weapon; }
+        set { _weapon = value;
 
-    public static float reloadSpeed = 1f;
+            AmmoCapacity = _weapon._magazineSize;
+            Ammo = _weapon._magazineSize;
+            reloadSpeed = _weapon._reloadSpeed;
+
+        }
+    }
+    private static Weapon _weapon;
+
+    public static float reloadSpeed;
 
     public static bool Reloading
     {
@@ -48,7 +58,7 @@ public class UIManager : MonoBehaviour
             AmmoUI.UpdateAmmoCapacity(ammoCapacity);
         }
     }
-    [SerializeField] private static int ammoCapacity = 10;
+    private static int ammoCapacity;
 
     public static float Health
     {
@@ -71,5 +81,6 @@ public class UIManager : MonoBehaviour
             if (health > maxHealth){ Health = maxHealth; }
         }
     }
-    [SerializeField] static float maxHealth = 100f;
+    private static float maxHealth;
+
 }
