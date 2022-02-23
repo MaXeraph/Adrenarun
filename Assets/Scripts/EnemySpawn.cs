@@ -34,8 +34,9 @@ public class EnemySpawn : MonoBehaviour
     private int currentWaveNumber = 0;
 
     private const int totalWaveNumber = 3;
-    private const int enemiesPerWave = 5;
+    private const int enemiesPerWave = 10;
     private const int spawnInterval = 0;
+    private int currentNumEnemies = 0;
 
     public Wave[] waves;
     public Vector3[] spawnPoints;
@@ -53,6 +54,10 @@ public class EnemySpawn : MonoBehaviour
             waves[i] = new Wave(name, enemiesPerWave, enemy, spawnInterval);
         }
 
+        // need to generate the spawnpoints location here
+        // already have spawnpoints array but need to populate it here
+        // we dont need spawnpoints yet because spawnEnemy spawn randon
+
         StartSpawningWave();
     }
 
@@ -69,23 +74,35 @@ public class EnemySpawn : MonoBehaviour
         currentWave = waves[currentWaveNumber];
         SpawnWave();
 
-        GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-
-
-
+        // 
 
         if (!_cooldown)
         {
             _cooldownDelay = SpeedManager.enemySpawnScaling;
-            SpawnEnemy();
-            _cooldown = true;
-            StartCoroutine(Cooldown());
+            if (canSpawn && currentNumEnemies < enemiesPerWave)
+            {
+                SpawnEnemy();
+                _cooldown = true;
+                currentNumEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
+                Debug.Log(currentNumEnemies);
+                StartCoroutine(Cooldown());
+            }
+            else
+            {
+                if(currentNumEnemies >= enemiesPerWave)
+                {
+                    canSpawn = false;
+                    Debug.Log(GameObject.FindGameObjectsWithTag("Enemy").Length);
+                }
+            }
         }
     }
 
     void SpawnWave()
     {
+
+        // only do this if the currentWave enemy finishes
+        // utilize the randomly generated vector 3 values and call on spawnEnemy
 
     }
     bool RandomPoint(float radius, out Vector3 result)
