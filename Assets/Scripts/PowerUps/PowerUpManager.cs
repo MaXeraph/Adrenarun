@@ -12,9 +12,9 @@ public class PowerUpManager : MonoBehaviour
     private bool includeNone = false;
     public List<AbstractPowerUp> appliedPowerUps;
 
-    private GameObject _player;
+    private PlayerControls _player;
     private Weapon _weapon; 
-    private BulletAttackBehaviour _bullet;
+    private AbstractAttackBehaviour _bullet;
 
     // Start is called before the first frame update
     void Start()
@@ -22,17 +22,11 @@ public class PowerUpManager : MonoBehaviour
         generatorList = Enumerable.Range(0, System.Enum.GetNames(typeof(PowerUpType)).Length).ToArray();
         powerUpSelectionList = new PowerUpType[numPowerUpOptions];
         appliedPowerUps = new List<AbstractPowerUp>();
-        _player = GameObject.FindWithTag("Player");
 
-        // Debug.Log(generatorList[0]);
-        // Debug.Log(generatorList[1]);
-        // Debug.Log(generatorList[2]);
-        // Debug.Log(generatorList[3]);
-        // Debug.Log(generatorList[4]);
-        // Debug.Log(generatorList[5]);
+        _player = GameObject.FindWithTag("Player").GetComponent<PlayerControls>();
     }
 
-    // 
+
     private void generatePowerUps()
     {
         shuffleGeneratorList();
@@ -46,9 +40,9 @@ public class PowerUpManager : MonoBehaviour
             }
         }
 
-        // Debug.Log(powerUpSelectionList[0]);
-        // Debug.Log(powerUpSelectionList[1]);
-        // Debug.Log(powerUpSelectionList[2]);
+        Debug.Log(powerUpSelectionList[0]);
+        Debug.Log(powerUpSelectionList[1]);
+        Debug.Log(powerUpSelectionList[2]);
 
     }
 
@@ -63,14 +57,6 @@ public class PowerUpManager : MonoBehaviour
             generatorList[n] = generatorList[k];
             generatorList[k] = temp;
         }
-
-        // Debug.Log("SHUFFLED");
-        // Debug.Log(generatorList[0]);
-        // Debug.Log(generatorList[1]);
-        // Debug.Log(generatorList[2]);
-        // Debug.Log(generatorList[3]);
-        // Debug.Log(generatorList[4]);
-        // Debug.Log(generatorList[5]);
     }
 
     // 
@@ -87,28 +73,36 @@ public class PowerUpManager : MonoBehaviour
     //
     private void applyPowerUp(PowerUpType type)
     {
-        AbstractPowerUp powerUp = Globals.AbstractPowerUpDictionary[type];
+        AbstractPowerUp powerUp = Globals.StatPowerUpDictionary[type];
+        Debug.Log(powerUp.modifier);
         switch (type)
         {
             case PowerUpType.NONE:
                 return;
             case PowerUpType.DAMAGE:
-                // 
+                _weapon = GameObject.FindWithTag("Player").GetComponent<Weapon>();
+                _weapon._attackBehaviour._damage += powerUp.modifier;
+                Debug.Log("Damage PowerUp Applied: " + _weapon._attackBehaviour._damage);
                 break;
             case PowerUpType.FIRERATE:
-                //
+                _weapon = GameObject.FindWithTag("Player").GetComponent<Weapon>();
+                _weapon._fireRate += powerUp.modifier;
+                Debug.Log("Fire Rate PowerUp Applied: " + _weapon._fireRate);
                 break;
             case PowerUpType.RELOADSPD:
-                //
+                _weapon = GameObject.FindWithTag("Player").GetComponent<Weapon>();
+                // TODO: implement reload speed
                 break;
             case PowerUpType.CLIPSIZE:
-                //
+                _weapon = GameObject.FindWithTag("Player").GetComponent<Weapon>();
+                _weapon._magazineSize += (int)powerUp.modifier;
+                Debug.Log("Clip Size PowerUp Applied: " + _weapon._magazineSize);
                 break;                
             case PowerUpType.ADRENALIN:
-                //
+                // TODO: apply adrenalin
                 break;                
             default:
-                appliedPowerUps.Add(Globals.AbstractPowerUpDictionary[type]);
+                appliedPowerUps.Add(powerUp);
                 break;
         }
     }

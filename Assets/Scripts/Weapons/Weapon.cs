@@ -13,17 +13,16 @@ public class Weapon : MonoBehaviour
         { "repeater", false }
     };
 
-    AbstractAttackBehaviour _attackBehaviour;
-    float _fireRate; // shots per second
-    int _magazineSize;
+    public AbstractAttackBehaviour _attackBehaviour;
+    public float _fireRate; // shots per second
+    public int _magazineSize;
     int _currentMagazine;
-    double lastShot = 0;
+    public double lastShot = 0;
 
     public bool Initialize(AbstractAttackBehaviour attackBehaviour, float fireRate = 0.1f, int magSize = 1)
     {
         if (_initialized) return false;
         _initialized = true;
-        
         _attackBehaviour = attackBehaviour;
         _fireRate = fireRate; 
         _magazineSize = magSize;

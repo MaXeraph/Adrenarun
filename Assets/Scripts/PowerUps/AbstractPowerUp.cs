@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbstractPowerUp
+public abstract class AbstractPowerUp
 {
-    
+    public float modifier;
+    public abstract Vector3[] applyPowerUp(Vector3[] direction);
+
 }

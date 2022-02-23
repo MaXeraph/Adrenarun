@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class StatPowerUp : AbstractPowerUp
 {
-    public float modifier;
-
     public StatPowerUp(float _modifier){
         modifier = _modifier;
     }
 
-    public void applyPowerUp(ref float attribute){
-        attribute += modifier;
+    public override Vector3[] applyPowerUp(Vector3[] direction){
+        return new Vector3[0];
     }
 }
