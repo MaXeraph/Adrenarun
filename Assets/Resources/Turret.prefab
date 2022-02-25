@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 5414158412766006747}
   - component: {fileID: 8473110447466897240}
   - component: {fileID: 1930389540923515780}
-  m_Layer: 3
-  m_Name: Enemy
+  - component: {fileID: 1010175939253670977}
+  m_Layer: 0
+  m_Name: Turret
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4871,6 +4872,21 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &1010175939253670977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4098980912964268930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf3eeec72cd6db149b61130cc3245c7b, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  currentHealth: 0
+  maxHealth: 100
+  owner: 0
 --- !u!1 &5336053257752497350
 GameObject:
   m_ObjectHideFlags: 0
