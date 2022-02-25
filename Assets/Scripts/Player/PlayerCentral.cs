@@ -18,7 +18,6 @@ public class PlayerCentral : MonoBehaviour
         _player = GameObject.FindWithTag("Player");
 
         _camera = Camera.main;
-        //setWeapon(new BulletAttackBehaviour(EntityType.PLAYER), 0.2f, 16, 1f);
 
         _weapon = _player.AddComponent<Weapon>();
         _weapon.Initialize(new BulletAttackBehaviour(EntityType.PLAYER), 0.2f, 16, 1f);
