@@ -20,12 +20,15 @@ public class ArtilleryAttackBehaviour : BulletAttackBehaviour
 
     public override void onHit(BulletMono bm, GameObject target)
     {
-        if (target.GetComponent<Stats>() == null && target.GetComponent<BulletMono>() == null) // if not another bullet...
+        if (target.tag == "Player" || target.GetComponent<BulletMono>() == null) // if not another bullet...
         {
+            Vector3 position = bm.gameObject.GetComponent<Transform>().position;
+            RaycastHit hitInfo;
+            Physics.Raycast(position, new Vector3(0, -1, 0), out hitInfo);
             GameObject.Destroy(bm.gameObject);
             GameObject thermitePool = GameObject.Instantiate(Resources.Load("ThermitePool")) as GameObject;
-            // TODO: project down to surface
-            thermitePool.GetComponent<Transform>().position = bm.gameObject.GetComponent<Transform>().position;
+            // Spawn the pool on the ground.
+            thermitePool.GetComponent<Transform>().position = hitInfo.point;
             thermitePool.GetComponent<ThermitePoolMono>().Initialize(this);
         }
     }
