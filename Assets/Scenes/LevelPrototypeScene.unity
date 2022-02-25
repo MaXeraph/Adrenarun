@@ -2131,6 +2131,14 @@ PrefabInstance:
       propertyPath: PlayerController
       value: 
       objectReference: {fileID: 1770069371}
+    - target: {fileID: 4063134788257359582, guid: 8caeb98ef9447154c928274cd65859b9, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063134788257359582, guid: 8caeb98ef9447154c928274cd65859b9, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 4104746324692379119, guid: 8caeb98ef9447154c928274cd65859b9, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2689,7 +2697,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5841979810881545746, guid: b48c293e05f83a84cb33d1d6c25fc4a7, type: 3}
   m_PrefabInstance: {fileID: 5841979812143880682}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1889198380}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4056402286c1104384510d5cd6aae2a, type: 3}
@@ -3493,6 +3501,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1723540897089339722, guid: b48c293e05f83a84cb33d1d6c25fc4a7, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5841979810792809305, guid: b48c293e05f83a84cb33d1d6c25fc4a7, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.1
