@@ -89,11 +89,14 @@ public class PowerUpManager : MonoBehaviour
                 break;
             case PowerUpType.RELOADSPD:
                 _weapon = GameObject.FindWithTag("Player").GetComponent<Weapon>();
-                // TODO: implement reload speed
+                _weapon._reloadSpeed += powerUp.modifier;
+                UIManager.reloadSpeed = _weapon._reloadSpeed;
+                Debug.Log("Reload Speed PowerUp Applied: " + _weapon._reloadSpeed);
                 break;
             case PowerUpType.CLIPSIZE:
                 _weapon = GameObject.FindWithTag("Player").GetComponent<Weapon>();
                 _weapon._magazineSize += (int)powerUp.modifier;
+                UIManager.AmmoCapacity = _weapon._magazineSize;
                 Debug.Log("Clip Size PowerUp Applied: " + _weapon._magazineSize);
                 break;                
             case PowerUpType.ADRENALIN:
