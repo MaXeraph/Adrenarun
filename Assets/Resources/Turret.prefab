@@ -4882,8 +4882,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf3eeec72cd6db149b61130cc3245c7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   currentHealth: 0
   maxHealth: 100
   owner: 0
@@ -4899,9 +4899,9 @@ GameObject:
   - component: {fileID: 3079834186586270733}
   - component: {fileID: 6687809355332020556}
   - component: {fileID: 1353100426342338490}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Crit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

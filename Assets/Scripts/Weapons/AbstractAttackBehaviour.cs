@@ -7,6 +7,11 @@ using UnityEngine;
  */
 public abstract class AbstractAttackBehaviour
 {
+    public EntityType Owner
+    {
+        get { return _owner; }
+        private set { _owner = value; }
+    }
     protected EntityType _owner;
     public float _damage;
     

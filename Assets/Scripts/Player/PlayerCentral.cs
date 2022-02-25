@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerCentral : MonoBehaviour
 {
-    // Start is called before the first frame update
     private GameObject _player;
-    private Weapon _weapon;
-    private Vector3 _velocity;
     private Camera _camera;
+    private Weapon _weapon;
+
+    private Vector3 _velocity;
 
     bool isGrounded;
 
@@ -16,21 +16,22 @@ public class PlayerCentral : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         _player = GameObject.FindWithTag("Player");
+
         _camera = Camera.main;
-        
-        
+
         _weapon = _player.AddComponent<Weapon>();
-        _weapon.Initialize(new BulletAttackBehaviour(EntityType.PLAYER));
+        _weapon.Initialize(new BulletAttackBehaviour(EntityType.PLAYER), 0.2f, 16, 1f);
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         checkGround();
 
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {
-            Movement.RotatePlayer(_player, _camera.gameObject);
+            Movement.RotatePlayer(_player, _camera);
+            CompassUI.updateCompass();
         }
 
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
@@ -42,7 +43,7 @@ public class PlayerCentral : MonoBehaviour
         {
             _velocity.y += Movement.jumpVelocity;
         }
-        
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
             Movement.playerDash(_player);
@@ -52,11 +53,12 @@ public class PlayerCentral : MonoBehaviour
         {
             Vector3 position = _camera.transform.forward + _camera.transform.position;
             Vector3 direction = _camera.transform.forward;
-            _weapon.Attack(position, direction);
+            if (_weapon.Attack(position, direction)) { UIManager.Ammo -= 1; }
         }
         if (Input.GetButtonDown("Reload"))
         {
             _weapon.Reload();
+            UIManager.Reloading = true;
         }
 
         applyGravity();
@@ -88,8 +90,8 @@ public class PlayerCentral : MonoBehaviour
         if(isGrounded && _velocity.y < 0){
             _velocity.y = 0f;
         }
-    }    
-    
+    }
+
     private void applyGravity()
     {
         CharacterController char_controller = _player.GetComponent<CharacterController>();
