@@ -19,15 +19,13 @@ public static class Globals
 
 	public static Dictionary<EnemyType, string> enemyPrefabNames = new Dictionary<EnemyType, string>()
 	{
-		{ EnemyType.TURRET, "Turret" },
-        { EnemyType.HEALER, "Healer" }
+		{ EnemyType.TURRET, "Turret" }
 	};
 }
 
 public enum EnemyType
 {
-	TURRET,
-    HEALER
+	TURRET
 }
 
 public enum EntityType {
