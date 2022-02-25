@@ -18,17 +18,14 @@ public class ArtilleryAttackBehaviour : BulletAttackBehaviour
         thermiteDamageCooldown = damageCooldown;
     }
 
-    public override void initiateAttack(Vector3 position, Vector3 direction)
-    {
-        BulletMono.create(this, position, direction);
-    }
-
-    public void onHit(BulletMono bm, GameObject target)
+    public override void onHit(BulletMono bm, GameObject target)
     {
         if (target.GetComponent<Stats>() == null && target.GetComponent<BulletMono>() == null) // if not another bullet...
         {
             GameObject.Destroy(bm.gameObject);
             GameObject thermitePool = GameObject.Instantiate(Resources.Load("ThermitePool")) as GameObject;
+            // TODO: project down to surface
+            thermitePool.GetComponent<Transform>().position = bm.gameObject.GetComponent<Transform>().position;
             thermitePool.GetComponent<ThermitePoolMono>().Initialize(this);
         }
     }

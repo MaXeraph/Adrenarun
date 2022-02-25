@@ -41,7 +41,7 @@ public class ThermitePoolMono : MonoBehaviour
             _ticks++;
         }
 
-        if (_ticks == _attackBehaviour.thermiteDurability) Destroy(this);
+        if (_ticks == _attackBehaviour.thermiteDurability) Destroy(gameObject);
     }
 
     void OnTriggerEnter(Collider other)

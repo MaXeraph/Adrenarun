@@ -50,7 +50,9 @@ public class EnemyFactory
 
     public EnemyFactory()
     {
+        // Define enemyInfo for each type.
         AddTurretToRoster();
+        _enemyInfo.Add(EnemyType.GRENADIER, new EnemyInfo(_defaultFunc, Globals.DirectTargeting, _defaultMove, new ArtilleryAttackBehaviour(EntityType.ENEMY, 20f), 10f));
     }
 
     public GameObject CreateEnemy(EnemyType enemyType, Vector3 position)
@@ -61,7 +63,7 @@ public class EnemyFactory
         if (!Globals.enemyPrefabNames.ContainsKey(enemyType)) return null;
 
         string enemyName = Globals.enemyPrefabNames[enemyType];
-
+        
         GameObject newEnemyObject = GameObject.Instantiate(Resources.Load(enemyName)) as GameObject;
         Transform enemyTransform = newEnemyObject.GetComponent<Transform>();
 

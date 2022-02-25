@@ -13,6 +13,11 @@ public class Stats : MonoBehaviour
         set {
             _currentHealth = value;
             if (value <= 0) Destroy(gameObject);
+            if (owner == EntityType.PLAYER)
+            {
+                UIManager.Health = currentHealth;
+                SpeedManager.updateSpeeds(currentHealth / maxHealth);
+            }
         }
     }
     public float maxHealth;
