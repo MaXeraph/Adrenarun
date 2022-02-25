@@ -5,14 +5,17 @@ TagManager:
   serializedVersion: 2
   tags:
   - Platform
+  - Enemy
+  - Crit
+  - overlay
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Target
   - Water
   - UI
-  - 
+  - Character
   - 
   - 
   - 
