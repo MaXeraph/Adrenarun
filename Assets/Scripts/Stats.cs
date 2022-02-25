@@ -5,7 +5,16 @@ using UnityEngine;
 // TODO: refactor away from MonoBehaviour
 public class Stats : MonoBehaviour
 {
-    public float currentHealth;
+    private float _currentHealth;
+
+    public float currentHealth
+    {
+        get => _currentHealth;
+        set {
+            _currentHealth = value;
+            if (value <= 0) Destroy(gameObject);
+        }
+    }
     public float maxHealth;
     public EntityType owner;
 
