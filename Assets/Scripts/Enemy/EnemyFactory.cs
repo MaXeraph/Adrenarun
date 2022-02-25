@@ -31,6 +31,7 @@ public class EnemyFactory
 {
 
     // Additional setup for an enemy.
+    private static Dictionary<EnemyType, Action<EnemyBehaviour>> _enemyPostSetups = new Dictionary<EnemyType, Action<EnemyBehaviour>>();
     private static Dictionary<EnemyType, EnemyInfo> _enemyInfo = new Dictionary<EnemyType, EnemyInfo>();
     private static Func<Transform, Transform, Vector3> _defaultFunc = (Transform t1, Transform t2) => new Vector3(0, 0, 0);
     private static Action<Transform, Vector3> _defaultMove = (Transform t, Vector3 v) => t.position += v * Time.deltaTime;
@@ -50,7 +51,6 @@ public class EnemyFactory
     public EnemyFactory()
     {
         AddTurretToRoster();
-        // AddHealerToRoster();
     }
 
     public GameObject CreateEnemy(EnemyType enemyType, Vector3 position)
@@ -78,17 +78,9 @@ public class EnemyFactory
             _defaultTarget,
             enemyInfo,
             enemyWeapon);
+        if (_enemyPostSetups.ContainsKey(enemyType)) _enemyPostSetups[enemyType](eb);
 
         return newEnemyObject;
-    }
-
-    void AddHealerToRoster()
-    {
-        BulletAttackBehaviour bulletBehaviour = new BulletAttackBehaviour(EntityType.ENEMY);
-        float fireRate = 1f;
-
-        // Define enemyInfo for each type.
-        _enemyInfo.Add(EnemyType.HEALER, new EnemyInfo(_defaultFunc, Globals.DirectTargeting, _defaultMove, bulletBehaviour, fireRate));
     }
 
     void AddTurretToRoster()
@@ -98,5 +90,13 @@ public class EnemyFactory
 
         // Define enemyInfo for each type.
         _enemyInfo.Add(EnemyType.TURRET, new EnemyInfo(_defaultFunc, Globals.DirectTargeting, _defaultMove, bulletBehaviour, fireRate));
+
+        // Set up the dictionary with methods.
+        _enemyPostSetups.Add(EnemyType.TURRET, CreateTurret);
+    }
+
+    void CreateTurret(EnemyBehaviour eb)
+    {
+
     }
 }
