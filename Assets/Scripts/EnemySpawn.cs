@@ -84,7 +84,7 @@ public class EnemySpawn : MonoBehaviour
                 SpawnEnemy();
                 _cooldown = true;
                 currentNumEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
-                Debug.Log(currentNumEnemies);
+                // Debug.Log(currentNumEnemies);
                 StartCoroutine(Cooldown());
             }
             else
@@ -92,7 +92,7 @@ public class EnemySpawn : MonoBehaviour
                 if(currentNumEnemies >= enemiesPerWave)
                 {
                     canSpawn = false;
-                    Debug.Log(GameObject.FindGameObjectsWithTag("Enemy").Length);
+                    // Debug.Log(GameObject.FindGameObjectsWithTag("Enemy").Length);
                 }
             }
         }
