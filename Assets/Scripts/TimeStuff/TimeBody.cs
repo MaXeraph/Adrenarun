@@ -11,7 +11,7 @@ public class TimeBody : MonoBehaviour
 
 	public static bool isRecording = true;
 
-	public float recordTime = 20f;
+	public float recordTime = 120f;
 
 
 	List<PointInTime> pointsInTime;
@@ -35,8 +35,7 @@ public class TimeBody : MonoBehaviour
 	{
 		if (isRewinding)
 			Rewind();
-		else if (isRecording)
-			Record();
+		else if (isRecording) { Record(); }
 	}
 
 	void Rewind()
@@ -67,8 +66,9 @@ public class TimeBody : MonoBehaviour
 
 	public static void StartRewind()
 	{
+		Time.timeScale = 2f;
 		Cursor.visible = false;
-		DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 5f, 5).SetEase(Ease.InOutQuint);
+		DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 8f, 5).SetEase(Ease.InOutQuint);
 		isRewinding = true;
 	}
 

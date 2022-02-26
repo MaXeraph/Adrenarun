@@ -51,6 +51,7 @@ public class PlayerCentral : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
+            GetComponent<Stats>().takeDamage(10f);
             _velocity.y += Movement.jumpVelocity;
         }
 

@@ -63,12 +63,15 @@ public class Stats : MonoBehaviour
         setHealth(currentHealth - damage);
         if (currentHealth <= 0)
         {
-            if (gameObject.tag == "Player" && !dead)
+            if (gameObject.tag == "Player")
             {
-                dead = true;
-                deathUI.reveal(deathUI.instance);
+                if (!dead)
+                {
+                    dead = true;
+                    deathUI.reveal(deathUI.instance);
+                }
             }
-        else Destroy(gameObject);
+            else Destroy(gameObject);
         }
     }
 }
