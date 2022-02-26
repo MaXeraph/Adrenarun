@@ -107,13 +107,11 @@ public class PlayerCentral : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (!isGrounded && hit.normal.y < wallJumpSlope)
+        bool wallJumpableSurface = hit.normal.y < wallJumpSlope;
+        if (!isGrounded && wallJumpableSurface && Input.GetButtonDown("Jump") && canWallJump)
         {
-            if(Input.GetButtonDown("Jump") && canWallJump)
-            {
-                canWallJump = false;
-                _velocity.y = Movement.jumpVelocity;
-            }
+            canWallJump = false;
+            _velocity.y = Movement.jumpVelocity;
         }
     }
 }
