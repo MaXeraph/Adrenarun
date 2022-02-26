@@ -7,6 +7,7 @@ public class PlayerCentral : MonoBehaviour
     private GameObject _player;
     private Camera _camera;
     private Weapon _weapon;
+    public static bool paused = false;
 
     private Vector3 _velocity;
 
@@ -15,6 +16,7 @@ public class PlayerCentral : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        
         _player = GameObject.FindWithTag("Player");
 
         _camera = Camera.main;
@@ -26,6 +28,8 @@ public class PlayerCentral : MonoBehaviour
 
     void Update()
     {
+        if (paused) return;
+
         checkGround();
 
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)

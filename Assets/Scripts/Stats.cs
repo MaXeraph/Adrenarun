@@ -8,6 +8,7 @@ public class Stats : MonoBehaviour
     public float currentHealth;
     public float maxHealth;
     public EntityType owner;
+    bool dead = false;
 
     public Stats(float maxHealth = 100f)
     {
@@ -62,7 +63,12 @@ public class Stats : MonoBehaviour
         setHealth(currentHealth - damage);
         if (currentHealth <= 0)
         {
-            Destroy(gameObject);
+            if (gameObject.tag == "Player" && !dead)
+            {
+                dead = true;
+                deathUI.reveal(deathUI.instance);
+            }
+        else Destroy(gameObject);
         }
     }
 }

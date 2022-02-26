@@ -87,4 +87,10 @@ public class UIManager : MonoBehaviour
     {
         UIManager.weapon = _weapon;
     }
+
+    public static void die()
+    {
+
+    }
+
 }
