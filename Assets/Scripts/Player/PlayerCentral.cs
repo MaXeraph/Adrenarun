@@ -122,17 +122,17 @@ public class PlayerCentral : MonoBehaviour
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         bool wallJumpableSurface = hit.normal.y < wallJumpSlope;
-
         if (!isGrounded && wallJumpableSurface && Input.GetButtonDown("Jump") && canWallJump)
         {
+            canWallJump = false;
             //Wall jump now kicks off from the wall on X/Z vectors
             Vector3 target = hit.normal * Movement.speed * SpeedManager.playerMovementScaling;
-            canWallJump = false;
             _velocity = target;
             _velocity.y = Movement.jumpVelocity;
 
         }
-        else if (!isGrounded) _velocity.y = -5;
+        //Fall slightly slower against falls
+        else if (!isGrounded && _velocity.y < 0) _velocity.y+=0.5f;
     }
 
     // This should make more complex movement/animations much easier and more stable
