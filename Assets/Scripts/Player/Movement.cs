@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour
 {
     // Movement variables
     public static float speed = 12f;
-    public static float dashSpeed = 3f;
+    public static float dashSpeed = 7f;
 
     // Jump variables
     // NOTE: -45.81 is an experimental value for gravity
@@ -28,8 +28,8 @@ public class Movement : MonoBehaviour
         camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         player.transform.Rotate(Vector3.up * mouseX);
     }
-    public static void MoveXY(GameObject player)
-    {   
+    public static Vector3 MoveXY(GameObject player)
+    {
         CharacterController char_controller = player.GetComponent<CharacterController>();
 
         float x = Input.GetAxis("Horizontal");
@@ -37,16 +37,14 @@ public class Movement : MonoBehaviour
 
         Vector3 move = player.transform.right * x + player.transform.forward * y;
         char_controller.Move(move * speed * Time.deltaTime * SpeedManager.playerMovementScaling);
+        return move;
     }
 
-    public static void playerDash(GameObject player)
+    public static void playerDash(GameObject player, Vector3 dir)
     {
         CharacterController char_controller = player.GetComponent<CharacterController>();
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
-        
-        Vector3 move = player.transform.right * x + player.transform.forward * y;
 
-        char_controller.Move(move * speed * Time.deltaTime * dashSpeed * SpeedManager.playerMovementScaling);
+        //Movement direction cannot be changed while dashing
+        char_controller.Move(dir * speed * Time.deltaTime * dashSpeed * SpeedManager.playerMovementScaling);
     }
 }
