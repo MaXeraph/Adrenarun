@@ -10,8 +10,11 @@ public class PlayerCentral : MonoBehaviour
     public static bool paused = false;
 
     private Vector3 _velocity;
+    private CharacterController _controller;
 
     bool isGrounded;
+    bool canWallJump;
+    float wallJumpSlope = 0.1f;
 
     void Start()
     {
@@ -21,6 +24,9 @@ public class PlayerCentral : MonoBehaviour
 
         _camera = Camera.main;
 
+        _controller = GetComponent<CharacterController>();
+        
+        
         _weapon = _player.AddComponent<Weapon>();
         _weapon.Initialize(new BulletAttackBehaviour(EntityType.PLAYER), 0.2f, 16, 1f);
     }
@@ -80,6 +86,7 @@ public class PlayerCentral : MonoBehaviour
         {
             Debug.DrawRay(origin, direction * distance, Color.red);
             isGrounded = true;
+            canWallJump = true;
 
         }
         else
@@ -98,8 +105,17 @@ public class PlayerCentral : MonoBehaviour
 
     private void applyGravity()
     {
-        CharacterController char_controller = _player.GetComponent<CharacterController>();
         _velocity.y += -45.81f * Time.deltaTime * SpeedManager.playerMovementScaling;
-        char_controller.Move(_velocity * Time.deltaTime * SpeedManager.playerMovementScaling);
+        _controller.Move(_velocity * Time.deltaTime * SpeedManager.playerMovementScaling);
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        bool wallJumpableSurface = hit.normal.y < wallJumpSlope;
+        if (!isGrounded && wallJumpableSurface && Input.GetButtonDown("Jump") && canWallJump)
+        {
+            canWallJump = false;
+            _velocity.y = Movement.jumpVelocity;
+        }
     }
 }
