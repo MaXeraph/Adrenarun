@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerCentral : MonoBehaviour
 {
@@ -10,10 +11,13 @@ public class PlayerCentral : MonoBehaviour
     private static CharacterController _controller;
     static PlayerCentral instance;
 
+    public Transform arms;
+    public Transform gun;
+
     static private Vector3 _velocity;
     static private Vector3 prev_dir;
 
-    public static float dashLength = 0.12f;
+    public static float dashLength = 0.2f;
     public static float dashCooldown = 0.5f;
     static float lastDash = 0f;
 
@@ -26,6 +30,7 @@ public class PlayerCentral : MonoBehaviour
     private CharacterState prevState;
 
     void Awake() => instance = this;
+
 
     void Start()
     {
@@ -42,27 +47,22 @@ public class PlayerCentral : MonoBehaviour
 
     void Update()
     {
-        // Seperates functionality between different states and handles transitions between them
+        // Seperates functionality between different movement states and handles transitions between them
         manageStates();
 
-        if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
-        {
-            Movement.RotatePlayer(_player, _camera);
-            CompassUI.updateCompass();
-        }
+        //Look
+        if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0) Movement.RotatePlayer(_player, _camera);
 
+        //Shoot
         if (Input.GetButton("Fire1"))
         {
-            Vector3 position = _camera.transform.forward + _camera.transform.position;
-            Vector3 direction = _camera.transform.forward;
-            if (_weapon.Attack(position, direction)) { UIManager.Ammo -= 1; }
+            Vector3 position = _camera.transform.forward + _camera.transform.position + (0.22f* _camera.transform.right) + (-0.18f * _camera.transform.up);
+            Vector3 direction = _camera.transform.forward + new Vector3(-0.0075f,0.003f,0);
+            if (_weapon.Attack(position, direction)) shootEffects(position);
         }
 
-        if (Input.GetButtonDown("Reload"))
-        {
-            _weapon.Reload();
-            UIManager.Reloading = true;
-        }
+        //Reload
+        if (Input.GetButtonDown("Reload")) _weapon.Reload();
 
     }
 
@@ -81,6 +81,23 @@ public class PlayerCentral : MonoBehaviour
         }
     }
 
+    private void shootEffects(Vector3 pos)
+    {
+        //Update UI
+        UIManager.Ammo -= 1;
+
+        //Muzzleflash
+        GameObject flash = Instantiate(Resources.Load("Muzzleflash")) as GameObject;
+        flash.transform.position = pos;
+        flash.transform.right = Camera.main.transform.forward;
+        flash.transform.Rotate(Random.Range(0, 360), 0, 0);
+
+        //Recoil tween
+        Sequence RecoilSequence = DOTween.Sequence();
+        RecoilSequence.Insert(0, arms.DOPunchRotation(new Vector3(0, 0, -1f), _weapon._fireRate / 2, 0, 0.5f)); 
+        RecoilSequence.Insert(0, gun.DOPunchRotation(new Vector3(-1f, 0, 0), _weapon._fireRate / 2, 0, 0.5f));
+    }
+
     private static void checkGround()
     {
         Vector3 origin = new Vector3(instance.transform.position.x, instance.transform.position.y - (instance.transform.localScale.y * .5f), instance.transform.position.z);
@@ -89,28 +106,18 @@ public class PlayerCentral : MonoBehaviour
 
         if (Physics.Raycast(origin, direction, out RaycastHit hit, distance))
         {
-            _velocity = new Vector3 (0f, _velocity.y, 0f);
-            //Debug.DrawRay(origin, direction * distance, Color.red);
+            _velocity = new Vector3(0f, _velocity.y, 0f);
             isGrounded = true;
             canWallJump = true;
-
         }
-        else
-        {
-            isGrounded = false;
-        }
+        else isGrounded = false;
     }
 
     private static void checkDirection()
     {
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
-        {
-            Vector3 move = Movement.MoveXY(_player);
-            if (move != Vector3.zero)
-            {
-                prev_dir = move;
-            }
-        }
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)  
+            Movement.MoveXY(_player);
+
     }
 
     private static void applyGravity()
@@ -124,6 +131,7 @@ public class PlayerCentral : MonoBehaviour
         bool wallJumpableSurface = hit.normal.y < wallJumpSlope;
         if (!isGrounded && wallJumpableSurface && Input.GetButtonDown("Jump") && canWallJump)
         {
+            Debug.Log("JUMPED!!");
             canWallJump = false;
             //Wall jump now kicks off from the wall on X/Z vectors
             Vector3 target = hit.normal * Movement.speed * SpeedManager.playerMovementScaling;
@@ -131,11 +139,16 @@ public class PlayerCentral : MonoBehaviour
             _velocity.y = Movement.jumpVelocity;
 
         }
-        //Fall slightly slower against falls
-        else if (!isGrounded && _velocity.y < 0) _velocity.y+=0.5f;
     }
 
-    // This should make more complex movement/animations much easier and more stable
+    private static bool checkDash()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time >= (lastDash + dashCooldown)) return true;
+        else return false;
+    }
+
+
+    // This should make more complex movement/animations easier and more stable
     //Base Character State Class
     class CharacterState
     {
@@ -162,7 +175,7 @@ public class PlayerCentral : MonoBehaviour
             //Can jump only from this state or during wall collision
             if (isGrounded && Input.GetButtonDown("Jump")) return new JumpState();
 
-            if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time >= (lastDash + dashCooldown)) return new DashState();
+            if (checkDash()) return new DashState();
 
             return this;
         }
@@ -189,7 +202,7 @@ public class PlayerCentral : MonoBehaviour
 
         public override CharacterState handleInput()
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time >= (lastDash + dashCooldown)) return new DashState();
+            if (checkDash()) return new DashState();
             return this;
         }
 
@@ -207,7 +220,7 @@ public class PlayerCentral : MonoBehaviour
     {
         public override CharacterState handleInput()
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time >= (lastDash + dashCooldown)) return new DashState();
+            if (checkDash()) return new DashState();
             return this;
         }
 
@@ -224,22 +237,25 @@ public class PlayerCentral : MonoBehaviour
     //Dash state
     class DashState : CharacterState
     {
-        private float dash_start;
-        private Vector3 dir;
-        private bool dashing = false;
+        float dash_start;
+        Vector3 dir;
+        bool dashing = false;
+        float mult = 1;
+        float delay = 0.075f;
+        
 
         public override void enter()
         {
-            if (prev_dir == Vector3.zero) prev_dir = _player.transform.forward;
+            dir = Camera.main.transform.forward;
             _velocity.y = 0;
             dash_start = Time.time;
-            dir = prev_dir;
             dashing = true;
+            DOTween.To(x => mult = x, 1f, 0f, dashLength-delay).SetDelay(delay);
         }
 
         public override CharacterState process()
         {
-            Movement.playerDash(_player, dir);
+            Movement.playerDash(_player, dir*mult);
             if (dashing && Time.time >= (dash_start + dashLength)) return new FallState();
             return this;
         }

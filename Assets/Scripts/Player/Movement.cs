@@ -27,8 +27,9 @@ public class Movement : MonoBehaviour
 
         camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         player.transform.Rotate(Vector3.up * mouseX);
+        CompassUI.updateCompass();
     }
-    public static Vector3 MoveXY(GameObject player)
+    public static void MoveXY(GameObject player)
     {
         CharacterController char_controller = player.GetComponent<CharacterController>();
 
@@ -37,7 +38,6 @@ public class Movement : MonoBehaviour
 
         Vector3 move = player.transform.right * x + player.transform.forward * y;
         char_controller.Move(move * speed * Time.deltaTime * SpeedManager.playerMovementScaling);
-        return move;
     }
 
     public static void playerDash(GameObject player, Vector3 dir)
@@ -45,6 +45,6 @@ public class Movement : MonoBehaviour
         CharacterController char_controller = player.GetComponent<CharacterController>();
 
         //Movement direction cannot be changed while dashing
-        char_controller.Move(dir * speed * Time.deltaTime * dashSpeed * SpeedManager.playerMovementScaling);
+        char_controller.Move(dir * speed * Time.deltaTime * dashSpeed);
     }
 }

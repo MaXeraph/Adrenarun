@@ -48,6 +48,7 @@ public class Weapon : MonoBehaviour
             if (_currentMagazine > 0)
             {
                 _attackBehaviour.initiateAttack(position, direction);
+
                 _currentMagazine -= 1; // Comment out for infinite ammo
                 lastShot = Time.time;
                 return true;
@@ -65,13 +66,14 @@ public class Weapon : MonoBehaviour
     public void Reload()
     {
         _reloading = true;
-        DOTween.To(() => _currentMagazine, x => _currentMagazine = x, _magazineSize, _reloadSpeed).OnComplete(finishReload);
-        //_currentMagazine = _magazineSize;
+        if (_attackBehaviour.Owner.ToString() == "PLAYER") UIManager.Reloading = true;
+        else DOTween.To(() => _currentMagazine, x => _currentMagazine = x, _magazineSize, _reloadSpeed).OnComplete(finishReload);
     }
 
-    void finishReload()
+    public void finishReload()
     {
         _reloading = false;
+        _currentMagazine = _magazineSize;
     }
 
 }

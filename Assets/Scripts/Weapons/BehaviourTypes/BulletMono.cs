@@ -14,7 +14,8 @@ public class BulletMono : MonoBehaviour
         newBullet.GetComponent<BulletMono>()._attackBehaviour = attackBehaviour;
         
         newBullet.transform.position = position;
-        newBullet.transform.forward = direction;
+        //newBullet.transform.forward = direction;
+        newBullet.transform.LookAt(direction * 1000);
 
         return newBullet;
     }
