@@ -63,7 +63,6 @@ public class PlayerCentral : MonoBehaviour
 
         //Reload
         if (Input.GetButtonDown("Reload")) _weapon.Reload();
-
     }
 
     private void manageStates()
@@ -131,7 +130,6 @@ public class PlayerCentral : MonoBehaviour
         bool wallJumpableSurface = hit.normal.y < wallJumpSlope;
         if (!isGrounded && wallJumpableSurface && Input.GetButtonDown("Jump") && canWallJump)
         {
-            Debug.Log("JUMPED!!");
             canWallJump = false;
             //Wall jump now kicks off from the wall on X/Z vectors
             Vector3 target = hit.normal * Movement.speed * SpeedManager.playerMovementScaling;
@@ -148,7 +146,7 @@ public class PlayerCentral : MonoBehaviour
     }
 
 
-    // This should make more complex movement/animations easier and more stable
+    //This should make more complex movement/animations easier and more stable
     //Base Character State Class
     class CharacterState
     {
