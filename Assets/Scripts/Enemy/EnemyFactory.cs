@@ -51,7 +51,7 @@ public class EnemyFactory
     public EnemyFactory()
     {
         AddTurretToRoster();
-        AddTurret_HealerVarient_ToRoster();
+        AddHealerVarientToRoster();
     }
 
     public GameObject CreateEnemy(Vector3 position, EnemyType enemyType, EnemyVarientType varientType = EnemyVarientType.NONE)
@@ -84,18 +84,18 @@ public class EnemyFactory
         return newEnemyObject;
     }
 
-    void AddTurret_HealerVarient_ToRoster()
+    void AddHealerVarientToRoster()
     {
         // Set up the dictionary with methods.
-        _enemyPostSetups.Add(EnemyVarientType.HEALER, CreateTurret_HealerVarient);
+        _enemyPostSetups.Add(EnemyVarientType.HEALER, CreateHealerVarient);
     }
 
-    void CreateTurret_HealerVarient(EnemyBehaviour eb)
+    void CreateHealerVarient(EnemyBehaviour eb)
     {
         AbstractAttackBehaviour enemyAttackBehaviour = eb.GetComponent<Weapon>()._attackBehaviour;
-        enemyAttackBehaviour._damage *= -1; 
+        if (enemyAttackBehaviour._damage > 0) enemyAttackBehaviour._damage *= -1; 
     }
-
+    
     void AddTurretToRoster()
     {
         BulletAttackBehaviour bulletBehaviour = new BulletAttackBehaviour(EntityType.ENEMY);
