@@ -27,6 +27,7 @@ public class BulletMono : MonoBehaviour
 
     void OnTriggerEnter(Collider c)
     {
+        if (c.gameObject.tag == "Detector") return;//{ CrosshairUI.addIndicator(c); return; }
         _attackBehaviour.onHit(this, c.gameObject);
         if (c.gameObject.tag == "Enemy") UIManager.DamageText(transform.position + transform.up * 0.15f, -_attackBehaviour._damage);
     }

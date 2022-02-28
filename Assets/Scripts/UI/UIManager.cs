@@ -43,7 +43,7 @@ public class UIManager : MonoBehaviour
         {
             ammo = Mathf.Clamp(value, 0, ammoCapacity);
             if (ammo <= 0) { Reloading = true;}
-            else if (ammo == ammoCapacity) { Reloading = false;}
+            else if (ammo == ammoCapacity) { Reloading = false; _weapon.finishReload(); }
             AmmoUI.UpdateAmmo(ammo, reloading);
 
         }
@@ -121,6 +121,8 @@ public class UIManager : MonoBehaviour
 
     public static void showPowerups(PowerUpType[] _powerUpSelectionList)
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         UpgradeUI.powerUpSelectionList = _powerUpSelectionList;
         UpgradeUI.instance.gameObject.SetActive(true);
         UpgradeUI.init();

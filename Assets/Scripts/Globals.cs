@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class Globals
 {
+	public static Texture tex;
+
 	public static Dictionary<PowerUpType, AbstractStatPowerUp> StatPowerUpDictionary = new Dictionary<PowerUpType, AbstractStatPowerUp>
 	{{PowerUpType.DAMAGE, new DamagePowerUp()},
 	{PowerUpType.FIRERATE, new FireRatePowerUp()},
@@ -31,7 +33,28 @@ public static class Globals
 	{PowerUpType.REPEATER, PowerUpClass.FIRING}
 	};
 
-    public static Vector3 DirectTargeting(Transform from, Transform to)
+	public static Dictionary<PowerUpType, string> PowerUpInfoDictionary = new Dictionary<PowerUpType, string>
+	{{PowerUpType.NONE, ""},
+	{PowerUpType.DAMAGE, "Increase bullet damage"},
+	{PowerUpType.FIRERATE, "Increase bullet fire rate"},
+	{PowerUpType.RELOADSPD, "Increase gun reload speed"},
+	{PowerUpType.CLIPSIZE, "Increase gun clip size"},
+	{PowerUpType.ADRENALIN, "Increase slow down ratio"},
+	{PowerUpType.SHOTGUN, "Shoot more bullets with increased spread"},
+	{PowerUpType.REPEATER, "Shoot an additional bullet with each shot"}
+	};
+
+	public static Dictionary<PowerUpType, Texture> PowerUpIconDictionary = new Dictionary<PowerUpType, Texture>
+	{{PowerUpType.DAMAGE, tex},
+	{PowerUpType.FIRERATE, tex},
+	{PowerUpType.RELOADSPD, tex},
+	{PowerUpType.CLIPSIZE, tex},
+	{PowerUpType.ADRENALIN, tex},
+	{PowerUpType.SHOTGUN, tex},
+	{PowerUpType.REPEATER, tex}
+	};
+
+	public static Vector3 DirectTargeting(Transform from, Transform to)
     {
         Vector3 direction = (to.position - from.position).normalized;
         return direction;

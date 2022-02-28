@@ -30,7 +30,7 @@ public class deathUI : MonoBehaviour
 
     public static void reveal(GameObject inst)
     {
-        inst.SetActive(true);
+        instance.SetActive(true);
         PlayerCentral.paused = true;
         TimeBody.isRecording = false;
         Cursor.lockState = CursorLockMode.None;

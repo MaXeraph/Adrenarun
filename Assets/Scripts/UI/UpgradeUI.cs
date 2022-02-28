@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -9,20 +8,12 @@ public class UpgradeUI : MonoBehaviour
 {
 
     static TMP_Text info;
-
     static Button[] choiceButtons;
-
     static Image[] choiceImages;
-
     static TMP_Text[] choiceTexts;
-
-
 
     public static PowerUpType[] powerUpSelectionList;
     public static UpgradeUI instance;
-
-
-
 
     void Awake()
     {
@@ -36,7 +27,8 @@ public class UpgradeUI : MonoBehaviour
 
         for (var i = 0; i < 3; i++)
         {
-            choiceButtons[i].onClick.AddListener(() => choose(i));
+            setButton(choiceButtons[i], i);
+            choiceButtons[i].GetComponent<UpgradeChoice>().choiceNum = i;
         }
 
         gameObject.SetActive(false);
@@ -50,8 +42,13 @@ public class UpgradeUI : MonoBehaviour
         }
     }
 
-    void choose(int num)
+    void setButton(Button targetButton, int choice)
     {
+        targetButton.onClick.AddListener(() => choose(choice));
+    }
+
+    void choose(int num)
+    { 
         if (num < 0 || num > 2) return;
         UIManager.powerSelection = num;
         gameObject.SetActive(false);
@@ -60,13 +57,13 @@ public class UpgradeUI : MonoBehaviour
     void exit()
     {
         gameObject.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
     }
-
     
 
-    public static void upateInfo(string _info)
+    public static void updateInfo(PowerUpType type)
     {
-        info.text = _info;
+        info.text = Globals.PowerUpInfoDictionary[type];
     }
 
     

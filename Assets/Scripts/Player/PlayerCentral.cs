@@ -22,7 +22,7 @@ public class PlayerCentral : MonoBehaviour
 
     void Start()
     {
-       // Cursor.lockState = CursorLockMode.Locked;
+       Cursor.lockState = CursorLockMode.Locked;
         
         _player = GameObject.FindWithTag("Player");
 
@@ -44,28 +44,18 @@ public class PlayerCentral : MonoBehaviour
 
         checkGround();
 
-        if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
-        {
-            Movement.RotatePlayer(_player, _camera);
-            CompassUI.updateCompass();
-        }
+        //Look
+        if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0) Movement.RotatePlayer(_player, _camera);
 
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
-        {
-            Movement.MoveXY(_player);
-        }
+        //Move
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) Movement.MoveXY(_player);
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            GetComponent<PowerUpManager>().presentPowerUps();
-            GetComponent<Stats>().takeDamage(10f);
-            _velocity.y += Movement.jumpVelocity;
-        }
+        //Jump
+        if (Input.GetButtonDown("Jump") && isGrounded) _velocity.y += Movement.jumpVelocity;
 
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            Movement.playerDash(_player);
-        }
+        //Dash
+        if (Input.GetKey(KeyCode.LeftShift)) Movement.playerDash(_player);
+        
 
         //Shoot
         if (Input.GetButton("Fire1"))
@@ -74,11 +64,10 @@ public class PlayerCentral : MonoBehaviour
             Vector3 direction = _camera.transform.forward + new Vector3(-0.0075f, 0.003f, 0);
             if (_weapon.Attack(position, direction)) shootEffects(position);
         }
-        if (Input.GetButtonDown("Reload"))
-        {
-            _weapon.Reload();
-            UIManager.Reloading = true;
-        }
+
+        //Reload
+        if (Input.GetButtonDown("Reload")) _weapon.Reload();
+      
 
         applyGravity();
         resetYVelocity();

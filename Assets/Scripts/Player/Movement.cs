@@ -27,6 +27,7 @@ public class Movement : MonoBehaviour
 
         camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         player.transform.Rotate(Vector3.up * mouseX);
+        CompassUI.updateCompass();
     }
     public static void MoveXY(GameObject player)
     {   

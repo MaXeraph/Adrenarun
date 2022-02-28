@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Crit
   - overlay
+  - Detector
   layers:
   - Default
   - TransparentFX
