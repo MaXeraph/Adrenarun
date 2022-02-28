@@ -46,8 +46,9 @@ public static class Globals
 
 public enum EnemyType
 {
-    TURRET,
-    HEALER
+	TURRET,
+	GRENADIER,
+  HEALER
 }
 
 public enum EnemyVariantType
