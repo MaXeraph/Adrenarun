@@ -1340,6 +1340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ffcaa6ea6775c44967ddc5c21c6ae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemiesPerWave: 7
   waves:
   - waveName: firstWave
     numOfEnemies: 10

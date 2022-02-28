@@ -6,18 +6,18 @@ using UnityEngine;
 // Define EnemyInfo for convenience.
 public struct EnemyInfo
 {
-    public Func<Transform, Transform, Vector3> pathfind;
+    public Action<GameObject, Vector3> navAgentMove;
     public Func<Transform, Transform, Vector3> aim;
-    public Action<Transform, Vector3> move;
+    public Action<Vector3> navAgentSetup;
     public AbstractAttackBehaviour attackBehaviour;
     public float fireRate;
 
-    public EnemyInfo(Func<Transform, Transform, Vector3> pathfindFunc, Func<Transform, Transform, Vector3> aimFunc,
-        Action<Transform, Vector3> moveFunc, AbstractAttackBehaviour attackBehaviour, float fireRate)
+    public EnemyInfo(Action<GameObject, Vector3> navAgentMoveFunc, Func<Transform, Transform, Vector3> aimFunc,
+        Action<Vector3> navAgentSetupFunc, AbstractAttackBehaviour attackBehaviour, float fireRate)
     {
-        pathfind = pathfindFunc;
+        navAgentMove = navAgentMoveFunc;
         aim = aimFunc;
-        move = moveFunc;
+        navAgentSetup = navAgentSetupFunc;
         this.attackBehaviour = attackBehaviour;
         this.fireRate = fireRate;
     }
@@ -33,8 +33,6 @@ public class EnemyFactory
     // Additional setup for an enemy.
     private static Dictionary<EnemyVariantType, Action<EnemyBehaviour>> _enemyPostSetups = new Dictionary<EnemyVariantType, Action<EnemyBehaviour>>();
     private static Dictionary<EnemyType, EnemyInfo> _enemyInfo = new Dictionary<EnemyType, EnemyInfo>();
-    private static Func<Transform, Transform, Vector3> _defaultFunc = (Transform t1, Transform t2) => new Vector3(0, 0, 0);
-    private static Action<Transform, Vector3> _defaultMove = (Transform t, Vector3 v) => t.position += v * Time.deltaTime;
     private GameObject _defaultTarget = null;
 
     private static EnemyFactory _instance;
@@ -50,7 +48,9 @@ public class EnemyFactory
 
     public EnemyFactory()
     {
+        // Define enemyInfo for each type.
         AddTurretToRoster();
+        _enemyInfo.Add(EnemyType.GRENADIER, new EnemyInfo(EnemyMovements.GrenadierMovement, Globals.DirectTargeting, EnemyMovements.GrenadierSetup, new ArtilleryAttackBehaviour(EntityType.ENEMY, 20f), 10f));
         AddHealerVariantToRoster();
     }
 
@@ -62,7 +62,7 @@ public class EnemyFactory
         if (!Globals.enemyPrefabNames.ContainsKey(enemyType)) return null;
 
         string enemyName = Globals.enemyPrefabNames[enemyType];
-
+        
         GameObject newEnemyObject = GameObject.Instantiate(Resources.Load(enemyName)) as GameObject;
         Transform enemyTransform = newEnemyObject.GetComponent<Transform>();
 
@@ -102,6 +102,6 @@ public class EnemyFactory
         float fireRate = 1f;
 
         // Define enemyInfo for each type.
-        _enemyInfo.Add(EnemyType.TURRET, new EnemyInfo(_defaultFunc, Globals.DirectTargeting, _defaultMove, bulletBehaviour, fireRate));
+        _enemyInfo.Add(EnemyType.TURRET, new EnemyInfo(EnemyMovements.TurretMovement, Globals.DirectTargeting, EnemyMovements.TurretSetup, bulletBehaviour, fireRate));
     }
 }

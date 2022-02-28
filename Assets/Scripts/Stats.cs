@@ -5,7 +5,21 @@ using UnityEngine;
 // TODO: refactor away from MonoBehaviour
 public class Stats : MonoBehaviour
 {
-    public float currentHealth;
+    private float _currentHealth;
+
+    public float currentHealth
+    {
+        get => _currentHealth;
+        set {
+            _currentHealth = value;
+            if (value <= 0) Destroy(gameObject);
+            if (owner == EntityType.PLAYER)
+            {
+                UIManager.Health = currentHealth;
+                SpeedManager.updateSpeeds(currentHealth / maxHealth);
+            }
+        }
+    }
     public float maxHealth;
     public EntityType owner;
     bool dead = false;

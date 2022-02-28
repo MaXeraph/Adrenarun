@@ -27,19 +27,19 @@ public class EnemySpawn : MonoBehaviour
     private float _cooldownDelay = SpeedManager.enemySpawnScaling;
     private const float platformRadius = 175/2;
 
-    private bool canSpawn = false;
-    private bool startSpawn = false;
-    private float nextSpawnTime;
+    private bool canSpawn = false; // for within wave
+    private bool startSpawn = false; // for each wave
+    private float nextSpawnTime; // not used for now
     private Wave currentWave;
     private int currentWaveNumber = 0;
 
-    private const int totalWaveNumber = 3;
-    private const int enemiesPerWave = 10;
+    public int totalWaveNumber;
+    public int enemiesPerWave;
     private const int spawnInterval = 0;
     private int currentNumEnemies = 0;
 
     public Wave[] waves;
-    public Vector3[] spawnPoints;
+    public Vector3[] spawnPoints; // not used for now, may need later
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +59,7 @@ public class EnemySpawn : MonoBehaviour
         // we dont need spawnpoints yet because spawnEnemy spawn randon
 
         StartSpawningWave();
+        currentWave = waves[currentWaveNumber];
     }
 
     void StartSpawningWave()
@@ -69,15 +70,53 @@ public class EnemySpawn : MonoBehaviour
         startSpawn = true;
     }
 
+    void StopSpawningWave()
+    {
+        canSpawn = false;
+        startSpawn = false;
+    }
     // Update is called once per frame
     void Update()
     {
+        if (startSpawn)
+        {
+            SpawnWave();
+        }
+        else
+        {
+            currentNumEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
+            //Debug.Log(currentNumEnemies);
 
-        currentWave = waves[currentWaveNumber];
-        SpawnWave();
+            if (currentNumEnemies == 0)
+            {
+                currentWaveNumber++;
+                if (currentWaveNumber >= totalWaveNumber)
+                {
+                    //Debug.Log("Game Over!");
+                }
+                else
+                {
+                    // still have more waves to spawn
 
-        //
+                    currentWave = waves[currentWaveNumber];
+                    // grant power up here as well
 
+
+                    StartSpawningWave();
+                }
+
+            }
+            // startSpawn only turns to false when we make all the enemies in the same wave
+            // check if the number of enemies has reached 0
+            // check if we are on the last wave
+            // implement powerup here
+        }
+
+
+    }
+
+    void SpawnWave()
+    {
         if (!_cooldown)
         {
             _cooldownDelay = SpeedManager.enemySpawnScaling;
@@ -86,25 +125,18 @@ public class EnemySpawn : MonoBehaviour
                 SpawnEnemy();
                 _cooldown = true;
                 currentNumEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
-                // Debug.Log(currentNumEnemies);
+                //Debug.Log(currentNumEnemies);
                 StartCoroutine(Cooldown());
             }
             else
             {
-                if(currentNumEnemies >= enemiesPerWave)
+                if (currentNumEnemies >= enemiesPerWave)
                 {
-                    canSpawn = false;
-                    // Debug.Log(GameObject.FindGameObjectsWithTag("Enemy").Length);
+                    StopSpawningWave();
+                    //Debug.Log("stopped spawning the current wave");
                 }
             }
         }
-    }
-
-    void SpawnWave()
-    {
-
-        // only do this if the currentWave enemy finishes
-        // utilize the randomly generated vector 3 values and call on spawnEnemy
 
     }
     bool RandomPoint(float radius, out Vector3 result)
@@ -128,7 +160,7 @@ public class EnemySpawn : MonoBehaviour
         Vector3 targetSpawn;
         if (RandomPoint(platformRadius, out targetSpawn)) {
             Debug.DrawRay(targetSpawn, Vector3.up, Color.blue, 1.0f);
-            EnemyFactory.Instance.CreateEnemy(targetSpawn, EnemyType.TURRET);
+            EnemyFactory.Instance.CreateEnemy(targetSpawn, EnemyType.GRENADIER);
         }
     }
 

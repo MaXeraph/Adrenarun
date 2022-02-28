@@ -4,8 +4,6 @@ using UnityEngine;
 
 public static class Globals
 {
-	public static Texture tex;
-
 	public static Dictionary<PowerUpType, AbstractStatPowerUp> StatPowerUpDictionary = new Dictionary<PowerUpType, AbstractStatPowerUp>
 	{{PowerUpType.DAMAGE, new DamagePowerUp()},
 	{PowerUpType.FIRERATE, new FireRatePowerUp()},
@@ -13,7 +11,7 @@ public static class Globals
 	{PowerUpType.CLIPSIZE, new ClipSizePowerUp()},
 	{PowerUpType.ADRENALIN, new AdrenalinPowerUp()}
 	};
-	
+
 	public static Dictionary<PowerUpType, AbstractFiringPowerUp> FiringPowerUpDictionary = new Dictionary<PowerUpType, AbstractFiringPowerUp>
 	{{PowerUpType.SHOTGUN, new ShotgunFiringPowerUp()},
 	{PowerUpType.REPEATER, new RepeaterFiringPowerUp()}
@@ -54,7 +52,7 @@ public static class Globals
 	{PowerUpType.REPEATER, tex}
 	};
 
-	public static Vector3 DirectTargeting(Transform from, Transform to)
+    public static Vector3 DirectTargeting(Transform from, Transform to)
     {
         Vector3 direction = (to.position - from.position).normalized;
         return direction;
@@ -63,14 +61,16 @@ public static class Globals
     public static Dictionary<EnemyType, string> enemyPrefabNames = new Dictionary<EnemyType, string>()
     {
         { EnemyType.TURRET, "Turret" },
-        { EnemyType.HEALER, "Healer" }
+        { EnemyType.HEALER, "Healer" },
+        { EnemyType.GRENADIER, "Grenadier"}
     };
 }
 
 public enum EnemyType
 {
-    TURRET,
-    HEALER
+	TURRET,
+	GRENADIER,
+  HEALER
 }
 
 public enum EnemyVariantType
