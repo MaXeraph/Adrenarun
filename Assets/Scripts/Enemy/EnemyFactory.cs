@@ -51,10 +51,10 @@ public class EnemyFactory
     public EnemyFactory()
     {
         AddTurretToRoster();
-        AddHealerVarientToRoster();
+        AddHealerVariantToRoster();
     }
 
-    public GameObject CreateEnemy(Vector3 position, EnemyType enemyType, EnemyVariantType varientType = EnemyVariantType.NONE)
+    public GameObject CreateEnemy(Vector3 position, EnemyType enemyType, EnemyVariantType variantType = EnemyVariantType.NONE)
     {
         // Janky, find a better place for this. Unsure when the Player object is available.
         if (_defaultTarget == null) _defaultTarget = GameObject.FindGameObjectWithTag("Player");
@@ -79,18 +79,18 @@ public class EnemyFactory
             _defaultTarget,
             enemyInfo,
             enemyWeapon);
-        if (varientType != EnemyVariantType.NONE && _enemyPostSetups.ContainsKey(varientType)) _enemyPostSetups[varientType](eb);
+        if (variantType != EnemyVariantType.NONE && _enemyPostSetups.ContainsKey(variantType)) _enemyPostSetups[variantType](eb);
 
         return newEnemyObject;
     }
 
-    void AddHealerVarientToRoster()
+    void AddHealerVariantToRoster()
     {
         // Set up the dictionary with methods.
-        _enemyPostSetups.Add(EnemyVariantType.HEALER, CreateHealerVarient);
+        _enemyPostSetups.Add(EnemyVariantType.HEALER, CreateHealerVariant);
     }
 
-    void CreateHealerVarient(EnemyBehaviour eb)
+    void CreateHealerVariant(EnemyBehaviour eb)
     {
         AbstractAttackBehaviour enemyAttackBehaviour = eb.GetComponent<Weapon>()._attackBehaviour;
         if (enemyAttackBehaviour._damage > 0) enemyAttackBehaviour._damage *= -1; 
