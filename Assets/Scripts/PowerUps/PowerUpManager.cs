@@ -73,7 +73,6 @@ public class PowerUpManager : MonoBehaviour
     // apply stat powerups directly, or add non stat ones to a powerup list
     private void applyPowerUp(PowerUpType type)
     {
-        // AbstractPowerUp powerUp = Globals.PowerUpDictionary[type];
         _weapon = GameObject.FindWithTag("Player").GetComponent<Weapon>();
 
         switch(Globals.PowerUpClassDictionary[type])
