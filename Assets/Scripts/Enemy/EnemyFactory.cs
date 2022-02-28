@@ -31,7 +31,7 @@ public class EnemyFactory
 {
 
     // Additional setup for an enemy.
-    private static Dictionary<EnemyVarientType, Action<EnemyBehaviour>> _enemyPostSetups = new Dictionary<EnemyVarientType, Action<EnemyBehaviour>>();
+    private static Dictionary<EnemyVariantType, Action<EnemyBehaviour>> _enemyPostSetups = new Dictionary<EnemyVariantType, Action<EnemyBehaviour>>();
     private static Dictionary<EnemyType, EnemyInfo> _enemyInfo = new Dictionary<EnemyType, EnemyInfo>();
     private static Func<Transform, Transform, Vector3> _defaultFunc = (Transform t1, Transform t2) => new Vector3(0, 0, 0);
     private static Action<Transform, Vector3> _defaultMove = (Transform t, Vector3 v) => t.position += v * Time.deltaTime;
@@ -54,7 +54,7 @@ public class EnemyFactory
         AddHealerVarientToRoster();
     }
 
-    public GameObject CreateEnemy(Vector3 position, EnemyType enemyType, EnemyVarientType varientType = EnemyVarientType.NONE)
+    public GameObject CreateEnemy(Vector3 position, EnemyType enemyType, EnemyVariantType varientType = EnemyVariantType.NONE)
     {
         // Janky, find a better place for this. Unsure when the Player object is available.
         if (_defaultTarget == null) _defaultTarget = GameObject.FindGameObjectWithTag("Player");
@@ -79,7 +79,7 @@ public class EnemyFactory
             _defaultTarget,
             enemyInfo,
             enemyWeapon);
-        if (varientType != EnemyVarientType.NONE && _enemyPostSetups.ContainsKey(varientType)) _enemyPostSetups[varientType](eb);
+        if (varientType != EnemyVariantType.NONE && _enemyPostSetups.ContainsKey(varientType)) _enemyPostSetups[varientType](eb);
 
         return newEnemyObject;
     }
@@ -87,7 +87,7 @@ public class EnemyFactory
     void AddHealerVarientToRoster()
     {
         // Set up the dictionary with methods.
-        _enemyPostSetups.Add(EnemyVarientType.HEALER, CreateHealerVarient);
+        _enemyPostSetups.Add(EnemyVariantType.HEALER, CreateHealerVarient);
     }
 
     void CreateHealerVarient(EnemyBehaviour eb)
@@ -105,7 +105,7 @@ public class EnemyFactory
         _enemyInfo.Add(EnemyType.TURRET, new EnemyInfo(_defaultFunc, Globals.DirectTargeting, _defaultMove, bulletBehaviour, fireRate));
 
         // Set up the dictionary with methods.
-        _enemyPostSetups.Add(EnemyVarientType.NONE, CreateTurret);
+        _enemyPostSetups.Add(EnemyVariantType.NONE, CreateTurret);
     }
 
     void CreateTurret(EnemyBehaviour eb)
