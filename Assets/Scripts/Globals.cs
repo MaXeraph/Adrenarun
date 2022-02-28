@@ -41,7 +41,7 @@ public static class Globals
     {
         { EnemyType.TURRET, "Turret" },
         { EnemyType.HEALER, "Healer" },
-	    { EnemyType.GRENADIER, "Grenadier"}
+        { EnemyType.GRENADIER, "Grenadier"}
     };
 }
 
