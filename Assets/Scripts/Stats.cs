@@ -30,7 +30,7 @@ public class Stats : MonoBehaviour
 
     void setHealth(float health)
     {
-        currentHealth = Mathf.Clamp(health, 0, maxHealth);
+        currentHealth = health;
         if (owner == EntityType.PLAYER)
         {
             UIManager.Health = currentHealth;
