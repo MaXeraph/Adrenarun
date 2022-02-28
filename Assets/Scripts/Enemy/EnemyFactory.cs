@@ -103,13 +103,5 @@ public class EnemyFactory
 
         // Define enemyInfo for each type.
         _enemyInfo.Add(EnemyType.TURRET, new EnemyInfo(_defaultFunc, Globals.DirectTargeting, _defaultMove, bulletBehaviour, fireRate));
-
-        // Set up the dictionary with methods.
-        _enemyPostSetups.Add(EnemyVariantType.NONE, CreateTurret);
-    }
-
-    void CreateTurret(EnemyBehaviour eb)
-    {
-
     }
 }
