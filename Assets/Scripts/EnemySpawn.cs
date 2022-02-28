@@ -76,6 +76,11 @@ public class EnemySpawn : MonoBehaviour
 
         // 
 
+        
+    }
+
+    void SpawnWave()
+    {
         if (!_cooldown)
         {
             _cooldownDelay = SpeedManager.enemySpawnScaling;
@@ -89,18 +94,13 @@ public class EnemySpawn : MonoBehaviour
             }
             else
             {
-                if(currentNumEnemies >= enemiesPerWave)
+                if (currentNumEnemies >= enemiesPerWave)
                 {
                     canSpawn = false;
                     Debug.Log(GameObject.FindGameObjectsWithTag("Enemy").Length);
                 }
             }
         }
-    }
-
-    void SpawnWave()
-    {
-
         // only do this if the currentWave enemy finishes
         // utilize the randomly generated vector 3 values and call on spawnEnemy
 
