@@ -33,8 +33,6 @@ public class EnemyFactory
     // Additional setup for an enemy.
     private static Dictionary<EnemyVariantType, Action<EnemyBehaviour>> _enemyPostSetups = new Dictionary<EnemyVariantType, Action<EnemyBehaviour>>();
     private static Dictionary<EnemyType, EnemyInfo> _enemyInfo = new Dictionary<EnemyType, EnemyInfo>();
-    private static Func<Transform, Transform, Vector3> _defaultFunc = (Transform t1, Transform t2) => new Vector3(0, 0, 0);
-    private static Action<Transform, Vector3> _defaultMove = (Transform t, Vector3 v) => t.position += v * Time.deltaTime;
     private GameObject _defaultTarget = null;
 
     private static EnemyFactory _instance;
