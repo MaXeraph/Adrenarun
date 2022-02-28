@@ -15,6 +15,7 @@ public class BulletMono : MonoBehaviour
         
         newBullet.transform.position = position;
         newBullet.transform.forward = direction;
+        if (attackBehaviour.Owner == EntityType.ENEMY)newBullet.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
 
         return newBullet;
     }
@@ -27,6 +28,6 @@ public class BulletMono : MonoBehaviour
     void OnTriggerEnter(Collider c)
     {
         _attackBehaviour.onHit(this, c.gameObject);
-        UIManager.DamageText(transform.position + transform.up * 0.15f, -_attackBehaviour._damage);
+        if (c.gameObject.tag == "Enemy") UIManager.DamageText(transform.position + transform.up * 0.15f, -_attackBehaviour._damage);
     }
 }

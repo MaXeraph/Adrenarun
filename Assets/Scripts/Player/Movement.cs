@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour
 {
     // Movement variables
     public static float speed = 12f;
-    public static float dashSpeed = 3f;
+    public static float dashSpeed = 5f;
 
     // Jump variables
     // NOTE: -45.81 is an experimental value for gravity
@@ -44,8 +44,10 @@ public class Movement : MonoBehaviour
         CharacterController char_controller = player.GetComponent<CharacterController>();
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
-        
-        Vector3 move = player.transform.right * x + player.transform.forward * y;
+
+        //Vector3 move = player.transform.right * x + player.transform.forward * y;
+       // Vector3 move = Camera.main.transform.right * x + Camera.main.transform.forward * y;
+        Vector3 move = Camera.main.transform.forward;
 
         char_controller.Move(move * speed * Time.deltaTime * dashSpeed * SpeedManager.playerMovementScaling);
     }

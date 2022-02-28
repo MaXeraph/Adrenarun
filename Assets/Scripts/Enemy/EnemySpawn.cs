@@ -64,6 +64,7 @@ public class EnemySpawn : MonoBehaviour
     void StartSpawningWave()
     {
         UIManager.enemiesTotal = 0;
+        UIManager.enemiesLeft = 0;
         canSpawn = true;
         startSpawn = true;
     }

@@ -13,8 +13,8 @@ public class PlayerCentral : MonoBehaviour
     private Vector3 _velocity;
     private CharacterController _controller;
 
-    public Transform arms;
-    public Transform gun;
+    Transform arms;
+    Transform gun;
 
     bool isGrounded;
     bool canWallJump;
@@ -29,7 +29,9 @@ public class PlayerCentral : MonoBehaviour
         _camera = Camera.main;
 
         _controller = GetComponent<CharacterController>();
-        
+
+        arms = transform.GetChild(0).GetChild(0).GetChild(0).Find("arms");
+        gun = transform.GetChild(0).GetChild(0).GetChild(0).Find("gunF");
         
         _weapon = _player.AddComponent<Weapon>();
         _weapon.Initialize(new BulletAttackBehaviour(EntityType.PLAYER), 0.2f, 16, 1f);
