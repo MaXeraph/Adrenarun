@@ -86,7 +86,6 @@ public class PowerUpManager : MonoBehaviour
                 AbstractFiringPowerUp firingPowerUp = Globals.FiringPowerUpDictionary[type];
                 firingPowerUps.Add(firingPowerUp);
                 firingPowerUps = firingPowerUps.OrderBy(powerUp => powerUp.sortOrder).ToList();
-                Debug.Log("Sorted powerups");
                 break;
             case PowerUpClass.BULLET:
                 // TODO: implement bullet powerups
