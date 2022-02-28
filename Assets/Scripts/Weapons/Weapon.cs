@@ -57,7 +57,7 @@ public class Weapon : MonoBehaviour
                 List<(Vector3, float)> attackDirections = new List<(Vector3, float)>();
                 attackDirections.Add((direction, 0f));
                 
-                if (firingBehavior[PowerUpType.SHOTGUN] || firingBehavior[PowerUpType.REPEATER])
+                if (!firingBehavior[PowerUpType.NONE])
                 {                
                     // apply each powerup in poweruplist, creating a growing list of firing directions
                     // assumptions: firingPowerUps in PowerUpManager is sorted (handled in PowerUpManager)

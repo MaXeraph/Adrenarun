@@ -83,6 +83,7 @@ public class PowerUpManager : MonoBehaviour
                 break;
             case PowerUpClass.FIRING:
                 _weapon.firingBehavior[type] = true;
+                _weapon.firingBehavior[PowerUpType.NONE] = false;
                 AbstractFiringPowerUp firingPowerUp = Globals.FiringPowerUpDictionary[type];
                 firingPowerUps.Add(firingPowerUp);
                 firingPowerUps = firingPowerUps.OrderBy(powerUp => powerUp.sortOrder).ToList();

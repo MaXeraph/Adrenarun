@@ -34,11 +34,11 @@ public class FireRatePowerUp : AbstractStatPowerUp
 public class ReloadSpeedPowerUp : AbstractStatPowerUp
 {
     public ReloadSpeedPowerUp(){
-        _modifier = 1f;
+        _modifier = 0.7f;
     }
 
     public override void applyPowerUp(Weapon weapon){
-        weapon._reloadSpeed += _modifier;
+        weapon._reloadSpeed *= _modifier;
     }
 }
 
