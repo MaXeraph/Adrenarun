@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour
 {
     // Movement variables
     public static float speed = 12f;
-    public static float dashSpeed = 3f;
+    public static float sprintSpeed = 1.05f;
 
     // Jump variables
     // NOTE: -45.81 is an experimental value for gravity
@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
     public static float jumpVelocity = Mathf.Sqrt(jumpHeight * -2f * -45.81f);
 
     // MouseLook variables
-    static float mouseSensitivity = 500f;
+    static float mouseSensitivity = 100f;
     static float xRotation = 0f;
 
     public static void RotatePlayer(GameObject player, Camera camera)
@@ -39,7 +39,7 @@ public class Movement : MonoBehaviour
         char_controller.Move(move * speed * Time.deltaTime * SpeedManager.playerMovementScaling);
     }
 
-    public static void playerDash(GameObject player)
+    public static void playerSprint(GameObject player)
     {
         CharacterController char_controller = player.GetComponent<CharacterController>();
         float x = Input.GetAxis("Horizontal");
@@ -47,6 +47,6 @@ public class Movement : MonoBehaviour
         
         Vector3 move = player.transform.right * x + player.transform.forward * y;
 
-        char_controller.Move(move * speed * Time.deltaTime * dashSpeed * SpeedManager.playerMovementScaling);
+        char_controller.Move(move * speed * Time.deltaTime * sprintSpeed * SpeedManager.playerMovementScaling);
     }
 }
