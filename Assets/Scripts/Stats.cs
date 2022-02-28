@@ -71,7 +71,11 @@ public class Stats : MonoBehaviour
                     deathUI.reveal(deathUI.instance);
                 }
             }
-            else Destroy(gameObject);
+            else
+            {
+                UIManager.enemiesLeft -= 1;
+                Destroy(gameObject);
+            }
         }
     }
 }

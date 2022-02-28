@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -88,9 +89,30 @@ public class UIManager : MonoBehaviour
         UIManager.weapon = _weapon;
     }
 
-    public static void die()
+    public static int enemiesLeft
     {
+        set { waveUI.setLeft(value); }
+        get { return waveUI._left; }
 
+    }
+
+    public static int enemiesTotal
+    {
+        set { waveUI.setTotal(value); }
+        get { return waveUI._total; }
+    }
+
+    public static void DamageText(Vector3 position, float amount)
+    {
+        Color c = Color.red;
+        if (amount >= 0) c = Color.green;
+        amount = Mathf.Abs(amount);
+        string text = amount.ToString();
+        
+        GameObject floatingText = Instantiate(Resources.Load("TextPopup")) as GameObject;
+        floatingText.transform.position = position;
+        floatingText.GetComponent<TMP_Text>().color = c;
+        floatingText.GetComponent<DamagePopup>().displayText = text;
     }
 
 }

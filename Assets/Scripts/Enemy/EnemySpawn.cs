@@ -63,6 +63,7 @@ public class EnemySpawn : MonoBehaviour
 
     void StartSpawningWave()
     {
+        UIManager.enemiesTotal = 0;
         canSpawn = true;
         startSpawn = true;
     }
@@ -74,7 +75,6 @@ public class EnemySpawn : MonoBehaviour
         currentWave = waves[currentWaveNumber];
         SpawnWave();
 
-        // 
 
         if (!_cooldown)
         {
@@ -84,7 +84,6 @@ public class EnemySpawn : MonoBehaviour
                 SpawnEnemy();
                 _cooldown = true;
                 currentNumEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
-                // Debug.Log(currentNumEnemies);
                 StartCoroutine(Cooldown());
             }
             else
@@ -121,6 +120,9 @@ public class EnemySpawn : MonoBehaviour
 
     void SpawnEnemy()
     {
+        UIManager.enemiesTotal += 1;
+        UIManager.enemiesLeft += 1;
+
         Vector3 targetSpawn;
         if (RandomPoint(platformRadius, out targetSpawn)) {
             Debug.DrawRay(targetSpawn, Vector3.up, Color.blue, 1.0f);

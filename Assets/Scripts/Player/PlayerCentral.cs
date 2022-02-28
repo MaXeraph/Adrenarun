@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerCentral : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class PlayerCentral : MonoBehaviour
 
     private Vector3 _velocity;
     private CharacterController _controller;
+
+    public Transform arms;
+    public Transform gun;
 
     bool isGrounded;
     bool canWallJump;
@@ -60,11 +64,12 @@ public class PlayerCentral : MonoBehaviour
             Movement.playerDash(_player);
         }
 
+        //Shoot
         if (Input.GetButton("Fire1"))
         {
-            Vector3 position = _camera.transform.forward + _camera.transform.position;
-            Vector3 direction = _camera.transform.forward;
-            if (_weapon.Attack(position, direction)) { UIManager.Ammo -= 1; }
+            Vector3 position = _camera.transform.forward + _camera.transform.position + (0.22f * _camera.transform.right) + (-0.18f * _camera.transform.up);
+            Vector3 direction = _camera.transform.forward + new Vector3(-0.0075f, 0.003f, 0);
+            if (_weapon.Attack(position, direction)) shootEffects(position);
         }
         if (Input.GetButtonDown("Reload"))
         {
@@ -77,7 +82,26 @@ public class PlayerCentral : MonoBehaviour
 
     }
 
-    private void checkGround()
+  
+
+private void shootEffects(Vector3 pos)
+    {
+    //Update UI
+    UIManager.Ammo -= 1;
+
+    //Muzzleflash
+    GameObject flash = Instantiate(Resources.Load("Muzzleflash")) as GameObject;
+    flash.transform.position = pos;
+    flash.transform.right = Camera.main.transform.forward;
+    flash.transform.Rotate(Random.Range(0, 360), 0, 0);
+
+    //Recoil tween
+    Sequence RecoilSequence = DOTween.Sequence();
+    RecoilSequence.Insert(0, arms.DOPunchRotation(new Vector3(0, 0, -1f), _weapon._fireRate / 2, 0, 0.5f));
+    RecoilSequence.Insert(0, gun.DOPunchRotation(new Vector3(-1f, 0, 0), _weapon._fireRate / 2, 0, 0.5f));
+    }
+
+private void checkGround()
     {
         Vector3 origin = new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * .5f), transform.position.z);
         Vector3 direction = transform.TransformDirection(Vector3.down);

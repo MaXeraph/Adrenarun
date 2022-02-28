@@ -27,5 +27,6 @@ public class BulletMono : MonoBehaviour
     void OnTriggerEnter(Collider c)
     {
         _attackBehaviour.onHit(this, c.gameObject);
+        UIManager.DamageText(transform.position + transform.up * 0.15f, -_attackBehaviour._damage);
     }
 }
