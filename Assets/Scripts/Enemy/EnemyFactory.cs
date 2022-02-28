@@ -31,7 +31,7 @@ public class EnemyFactory
 {
 
     // Additional setup for an enemy.
-    private static Dictionary<EnemyType, Action<EnemyBehaviour>> _enemyPostSetups = new Dictionary<EnemyType, Action<EnemyBehaviour>>();
+    private static Dictionary<EnemyVariantType, Action<EnemyBehaviour>> _enemyPostSetups = new Dictionary<EnemyVariantType, Action<EnemyBehaviour>>();
     private static Dictionary<EnemyType, EnemyInfo> _enemyInfo = new Dictionary<EnemyType, EnemyInfo>();
     private static Func<Transform, Transform, Vector3> _defaultFunc = (Transform t1, Transform t2) => new Vector3(0, 0, 0);
     private static Action<Transform, Vector3> _defaultMove = (Transform t, Vector3 v) => t.position += v * Time.deltaTime;
@@ -53,9 +53,10 @@ public class EnemyFactory
         // Define enemyInfo for each type.
         AddTurretToRoster();
         _enemyInfo.Add(EnemyType.GRENADIER, new EnemyInfo(_defaultFunc, Globals.DirectTargeting, _defaultMove, new ArtilleryAttackBehaviour(EntityType.ENEMY, 20f), 10f));
+        AddHealerVariantToRoster();
     }
 
-    public GameObject CreateEnemy(EnemyType enemyType, Vector3 position)
+    public GameObject CreateEnemy(Vector3 position, EnemyType enemyType, EnemyVariantType variantType = EnemyVariantType.NONE)
     {
         // Janky, find a better place for this. Unsure when the Player object is available.
         if (_defaultTarget == null) _defaultTarget = GameObject.FindGameObjectWithTag("Player");
@@ -80,11 +81,23 @@ public class EnemyFactory
             _defaultTarget,
             enemyInfo,
             enemyWeapon);
-        if (_enemyPostSetups.ContainsKey(enemyType)) _enemyPostSetups[enemyType](eb);
+        if (variantType != EnemyVariantType.NONE && _enemyPostSetups.ContainsKey(variantType)) _enemyPostSetups[variantType](eb);
 
         return newEnemyObject;
     }
 
+    void AddHealerVariantToRoster()
+    {
+        // Set up the dictionary with methods.
+        _enemyPostSetups.Add(EnemyVariantType.HEALER, CreateHealerVariant);
+    }
+
+    void CreateHealerVariant(EnemyBehaviour eb)
+    {
+        AbstractAttackBehaviour enemyAttackBehaviour = eb.GetComponent<Weapon>()._attackBehaviour;
+        if (enemyAttackBehaviour._damage > 0) enemyAttackBehaviour._damage *= -1; 
+    }
+    
     void AddTurretToRoster()
     {
         BulletAttackBehaviour bulletBehaviour = new BulletAttackBehaviour(EntityType.ENEMY);
@@ -92,13 +105,5 @@ public class EnemyFactory
 
         // Define enemyInfo for each type.
         _enemyInfo.Add(EnemyType.TURRET, new EnemyInfo(_defaultFunc, Globals.DirectTargeting, _defaultMove, bulletBehaviour, fireRate));
-
-        // Set up the dictionary with methods.
-        _enemyPostSetups.Add(EnemyType.TURRET, CreateTurret);
-    }
-
-    void CreateTurret(EnemyBehaviour eb)
-    {
-
     }
 }

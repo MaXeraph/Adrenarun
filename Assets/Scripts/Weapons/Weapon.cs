@@ -7,12 +7,19 @@ using DG.Tweening;
 public class Weapon : MonoBehaviour
 {
     private bool _initialized = false;
-    Dictionary<string, bool> _firingBehavior = new Dictionary<string, bool>()
+    Dictionary<PowerUpType, bool> _firingBehavior = new Dictionary<PowerUpType, bool>()
     {
-        { "singleShot", true }, // singleShot == !repeater
-        { "shotgun", false },
-        { "repeater", false }
+        { PowerUpType.NONE, true }, // singleShot == !repeater
+        { PowerUpType.SHOTGUN, false},
+        { PowerUpType.REPEATER, false}
     };
+    public Dictionary<PowerUpType, bool> firingBehavior
+    {
+        get => _firingBehavior;
+        set {
+            _firingBehavior = value;
+        }
+    }
 
     public AbstractAttackBehaviour _attackBehaviour;
     public float _fireRate; // shots per second
@@ -46,8 +53,26 @@ public class Weapon : MonoBehaviour
         if (Time.time - lastShot > _fireRate && !_reloading)
         {
             if (_currentMagazine > 0)
-            {
-                _attackBehaviour.initiateAttack(position, direction);
+            {                
+                List<(Vector3, float)> attackDirections = new List<(Vector3, float)>();
+                attackDirections.Add((direction, 0f));
+                
+                if (!firingBehavior[PowerUpType.NONE])
+                {                
+                    // apply each powerup in poweruplist, creating a growing list of firing directions
+                    // assumptions: firingPowerUps in PowerUpManager is sorted (handled in PowerUpManager)
+                    List<AbstractFiringPowerUp> firingPowerUps = GameObject.FindWithTag("Player").GetComponent<PowerUpManager>().firingPowerUps; 
+                    for (int i = 0; i < firingPowerUps.Count; i++)
+                    {
+                        attackDirections = firingPowerUps[i].applyPowerUp(attackDirections);
+                    }
+                }
+
+                // for each direction, initiate an attack
+                for (int j = 0; j < attackDirections.Count; j++)
+                {
+                    StartCoroutine(ShootAfterDelay(position, attackDirections[j].Item1, attackDirections[j].Item2));
+                }
                 _currentMagazine -= 1; // Comment out for infinite ammo
                 lastShot = Time.time;
                 return true;
@@ -74,4 +99,9 @@ public class Weapon : MonoBehaviour
         _reloading = false;
     }
 
+    IEnumerator ShootAfterDelay(Vector3 position, Vector3 direction, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        _attackBehaviour.initiateAttack(position, direction);
+    }
 }
