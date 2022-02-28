@@ -22,7 +22,7 @@ public class PlayerCentral : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+       // Cursor.lockState = CursorLockMode.Locked;
         
         _player = GameObject.FindWithTag("Player");
 
@@ -57,6 +57,7 @@ public class PlayerCentral : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
+            GetComponent<PowerUpManager>().presentPowerUps();
             GetComponent<Stats>().takeDamage(10f);
             _velocity.y += Movement.jumpVelocity;
         }

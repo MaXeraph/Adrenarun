@@ -63,8 +63,10 @@ public class PowerUpManager : MonoBehaviour
     {
 
         generatePowerUps();
+        UIManager.showPowerups(powerUpSelectionList);
         StartCoroutine(waitForSelection());
 
+        
         // TODO: UI - display power up screen to player
         //  the three powerups generated are in powerUpSelectionList
     }
@@ -73,6 +75,7 @@ public class PowerUpManager : MonoBehaviour
     private void applyPowerUp(PowerUpType type)
     {
         AbstractPowerUp powerUp = Globals.StatPowerUpDictionary[type];
+        UIManager.powerSelection = -1;
         switch (type)
         {
             case PowerUpType.NONE:
@@ -115,6 +118,10 @@ public class PowerUpManager : MonoBehaviour
         Time.timeScale = 0;
         while(selection == PowerUpType.NONE)
         {
+            if (UIManager.powerSelection != -1)
+            {
+                selection = powerUpSelectionList[UIManager.powerSelection];
+            }
             if (Input.GetKeyDown(KeyCode.Alpha1)){
                 selection = powerUpSelectionList[0];
             }

@@ -104,15 +104,27 @@ public class UIManager : MonoBehaviour
 
     public static void DamageText(Vector3 position, float amount)
     {
-        Color c = Color.red;
-        if (amount >= 0) c = Color.green;
-        amount = Mathf.Abs(amount);
-        string text = amount.ToString();
+        
+        
+
         
         GameObject floatingText = Instantiate(Resources.Load("TextPopup")) as GameObject;
+
+        if (amount >= 0) floatingText.GetComponent<TMP_Text>().color += Color.green;
+
         floatingText.transform.position = position;
-        floatingText.GetComponent<TMP_Text>().color = c;
+
+        amount = Mathf.Abs(amount);
+        string text = amount.ToString();
         floatingText.GetComponent<DamagePopup>().displayText = text;
     }
 
+    public static void showPowerups(PowerUpType[] _powerUpSelectionList)
+    {
+        UpgradeUI.powerUpSelectionList = _powerUpSelectionList;
+        UpgradeUI.instance.gameObject.SetActive(true);
+        UpgradeUI.init();
+    }
+
+    public static int powerSelection = -1;
 }
