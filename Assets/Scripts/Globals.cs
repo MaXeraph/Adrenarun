@@ -40,7 +40,8 @@ public static class Globals
     public static Dictionary<EnemyType, string> enemyPrefabNames = new Dictionary<EnemyType, string>()
     {
         { EnemyType.TURRET, "Turret" },
-        { EnemyType.HEALER, "Healer" }
+        { EnemyType.HEALER, "Healer" },
+        { EnemyType.GRENADIER, "Grenadier"}
     };
 }
 
