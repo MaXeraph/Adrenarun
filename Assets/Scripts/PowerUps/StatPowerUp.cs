@@ -17,7 +17,6 @@ public class DamagePowerUp : AbstractStatPowerUp
 
     public override void applyPowerUp(Weapon weapon){
         weapon._attackBehaviour._damage += _modifier;
-        Debug.Log("Damage PowerUp Applied: " + weapon._attackBehaviour._damage);
     }
 }
 
@@ -29,7 +28,6 @@ public class FireRatePowerUp : AbstractStatPowerUp
 
     public override void applyPowerUp(Weapon weapon){
         weapon._fireRate += _modifier;
-        Debug.Log("Fire Rate PowerUp Applied: " + weapon._fireRate);
     }
 }
 
@@ -41,7 +39,6 @@ public class ReloadSpeedPowerUp : AbstractStatPowerUp
 
     public override void applyPowerUp(Weapon weapon){
         weapon._reloadSpeed += _modifier;
-        Debug.Log("Reload Speed PowerUp Applied: " + weapon._reloadSpeed);
     }
 }
 
@@ -53,7 +50,6 @@ public class ClipSizePowerUp : AbstractStatPowerUp
 
     public override void applyPowerUp(Weapon weapon){
         weapon._magazineSize += (int)_modifier;
-        Debug.Log("Clip Size PowerUp Applied: " + weapon._magazineSize);
     }
 }
 
@@ -65,6 +61,5 @@ public class AdrenalinPowerUp : AbstractStatPowerUp
 
     public override void applyPowerUp(Weapon weapon){
         SpeedManager.adrenalinModifier += _modifier;
-        Debug.Log("Adrenalin PowerUp Applied: " + SpeedManager.adrenalinModifier);
     }
 }

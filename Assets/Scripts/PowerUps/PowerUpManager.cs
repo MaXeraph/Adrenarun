@@ -39,9 +39,9 @@ public class PowerUpManager : MonoBehaviour
         }
 
         // uncomment to see what powerups are generated
-        Debug.Log(powerUpSelectionList[0]);
-        Debug.Log(powerUpSelectionList[1]);
-        Debug.Log(powerUpSelectionList[2]);
+        // Debug.Log(powerUpSelectionList[0]);
+        // Debug.Log(powerUpSelectionList[1]);
+        // Debug.Log(powerUpSelectionList[2]);
 
     }
 

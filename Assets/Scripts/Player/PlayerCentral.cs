@@ -10,7 +10,6 @@ public class PlayerCentral : MonoBehaviour
 
     private Vector3 _velocity;
     private CharacterController _controller;
-    public PowerUpManager _pum;
 
     bool isGrounded;
     bool canWallJump;
@@ -28,7 +27,6 @@ public class PlayerCentral : MonoBehaviour
         
         _weapon = _player.AddComponent<Weapon>();
         _weapon.Initialize(new BulletAttackBehaviour(EntityType.PLAYER), 0.2f, 16, 1f);
-        _pum = _player.GetComponent<PowerUpManager>();
     }
 
 
@@ -67,10 +65,6 @@ public class PlayerCentral : MonoBehaviour
         {
             _weapon.Reload();
             UIManager.Reloading = true;
-        }
-        if (Input.GetKeyDown(KeyCode.RightShift))
-        {
-            _pum.presentPowerUps();
         }
 
         applyGravity();

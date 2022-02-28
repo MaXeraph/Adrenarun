@@ -12,8 +12,6 @@ public abstract class AbstractFiringPowerUp
 public class ShotgunFiringPowerUp : AbstractFiringPowerUp
 {
     // fire in a cone of 2 additional bullets per powerup obtained.
-    // balancing wise i think this is broken but alpha
-    // maybe limit to 2 powerups
     public ShotgunFiringPowerUp(){
         sortOrder = 0;
     }
