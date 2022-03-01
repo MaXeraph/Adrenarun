@@ -13,7 +13,7 @@ public class PowerUpManager : MonoBehaviour
     public List<AbstractFiringPowerUp> firingPowerUps;
     public List<AbstractBulletPowerUp> bulletPowerUps;
 
-    private Weapon _weapon; 
+    private Weapon _weapon;
 
     // Start is called before the first frame update
     void Start()
@@ -64,7 +64,9 @@ public class PowerUpManager : MonoBehaviour
     {
 
         generatePowerUps();
+        UIManager.showPowerups(powerUpSelectionList);
         StartCoroutine(waitForSelection());
+
 
         // TODO: UI - display power up screen to player
         //  the three powerups generated are in powerUpSelectionList
@@ -74,7 +76,7 @@ public class PowerUpManager : MonoBehaviour
     private void applyPowerUp(PowerUpType type)
     {
         _weapon = GameObject.FindWithTag("Player").GetComponent<Weapon>();
-
+        UIManager.powerSelection = -1;
         switch(Globals.PowerUpClassDictionary[type])
         {
             case PowerUpClass.STAT:
@@ -102,6 +104,10 @@ public class PowerUpManager : MonoBehaviour
         Time.timeScale = 0;
         while(selection == PowerUpType.NONE)
         {
+            if (UIManager.powerSelection != -1)
+            {
+                selection = powerUpSelectionList[UIManager.powerSelection];
+            }
             if (Input.GetKeyDown(KeyCode.Alpha1)){
                 selection = powerUpSelectionList[0];
             }

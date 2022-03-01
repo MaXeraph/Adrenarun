@@ -68,6 +68,7 @@ public class EnemyBehaviour : MonoBehaviour
         
         // Look. Determine look direction.
         _direction = (_targetTransform.position - transform.position).normalized;
+        _direction.y = 0;
         _lookRotation = Quaternion.LookRotation(_direction);
         transform.rotation = _lookRotation;
         

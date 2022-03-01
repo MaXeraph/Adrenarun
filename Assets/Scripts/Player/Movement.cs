@@ -27,9 +27,10 @@ public class Movement : MonoBehaviour
 
         camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         player.transform.Rotate(Vector3.up * mouseX);
+        CompassUI.updateCompass();
     }
     public static void MoveXY(GameObject player)
-    {   
+    {
         CharacterController char_controller = player.GetComponent<CharacterController>();
 
         float x = Input.GetAxis("Horizontal");
@@ -44,7 +45,7 @@ public class Movement : MonoBehaviour
         CharacterController char_controller = player.GetComponent<CharacterController>();
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
-        
+
         Vector3 move = player.transform.right * x + player.transform.forward * y;
 
         char_controller.Move(move * speed * Time.deltaTime * sprintSpeed * SpeedManager.playerMovementScaling);

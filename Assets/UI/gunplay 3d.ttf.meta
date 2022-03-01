@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: d48cc2cd4de70634b842c6b2f815512a
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Gunplay
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 0102b2b2b59eb4f49bca8e4a308396fa, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -11,7 +11,7 @@ public static class Globals
 	{PowerUpType.CLIPSIZE, new ClipSizePowerUp()},
 	{PowerUpType.ADRENALIN, new AdrenalinPowerUp()}
 	};
-	
+
 	public static Dictionary<PowerUpType, AbstractFiringPowerUp> FiringPowerUpDictionary = new Dictionary<PowerUpType, AbstractFiringPowerUp>
 	{{PowerUpType.SHOTGUN, new ShotgunFiringPowerUp()},
 	{PowerUpType.REPEATER, new RepeaterFiringPowerUp()}
@@ -30,6 +30,28 @@ public static class Globals
 	{PowerUpType.SHOTGUN, PowerUpClass.FIRING},
 	{PowerUpType.REPEATER, PowerUpClass.FIRING}
 	};
+
+	public static Dictionary<PowerUpType, string> PowerUpInfoDictionary = new Dictionary<PowerUpType, string>
+	{{PowerUpType.NONE, ""},
+	{PowerUpType.DAMAGE, "Increase bullet damage"},
+	{PowerUpType.FIRERATE, "Increase bullet fire rate"},
+	{PowerUpType.RELOADSPD, "Increase gun reload speed"},
+	{PowerUpType.CLIPSIZE, "Increase gun clip size"},
+	{PowerUpType.ADRENALIN, "Increase slow down ratio"},
+	{PowerUpType.SHOTGUN, "Shoot more bullets with increased spread"},
+	{PowerUpType.REPEATER, "Shoot an additional bullet with each shot"}
+	};
+
+	//For Upgrade Icons
+	//public static Dictionary<PowerUpType, Texture> PowerUpIconDictionary = new Dictionary<PowerUpType, Texture>
+	//{{PowerUpType.DAMAGE, tex},
+	//{PowerUpType.FIRERATE, tex},
+	//{PowerUpType.RELOADSPD, tex},
+	//{PowerUpType.CLIPSIZE, tex},
+	//{PowerUpType.ADRENALIN, tex},
+	//{PowerUpType.SHOTGUN, tex},
+	//{PowerUpType.REPEATER, tex}
+	//};
 
     public static Vector3 DirectTargeting(Transform from, Transform to)
     {
