@@ -66,9 +66,9 @@ public class PlayerCentral : MonoBehaviour
         //Shoot
         if (Input.GetButton("Fire1"))
         {
-            Vector3 position = _camera.transform.forward + _camera.transform.position + (0.22f * _camera.transform.right) + (-0.18f * _camera.transform.up);
+            Vector3 position = _camera.transform.forward + _camera.transform.position;
             Vector3 direction = _camera.transform.forward + new Vector3(-0.0075f, 0.003f, 0);
-            if (_weapon.Attack(position, direction)) shootEffects(position);
+            if (_weapon.Attack(position, direction)) shootEffects(position + (0.22f * _camera.transform.right) + (-0.18f * _camera.transform.up));
         }
 
         //Reload
