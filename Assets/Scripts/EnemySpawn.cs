@@ -8,10 +8,10 @@ public class Wave
 {
     public string waveName;
     public int numOfEnemies;
-    public string[] typeOfEnemies;
+    public EnemyType[] typeOfEnemies;
     public float spawnInterval;
 
-    public Wave(string name, int num, string[] types, float interval)
+    public Wave(string name, int num, EnemyType[] types, float interval)
     {
         waveName = name;
         numOfEnemies = num;
@@ -32,6 +32,7 @@ public class EnemySpawn : MonoBehaviour
     private float nextSpawnTime; // not used for now 
     private Wave currentWave;
     private int currentWaveNumber = 0;
+    private PowerUpManager pum;
 
     public int totalWaveNumber;
     public int enemiesPerWave;
@@ -44,19 +45,17 @@ public class EnemySpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pum = GameObject.FindGameObjectWithTag("Player").GetComponent<PowerUpManager>();
         waves = new Wave[totalWaveNumber];
-        string[] enemy = new string[1];
-        enemy[0] = "Enemy";
+        EnemyType[] enemy = new EnemyType[2];
+        enemy[0] = EnemyType.TURRET;
+        enemy[1] = EnemyType.GRENADIER;
 
         for (int i = 0; i < totalWaveNumber; i++)
         {
             string name = "wave " + i.ToString();
             waves[i] = new Wave(name, enemiesPerWave, enemy, spawnInterval);
         }
-
-        // need to generate the spawnpoints location here
-        // already have spawnpoints array but need to populate it here
-        // we dont need spawnpoints yet because spawnEnemy spawn randon
 
         StartSpawningWave();
         currentWave = waves[currentWaveNumber];
@@ -91,6 +90,7 @@ public class EnemySpawn : MonoBehaviour
                 if (currentWaveNumber >= totalWaveNumber)
                 {
                     //Debug.Log("Game Over!");
+                    // TODO : GAME OVER UI
                 }
                 else
                 {
@@ -98,16 +98,14 @@ public class EnemySpawn : MonoBehaviour
 
                     currentWave = waves[currentWaveNumber];
                     // grant power up here as well 
-
+                    // TODO : POWER UP UI 
+                    pum.presentPowerUps();
 
                     StartSpawningWave();
                 }
                 
             }
-            // startSpawn only turns to false when we make all the enemies in the same wave
-            // check if the number of enemies has reached 0
-            // check if we are on the last wave
-            // implement powerup here
+         
         }
        
         
@@ -120,7 +118,12 @@ public class EnemySpawn : MonoBehaviour
             _cooldownDelay = SpeedManager.enemySpawnScaling;
             if (canSpawn && currentNumEnemies < enemiesPerWave)
             {
-                SpawnEnemy();
+
+                // TODO: need to fix the way this is implemented
+                // Random on array 
+                EnemyType[] currentTypes = currentWave.typeOfEnemies;
+                int index = Random.Range(0, currentTypes.Length);
+                SpawnEnemy(currentTypes[index]);
                 _cooldown = true;
                 currentNumEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
                 //Debug.Log(currentNumEnemies);
@@ -151,12 +154,16 @@ public class EnemySpawn : MonoBehaviour
     }
 
 
-    void SpawnEnemy()
+    void SpawnEnemy(EnemyType enemy)
     {
+
+        // need to include variant type as a parameter
+        // default is None for a type from factory 
         Vector3 targetSpawn;
         if (RandomPoint(platformRadius, out targetSpawn)) {
             Debug.DrawRay(targetSpawn, Vector3.up, Color.blue, 1.0f);
-            EnemyFactory.Instance.CreateEnemy(targetSpawn, EnemyType.GRENADIER);
+            EnemyFactory.Instance.CreateEnemy(targetSpawn, enemy);
+
         }
     }
 
