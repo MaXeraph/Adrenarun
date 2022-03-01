@@ -37,6 +37,7 @@ public class EnemySpawn : MonoBehaviour
     private int totalWaveNumber;
     private int enemiesPerWave = 5;
     private const int spawnInterval = 0;
+    private int enemiesSpawned = 0;
     private int currentNumEnemies = 0;
     private EnemyType[] enemy;
 
@@ -76,6 +77,7 @@ public class EnemySpawn : MonoBehaviour
     {
         canSpawn = false;
         startSpawn = false;
+        enemiesSpawned = 0;
     }
     // Update is called once per frame
     void Update()
@@ -130,7 +132,7 @@ public class EnemySpawn : MonoBehaviour
         if (!_cooldown)
         {
             _cooldownDelay = SpeedManager.enemySpawnScaling;
-            if (canSpawn && currentNumEnemies < enemiesPerWave)
+            if (canSpawn && enemiesSpawned < enemiesPerWave)
             {
 
                 // TODO: need to fix the way this is implemented
@@ -140,13 +142,14 @@ public class EnemySpawn : MonoBehaviour
                 SpawnEnemy(currentTypes[index]);
                 _cooldown = true;
                 currentNumEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
+                enemiesSpawned += 1;
                 UIManager.enemiesLeft = currentNumEnemies;
                 //Debug.Log(currentNumEnemies);
                 StartCoroutine(Cooldown());
             }
             else
             {
-                if (currentNumEnemies >= enemiesPerWave)
+                if (enemiesSpawned >= enemiesPerWave)
                 {
                     StopSpawningWave();
                     //Debug.Log("stopped spawning the current wave");
