@@ -17,11 +17,10 @@ public static class EnemyMovements
         NavMeshAgent navAgent = gameObject.GetComponent<NavMeshAgent>();
         navAgent.speed = _grenadierBaseSpeed * SpeedManager.enemyMovementScaling;
         float playerDistance = Vector3.Distance(position, playerPosition);
-        if (playerDistance > 20) {
+        if (playerDistance > 40) {
             navAgent.SetDestination(playerPosition);
             anim.Play("grenad walk");
         }
-        if (playerDistance > 16) anim.Play("grenad walk");
         else anim.Stop();
 
     }
