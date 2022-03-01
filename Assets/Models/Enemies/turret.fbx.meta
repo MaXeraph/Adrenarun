@@ -12,7 +12,37 @@ ModelImporter:
   - first:
       74: 4224888591873604527
     second: turret down
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Turret head
+    second: {fileID: 2100000, guid: 29b3fc8d3f79d1b49a1d2b6d6ea946a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: accents
+    second: {fileID: 2100000, guid: 33d22077f99e44c4485edea4059a4bb1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glow
+    second: {fileID: 2100000, guid: 1a5de9d2f7e49694093c6de400ffa25c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gun
+    second: {fileID: 2100000, guid: f55c4c57c0ae18e4abef305fe9673aa1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mechanism
+    second: {fileID: 2100000, guid: 37aa33cff715e8d4b906eea8c4366ebb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: turret body
+    second: {fileID: 2100000, guid: 002f0bd5bc68ba74a941aa4d37398371, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -97,11 +127,11 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 2
+  animationType: 1
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
