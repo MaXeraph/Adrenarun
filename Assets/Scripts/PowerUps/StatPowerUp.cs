@@ -39,6 +39,7 @@ public class ReloadSpeedPowerUp : AbstractStatPowerUp
 
     public override void applyPowerUp(Weapon weapon){
         weapon._reloadSpeed *= _modifier;
+        UIManager.reloadSpeed = weapon._reloadSpeed;
     }
 }
 
@@ -50,6 +51,7 @@ public class ClipSizePowerUp : AbstractStatPowerUp
 
     public override void applyPowerUp(Weapon weapon){
         weapon._magazineSize += (int)_modifier;
+        UIManager.AmmoCapacity = weapon._magazineSize;
     }
 }
 
