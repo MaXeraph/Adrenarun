@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour
 {
     // Movement variables
     public static float speed = 12f;
-    public static float sprintSpeed = 1.05f;
+    public static float sprintSpeed = 0.05f;
 
     // Jump variables
     // NOTE: -45.81 is an experimental value for gravity
