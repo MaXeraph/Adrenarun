@@ -23,7 +23,7 @@ public class PlayerCentral : MonoBehaviour
     void Start()
     {
        Cursor.lockState = CursorLockMode.Locked;
-        
+
         _player = GameObject.FindWithTag("Player");
 
         _camera = Camera.main;
@@ -32,7 +32,7 @@ public class PlayerCentral : MonoBehaviour
 
         arms = transform.GetChild(0).GetChild(0).GetChild(0).Find("arms");
         gun = transform.GetChild(0).GetChild(0).GetChild(0).Find("gunF");
-        
+
         _weapon = _player.AddComponent<Weapon>();
         _weapon.Initialize(new BulletAttackBehaviour(EntityType.PLAYER), 0.2f, 16, 1f);
     }
@@ -53,9 +53,15 @@ public class PlayerCentral : MonoBehaviour
         //Jump
         if (Input.GetButtonDown("Jump") && isGrounded) _velocity.y += Movement.jumpVelocity;
 
-        //Dash
-        if (Input.GetKey(KeyCode.LeftShift)) Movement.playerDash(_player);
-        
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            Movement.playerSprint(_player);
+        }
+
+        if (Input.GetButtonDown("Fire2"))
+        {
+            StartCoroutine(Dash());
+        }
 
         //Shoot
         if (Input.GetButton("Fire1"))
@@ -67,14 +73,14 @@ public class PlayerCentral : MonoBehaviour
 
         //Reload
         if (Input.GetButtonDown("Reload")) _weapon.Reload();
-      
+
 
         applyGravity();
         resetYVelocity();
 
     }
 
-  
+
 
 private void shootEffects(Vector3 pos)
     {
@@ -133,6 +139,22 @@ private void checkGround()
         {
             canWallJump = false;
             _velocity.y = Movement.jumpVelocity;
+        }
+    }
+
+    IEnumerator Dash()
+    {
+        float startTime = Time.time;
+        float ad_input = Input.GetAxis("Horizontal");
+        float ws_input = Input.GetAxis("Vertical");
+
+        float dashSpeed = 80f;
+        float dashTime = 0.2f;
+        Vector3 move = _player.transform.right * ad_input + _player.transform.forward * ws_input;
+        while(Time.time < startTime + dashTime)
+        {
+            _controller.Move(move.normalized * dashSpeed * Time.deltaTime);
+            yield return null;
         }
     }
 }

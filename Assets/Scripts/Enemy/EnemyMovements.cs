@@ -24,4 +24,18 @@ public static class EnemyMovements
     public static void TurretSetup(Vector3 transform) {
         
     }
+
+    public static void RangedSetup(Vector3 transform) {
+
+    }
+
+    public static void RangedMovement(GameObject gameObject, Vector3 playerPosition) {
+        Vector3 position = gameObject.transform.position;
+        NavMeshAgent navAgent = gameObject.GetComponent<NavMeshAgent>();
+        float playerDistance = Vector3.Distance(position, playerPosition);
+        if (playerDistance > 15) {
+            navAgent.SetDestination(playerPosition);
+        }
+    }
+
 }
