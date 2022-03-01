@@ -17,7 +17,6 @@ public class UIManager : MonoBehaviour
             AmmoCapacity = _weapon._magazineSize;
             Ammo = _weapon._magazineSize;
             reloadSpeed = _weapon._reloadSpeed;
-
         }
     }
     private static Weapon _weapon;
