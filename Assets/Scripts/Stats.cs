@@ -24,7 +24,8 @@ public class Stats : MonoBehaviour
                 }
             }
             else if (owner == EntityType.PLAYER) {
-                UIManager.Health = Mathf.Clamp(_currentHealth, 0, maxHealth);
+                _currentHealth = Mathf.Clamp(_currentHealth, 0, maxHealth);
+                UIManager.Health = _currentHealth;
                 AudioManager.UpdateMusicAudio(_currentHealth / maxHealth);
                 AudioManager.PlayInjuryAudio();
             }
