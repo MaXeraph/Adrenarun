@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -826,8 +826,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69137c045574ea149ade1a236c3defa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!4 &383231157 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7136586390457976596, guid: efb0ccb72c32a7845ba0c921e57cc072, type: 3}
@@ -1338,14 +1338,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43ffcaa6ea6775c44967ddc5c21c6ae9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalWaveNumber: 10
-  enemiesPerWave: 10
+  m_Name:
+  m_EditorClassIdentifier:
+  totalWaveNumber: 3
+  enemiesPerWave: 3
   waves:
   - waveName: firstWave
     numOfEnemies: 10
-    typeOfEnemies: []
+    typeOfEnemies: 00000000
     spawnInterval: 0
   spawnPoints:
   - {x: 2.3547e-41, y: 7.26e-43, z: 0}
@@ -1394,8 +1394,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f042afd39f5f3854b806463aa8cd7547, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!4 &807511561
 Transform:
   m_ObjectHideFlags: 0
@@ -2213,11 +2213,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3235856316707627887, guid: 8caeb98ef9447154c928274cd65859b9, type: 3}
       propertyPath: CameraTransform
-      value: 
+      value:
       objectReference: {fileID: 1572829508}
     - target: {fileID: 3235856316707627887, guid: 8caeb98ef9447154c928274cd65859b9, type: 3}
       propertyPath: PlayerController
-      value: 
+      value:
       objectReference: {fileID: 1770069371}
     - target: {fileID: 3634661369592940259, guid: 8caeb98ef9447154c928274cd65859b9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2964,8 +2964,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -2983,8 +2983,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
@@ -3011,8 +3011,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4056402286c1104384510d5cd6aae2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!4 &1779211776 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7136586390457976596, guid: efb0ccb72c32a7845ba0c921e57cc072, type: 3}
@@ -3812,7 +3812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5841979810881545744, guid: b48c293e05f83a84cb33d1d6c25fc4a7, type: 3}
       propertyPath: death
-      value: 
+      value:
       objectReference: {fileID: 372732489}
     - target: {fileID: 5841979810881545744, guid: b48c293e05f83a84cb33d1d6c25fc4a7, type: 3}
       propertyPath: maxHealth
@@ -4053,11 +4053,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1471498709642922451, guid: aca694205cb1b2f409667dd554855500, type: 3}
       propertyPath: m_Materials.Array.data[0]
-      value: 
+      value:
       objectReference: {fileID: -971967308306111065, guid: 70a4316ef238dfc40a66a8584df30aad, type: 3}
     - target: {fileID: 1471498709642922451, guid: aca694205cb1b2f409667dd554855500, type: 3}
       propertyPath: m_Materials.Array.data[1]
-      value: 
+      value:
       objectReference: {fileID: 7344855706876067045, guid: 70a4316ef238dfc40a66a8584df30aad, type: 3}
     - target: {fileID: 3131128981111906758, guid: aca694205cb1b2f409667dd554855500, type: 3}
       propertyPath: m_RootOrder
