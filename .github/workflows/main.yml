@@ -28,16 +28,14 @@ jobs:
       #   uses: game-ci/unity-return-license@v1
       #   if: always()
       - uses: actions/upload-artifact@v2
-        env: 
-          SHA8: ${GITHUB_SHA::8}
         with:
-          name: Adrenarun_$SHA8 
+          name: Adrenarun_CI_Build
           path: build
       # Upload to Itch
-      # - uses: josephbmanley/butler-publish-itchio-action@master
-      #   env:
-      #     BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-      #     CHANNEL: html5
-      #     ITCH_GAME: Adrenarun
-      #     ITCH_USER: azhu
-      #     PACKAGE: build/WebGL
+      - uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: html5
+          ITCH_GAME: Adrenarun
+          ITCH_USER: azhu
+          PACKAGE: build/WebGL
