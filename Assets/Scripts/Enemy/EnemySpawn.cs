@@ -68,7 +68,7 @@ public class EnemySpawn : MonoBehaviour
     void StartSpawningWave()
     {
         UIManager.enemiesTotal = enemiesPerWave;
-        UIManager.enemiesLeft = enemiesPerWave;
+        UIManager.enemiesLeft = 0;
         canSpawn = true;
         startSpawn = true;
     }
@@ -89,6 +89,7 @@ public class EnemySpawn : MonoBehaviour
         else
         {
             currentNumEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
+            UIManager.enemiesLeft = currentNumEnemies;
             //Debug.Log(currentNumEnemies);
 
             if (currentNumEnemies == 0)

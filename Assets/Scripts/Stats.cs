@@ -10,11 +10,11 @@ public class Stats : MonoBehaviour
     public float currentHealth
     {
         get => _currentHealth;
-        set 
+        set
         {
             _currentHealth = value;
-            if (value <= 0 && owner == EntityType.ENEMY) { 
-                Destroy(gameObject); UIManager.enemiesLeft -= 1;
+            if (value <= 0 && owner == EntityType.ENEMY) {
+                Destroy(gameObject);
                 int rand = Random.Range(0, 10);
                 if(rand == 0)
                 {
