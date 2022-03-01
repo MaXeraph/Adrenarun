@@ -10,18 +10,16 @@ public class Stats : MonoBehaviour
     public float currentHealth
     {
         get => _currentHealth;
-        set {
+        set 
+        {
             _currentHealth = value;
-            if (value <= 0) Destroy(gameObject);
-            if (owner == EntityType.PLAYER)
-            {
-                UIManager.Health = currentHealth;
-                SpeedManager.updateSpeeds(currentHealth / maxHealth);
-            }
+            if (value <= 0 && owner == EntityType.ENEMY) { Destroy(gameObject); UIManager.enemiesLeft -= 1; }
+            else if (owner == EntityType.PLAYER) UIManager.Health = currentHealth;
         }
     }
     public float maxHealth;
     public EntityType owner;
+    bool dead = false;
 
     public Stats(float maxHealth = 100f)
     {
@@ -38,45 +36,7 @@ public class Stats : MonoBehaviour
         }
         else owner = EntityType.ENEMY;
 
-        setHealth(maxHealth);
+        currentHealth = maxHealth;
     }
 
-    void setHealth(float health)
-    {
-        currentHealth = health;
-        if (owner == EntityType.PLAYER)
-        {
-            UIManager.Health = currentHealth;
-            SpeedManager.updateSpeeds(currentHealth / maxHealth);
-        }
-    }
-
-    void setMaxHealth(float health)
-    {
-        maxHealth = health;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        if (owner == EntityType.PLAYER)
-        {
-            UIManager.MaxHealth = maxHealth;
-            SpeedManager.updateSpeeds(currentHealth / maxHealth);
-        }
-    }
-
-    public void heal(float healthGained)
-    {
-        setHealth(currentHealth + healthGained);
-        if (currentHealth <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    public void takeDamage(float damage)
-    {
-        setHealth(currentHealth - damage);
-        if (currentHealth <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
 }

@@ -6,21 +6,16 @@ using DG.Tweening;
 
 public class AmmoUI : MonoBehaviour
 {
-    public static int Capacity
-    {
-        get { return AmmoCapacity; }
-        set { UpdateAmmoCapacity(value); }
-    }
 
     public static int AmmoCapacity = 0;
     private static int CurrentAmmo;
 
     private static GameObject[] AmmoSlots;
 
-    [SerializeField] public static GameObject AmmoSlot;
-    [SerializeField] public static Transform Clip;
-    [SerializeField] public static Text AmmoCounter;
-    [SerializeField] public static GameObject AmmoPanel;
+    public static GameObject AmmoSlot;
+    public static Transform Clip;
+    public static Text AmmoCounter;
+    public static GameObject AmmoPanel;
 
     private static Image AmmoPanelColor;
     private static Vector4 PanelColorNormal = new Vector4(0.7f, 0.6f, 0.6f, 0.8f);
