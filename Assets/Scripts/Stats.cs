@@ -13,7 +13,7 @@ public class Stats : MonoBehaviour
         set 
         {
             _currentHealth = value;
-            if (value <= 0 && owner == EntityType.ENEMY) { Destroy(gameObject); UIManager.enemiesLeft -= 1; }
+            if (value <= 0 && owner == EntityType.ENEMY) { Destroy(gameObject); }
             else if (owner == EntityType.PLAYER) UIManager.Health = currentHealth;
         }
     }

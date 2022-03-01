@@ -32,7 +32,7 @@ public class waveUI : MonoBehaviour
         if (num < 10) pre = " ";
         left.text = pre + num.ToString();
         _left = num;
-        left.transform.DOPunchScale(new Vector3(0.1f, 1.3f, 1.3f), 0.5f, 1, 0.1f);
+        //left.transform.DOPunchScale(new Vector3(0.1f, 0.2f, 0.2f), 0.5f, 1, 0.1f);
     }
 
 }
