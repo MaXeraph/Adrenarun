@@ -49,9 +49,6 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
         else if (target.GetComponent<BulletMono>() == null) // if not another bullet...
         {
             GameObject.Destroy(bm.gameObject);
-            if (Owner.ToString() == "PLAYER") {
-                AudioManager.PlayImpactAudio();
-            }
         }
     }
 }

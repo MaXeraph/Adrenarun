@@ -25,7 +25,6 @@ public class ArtilleryAttackBehaviour : BulletAttackBehaviour
             Vector3 position = bm.gameObject.GetComponent<Transform>().position;
             RaycastHit hitInfo;
             Physics.Raycast(position, new Vector3(0, -1, 0), out hitInfo);
-            AudioManager.PlayImpactAudio();
             GameObject.Destroy(bm.gameObject);
             GameObject thermitePool = GameObject.Instantiate(Resources.Load("ThermitePool")) as GameObject;
             // Spawn the pool on the ground.
