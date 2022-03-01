@@ -13,7 +13,16 @@ public class Stats : MonoBehaviour
         set 
         {
             _currentHealth = value;
-            if (value <= 0 && owner == EntityType.ENEMY) { Destroy(gameObject); UIManager.enemiesLeft -= 1; }
+            if (value <= 0 && owner == EntityType.ENEMY) { 
+                Destroy(gameObject); UIManager.enemiesLeft -= 1;
+                int rand = Random.Range(0, 10);
+                if(rand == 0)
+                {
+                    GameObject newHealingPill = GameObject.Instantiate(Resources.Load("HealingPill")) as GameObject;
+                    Transform pillTransform = newHealingPill.GetComponent<Transform>();
+                    pillTransform.position = gameObject.transform.position;
+                }
+            }
             else if (owner == EntityType.PLAYER) UIManager.Health = currentHealth;
         }
     }
