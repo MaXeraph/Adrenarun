@@ -15,6 +15,9 @@ public class PlayerCentral : MonoBehaviour
     bool canWallJump;
     float wallJumpSlope = 0.1f;
 
+    private bool test = false;
+    private GameObject o;
+    
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -65,6 +68,16 @@ public class PlayerCentral : MonoBehaviour
         {
             _weapon.Reload();
             UIManager.Reloading = true;
+        }
+        if (Input.GetKey(KeyCode.O) && !test)
+        {
+            test = true;
+            o = EnemyFactory.Instance.CreateEnemy(new Vector3(0, 2, 8), EnemyType.GRENADIER);
+        }
+        else if (Input.GetKey(KeyCode.P) && test)
+        {
+            test = false;
+            Destroy(o);
         }
 
         applyGravity();

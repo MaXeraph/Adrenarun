@@ -17,6 +17,11 @@ public class ArtilleryAttackBehaviour : BulletAttackBehaviour
         thermiteDurability = durability;
         thermiteDamageCooldown = damageCooldown;
     }
+    
+    public override void initiateAttack(Vector3 position, Vector3 direction)
+    {
+        ArtilleryMono.create(this, position, direction);
+    }
 
     public override void onHit(BulletMono bm, GameObject target)
     {

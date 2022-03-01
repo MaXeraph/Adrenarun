@@ -37,6 +37,10 @@ public static class Globals
         return direction;
     }
 
+	public static Vector3 GrenadierTargeting(Transform from, Transform to) {
+		return to.position;
+	}
+
     public static Dictionary<EnemyType, string> enemyPrefabNames = new Dictionary<EnemyType, string>()
     {
         { EnemyType.TURRET, "Turret" },
