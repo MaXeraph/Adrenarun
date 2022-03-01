@@ -18,11 +18,9 @@ public class EnemyBehaviour : MonoBehaviour
     private Weapon _weapon;
 
     // Method to pathfind from Transform to Transform, returns Vector3, the direction to move in next.
-    private Func<Transform, Transform, Vector3> Pathfind;
+    private Action<GameObject, Vector3> NavAgentMove;
     // Method to determine aiming direction from Transform to Transform, returns Vector3, the direction to fire in.
     private Func<Transform, Transform, Vector3> GetAimDirection;
-    // Method to move Transform in the direction of Vector3.
-    private Action<Transform, Vector3> Move;
     
     IEnumerator Cooldown()
     {
@@ -53,9 +51,9 @@ public class EnemyBehaviour : MonoBehaviour
 
         _weapon = weapon;
         _targetTransform = target.GetComponent<Transform>();
-        Pathfind = info.pathfind;
+        NavAgentMove = info.navAgentMove;
         GetAimDirection = info.aim;
-        Move = info.move;
+        info.navAgentSetup(new Vector3(0, 0, 0));
         
         return true;
     }
@@ -73,11 +71,7 @@ public class EnemyBehaviour : MonoBehaviour
         _lookRotation = Quaternion.LookRotation(_direction);
         transform.rotation = _lookRotation;
         
-        // Pathfind. Determine direction to move in.
-        Vector3 moveDirection = Pathfind(transform, _targetTransform);
-        
-        // Move. Ensure movement is valid, then move.
-        Move(transform, moveDirection);
+        NavAgentMove(this.gameObject, _targetTransform.position);
         
         // Aim. Determine firing direction.
         Vector3 aimDirection = GetAimDirection(transform, _targetTransform);

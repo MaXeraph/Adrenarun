@@ -165,7 +165,6 @@ public class EnemySpawn : MonoBehaviour
         {
             Debug.DrawRay(targetSpawn, Vector3.up, Color.blue, 1.0f);
             EnemyFactory.Instance.CreateEnemy(targetSpawn, enemy, variant);
-
         }
     }
 

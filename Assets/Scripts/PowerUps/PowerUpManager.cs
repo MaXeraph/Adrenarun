@@ -10,7 +10,8 @@ public class PowerUpManager : MonoBehaviour
     private int[] generatorList;
     private PowerUpType[] powerUpSelectionList;
     private bool includeNone = false;
-    public List<AbstractPowerUp> appliedPowerUps;
+    public List<AbstractFiringPowerUp> firingPowerUps;
+    public List<AbstractBulletPowerUp> bulletPowerUps;
 
     private Weapon _weapon; 
 
@@ -19,7 +20,7 @@ public class PowerUpManager : MonoBehaviour
     {
         generatorList = Enumerable.Range(0, System.Enum.GetNames(typeof(PowerUpType)).Length).ToArray();
         powerUpSelectionList = new PowerUpType[numPowerUpOptions];
-        appliedPowerUps = new List<AbstractPowerUp>();
+        firingPowerUps = new List<AbstractFiringPowerUp>();
     }
 
     // we generate powerups randomly by shuffling a premade list
@@ -72,39 +73,25 @@ public class PowerUpManager : MonoBehaviour
     // apply stat powerups directly, or add non stat ones to a powerup list
     private void applyPowerUp(PowerUpType type)
     {
-        AbstractPowerUp powerUp = Globals.StatPowerUpDictionary[type];
-        switch (type)
+        _weapon = GameObject.FindWithTag("Player").GetComponent<Weapon>();
+
+        switch(Globals.PowerUpClassDictionary[type])
         {
-            case PowerUpType.NONE:
-                return;
-            case PowerUpType.DAMAGE:
-                _weapon = GameObject.FindWithTag("Player").GetComponent<Weapon>();
-                _weapon._attackBehaviour._damage += powerUp.modifier;
-                Debug.Log("Damage PowerUp Applied: " + _weapon._attackBehaviour._damage);
+            case PowerUpClass.STAT:
+                AbstractStatPowerUp statPowerUp = Globals.StatPowerUpDictionary[type];
+                statPowerUp.applyPowerUp(_weapon);
                 break;
-            case PowerUpType.FIRERATE:
-                _weapon = GameObject.FindWithTag("Player").GetComponent<Weapon>();
-                _weapon._fireRate += powerUp.modifier;
-                Debug.Log("Fire Rate PowerUp Applied: " + _weapon._fireRate);
+            case PowerUpClass.FIRING:
+                _weapon.firingBehavior[type] = true;
+                _weapon.firingBehavior[PowerUpType.NONE] = false;
+                AbstractFiringPowerUp firingPowerUp = Globals.FiringPowerUpDictionary[type];
+                firingPowerUps.Add(firingPowerUp);
+                firingPowerUps = firingPowerUps.OrderBy(powerUp => powerUp.sortOrder).ToList();
                 break;
-            case PowerUpType.RELOADSPD:
-                _weapon = GameObject.FindWithTag("Player").GetComponent<Weapon>();
-                _weapon._reloadSpeed += powerUp.modifier;
-                UIManager.reloadSpeed = _weapon._reloadSpeed;
-                Debug.Log("Reload Speed PowerUp Applied: " + _weapon._reloadSpeed);
-                break;
-            case PowerUpType.CLIPSIZE:
-                _weapon = GameObject.FindWithTag("Player").GetComponent<Weapon>();
-                _weapon._magazineSize += (int)powerUp.modifier;
-                UIManager.AmmoCapacity = _weapon._magazineSize;
-                Debug.Log("Clip Size PowerUp Applied: " + _weapon._magazineSize);
-                break;                
-            case PowerUpType.ADRENALIN:
-                SpeedManager.adrenalinModifier += powerUp.modifier;
-                Debug.Log("Adrenalin PowerUp Applied: " + SpeedManager.adrenalinModifier);
-                break;                
-            default:
-                appliedPowerUps.Add(powerUp);
+            case PowerUpClass.BULLET:
+                // TODO: implement bullet powerups
+                AbstractBulletPowerUp bulletPowerUp = Globals.BulletPowerUpDictionary[type];
+                bulletPowerUps.Add(bulletPowerUp);
                 break;
         }
     }

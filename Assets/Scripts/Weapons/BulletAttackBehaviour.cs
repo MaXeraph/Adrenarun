@@ -32,7 +32,7 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
         BulletMono.create(this, position, direction);
     }
 
-    public void onHit(BulletMono bm, GameObject target)
+    public virtual void onHit(BulletMono bm, GameObject target)
     {
         Stats statsComponent = target.GetComponent<Stats>();
         if (statsComponent)
