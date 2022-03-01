@@ -6,6 +6,9 @@ using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
+
+    public static bool dead = false;
+
     public static Weapon weapon
     {
         get { return _weapon; }
@@ -68,6 +71,9 @@ public class UIManager : MonoBehaviour
         {
             health = Mathf.Clamp(value, 0, maxHealth);
             UI_health.setHealth(health);
+            SpeedManager.updateSpeeds(health / maxHealth);
+            if (health <= 0) deathUI.reveal(deathUI.instance);
+            
         }
     }
     private static float health;

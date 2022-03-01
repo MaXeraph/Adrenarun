@@ -11,10 +11,6 @@ public class deathUI : MonoBehaviour
     Button leave;
     public static GameObject instance;
 
-
-
-
-
    void Awake()
     {
         instance = this.gameObject;
@@ -28,9 +24,9 @@ public class deathUI : MonoBehaviour
 
     public static void reveal(GameObject inst)
     {
+        UIManager.dead = true;
         instance.SetActive(true);
         PlayerCentral.paused = true;
-        //TimeBody.isRecording = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -49,11 +45,5 @@ public class deathUI : MonoBehaviour
         PlayerCentral.paused = false;
         gameObject.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
-        //GetComponent<Image>().DOFade(0, 0.5f);
-        //foreach (Image img in toFade){
-        //   img.DOFade(0, 0.5f);
-        //}
-        
-        //TimeBody.StartRewind();
     }
 }

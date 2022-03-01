@@ -10,29 +10,11 @@ public class Stats : MonoBehaviour
     public float currentHealth
     {
         get => _currentHealth;
-        set {
+        set 
+        {
             _currentHealth = value;
-            if (value <= 0)
-            {
-                if (gameObject.tag == "Player")
-                {
-                    if (!dead)
-                    {
-                        dead = true;
-                        deathUI.reveal(deathUI.instance);
-                    }
-                }
-                else
-                {
-                    UIManager.enemiesLeft -= 1;
-                    Destroy(gameObject);
-                }
-            }
-            if (owner == EntityType.PLAYER)
-            {
-                UIManager.Health = currentHealth;
-                SpeedManager.updateSpeeds(currentHealth / maxHealth);
-            }
+            if (value <= 0 && owner == EntityType.ENEMY) { Destroy(gameObject); UIManager.enemiesLeft -= 1; }
+            else if (owner == EntityType.PLAYER) UIManager.Health = currentHealth;
         }
     }
     public float maxHealth;
@@ -57,54 +39,4 @@ public class Stats : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    void setHealth(float health)
-    {
-        currentHealth = health;
-        if (owner == EntityType.PLAYER)
-        {
-            UIManager.Health = currentHealth;
-            SpeedManager.updateSpeeds(currentHealth / maxHealth);
-        }
-    }
-
-    void setMaxHealth(float health)
-    {
-        maxHealth = health;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        if (owner == EntityType.PLAYER)
-        {
-            UIManager.MaxHealth = maxHealth;
-            SpeedManager.updateSpeeds(currentHealth / maxHealth);
-        }
-    }
-
-    public void heal(float healthGained)
-    {
-        setHealth(currentHealth + healthGained);
-        if (currentHealth <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    public void takeDamage(float damage)
-    {
-        setHealth(currentHealth - damage);
-        if (currentHealth <= 0)
-        {
-            if (gameObject.tag != "Player")
-            {
-                if (!dead)
-                {
-                    dead = true;
-                    deathUI.reveal(deathUI.instance);
-                }
-            }
-            else
-            {
-                UIManager.enemiesLeft -= 1;
-                Destroy(gameObject);
-            }
-        }
-    }
 }
