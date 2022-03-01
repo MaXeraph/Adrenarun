@@ -52,7 +52,12 @@ public class PlayerCentral : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            Movement.playerDash(_player);
+            Movement.playerSprint(_player);
+        }
+
+        if (Input.GetButtonDown("Fire2"))
+        {
+            StartCoroutine(Dash());
         }
 
         if (Input.GetButton("Fire1"))
@@ -112,6 +117,22 @@ public class PlayerCentral : MonoBehaviour
         {
             canWallJump = false;
             _velocity.y = Movement.jumpVelocity;
+        }
+    }
+
+    IEnumerator Dash()
+    {
+        float startTime = Time.time;
+        float ad_input = Input.GetAxis("Horizontal");
+        float ws_input = Input.GetAxis("Vertical");
+
+        float dashSpeed = 80f;
+        float dashTime = 0.2f;
+        Vector3 move = _player.transform.right * ad_input + _player.transform.forward * ws_input;
+        while(Time.time < startTime + dashTime)
+        {
+            _controller.Move(move.normalized * dashSpeed * Time.deltaTime);
+            yield return null;
         }
     }
 }
