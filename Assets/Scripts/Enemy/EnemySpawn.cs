@@ -25,7 +25,7 @@ public class EnemySpawn : MonoBehaviour
     private Vector3 _enemySpawn = Vector3.zero;
     private bool _cooldown = false;
     private float _cooldownDelay = SpeedManager.enemySpawnScaling;
-    private const float platformRadius = 175/2;
+    private const float platformRadius = 175 / 2;
 
     private bool canSpawn = false; // for within wave
     private bool startSpawn = false; // for each wave 
@@ -72,7 +72,7 @@ public class EnemySpawn : MonoBehaviour
     void StopSpawningWave()
     {
         canSpawn = false;
-        startSpawn = false; 
+        startSpawn = false;
     }
     // Update is called once per frame
     void Update()
@@ -80,7 +80,7 @@ public class EnemySpawn : MonoBehaviour
         if (startSpawn)
         {
             SpawnWave();
-        } 
+        }
         else
         {
             currentNumEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
@@ -105,12 +105,12 @@ public class EnemySpawn : MonoBehaviour
 
                     StartSpawningWave();
                 }
-                
+
             }
-         
+
         }
-       
-        
+
+
     }
 
     void SpawnWave()
