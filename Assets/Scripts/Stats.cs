@@ -21,7 +21,6 @@ public class Stats : MonoBehaviour
                     GameObject newHealingPill = GameObject.Instantiate(Resources.Load("HealingPill")) as GameObject;
                     Transform pillTransform = newHealingPill.GetComponent<Transform>();
                     pillTransform.position = gameObject.transform.position;
-                    Debug.Log(gameObject.transform.position);
                 }
             }
             else if (owner == EntityType.PLAYER) UIManager.Health = currentHealth;
