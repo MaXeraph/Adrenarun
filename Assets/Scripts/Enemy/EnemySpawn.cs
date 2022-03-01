@@ -34,10 +34,12 @@ public class EnemySpawn : MonoBehaviour
     private int currentWaveNumber = 0;
     private PowerUpManager pum;
 
-    public int totalWaveNumber;
-    public int enemiesPerWave;
+    private int totalWaveNumber;
+    private int enemiesPerWave = 5;
     private const int spawnInterval = 0;
+    private int enemiesSpawned = 0;
     private int currentNumEnemies = 0;
+    private EnemyType[] enemy;
 
     public Wave[] waves;
     public Vector3[] spawnPoints; // not used for now, may need later
@@ -46,25 +48,27 @@ public class EnemySpawn : MonoBehaviour
     void Start()
     {
         pum = GameObject.FindGameObjectWithTag("Player").GetComponent<PowerUpManager>();
-        waves = new Wave[totalWaveNumber];
-        EnemyType[] enemy = new EnemyType[2];
+        // waves = new Wave[totalWaveNumber];
+        enemy = new EnemyType[3];
         enemy[0] = EnemyType.TURRET;
         enemy[1] = EnemyType.GRENADIER;
+        enemy[2] = EnemyType.RANGED;
 
-        for (int i = 0; i < totalWaveNumber; i++)
+        /*for (int i = 0; i < totalWaveNumber; i++)
         {
             string name = "wave " + i.ToString();
             waves[i] = new Wave(name, enemiesPerWave, enemy, spawnInterval);
-        }
+        }*/
 
         StartSpawningWave();
-        currentWave = waves[currentWaveNumber];
+        // currentWave = waves[currentWaveNumber];
+        currentWave = new Wave(name, enemiesPerWave, enemy, spawnInterval);
     }
 
     void StartSpawningWave()
     {
-        UIManager.enemiesTotal = 0;
-        UIManager.enemiesLeft = 0;
+        UIManager.enemiesTotal = enemiesPerWave;
+        UIManager.enemiesLeft = enemiesPerWave;
         canSpawn = true;
         startSpawn = true;
     }
@@ -73,6 +77,7 @@ public class EnemySpawn : MonoBehaviour
     {
         canSpawn = false;
         startSpawn = false;
+        enemiesSpawned = 0;
     }
     // Update is called once per frame
     void Update()
@@ -89,6 +94,13 @@ public class EnemySpawn : MonoBehaviour
             if (currentNumEnemies == 0)
             {
                 currentWaveNumber++;
+                enemiesPerWave += 5;
+
+                currentWave = new Wave(name, enemiesPerWave, enemy, spawnInterval);
+                pum.presentPowerUps();
+                StartSpawningWave();
+
+                /*
                 if (currentWaveNumber >= totalWaveNumber)
                 {
                     //Debug.Log("Game Over!");
@@ -99,12 +111,14 @@ public class EnemySpawn : MonoBehaviour
                     // still have more waves to spawn
 
                     currentWave = waves[currentWaveNumber];
+                    enemiesPerWave += 5;
                     // grant power up here as well
                     // TODO : POWER UP UI
                     pum.presentPowerUps();
 
                     StartSpawningWave();
                 }
+                */
 
             }
 
@@ -118,7 +132,7 @@ public class EnemySpawn : MonoBehaviour
         if (!_cooldown)
         {
             _cooldownDelay = SpeedManager.enemySpawnScaling;
-            if (canSpawn && currentNumEnemies < enemiesPerWave)
+            if (canSpawn && enemiesSpawned < enemiesPerWave)
             {
 
                 // TODO: need to fix the way this is implemented
@@ -128,12 +142,14 @@ public class EnemySpawn : MonoBehaviour
                 SpawnEnemy(currentTypes[index]);
                 _cooldown = true;
                 currentNumEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
+                enemiesSpawned += 1;
+                UIManager.enemiesLeft = currentNumEnemies;
                 //Debug.Log(currentNumEnemies);
                 StartCoroutine(Cooldown());
             }
             else
             {
-                if (currentNumEnemies >= enemiesPerWave)
+                if (enemiesSpawned >= enemiesPerWave)
                 {
                     StopSpawningWave();
                     //Debug.Log("stopped spawning the current wave");
@@ -163,13 +179,25 @@ public class EnemySpawn : MonoBehaviour
         // default is None for a type from factory 
 
         Vector3 targetSpawn;
-        EnemyVariantType variant = (EnemyVariantType)Random.Range(0, 2);
+        EnemyVariantType variant;
+        EnemyType enemyType; 
+        int random = Random.Range(0, 15); // this could be iffy 
+        if (random == 0)
+        {
+            variant = EnemyVariantType.HEALER;
+            enemyType = EnemyType.TURRET;
+        }
+        else
+        {
+            variant = EnemyVariantType.NONE;
+            enemyType = enemy;
+        }
         if (RandomPoint(platformRadius, out targetSpawn))
         {
             Debug.DrawRay(targetSpawn, Vector3.up, Color.blue, 1.0f);
-            EnemyFactory.Instance.CreateEnemy(targetSpawn, enemy, variant);
-            UIManager.enemiesTotal += 1;
-            UIManager.enemiesLeft += 1;
+            EnemyFactory.Instance.CreateEnemy(targetSpawn, enemyType, variant);
+            // UIManager.enemiesTotal += 1;
+            // UIManager.enemiesLeft += 1;
         }
     }
 
