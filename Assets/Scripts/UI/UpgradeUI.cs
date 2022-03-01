@@ -52,16 +52,15 @@ public class UpgradeUI : MonoBehaviour
     { 
         if (num < 0 || num > 2) return;
         UIManager.powerSelection = num;
-        gameObject.SetActive(false);
+        exit();
     }
 
     void exit()
     {
-        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        gameObject.SetActive(false);
         UIManager.UpdateWeapon();
         UIManager.Reloading = true;
+        gameObject.SetActive(false);
     }
     
 
