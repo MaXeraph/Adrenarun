@@ -57,8 +57,11 @@ public class UpgradeUI : MonoBehaviour
 
     void exit()
     {
-        gameObject.SetActive(false);
+        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        gameObject.SetActive(false);
+        UIManager.UpdateWeapon();
+        UIManager.Reloading = true;
     }
     
 
