@@ -12,7 +12,22 @@ public class Stats : MonoBehaviour
         get => _currentHealth;
         set {
             _currentHealth = value;
-            if (value <= 0) Destroy(gameObject);
+            if (value <= 0)
+            {
+                if (gameObject.tag == "Player")
+                {
+                    if (!dead)
+                    {
+                        dead = true;
+                        deathUI.reveal(deathUI.instance);
+                    }
+                }
+                else
+                {
+                    UIManager.enemiesLeft -= 1;
+                    Destroy(gameObject);
+                }
+            }
             if (owner == EntityType.PLAYER)
             {
                 UIManager.Health = currentHealth;
@@ -39,7 +54,7 @@ public class Stats : MonoBehaviour
         }
         else owner = EntityType.ENEMY;
 
-        setHealth(maxHealth);
+        currentHealth = maxHealth;
     }
 
     void setHealth(float health)
@@ -77,7 +92,7 @@ public class Stats : MonoBehaviour
         setHealth(currentHealth - damage);
         if (currentHealth <= 0)
         {
-            if (gameObject.tag == "Player")
+            if (gameObject.tag != "Player")
             {
                 if (!dead)
                 {

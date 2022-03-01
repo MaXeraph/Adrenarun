@@ -66,6 +66,7 @@ public class TimeBody : MonoBehaviour
 
 	public static void StartRewind()
 	{
+		SpeedManager.updateSpeeds(0f);
 		Time.timeScale = 1.1f;
 		Cursor.visible = false;
 		DOTween.To(() => Time.timeScale, x => Time.timeScale = x, 7f, 3).SetEase(Ease.InOutQuint).SetDelay(1);

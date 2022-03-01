@@ -153,7 +153,6 @@ GameObject:
   - component: {fileID: 5841979810881545746}
   - component: {fileID: 5841979810881545757}
   - component: {fileID: 5841979810881545744}
-  - component: {fileID: 3783479438812845471}
   - component: {fileID: 2539575628657302016}
   m_Layer: 0
   m_Name: Player
@@ -221,22 +220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3eeec72cd6db149b61130cc3245c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
   maxHealth: 0
   owner: 0
---- !u!114 &3783479438812845471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5841979810881545756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99d5b172b643fc0439fcada75dde81b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  recordTime: 120
 --- !u!114 &2539575628657302016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,6 +326,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: _Player
       objectReference: {fileID: 0}
+    - target: {fileID: 603303048207886315, guid: 61eda3c085a051e44b7d0ff391c39f76, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1433844120179640230, guid: 61eda3c085a051e44b7d0ff391c39f76, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -383,6 +372,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1433844120179640230, guid: 61eda3c085a051e44b7d0ff391c39f76, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188626700089148824, guid: 61eda3c085a051e44b7d0ff391c39f76, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

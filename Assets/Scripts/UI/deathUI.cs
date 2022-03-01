@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class deathUI : MonoBehaviour
 {
@@ -32,7 +30,7 @@ public class deathUI : MonoBehaviour
     {
         instance.SetActive(true);
         PlayerCentral.paused = true;
-        TimeBody.isRecording = false;
+        //TimeBody.isRecording = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -46,11 +44,16 @@ public class deathUI : MonoBehaviour
    public void rewind()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1f;
+        SpeedManager.updateSpeeds(1f);
+        PlayerCentral.paused = false;
+        gameObject.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
         //GetComponent<Image>().DOFade(0, 0.5f);
         //foreach (Image img in toFade){
         //   img.DOFade(0, 0.5f);
         //}
-        gameObject.SetActive(false);
-        TimeBody.StartRewind();
+        
+        //TimeBody.StartRewind();
     }
 }

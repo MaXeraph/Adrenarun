@@ -40,6 +40,7 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
             if (statsComponent.owner != _owner)
             {
                 statsComponent.takeDamage(_damage);
+                statsComponent.currentHealth -= _damage;
                 GameObject.Destroy(bm.gameObject);
             }
         }

@@ -33,7 +33,7 @@ public class EnemySpawn : MonoBehaviour
     private Wave currentWave;
     private int currentWaveNumber = 0;
 
-    public int totalWaveNumber;
+    public int totalWaveNumber = 5;
     public int enemiesPerWave;
     private const int spawnInterval = 0;
     private int currentNumEnemies = 0;
@@ -92,7 +92,8 @@ public class EnemySpawn : MonoBehaviour
                 currentWaveNumber++;
                 if (currentWaveNumber >= totalWaveNumber)
                 {
-                    //Debug.Log("Game Over!");
+                    Debug.Log("Game Over!");
+                    //deathUI.reveal(deathUI.instance);
                 }
                 else
                 {
@@ -160,7 +161,7 @@ public class EnemySpawn : MonoBehaviour
         Vector3 targetSpawn;
         if (RandomPoint(platformRadius, out targetSpawn)) {
             Debug.DrawRay(targetSpawn, Vector3.up, Color.blue, 1.0f);
-            EnemyFactory.Instance.CreateEnemy(targetSpawn, EnemyType.GRENADIER);
+            EnemyFactory.Instance.CreateEnemy(targetSpawn, EnemyType.TURRET);
         }
     }
 

@@ -1,8 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using TMPro;
+//For healing text
+//using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -104,13 +104,10 @@ public class UIManager : MonoBehaviour
 
     public static void DamageText(Vector3 position, float amount)
     {
-        
-        
-
-        
         GameObject floatingText = Instantiate(Resources.Load("TextPopup")) as GameObject;
 
-        if (amount >= 0) floatingText.GetComponent<TMP_Text>().color += Color.green;
+        //For healing text
+        //if (amount >= 0) floatingText.GetComponent<TMP_Text>().color += Color.green;
 
         floatingText.transform.position = position;
 
