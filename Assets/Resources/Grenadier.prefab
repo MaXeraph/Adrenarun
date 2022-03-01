@@ -82,7 +82,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8925975246295725602}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -381,6 +381,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.0000000133402125
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 2c41bbe3467eaac4586b6fd700ebc216, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: eee01ca94353b0d4bb5a6331c68d6cea, type: 2}
     - target: {fileID: 6549698931928835223, guid: 2c41bbe3467eaac4586b6fd700ebc216, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -89.98021

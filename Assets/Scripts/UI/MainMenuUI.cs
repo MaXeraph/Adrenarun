@@ -30,7 +30,6 @@ public class MainMenuUI : MonoBehaviour
                 break;
             case "quit":
                 Application.Quit();
-                UnityEditor.EditorApplication.isPlaying = false;
                 break;
         }
     }
