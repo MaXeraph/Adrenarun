@@ -64,7 +64,7 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_initialized || TimeBody.isRewinding) return;
+        if (!_initialized) return;
         
         // Look. Determine look direction.
         _direction = (_targetTransform.position - transform.position).normalized;
