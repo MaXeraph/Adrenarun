@@ -23,7 +23,7 @@ public class ShotgunFiringPowerUp : AbstractFiringPowerUp
         int num_directions = direction.Count;
 
         // add new leftmost shot
-        shotDirections.Add((Quaternion.AngleAxis(-5, Vector3.up) * direction[0].Item1, direction[0].Item2));
+        shotDirections.Add((Quaternion.AngleAxis(-15, Vector3.up) * direction[0].Item1, direction[0].Item2));
 
         // add current shots in direction
         for (int i = 0; i < num_directions; i++)
@@ -32,7 +32,7 @@ public class ShotgunFiringPowerUp : AbstractFiringPowerUp
         }
 
         // add new rightmost shot
-        shotDirections.Add((Quaternion.AngleAxis(5, Vector3.up) * direction[num_directions - 1].Item1, direction[num_directions - 1].Item2));
+        shotDirections.Add((Quaternion.AngleAxis(15, Vector3.up) * direction[num_directions - 1].Item1, direction[num_directions - 1].Item2));
 
         return shotDirections;
     }

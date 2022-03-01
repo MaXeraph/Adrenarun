@@ -5,7 +5,7 @@ using UnityEngine;
 public class HealingPill : MonoBehaviour
 {
     void Update(){
-        gameObject.transform.rotation *= Quaternion.AngleAxis(-5, Vector3.forward);
+        gameObject.transform.rotation *= Quaternion.AngleAxis(-3, Vector3.forward);
     }
     
     public void OnTriggerEnter(Collider other)

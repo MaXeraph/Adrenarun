@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public static class EnemyMovements
 {
+    private const float _grenadierBaseSpeed = 6f;
+    private const float _rangedBaseSpeed = 8f;
 
     public static void GrenadierSetup(Vector3 transform) {
 
@@ -13,12 +15,12 @@ public static class EnemyMovements
         Vector3 position = gameObject.transform.position;
         Animation anim = gameObject.transform.GetChild(0).GetComponent<Animation>();
         NavMeshAgent navAgent = gameObject.GetComponent<NavMeshAgent>();
+        navAgent.speed = _grenadierBaseSpeed * SpeedManager.enemyMovementScaling;
         float playerDistance = Vector3.Distance(position, playerPosition);
-        if (playerDistance > 20) {
+        if (playerDistance > 40) {
             navAgent.SetDestination(playerPosition);
             anim.Play("grenad walk");
         }
-        if (playerDistance > 16) anim.Play("grenad walk");
         else anim.Stop();
 
     }
@@ -38,6 +40,7 @@ public static class EnemyMovements
         Vector3 position = gameObject.transform.position;
         Animation anim = gameObject.transform.GetChild(0).GetComponent<Animation>();
         NavMeshAgent navAgent = gameObject.GetComponent<NavMeshAgent>();
+        navAgent.speed = _rangedBaseSpeed * SpeedManager.enemyMovementScaling;
         float playerDistance = Vector3.Distance(position, playerPosition);
         if (playerDistance > 15) {
             navAgent.SetDestination(playerPosition);
