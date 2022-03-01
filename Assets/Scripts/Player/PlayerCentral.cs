@@ -36,7 +36,7 @@ public class PlayerCentral : MonoBehaviour
         gun = transform.GetChild(0).GetChild(0).GetChild(0).Find("gunF");
 
         _weapon = _player.AddComponent<Weapon>();
-        _weapon.Initialize(new BulletAttackBehaviour(EntityType.PLAYER, damage: 50f, bulletSpeed:30f), 0.2f, 16, 1f);
+        _weapon.Initialize(new BulletAttackBehaviour(EntityType.PLAYER, damage: 10f, bulletSpeed:30f), 0.2f, 16, 1f);
 
     }
 
