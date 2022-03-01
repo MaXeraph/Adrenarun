@@ -1,42 +1,33 @@
 name: Build Project and Publish to itch.io
-# on:
-#   push:
-#     branches:
-#       - production
 on: [push]
 jobs:
   build:
     name: Build Project and Publish to itch.io ✨
     runs-on: ubuntu-latest
-    # This stops builds that are in-progress once a new commit comes in
-    concurrency: 
+    concurrency:
       group: unity-build
       cancel-in-progress: true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          lfs: true      # Cache
+          lfs: true
       - uses: actions/cache@v2
         with:
           path: Library
-          key: Library      # Build
+          key: Library
       - name: Build project
         uses: game-ci/unity-builder@v2
         env:
-          # Comment this out if you're using a pro license
-          # UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          # Un-Comment the following lines if you're using a pro license
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+          UNITY_EMAIL: '${{ secrets.UNITY_EMAIL }}'
+          UNITY_PASSWORD: '${{ secrets.UNITY_PASSWORD }}'
+          UNITY_SERIAL: '${{ secrets.UNITY_SERIAL }}'
         with:
-          targetPlatform: WebGL       
-       # Return License (Un-Comment if you're using a pro license)
-       - name: Return license
+          targetPlatform: WebGL
+      - name: Return license
         uses: game-ci/unity-return-license@v1
-        if: always()       # Output
-       - uses: actions/upload-artifact@v2
-         with:
-           name: Build
-           path: build
+        if: always()
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Build
+          path: build
