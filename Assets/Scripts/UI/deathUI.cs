@@ -34,7 +34,6 @@ public class deathUI : MonoBehaviour
     void quit()
     {
         Application.Quit();
-        UnityEditor.EditorApplication.isPlaying = false;
     }
 
    public void rewind()
