@@ -46,8 +46,6 @@ public static class MathModule
 		    + Mathf.Log(Mathf.Abs(2 * a * curX + b + Mathf.Pow(1 + (2 * a * curX + b) * (2 * a * curX + b), 1f / 2f)))
 	    );
 	    float d = -1 * (arcLen + Mathf.Pow(FcurX, 1f/2f));
-	    Debug.Log(d);
-	    Debug.Log("Integral: " + integralCoefficients[0] + " " + integralCoefficients[1] + " " + integralCoefficients[2] + " " + integralCoefficients[3] + " ");
 	    return findCubicRoot(integralCoefficients[0], integralCoefficients[1], integralCoefficients[2], d);
     }
 
@@ -62,15 +60,18 @@ public static class MathModule
     public static Vector3 planeXY = (new Vector3(0, 0, 1)).normalized;
     public static Vector3 convertToXY(Vector3 plane, Vector3 pointInPlane, float d)
     {
-        float angle = Vector3.Angle(plane, planeXY);
-        return Quaternion.Euler(0, angle, 0) * (pointInPlane + plane*d);
+        float angle = Vector3.SignedAngle(plane, planeXY, Vector3.up);
+        int mod = 1;
+        if (angle > -90f && angle < 90f) mod = -1;
+        return Quaternion.Euler(0, angle, 0) * (pointInPlane + mod*plane*(Mathf.Abs(d)/Mathf.Pow(plane.x*plane.x + plane.y*plane.y + plane.z*plane.z, 1f/2f)));
     }
 
     public static Vector3 convertToPlane(Vector3 plane, Vector3 pointInPlaneXY, float d)
     {
-        float angle = -1*Vector3.Angle(planeXY, plane);
-        Debug.Log(d);
-        return (Quaternion.Euler(0, angle, 0) * pointInPlaneXY) - plane*d;
+        float angle = Vector3.SignedAngle(planeXY, plane, Vector3.up);
+        int mod = 1;
+        if (angle > -90f && angle < 90f) mod = -1;
+        return (Quaternion.Euler(0, angle, 0) * pointInPlaneXY) - mod*plane*(Mathf.Abs(d)/Mathf.Pow(plane.x*plane.x + plane.y*plane.y + plane.z*plane.z, 1f/2f));
     }
     
 	/**
@@ -122,18 +123,4 @@ public static class MathModule
 		float mcDet = calculate3x3Det(mc);
 		return new float[3] { maDet/mDet, mbDet/mDet, mcDet/mDet };
 	}
-
-    public static void main()
-    {
-	    float vertexHeight = 4;
-        Vector3 grenadier = new Vector3(-2, 0, 0);
-        Vector3 player = new Vector3(2, 0, 0);
-        Vector3 vertex = grenadier + (player - grenadier) / 2 + new Vector3(0, vertexHeight, 0);
-		float[] quadratic = calculateQuadratic(new Vector3[3] { grenadier, player, vertex });
-		Debug.Log(quadratic[0] + " " + quadratic[1] + " " + quadratic[2]);
-        Vector3 gpPlane = determinePlaneNormal(grenadier, player, vertex);
-        // Find gpPlane's d, or translation from the origin.
-        float d = -1 * (gpPlane.x * grenadier.x + gpPlane.y * grenadier.y + gpPlane.z * grenadier.z);
-
-    }
 }

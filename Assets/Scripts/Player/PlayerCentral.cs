@@ -20,9 +20,6 @@ public class PlayerCentral : MonoBehaviour
     bool canWallJump;
     float wallJumpSlope = 0.1f;
 
-    private bool test = false;
-    private GameObject o;
-    
     void Start()
     {
        Cursor.lockState = CursorLockMode.Locked;
@@ -72,16 +69,6 @@ public class PlayerCentral : MonoBehaviour
             Vector3 position = _camera.transform.forward + _camera.transform.position;
             Vector3 direction = _camera.transform.forward + new Vector3(-0.0075f, 0.003f, 0);
             if (_weapon.Attack(position, direction)) shootEffects(position + (0.22f * _camera.transform.right) + (-0.18f * _camera.transform.up));
-        }
-        if (Input.GetKey(KeyCode.O) && !test)
-        {
-            test = true;
-            o = EnemyFactory.Instance.CreateEnemy(new Vector3(0, 2, 8), EnemyType.GRENADIER);
-        }
-        else if (Input.GetKey(KeyCode.P) && test)
-        {
-            test = false;
-            Destroy(o);
         }
 
         //Reload

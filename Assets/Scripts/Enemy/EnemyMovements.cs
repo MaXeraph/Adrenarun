@@ -13,7 +13,7 @@ public static class EnemyMovements
         Vector3 position = gameObject.transform.position;
         NavMeshAgent navAgent = gameObject.GetComponent<NavMeshAgent>();
         float playerDistance = Vector3.Distance(position, playerPosition);
-        if (playerDistance > 20) {
+        if (playerDistance > 50) {
             navAgent.SetDestination(playerPosition);
         }
     }
