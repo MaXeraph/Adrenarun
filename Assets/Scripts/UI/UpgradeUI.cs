@@ -36,6 +36,7 @@ public class UpgradeUI : MonoBehaviour
 
     public static void init()
     {
+        instance.gameObject.SetActive(true);
         for (var i = 0; i < 3; i++)
         {
             choiceTexts[i].text = powerUpSelectionList[i].ToString();

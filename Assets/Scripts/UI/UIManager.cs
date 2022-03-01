@@ -121,7 +121,7 @@ public class UIManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         UpgradeUI.powerUpSelectionList = _powerUpSelectionList;
-        UpgradeUI.instance.gameObject.SetActive(true);
+        //UpgradeUI.instance.gameObject.SetActive(true);
         UpgradeUI.init();
     }
 

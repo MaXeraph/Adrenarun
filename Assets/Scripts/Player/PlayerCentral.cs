@@ -66,7 +66,7 @@ public class PlayerCentral : MonoBehaviour
         }
 
         //Reload
-        if (Input.GetButtonDown("Reload")) _weapon.Reload();
+        if (Input.GetButtonDown("Reload")) GetComponent<PowerUpManager>().presentPowerUps();//_weapon.Reload();
       
 
         applyGravity();
