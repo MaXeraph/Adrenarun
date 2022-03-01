@@ -40,7 +40,7 @@ public class EnemySpawn : MonoBehaviour
     private int currentNumEnemies = 0;
 
     public Wave[] waves;
-    public Vector3[] spawnPoints; // not used for now, may need later 
+    public Vector3[] spawnPoints; // not used for now, may need later
 
     // Start is called before the first frame update
     void Start()
@@ -99,8 +99,8 @@ public class EnemySpawn : MonoBehaviour
                     // still have more waves to spawn
 
                     currentWave = waves[currentWaveNumber];
-                    // grant power up here as well 
-                    // TODO : POWER UP UI 
+                    // grant power up here as well
+                    // TODO : POWER UP UI
                     pum.presentPowerUps();
 
                     StartSpawningWave();
@@ -122,7 +122,7 @@ public class EnemySpawn : MonoBehaviour
             {
 
                 // TODO: need to fix the way this is implemented
-                // Random on array 
+                // Random on array
                 EnemyType[] currentTypes = currentWave.typeOfEnemies;
                 int index = Random.Range(0, currentTypes.Length);
                 SpawnEnemy(currentTypes[index]);
