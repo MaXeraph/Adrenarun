@@ -25,7 +25,7 @@ public class EnemySpawn : MonoBehaviour
     private Vector3 _enemySpawn = Vector3.zero;
     private bool _cooldown = false;
     private float _cooldownDelay = SpeedManager.enemySpawnScaling;
-    private const float platformRadius = 175/2;
+    private const float platformRadius = 175 / 2;
 
     private bool canSpawn = false; // for within wave
     private bool startSpawn = false; // for each wave
@@ -160,14 +160,16 @@ public class EnemySpawn : MonoBehaviour
     {
 
         // need to include variant type as a parameter
-        // default is None for a type from factory
-        UIManager.enemiesTotal += 1;
-        UIManager.enemiesLeft += 1;
-        Vector3 targetSpawn;
-        if (RandomPoint(platformRadius, out targetSpawn)) {
-            Debug.DrawRay(targetSpawn, Vector3.up, Color.blue, 1.0f);
-            EnemyFactory.Instance.CreateEnemy(targetSpawn, enemy);
+        // default is None for a type from factory 
 
+        Vector3 targetSpawn;
+        EnemyVariantType variant = (EnemyVariantType)Random.Range(0, 2);
+        if (RandomPoint(platformRadius, out targetSpawn))
+        {
+            Debug.DrawRay(targetSpawn, Vector3.up, Color.blue, 1.0f);
+            EnemyFactory.Instance.CreateEnemy(targetSpawn, enemy, variant);
+            UIManager.enemiesTotal += 1;
+            UIManager.enemiesLeft += 1;
         }
     }
 
