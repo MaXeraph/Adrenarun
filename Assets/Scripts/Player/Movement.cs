@@ -46,9 +46,7 @@ public class Movement : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
 
-        //Vector3 move = player.transform.right * x + player.transform.forward * y;
-       // Vector3 move = Camera.main.transform.right * x + Camera.main.transform.forward * y;
-        Vector3 move = Camera.main.transform.forward;
+        Vector3 move = player.transform.right * x + player.transform.forward * y;
 
         char_controller.Move(move * speed * Time.deltaTime * dashSpeed * SpeedManager.playerMovementScaling);
     }
