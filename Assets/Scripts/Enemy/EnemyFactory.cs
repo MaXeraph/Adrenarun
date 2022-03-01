@@ -51,6 +51,7 @@ public class EnemyFactory
         // Define enemyInfo for each type.
         AddTurretToRoster();
         _enemyInfo.Add(EnemyType.GRENADIER, new EnemyInfo(EnemyMovements.GrenadierMovement, Globals.DirectTargeting, EnemyMovements.GrenadierSetup, new ArtilleryAttackBehaviour(EntityType.ENEMY, 20f), 10f));
+        _enemyInfo.Add(EnemyType.RANGED, new EnemyInfo(EnemyMovements.RangedMovement, Globals.DirectTargeting, EnemyMovements.RangedSetup, new BulletAttackBehaviour(EntityType.ENEMY, 5f, 20f), 1f));
         AddHealerVariantToRoster();
     }
 
@@ -98,8 +99,8 @@ public class EnemyFactory
     
     void AddTurretToRoster()
     {
-        BulletAttackBehaviour bulletBehaviour = new BulletAttackBehaviour(EntityType.ENEMY);
-        float fireRate = 1f;
+        BulletAttackBehaviour bulletBehaviour = new BulletAttackBehaviour(EntityType.ENEMY, 30f);
+        float fireRate = 5f;
 
         // Define enemyInfo for each type.
         _enemyInfo.Add(EnemyType.TURRET, new EnemyInfo(EnemyMovements.TurretMovement, Globals.DirectTargeting, EnemyMovements.TurretSetup, bulletBehaviour, fireRate));
