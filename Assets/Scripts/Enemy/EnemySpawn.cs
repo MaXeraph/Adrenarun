@@ -28,8 +28,8 @@ public class EnemySpawn : MonoBehaviour
     private const float platformRadius = 175 / 2;
 
     private bool canSpawn = false; // for within wave
-    private bool startSpawn = false; // for each wave 
-    private float nextSpawnTime; // not used for now 
+    private bool startSpawn = false; // for each wave
+    private float nextSpawnTime; // not used for now
     private Wave currentWave;
     private int currentWaveNumber = 0;
     private PowerUpManager pum;
