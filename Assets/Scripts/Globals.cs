@@ -42,7 +42,7 @@ public static class Globals
         { EnemyType.TURRET, "Turret" },
         { EnemyType.HEALER, "Healer" },
         { EnemyType.GRENADIER, "Grenadier"},
-		{ EnemyType.RANGED, "Ranged"}
+        { EnemyType.RANGED, "Ranged"}
     };
 }
 
@@ -51,7 +51,6 @@ public enum EnemyType
 	TURRET,
 	GRENADIER,
 	RANGED,
-	HEALER
 }
 
 public enum EnemyVariantType
