@@ -51,7 +51,13 @@ public class PlayerCentral : MonoBehaviour
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0) Movement.RotatePlayer(_player, _camera);
 
         //Move
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) Movement.MoveXY(_player);
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) {
+            Movement.MoveXY(_player);
+            AudioManager.PlayWalkAudio();
+        }
+        else if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0) {
+            AudioManager.StopWalkAudio();
+        }
 
         //Jump
         if (Input.GetButtonDown("Jump") && isGrounded) _velocity.y += Movement.jumpVelocity;
@@ -67,6 +73,7 @@ public class PlayerCentral : MonoBehaviour
                 StartCoroutine(Dash());
                 _cooldown = true;
                 StartCoroutine(Cooldown());
+                AudioManager.PlayDashAudio();
             }
         }
 
@@ -75,7 +82,7 @@ public class PlayerCentral : MonoBehaviour
         {
             Vector3 position = _camera.transform.forward + _camera.transform.position;
             Vector3 direction = _camera.transform.forward + new Vector3(-0.0075f, 0.003f, 0);
-            if (_weapon.Attack(position, direction)) shootEffects(position + (0.22f * _camera.transform.right) + (-0.18f * _camera.transform.up));
+            if (_weapon.Attack(position, direction, EntityType.PLAYER)) shootEffects(position + (0.22f * _camera.transform.right) + (-0.18f * _camera.transform.up));
         }
 
         //Reload

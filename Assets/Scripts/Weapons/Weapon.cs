@@ -47,7 +47,7 @@ public class Weapon : MonoBehaviour
         return true;
     }
 
-    public bool Attack(Vector3 position, Vector3 direction)
+    public bool Attack(Vector3 position, Vector3 direction, EntityType entityType)
     {
 
         if (Time.time - lastShot > _fireRate && !_reloading)
@@ -74,6 +74,9 @@ public class Weapon : MonoBehaviour
                     StartCoroutine(ShootAfterDelay(position, attackDirections[j].Item1, attackDirections[j].Item2));
                 }
                 _currentMagazine -= 1; // Comment out for infinite ammo
+                if (entityType == EntityType.PLAYER) {
+                    AudioManager.PlayFireAudio();
+                }
                 lastShot = Time.time;
                 return true;
             }
@@ -90,7 +93,10 @@ public class Weapon : MonoBehaviour
     public void Reload()
     {
         _reloading = true;
-        if (_attackBehaviour.Owner.ToString() == "PLAYER") UIManager.Reloading = true;
+        if (_attackBehaviour.Owner.ToString() == "PLAYER") {
+            UIManager.Reloading = true;
+            AudioManager.PlayReloadAudio();
+        }
         else DOTween.To(() => _currentMagazine, x => _currentMagazine = x, _magazineSize, _reloadSpeed).OnComplete(finishReload);
     }
 

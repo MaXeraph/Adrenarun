@@ -41,6 +41,9 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
             {
                 statsComponent.currentHealth -= _damage;
                 GameObject.Destroy(bm.gameObject);
+                if (statsComponent.owner == EntityType.ENEMY) {
+                    AudioManager.PlayImpactAudio();
+                }
             }
         }
         else if (target.GetComponent<BulletMono>() == null) // if not another bullet...

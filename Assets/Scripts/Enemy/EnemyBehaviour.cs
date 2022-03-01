@@ -80,7 +80,7 @@ public class EnemyBehaviour : MonoBehaviour
 
         // TODO: spawn bullet outside of model
 
-        if (_weapon.Attack(transform.position + aimDirection * 2, aimDirection))
+        if (_weapon.Attack(transform.position + aimDirection * 2, aimDirection, EntityType.ENEMY))
         {
             foreach (AnimationState state in anim)
             {
