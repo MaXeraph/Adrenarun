@@ -15,7 +15,7 @@ public class AudioManager : MonoBehaviour
 
     private static bool _walkAudioPlaying = false;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         InitComponents();
     }
