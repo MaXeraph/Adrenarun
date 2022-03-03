@@ -35,7 +35,7 @@ public class EnemySpawn : MonoBehaviour
     private PowerUpManager pum;
 
     private int totalWaveNumber;
-    private int enemiesPerWave = 5;
+    private int enemiesPerWave = 10;
     private const int spawnInterval = 0;
     private int enemiesSpawned = 0;
     private int currentNumEnemies = 0;
@@ -95,7 +95,7 @@ public class EnemySpawn : MonoBehaviour
             if (currentNumEnemies == 0)
             {
                 currentWaveNumber++;
-                enemiesPerWave += 5;
+                enemiesPerWave += enemiesPerWave;
 
                 currentWave = new Wave(name, enemiesPerWave, enemy, spawnInterval);
                 pum.presentPowerUps();

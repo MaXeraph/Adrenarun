@@ -23,7 +23,18 @@ public class Stats : MonoBehaviour
                     pillTransform.position = gameObject.transform.position;
                 }
             }
-            else if (owner == EntityType.PLAYER) UIManager.Health = currentHealth;
+            else if (owner == EntityType.PLAYER) {
+                _currentHealth = Mathf.Clamp(_currentHealth, 0, maxHealth);
+                UIManager.Health = _currentHealth;
+                if (_currentHealth == 0) {
+                    AudioManager.UpdateMusicAudio(1);
+                }
+                else {
+                    AudioManager.UpdateMusicAudio(_currentHealth / maxHealth);
+
+                }
+                AudioManager.PlayInjuryAudio();
+            }
         }
     }
     public float maxHealth;

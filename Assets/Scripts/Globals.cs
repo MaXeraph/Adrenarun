@@ -37,7 +37,7 @@ public static class Globals
 	{PowerUpType.FIRERATE, "Increase bullet fire rate"},
 	{PowerUpType.RELOADSPD, "Increase gun reload speed"},
 	{PowerUpType.CLIPSIZE, "Increase gun clip size"},
-	{PowerUpType.ADRENALIN, "Increase slow down ratio"},
+	{PowerUpType.ADRENALIN, "Reduces effect of health-based speed scaling"},
 	{PowerUpType.SHOTGUN, "Shoot more bullets with increased spread"},
 	{PowerUpType.REPEATER, "Shoot an additional bullet with each shot"}
 	};
