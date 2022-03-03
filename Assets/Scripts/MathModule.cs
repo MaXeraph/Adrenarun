@@ -68,7 +68,7 @@ public static class MathModule
 
     public static Vector3 convertToPlane(Vector3 plane, Vector3 pointInPlaneXY, float d)
     {
-        float angle = Vector3.SignedAngle(planeXY, plane, Vector3.up);
+        float angle = -1*Vector3.SignedAngle(plane, planeXY, Vector3.up);
         int mod = 1;
         if (angle > -90f && angle < 90f) mod = -1;
         return (Quaternion.Euler(0, angle, 0) * pointInPlaneXY) - mod*plane*(Mathf.Abs(d)/Mathf.Pow(plane.x*plane.x + plane.y*plane.y + plane.z*plane.z, 1f/2f));
