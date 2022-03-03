@@ -14,8 +14,8 @@ jobs:
           lfs: true
       - uses: actions/cache@v2
         with:
-          path: Library
-          key: Library
+          path: Library-2
+          key: Library-2
       - name: Build project
         uses: game-ci/unity-builder@v2
         env:
