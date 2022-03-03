@@ -172,8 +172,8 @@ public class PlayerCentral : MonoBehaviour
         float ad_input = Input.GetAxis("Horizontal");
         float ws_input = Input.GetAxis("Vertical");
 
-        float dashSpeed = 60f;
-        float dashTime = 0.2f;
+        float dashSpeed = 60f * SpeedManager.playerMovementScaling;
+        float dashTime = 0.2f/SpeedManager.playerMovementScaling;
         Vector3 move = _player.transform.right * ad_input + _player.transform.forward * ws_input;
         while(Time.time < startTime + dashTime)
         {
