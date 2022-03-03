@@ -21,6 +21,7 @@ public class PlayerCentral : MonoBehaviour
     bool _cooldown = false;
     float dashCooldown = 3f;
     float wallJumpSlope = 0.1f;
+    Vector3 wallJumpVector;
 
     void Start()
     {
@@ -96,7 +97,7 @@ public class PlayerCentral : MonoBehaviour
 
 
 
-private void shootEffects(Vector3 pos)
+    private void shootEffects(Vector3 pos)
     {
     //Update UI
     UIManager.Ammo -= 1;
@@ -113,7 +114,7 @@ private void shootEffects(Vector3 pos)
     RecoilSequence.Insert(0, gun.DOPunchRotation(new Vector3(-1f, 0, 0), _weapon._fireRate / 2, 0, 0.5f));
     }
 
-private void checkGround()
+    private void checkGround()
     {
         Vector3 origin = new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * .5f), transform.position.z);
         Vector3 direction = transform.TransformDirection(Vector3.down);
@@ -140,6 +141,12 @@ private void checkGround()
         }
     }
 
+    private void descaleWallJumpVector()
+    {
+        wallJumpVector.x *= 0.99f;
+        wallJumpVector.z *= 0.99f;
+    }
+
     private void applyGravity()
     {
         _velocity.y += -45.81f * Time.deltaTime * SpeedManager.playerMovementScaling;
@@ -152,7 +159,7 @@ private void checkGround()
         if (!isGrounded && wallJumpableSurface && Input.GetButtonDown("Jump") && canWallJump)
         {
             canWallJump = false;
-            _velocity.y = Movement.jumpVelocity;
+            StartCoroutine(wallJump(hit.normal));
         }
     }
 
@@ -176,5 +183,19 @@ private void checkGround()
     {
         yield return new WaitForSeconds(dashCooldown);
         _cooldown = false;
+    }
+
+    IEnumerator wallJump(Vector3 normal)
+    {
+        float wallJumpForce = 20f;
+        _velocity.y = Movement.jumpVelocity - 0.5f;
+        wallJumpVector = normal * wallJumpForce;
+        while(!isGrounded)
+        {
+            descaleWallJumpVector();
+            _controller.Move(wallJumpVector * Time.deltaTime);
+            yield return null;
+        }
+
     }
 }
