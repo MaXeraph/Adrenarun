@@ -61,7 +61,10 @@ public class PlayerCentral : MonoBehaviour
         }
 
         //Jump
-        if (Input.GetButtonDown("Jump") && isGrounded) _velocity.y += Movement.jumpVelocity;
+        if (Input.GetButtonDown("Jump") && isGrounded) 
+        {
+            _velocity.y += (Movement.jumpVelocity - 2f) + 1.5f * (SpeedManager.playerMovementScaling);
+        }
 
         // if (Input.GetKey(KeyCode.LeftShift))
         // {
@@ -188,8 +191,8 @@ public class PlayerCentral : MonoBehaviour
     IEnumerator wallJump(Vector3 normal)
     {
         float wallJumpForce = 20f;
-        _velocity.y = Movement.jumpVelocity - 0.5f;
-        wallJumpVector = normal * wallJumpForce;
+        _velocity.y = (Movement.jumpVelocity - 2) + 1.5f * SpeedManager.playerMovementScaling;
+        wallJumpVector = normal * wallJumpForce * SpeedManager.playerMovementScaling;
         while(!isGrounded)
         {
             descaleWallJumpVector();
