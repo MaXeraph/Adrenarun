@@ -25,7 +25,7 @@ public class PlayerCentral : MonoBehaviour
 
     void Start()
     {
-       Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
 
         _player = GameObject.FindWithTag("Player");
 
@@ -70,8 +70,9 @@ public class PlayerCentral : MonoBehaviour
         // {
         //     Movement.playerSprint(_player);
         // }
+        if (Input.GetKeyDown(KeyCode.LeftShift)) StartCoroutine(Dash());
 
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             if(!_cooldown){
                 StartCoroutine(Dash());
@@ -82,7 +83,7 @@ public class PlayerCentral : MonoBehaviour
         }
 
         //Shoot
-        if (Input.GetButton("Fire1"))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             Vector3 position = _camera.transform.forward + _camera.transform.position;
             Vector3 direction = _camera.transform.forward + new Vector3(-0.0075f, 0.003f, 0);
@@ -91,7 +92,7 @@ public class PlayerCentral : MonoBehaviour
 
         //Reload
         if (Input.GetButtonDown("Reload")) _weapon.Reload();
-
+        if (Input.GetKeyDown(KeyCode.RightShift)) StartCoroutine(tempPause());
 
         applyGravity();
         resetYVelocity();
@@ -200,5 +201,19 @@ public class PlayerCentral : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    IEnumerator tempPause()
+    {
+        Time.timeScale = 0;
+        int andyPause = 0;
+        while (andyPause == 0){
+            if(Input.GetKeyDown(KeyCode.RightControl)) 
+            {
+                andyPause = 1;
+            }
+            yield return null;
+        }
+        Time.timeScale = 1;
     }
 }

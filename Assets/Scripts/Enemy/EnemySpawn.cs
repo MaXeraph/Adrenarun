@@ -35,7 +35,7 @@ public class EnemySpawn : MonoBehaviour
     private PowerUpManager pum;
 
     private int totalWaveNumber;
-    private int enemiesPerWave = 10;
+    private int enemiesPerWave = 15;
     private const int spawnInterval = 0;
     private int enemiesSpawned = 0;
     private int currentNumEnemies = 0;
@@ -180,17 +180,15 @@ public class EnemySpawn : MonoBehaviour
         // default is None for a type from factory 
 
         Vector3 targetSpawn;
-        EnemyVariantType variant;
+        EnemyVariantType variant = EnemyVariantType.NONE;
         EnemyType enemyType; 
-        int random = Random.Range(0, 15); // this could be iffy 
-        if (random == 0)
+        int random = Random.Range(0, 3); // this could be iffy 
+        if (random == 0 && enemy == EnemyType.TURRET)
         {
-            variant = EnemyVariantType.HEALER;
-            enemyType = EnemyType.TURRET;
+            enemyType = EnemyType.RANGED;
         }
         else
         {
-            variant = EnemyVariantType.NONE;
             enemyType = enemy;
         }
         if (RandomPoint(platformRadius, out targetSpawn))

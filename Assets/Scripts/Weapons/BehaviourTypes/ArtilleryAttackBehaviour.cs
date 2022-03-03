@@ -23,6 +23,11 @@ public class ArtilleryAttackBehaviour : BulletAttackBehaviour
         if (target.tag == "Player" || target.GetComponent<BulletMono>() == null) // if not another bullet...
         {
             Vector3 position = bm.gameObject.GetComponent<Transform>().position;
+            Stats statsComponent = target.GetComponent<Stats>();
+            if (statsComponent)
+            {
+                statsComponent.currentHealth -= 5f;
+            }
             RaycastHit hitInfo;
             Physics.Raycast(position, new Vector3(0, -1, 0), out hitInfo);
             GameObject.Destroy(bm.gameObject);
