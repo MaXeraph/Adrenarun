@@ -42,17 +42,17 @@ public static class Globals
 	{PowerUpType.REPEATER, "Shoot an additional bullet with each shot"}
 	};
 
-	public static Dictionary<PowerUpType, string> PowerUpIconDictionary = new Dictionary<PowerUpType, string>
-	{{PowerUpType.DAMAGE, "Textures/toon_muzzleflash_side_spritesheet_1_6"},
-	{PowerUpType.FIRERATE, "Textures/toon_muzzleflash_front_spritesheet_1_1"},
-	{PowerUpType.RELOADSPD, "Textures/toon_muzzleflash_front_spritesheet_1_8"},
-	{PowerUpType.CLIPSIZE, "Textures/toon_muzzleflash_front_spritesheet_1_6"},
-	{PowerUpType.ADRENALIN, "Textures/toon_muzzleflash_front_spritesheet_1_4"},
-	{PowerUpType.SHOTGUN, "Textures/toon_muzzleflash_side_spritesheet_1_1"},
-	{PowerUpType.REPEATER, "Textures/toon_muzzleflash_side_spritesheet_1_7"}
+	public static Dictionary<PowerUpType, Sprite> PowerUpIconDictionary = new Dictionary<PowerUpType, Sprite>
+	{{PowerUpType.DAMAGE, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_side_spritesheet_1")[6]},
+	{PowerUpType.FIRERATE, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_front_spritesheet_1")[1]},
+	{PowerUpType.RELOADSPD, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_front_spritesheet_1")[8]},
+	{PowerUpType.CLIPSIZE, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_front_spritesheet_1")[6]},
+	{PowerUpType.ADRENALIN, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_front_spritesheet_1")[4]},
+	{PowerUpType.SHOTGUN, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_side_spritesheet_1")[1]},
+	{PowerUpType.REPEATER, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_side_spritesheet_1")[7]}
 	};
 
-    public static Vector3 DirectTargeting(Transform from, Transform to)
+	public static Vector3 DirectTargeting(Transform from, Transform to)
     {
         Vector3 direction = (to.position - from.position).normalized;
         return direction;

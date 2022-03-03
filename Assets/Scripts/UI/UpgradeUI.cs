@@ -9,7 +9,7 @@ public class UpgradeUI : MonoBehaviour
 
     static TMP_Text info;
     static Button[] choiceButtons;
-    static RawImage[] choiceImages;
+    static Image[] choiceImages;
     static TMP_Text[] choiceTexts;
 
     public static PowerUpType[] powerUpSelectionList;
@@ -22,7 +22,7 @@ public class UpgradeUI : MonoBehaviour
 
         Transform Choices = transform.GetChild(1);
         choiceButtons = Choices.GetComponentsInChildren<Button>();
-        choiceImages = Choices.GetComponentsInChildren<RawImage>();
+        choiceImages = Choices.GetComponentsInChildren<Image>();
         choiceTexts = Choices.GetComponentsInChildren<TMP_Text>();
 
         for (var i = 0; i < 3; i++)
@@ -40,7 +40,7 @@ public class UpgradeUI : MonoBehaviour
         for (var i = 0; i < 3; i++)
         {
             choiceTexts[i].text = powerUpSelectionList[i].ToString();
-            choiceImages[i].texture = Resources.Load<Texture2D>(Globals.PowerUpIconDictionary[powerUpSelectionList[i]]);
+            choiceImages[i].sprite = Globals.PowerUpIconDictionary[powerUpSelectionList[i]];
         }
     }
 
