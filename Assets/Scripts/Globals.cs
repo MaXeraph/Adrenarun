@@ -37,7 +37,7 @@ public static class Globals
 	{PowerUpType.FIRERATE, "Increase bullet fire rate"},
 	{PowerUpType.RELOADSPD, "Increase gun reload speed"},
 	{PowerUpType.CLIPSIZE, "Increase gun clip size"},
-	{PowerUpType.ADRENALIN, "Increase slow down ratio"},
+	{PowerUpType.ADRENALIN, "Reduces effect of health-based speed scaling"},
 	{PowerUpType.SHOTGUN, "Shoot more bullets with increased spread"},
 	{PowerUpType.REPEATER, "Shoot an additional bullet with each shot"}
 	};
@@ -57,6 +57,10 @@ public static class Globals
         Vector3 direction = (to.position - from.position).normalized;
         return direction;
     }
+
+	public static Vector3 GrenadierTargeting(Transform from, Transform to) {
+		return to.position;
+	}
 
     public static Dictionary<EnemyType, string> enemyPrefabNames = new Dictionary<EnemyType, string>()
     {

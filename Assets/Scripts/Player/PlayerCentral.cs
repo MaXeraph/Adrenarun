@@ -18,7 +18,10 @@ public class PlayerCentral : MonoBehaviour
 
     bool isGrounded;
     bool canWallJump;
+    bool _cooldown = false;
+    float dashCooldown = 3f;
     float wallJumpSlope = 0.1f;
+    Vector3 wallJumpVector;
 
     void Start()
     {
@@ -34,7 +37,8 @@ public class PlayerCentral : MonoBehaviour
         gun = transform.GetChild(0).GetChild(0).GetChild(0).Find("gunF");
 
         _weapon = _player.AddComponent<Weapon>();
-        _weapon.Initialize(new BulletAttackBehaviour(EntityType.PLAYER), 0.2f, 16, 1f);
+        _weapon.Initialize(new BulletAttackBehaviour(EntityType.PLAYER, damage: 10f, bulletSpeed:30f), 0.2f, 16, 1f);
+
     }
 
 
@@ -48,19 +52,33 @@ public class PlayerCentral : MonoBehaviour
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0) Movement.RotatePlayer(_player, _camera);
 
         //Move
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) Movement.MoveXY(_player);
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) {
+            Movement.MoveXY(_player);
+            AudioManager.PlayWalkAudio();
+        }
+        else if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0) {
+            AudioManager.StopWalkAudio();
+        }
 
         //Jump
-        if (Input.GetButtonDown("Jump") && isGrounded) _velocity.y += Movement.jumpVelocity;
-
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetButtonDown("Jump") && isGrounded) 
         {
-            Movement.playerSprint(_player);
+            _velocity.y += (Movement.jumpVelocity - 2f) + 1.5f * (SpeedManager.playerMovementScaling);
         }
+
+        // if (Input.GetKey(KeyCode.LeftShift))
+        // {
+        //     Movement.playerSprint(_player);
+        // }
 
         if (Input.GetButtonDown("Fire2"))
         {
-            StartCoroutine(Dash());
+            if(!_cooldown){
+                StartCoroutine(Dash());
+                _cooldown = true;
+                StartCoroutine(Cooldown());
+                AudioManager.PlayDashAudio();
+            }
         }
 
         //Shoot
@@ -68,7 +86,7 @@ public class PlayerCentral : MonoBehaviour
         {
             Vector3 position = _camera.transform.forward + _camera.transform.position;
             Vector3 direction = _camera.transform.forward + new Vector3(-0.0075f, 0.003f, 0);
-            if (_weapon.Attack(position, direction)) shootEffects(position + (0.22f * _camera.transform.right) + (-0.18f * _camera.transform.up));
+            if (_weapon.Attack(position, direction, EntityType.PLAYER)) shootEffects(position + (0.22f * _camera.transform.right) + (-0.18f * _camera.transform.up));
         }
 
         //Reload
@@ -82,7 +100,7 @@ public class PlayerCentral : MonoBehaviour
 
 
 
-private void shootEffects(Vector3 pos)
+    private void shootEffects(Vector3 pos)
     {
     //Update UI
     UIManager.Ammo -= 1;
@@ -99,7 +117,7 @@ private void shootEffects(Vector3 pos)
     RecoilSequence.Insert(0, gun.DOPunchRotation(new Vector3(-1f, 0, 0), _weapon._fireRate / 2, 0, 0.5f));
     }
 
-private void checkGround()
+    private void checkGround()
     {
         Vector3 origin = new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * .5f), transform.position.z);
         Vector3 direction = transform.TransformDirection(Vector3.down);
@@ -126,6 +144,12 @@ private void checkGround()
         }
     }
 
+    private void descaleWallJumpVector()
+    {
+        wallJumpVector.x *= 0.99f;
+        wallJumpVector.z *= 0.99f;
+    }
+
     private void applyGravity()
     {
         _velocity.y += -45.81f * Time.deltaTime * SpeedManager.playerMovementScaling;
@@ -138,7 +162,7 @@ private void checkGround()
         if (!isGrounded && wallJumpableSurface && Input.GetButtonDown("Jump") && canWallJump)
         {
             canWallJump = false;
-            _velocity.y = Movement.jumpVelocity;
+            StartCoroutine(wallJump(hit.normal));
         }
     }
 
@@ -148,13 +172,33 @@ private void checkGround()
         float ad_input = Input.GetAxis("Horizontal");
         float ws_input = Input.GetAxis("Vertical");
 
-        float dashSpeed = 80f;
-        float dashTime = 0.2f;
+        float dashSpeed = 60f * SpeedManager.playerMovementScaling;
+        float dashTime = 0.2f/SpeedManager.playerMovementScaling;
         Vector3 move = _player.transform.right * ad_input + _player.transform.forward * ws_input;
         while(Time.time < startTime + dashTime)
         {
             _controller.Move(move.normalized * dashSpeed * Time.deltaTime);
             yield return null;
         }
+    }
+
+    IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(dashCooldown);
+        _cooldown = false;
+    }
+
+    IEnumerator wallJump(Vector3 normal)
+    {
+        float wallJumpForce = 20f;
+        _velocity.y = (Movement.jumpVelocity - 2) + 1.5f * SpeedManager.playerMovementScaling;
+        wallJumpVector = normal * wallJumpForce * SpeedManager.playerMovementScaling;
+        while(!isGrounded)
+        {
+            descaleWallJumpVector();
+            _controller.Move(wallJumpVector * Time.deltaTime);
+            yield return null;
+        }
+
     }
 }
