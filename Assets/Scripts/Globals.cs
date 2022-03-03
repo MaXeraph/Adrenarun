@@ -42,16 +42,15 @@ public static class Globals
 	{PowerUpType.REPEATER, "Shoot an additional bullet with each shot"}
 	};
 
-	//For Upgrade Icons
-	//public static Dictionary<PowerUpType, Texture> PowerUpIconDictionary = new Dictionary<PowerUpType, Texture>
-	//{{PowerUpType.DAMAGE, tex},
-	//{PowerUpType.FIRERATE, tex},
-	//{PowerUpType.RELOADSPD, tex},
-	//{PowerUpType.CLIPSIZE, tex},
-	//{PowerUpType.ADRENALIN, tex},
-	//{PowerUpType.SHOTGUN, tex},
-	//{PowerUpType.REPEATER, tex}
-	//};
+	public static Dictionary<PowerUpType, string> PowerUpIconDictionary = new Dictionary<PowerUpType, string>
+	{{PowerUpType.DAMAGE, "Textures/toon_muzzleflash_side_spritesheet_1_6"},
+	{PowerUpType.FIRERATE, "Textures/toon_muzzleflash_front_spritesheet_1_1"},
+	{PowerUpType.RELOADSPD, "Textures/toon_muzzleflash_front_spritesheet_1_8"},
+	{PowerUpType.CLIPSIZE, "Textures/toon_muzzleflash_front_spritesheet_1_6"},
+	{PowerUpType.ADRENALIN, "Textures/toon_muzzleflash_front_spritesheet_1_4"},
+	{PowerUpType.SHOTGUN, "Textures/toon_muzzleflash_side_spritesheet_1_1"},
+	{PowerUpType.REPEATER, "Textures/toon_muzzleflash_side_spritesheet_1_7"}
+	};
 
     public static Vector3 DirectTargeting(Transform from, Transform to)
     {
