@@ -24,6 +24,7 @@ jobs:
           UNITY_SERIAL: '${{ secrets.UNITY_SERIAL }}'
         with:
           targetPlatform: WebGL
+          unityVersion: 2022.1.0a5
       # - name: Return license
       #   uses: game-ci/unity-return-license@v1
       #   if: always()
