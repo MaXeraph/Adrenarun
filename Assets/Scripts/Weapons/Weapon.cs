@@ -7,19 +7,7 @@ using DG.Tweening;
 public class Weapon : MonoBehaviour
 {
     private bool _initialized = false;
-    Dictionary<PowerUpType, bool> _firingBehavior = new Dictionary<PowerUpType, bool>()
-    {
-        { PowerUpType.NONE, true }, // singleShot == !repeater
-        { PowerUpType.SHOTGUN, false},
-        { PowerUpType.REPEATER, false}
-    };
-    public Dictionary<PowerUpType, bool> firingBehavior
-    {
-        get => _firingBehavior;
-        set {
-            _firingBehavior = value;
-        }
-    }
+	public List<AbstractFiringPowerUp> firingMods = new List<AbstractFiringPowerUp>();
 
     public AbstractAttackBehaviour _attackBehaviour;
     public float _fireRate; // shots per second
@@ -56,20 +44,16 @@ public class Weapon : MonoBehaviour
             {                
                 List<(Vector3, float)> attackDirections = new List<(Vector3, float)>();
                 attackDirections.Add((direction, 0f));
-                
-                if (!firingBehavior[PowerUpType.NONE])
-                {                
-                    // apply each powerup in poweruplist, creating a growing list of firing directions
-                    // assumptions: firingPowerUps in PowerUpManager is sorted (handled in PowerUpManager)
-                    List<AbstractFiringPowerUp> firingPowerUps = GameObject.FindWithTag("Player").GetComponent<PowerUpManager>().firingPowerUps; 
-                    for (int i = 0; i < firingPowerUps.Count; i++)
-                    {
-                        attackDirections = firingPowerUps[i].applyPowerUp(attackDirections);
-                    }
+                      
+                // apply each powerup in poweruplist, creating a growing list of firing directions
+                // assumptions: firingMods is sorted (handled in PowerUpManager)
+				for (int i = 0; i < firingMods.Count; i++)
+                {
+                    attackDirections = firingMods[i].applyPowerUp(attackDirections);
                 }
 
                 // for each direction, initiate an attack
-                for (int j = 0; j < attackDirections.Count; j++)
+				for (int j = 0; j < attackDirections.Count; j++)
                 {
                     StartCoroutine(ShootAfterDelay(position, attackDirections[j].Item1, attackDirections[j].Item2));
                 }
