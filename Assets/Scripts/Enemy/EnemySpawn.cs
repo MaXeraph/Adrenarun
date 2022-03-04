@@ -193,6 +193,12 @@ public class EnemySpawn : MonoBehaviour
             variant = EnemyVariantType.NONE;
             enemyType = enemy;
         }
+
+        random = Random.Range(0, 10);
+        if (enemyType == EnemyType.TURRET && random < 5)
+        {
+            variant = EnemyVariantType.SET;
+        }
         if (RandomPoint(platformRadius, out targetSpawn))
         {
             Debug.DrawRay(targetSpawn, Vector3.up, Color.blue, 1.0f);
