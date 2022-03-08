@@ -23,14 +23,14 @@ jobs:
           UNITY_PASSWORD: '${{ secrets.UNITY_PASSWORD }}'
           UNITY_SERIAL: '${{ secrets.UNITY_SERIAL }}'
         with:
-          targetPlatform: WebGL
+          targetPlatform: StandaloneWindows
           unityVersion: 2020.3.18f1
       # - name: Return license
       #   uses: game-ci/unity-return-license@v1
       #   if: always()
       - uses: actions/upload-artifact@v2
         with:
-          name: Adrenarun_CI_Build
+          name: Adrenarun_Build_Windows
           path: build
       # Upload to Itch
       - uses: josephbmanley/butler-publish-itchio-action@master
@@ -39,4 +39,4 @@ jobs:
           CHANNEL: html5
           ITCH_GAME: Adrenarun
           ITCH_USER: azhu
-          PACKAGE: build/WebGL
+          PACKAGE: build/StandaloneWindows
