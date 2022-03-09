@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ThermitePoolMono : MonoBehaviour
 {
-    private double _lastFixedUpdate = 0;
-    private double _timeSinceTick = 0;
+    private double _lastTick = 0;
     private double _damageCooldown = 1;
     private float _damage = 20f;
     private int _ticks = 0;
@@ -13,6 +12,7 @@ public class ThermitePoolMono : MonoBehaviour
     private Dictionary<GameObject, int> _currentCollisions = new Dictionary<GameObject, int>();
     void Start()
     {
+		_lastTick = SpeedManager.realTime;
         gameObject.GetComponent<Renderer>().material.color = Color.red;
     }
     public void Initialize(ArtilleryAttackBehaviour attackBehaviour)
@@ -21,13 +21,10 @@ public class ThermitePoolMono : MonoBehaviour
     }
     void FixedUpdate()
     {
-        _timeSinceTick += (Time.time - _lastFixedUpdate) * SpeedManager.coreSpeed;
-        _lastFixedUpdate = Time.time;
-        
         // Fire only when X 'real time' has passed since last damage tick.
-        if (_timeSinceTick >= _attackBehaviour.thermiteDamageCooldown)
+        if (SpeedManager.realTime - _lastTick >= _attackBehaviour.thermiteDamageCooldown)
         {
-            _timeSinceTick = 0;
+			_lastTick = SpeedManager.realTime;
             foreach (KeyValuePair<GameObject, int> entry in _currentCollisions)
             {
                 // If is colliding with both hitboxes and is the player...
@@ -38,10 +35,8 @@ public class ThermitePoolMono : MonoBehaviour
                     statsComponent.currentHealth -= _attackBehaviour._damage;
                 }
             }
-            _ticks++;
+			if (++_ticks == _attackBehaviour.thermiteDurability) Destroy(gameObject);
         }
-
-        if (_ticks == _attackBehaviour.thermiteDurability) Destroy(gameObject);
     }
 
     void OnTriggerEnter(Collider other)
