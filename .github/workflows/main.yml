@@ -4,7 +4,7 @@ on:
     branches:
       - production
 jobs:
-  build:
+  buildForWindows:
     name: Build Project and Publish to itch.io ✨
     runs-on: ubuntu-latest
     concurrency:
@@ -28,6 +28,35 @@ jobs:
         with:
           targetPlatform: StandaloneWindows
           unityVersion: 2020.3.18f1
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Adrenarun_CI_Build
+          path: build
+      # Upload to Itch
+      - name: Upload win to itch.io
+        uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: win
+          ITCH_GAME: Adrenarun
+          ITCH_USER: azhu
+          PACKAGE: build/StandaloneWindows
+
+  buildForWebGL:
+    name: Build Project and Publish to itch.io ✨
+    runs-on: ubuntu-latest
+    concurrency:
+      group: unity-build
+      cancel-in-progress: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      - uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library
       - name: Build WebGL
         uses: game-ci/unity-builder@v2
         env:
@@ -42,14 +71,6 @@ jobs:
           name: Adrenarun_CI_Build
           path: build
       # Upload to Itch
-      - name: Upload win to itch.io
-        uses: josephbmanley/butler-publish-itchio-action@master
-        env:
-          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-          CHANNEL: win
-          ITCH_GAME: Adrenarun
-          ITCH_USER: azhu
-          PACKAGE: build/StandaloneWindows
       - name: Upload WebGL to itch.io
         uses: josephbmanley/butler-publish-itchio-action@master
         env:
