@@ -2,7 +2,7 @@ name: Build Project and Publish to itch.io
 on:
   push:
     branches:
-      - building
+      - production
 jobs:
   build:
     name: Build Project and Publish to itch.io ✨
@@ -19,7 +19,7 @@ jobs:
         with:
           path: Library
           key: Library
-      - name: Build project
+      - name: Build Windows
         uses: game-ci/unity-builder@v2
         env:
           UNITY_EMAIL: '${{ secrets.UNITY_EMAIL }}'
@@ -28,7 +28,7 @@ jobs:
         with:
           targetPlatform: StandaloneWindows
           unityVersion: 2020.3.18f1
-      - name: Build project
+      - name: Build WebGL
         uses: game-ci/unity-builder@v2
         env:
           UNITY_EMAIL: '${{ secrets.UNITY_EMAIL }}'
