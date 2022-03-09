@@ -109,7 +109,7 @@ public class EnemyFactory
         _enemyPostSetups.Add(EnemyVariantType.SET, CreateSetVariant);
     }
 
-    void CreateSetVariant(EnemyBehaviour eb)
+    void CreateSetVariant(EnemyBehaviour eb, EnemyType et)
     {
         Weapon weapon = eb.GetComponent<Weapon>();
         weapon.firingMods.Add(new SetFiringPowerUp());
