@@ -6,7 +6,7 @@ on:
 jobs:
   buildForWindows:
     name: Build Windows and Publish to itch.io ✨
-    runs-on: windows-2019
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
