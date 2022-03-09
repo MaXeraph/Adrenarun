@@ -31,7 +31,7 @@ public class EnemyFactory
 {
 
     // Additional setup for an enemy.
-    private static Dictionary<EnemyVariantType, Action<EnemyBehaviour>> _enemyPostSetups = new Dictionary<EnemyVariantType, Action<EnemyBehaviour>>();
+    private static Dictionary<EnemyVariantType, Action<EnemyBehaviour, EnemyType>> _enemyPostSetups = new Dictionary<EnemyVariantType, Action<EnemyBehaviour, EnemyType>>();
     private static Dictionary<EnemyType, EnemyInfo> _enemyInfo = new Dictionary<EnemyType, EnemyInfo>();
     private GameObject _defaultTarget = null;
 
@@ -51,8 +51,9 @@ public class EnemyFactory
         // Define enemyInfo for each type.
         AddTurretToRoster();
         _enemyInfo.Add(EnemyType.GRENADIER, new EnemyInfo(EnemyMovements.GrenadierMovement, Globals.GrenadierTargeting, EnemyMovements.GrenadierSetup, new ArtilleryAttackBehaviour(EntityType.ENEMY, 20f), 3f));
-        _enemyInfo.Add(EnemyType.RANGED, new EnemyInfo(EnemyMovements.RangedMovement, Globals.DirectTargeting, EnemyMovements.RangedSetup, new BulletAttackBehaviour(EntityType.ENEMY, 5f, 20f), 1f));
+        _enemyInfo.Add(EnemyType.RANGED, new EnemyInfo(EnemyMovements.RangedMovement, Globals.DirectTargeting, EnemyMovements.RangedSetup, new BulletAttackBehaviour(EntityType.ENEMY, 5f, Globals.enemyBulletSpeeds[EnemyType.RANGED]), 1f));
         AddHealerVariantToRoster();
+        _enemyPostSetups.Add(EnemyVariantType.PREDICTIVE, CreatePredictiveVariant);
     }
 
     public GameObject CreateEnemy(Vector3 position, EnemyType enemyType, EnemyVariantType variantType = EnemyVariantType.NONE)
@@ -71,7 +72,7 @@ public class EnemyFactory
         enemyTransform.position = position + new Vector3(0, 1, 0);
 
         EnemyInfo enemyInfo = _enemyInfo[enemyType];
-
+        
         Weapon enemyWeapon = newEnemyObject.AddComponent<Weapon>();
         enemyWeapon.Initialize(enemyInfo.attackBehaviour, enemyInfo.fireRate);
 
@@ -80,7 +81,7 @@ public class EnemyFactory
             _defaultTarget,
             enemyInfo,
             enemyWeapon);
-        if (variantType != EnemyVariantType.NONE && _enemyPostSetups.ContainsKey(variantType)) _enemyPostSetups[variantType](eb);
+        if (variantType != EnemyVariantType.NONE && _enemyPostSetups.ContainsKey(variantType)) _enemyPostSetups[variantType](eb, enemyType);
 
         return newEnemyObject;
     }
@@ -91,18 +92,23 @@ public class EnemyFactory
         _enemyPostSetups.Add(EnemyVariantType.HEALER, CreateHealerVariant);
     }
 
-    void CreateHealerVariant(EnemyBehaviour eb)
+    void CreateHealerVariant(EnemyBehaviour eb, EnemyType et)
     {
         AbstractAttackBehaviour enemyAttackBehaviour = eb.GetComponent<Weapon>()._attackBehaviour;
         if (enemyAttackBehaviour._damage > 0) enemyAttackBehaviour._damage *= -1; 
     }
-    
+
     void AddTurretToRoster()
     {
-        BulletAttackBehaviour bulletBehaviour = new BulletAttackBehaviour(EntityType.ENEMY, 30f);
+        BulletAttackBehaviour bulletBehaviour = new BulletAttackBehaviour(EntityType.ENEMY, 30f, Globals.enemyBulletSpeeds[EnemyType.TURRET]);
         float fireRate = 5f;
 
         // Define enemyInfo for each type.
         _enemyInfo.Add(EnemyType.TURRET, new EnemyInfo(EnemyMovements.TurretMovement, Globals.DirectTargeting, EnemyMovements.TurretSetup, bulletBehaviour, fireRate));
+    }
+
+    void CreatePredictiveVariant(EnemyBehaviour eb, EnemyType et)
+    {
+        eb.GetAimDirection = Globals.CreatePredictiveTargeting(GameObject.FindGameObjectWithTag("Player").transform, Globals.enemyBulletSpeeds[et]);
     }
 }
