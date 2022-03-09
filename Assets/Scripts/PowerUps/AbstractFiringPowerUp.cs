@@ -77,3 +77,23 @@ public class ChargeShotFiringPowerUp : AbstractFiringPowerUp
     }
     
 }
+
+public class SetFiringPowerUp : AbstractFiringPowerUp
+{
+    public SetFiringPowerUp(){
+        sortOrder = 2;
+    }
+    
+    public override List<(Vector3, float)> applyPowerUp(List<(Vector3, float)> direction)
+    {
+        List<(Vector3, float)> shotDirections = new List<(Vector3, float)>();
+
+        shotDirections.Add((new Vector3(0, 0, 1), 0));
+        shotDirections.Add((new Vector3(0, 0, -1), 0));
+        shotDirections.Add((new Vector3(1, 0, 0), 0));
+        shotDirections.Add((new Vector3(-1, 0, 0), 0));
+        
+        return shotDirections;
+    }
+    
+}

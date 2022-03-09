@@ -113,6 +113,7 @@ public enum EnemyVariantType
 {
     NONE,
     HEALER,
+	SET,
 	PREDICTIVE
 }
 

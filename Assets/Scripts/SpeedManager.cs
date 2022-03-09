@@ -10,7 +10,8 @@ public class SpeedManager : MonoBehaviour
     public static float enemySpawnScaling;
     public static float adrenalinModifier = 0f;
     public static float enemyMovementScaling;
-
+    public static double realTime = 0;
+    
     void Start() {
         playerMovementScaling = coreSpeed; //TODO: determine player movement ratio based on speed
         bulletSpeedScaling = coreSpeed; //TODO: determine bullet speed ratio based on speed
@@ -51,6 +52,11 @@ public class SpeedManager : MonoBehaviour
         }
         return 0f;
 
+    }
+
+    void FixedUpdate()
+    {
+        realTime += Time.fixedDeltaTime * coreSpeed;
     }
 
 }
