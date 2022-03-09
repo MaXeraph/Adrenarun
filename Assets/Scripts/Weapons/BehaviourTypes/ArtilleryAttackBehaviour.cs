@@ -17,19 +17,30 @@ public class ArtilleryAttackBehaviour : BulletAttackBehaviour
         thermiteDurability = durability;
         thermiteDamageCooldown = damageCooldown;
     }
+    
+    public override void initiateAttack(Vector3 position, Vector3 direction)
+    {
+        ArtilleryMono.create(this, position, direction);
+    }
 
     public override void onHit(BulletMono bm, GameObject target)
     {
-        if (target.tag == "Player" || target.GetComponent<BulletMono>() == null) // if not another bullet...
+        if (target.tag != "Enemy" && target.tag != "Detector" && (target.tag == "Player" || target.GetComponent<BulletMono>() == null)) // if not another bullet...
         {
             Vector3 position = bm.gameObject.GetComponent<Transform>().position;
-            RaycastHit hitInfo;
-            Physics.Raycast(position, new Vector3(0, -1, 0), out hitInfo);
-            GameObject.Destroy(bm.gameObject);
-            GameObject thermitePool = GameObject.Instantiate(Resources.Load("ThermitePool")) as GameObject;
-            // Spawn the pool on the ground.
-            thermitePool.GetComponent<Transform>().position = hitInfo.point;
-            thermitePool.GetComponent<ThermitePoolMono>().Initialize(this);
+            RaycastHit[] hitInfo = Physics.RaycastAll(position + new Vector3(0, 5, 0), new Vector3(0, -1, 0));
+            for (int i = 0; i < hitInfo.Length; i++)
+            {
+                if (hitInfo[i].collider.gameObject.tag == "Platform")
+                {
+                    GameObject thermitePool = GameObject.Instantiate(Resources.Load("ThermitePool")) as GameObject;
+                    // Spawn the pool on the ground.
+                    thermitePool.GetComponent<Transform>().position = hitInfo[i].point;
+                    thermitePool.GetComponent<ThermitePoolMono>().Initialize(this);
+                    GameObject.Destroy(bm.gameObject);
+                    return;
+                }
+            }
         }
     }
 }
