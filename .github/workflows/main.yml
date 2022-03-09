@@ -2,7 +2,7 @@ name: Build Project and Publish to itch.io
 on:
   push:
     branches:
-      - building
+      - production
 jobs:
   buildForWindows:
     name: Build Windows and Publish to itch.io ✨
