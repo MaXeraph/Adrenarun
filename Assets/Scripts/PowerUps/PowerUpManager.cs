@@ -10,7 +10,6 @@ public class PowerUpManager : MonoBehaviour
     private int[] generatorList;
     private PowerUpType[] powerUpSelectionList;
     private bool includeNone = false;
-    public List<AbstractFiringPowerUp> firingPowerUps;
     public List<AbstractBulletPowerUp> bulletPowerUps;
 
     private Weapon _weapon;
@@ -20,7 +19,6 @@ public class PowerUpManager : MonoBehaviour
     {
         generatorList = Enumerable.Range(0, System.Enum.GetNames(typeof(PowerUpType)).Length).ToArray();
         powerUpSelectionList = new PowerUpType[numPowerUpOptions];
-        firingPowerUps = new List<AbstractFiringPowerUp>();
     }
 
     // we generate powerups randomly by shuffling a premade list
@@ -84,11 +82,9 @@ public class PowerUpManager : MonoBehaviour
                 statPowerUp.applyPowerUp(_weapon);
                 break;
             case PowerUpClass.FIRING:
-                _weapon.firingBehavior[type] = true;
-                _weapon.firingBehavior[PowerUpType.NONE] = false;
                 AbstractFiringPowerUp firingPowerUp = Globals.FiringPowerUpDictionary[type];
-                firingPowerUps.Add(firingPowerUp);
-                firingPowerUps = firingPowerUps.OrderBy(powerUp => powerUp.sortOrder).ToList();
+                _weapon.firingMods.Add(firingPowerUp);
+                _weapon.firingMods = _weapon.firingMods.OrderBy(powerUp => powerUp.sortOrder).ToList();
                 break;
             case PowerUpClass.BULLET:
                 // TODO: implement bullet powerups

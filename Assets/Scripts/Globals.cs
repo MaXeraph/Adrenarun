@@ -80,7 +80,8 @@ public enum EnemyType
 public enum EnemyVariantType
 {
     NONE,
-    HEALER
+    HEALER,
+	SET
 }
 
 public enum EntityType

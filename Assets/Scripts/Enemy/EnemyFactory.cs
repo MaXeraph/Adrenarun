@@ -105,5 +105,13 @@ public class EnemyFactory
 
         // Define enemyInfo for each type.
         _enemyInfo.Add(EnemyType.TURRET, new EnemyInfo(EnemyMovements.TurretMovement, Globals.DirectTargeting, EnemyMovements.TurretSetup, bulletBehaviour, fireRate));
+        
+        _enemyPostSetups.Add(EnemyVariantType.SET, CreateSetVariant);
+    }
+
+    void CreateSetVariant(EnemyBehaviour eb)
+    {
+        Weapon weapon = eb.GetComponent<Weapon>();
+        weapon.firingMods.Add(new SetFiringPowerUp());
     }
 }
