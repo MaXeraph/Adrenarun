@@ -19,7 +19,7 @@ public class PlayerCentral : MonoBehaviour
     bool isGrounded;
     bool canWallJump;
     bool _cooldown = false;
-    float dashCooldown = 3f;
+    float dashCD = 3f;
     float wallJumpSlope = 0.1f;
     Vector3 wallJumpVector;
 
@@ -71,18 +71,18 @@ public class PlayerCentral : MonoBehaviour
         //     Movement.playerSprint(_player);
         // }
 
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            if(!_cooldown){
+            if(!_cooldown && _controller.velocity.magnitude > 0f){
                 StartCoroutine(Dash());
                 _cooldown = true;
-                StartCoroutine(Cooldown());
+                StartCoroutine(dashCooldown());
                 AudioManager.PlayDashAudio();
             }
         }
 
         //Shoot
-        if (Input.GetButton("Fire1"))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             Vector3 position = _camera.transform.forward + _camera.transform.position;
             Vector3 direction = _camera.transform.forward + new Vector3(-0.0075f, 0.003f, 0);
@@ -182,9 +182,9 @@ public class PlayerCentral : MonoBehaviour
         }
     }
 
-    IEnumerator Cooldown()
+    IEnumerator dashCooldown()
     {
-        yield return new WaitForSeconds(dashCooldown);
+        yield return new WaitForSeconds(dashCD/SpeedManager.playerMovementScaling);
         _cooldown = false;
     }
 
