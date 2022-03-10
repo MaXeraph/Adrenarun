@@ -106,7 +106,7 @@ public class EnemySpawn : MonoBehaviour
             currentNumEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
             UIManager.enemiesLeft = enemiesPerWave - (enemiesSpawned - currentNumEnemies); ;
             //Debug.Log(currentNumEnemies);
-            Debug.Log(enemiesSpawned);
+            //Debug.Log(enemiesSpawned);
 
             if (currentNumEnemies == 0 && !_timeout)
             {
@@ -161,7 +161,7 @@ public class EnemySpawn : MonoBehaviour
                 currentNumEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
                 enemiesSpawned += 1;
                 UIManager.enemiesLeft =  enemiesPerWave - (enemiesSpawned - currentNumEnemies);
-                Debug.Log(enemiesSpawned);
+                //Debug.Log(enemiesSpawned);
                 StartCoroutine(Cooldown());
             }
             else
