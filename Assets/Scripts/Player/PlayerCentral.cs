@@ -50,6 +50,8 @@ public class PlayerCentral : MonoBehaviour
 
         //Look
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0) Movement.RotatePlayer(_player, _camera);
+        //Moved out of movement because now it shows enemy position and needs to updated every frame
+        CompassUI.updateCompass();
 
         //Move
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) {

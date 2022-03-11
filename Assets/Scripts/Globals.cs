@@ -43,18 +43,17 @@ public static class Globals
 	{PowerUpType.REPEATER, "Shoot an additional bullet with each shot"}
 	};
 
-	//For Upgrade Icons
-	//public static Dictionary<PowerUpType, Texture> PowerUpIconDictionary = new Dictionary<PowerUpType, Texture>
-	//{{PowerUpType.DAMAGE, tex},
-	//{PowerUpType.FIRERATE, tex},
-	//{PowerUpType.RELOADSPD, tex},
-	//{PowerUpType.CLIPSIZE, tex},
-	//{PowerUpType.ADRENALIN, tex},
-	//{PowerUpType.SHOTGUN, tex},
-	//{PowerUpType.REPEATER, tex}
-	//};
+	public static Dictionary<PowerUpType, Sprite> PowerUpIconDictionary = new Dictionary<PowerUpType, Sprite>
+	{{PowerUpType.DAMAGE, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_side_spritesheet_1")[6]},
+	{PowerUpType.FIRERATE, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_front_spritesheet_1")[1]},
+	{PowerUpType.RELOADSPD, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_front_spritesheet_1")[8]},
+	{PowerUpType.CLIPSIZE, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_front_spritesheet_1")[6]},
+	{PowerUpType.ADRENALIN, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_front_spritesheet_1")[4]},
+	{PowerUpType.SHOTGUN, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_side_spritesheet_1")[1]},
+	{PowerUpType.REPEATER, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_side_spritesheet_1")[7]}
+	};
 
-    public static Vector3 DirectTargeting(Transform from, Transform to)
+	public static Vector3 DirectTargeting(Transform from, Transform to)
     {
         Vector3 direction = (to.position - from.position).normalized;
         return direction;
