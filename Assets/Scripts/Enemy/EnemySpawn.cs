@@ -198,14 +198,13 @@ public class EnemySpawn : MonoBehaviour
 
         Vector3 targetSpawn;
         EnemyVariantType variant = EnemyVariantType.NONE;
-        EnemyType enemyType; 
 
         // 50% to be predictive if turret or ranged.
-        if ((enemyType == EnemyType.TURRET || enemyType == EnemyType.RANGED) && Random.Range(0, 2) == 0)
+        if ((enemy == EnemyType.TURRET || enemy == EnemyType.RANGED) && Random.Range(0, 2) == 0)
         {
             variant = EnemyVariantType.PREDICTIVE;
         }
-        else if (enemyType == EnemyType.TURRET && Random.Range(0, 2) == 0)
+        else if (enemy == EnemyType.TURRET && Random.Range(0, 2) == 0)
         {
             variant = EnemyVariantType.SET;
         }
