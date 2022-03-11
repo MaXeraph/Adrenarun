@@ -3,7 +3,102 @@ guid: 70a4316ef238dfc40a66a8584df30aad
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bark_Tree
+    second: {fileID: 2100000, guid: 4fb2819c992922f4188131d3f3faed0e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Building04_Lambert
+    second: {fileID: 2100000, guid: 39def5ec91ee47a428ba2293ef45e37c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Building04_Windows
+    second: {fileID: 2100000, guid: 394d8ddadd29adf45a7c8e2d13c19efd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Building5_Lambert
+    second: {fileID: 2100000, guid: fcd9c4ce71016994ab2680b2306efcf2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Building_02_Base
+    second: {fileID: 2100000, guid: cc01c2e742f9dbf45ba4a6281dedc2de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass_Building06
+    second: {fileID: 2100000, guid: 474a0741c8658ff42bf6d512a9a3c846, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass_building5
+    second: {fileID: 2100000, guid: aad751f03e84dcc42bdbfbbc932d103e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf_Tree01
+    second: {fileID: 2100000, guid: e9bd86b8d33acf844bf5ee91426d1480, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf_Tree02
+    second: {fileID: 2100000, guid: ef1a7bf03f23b97459e8989184d38bda, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ring_Light01
+    second: {fileID: 2100000, guid: d20a7db0d6f82064c80f8abad0778251, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Road01_Lambert
+    second: {fileID: 2100000, guid: 190bdb4cd489d1943b76db8b36239319, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Road_End
+    second: {fileID: 2100000, guid: 2c454f42571648e49ba8bcd7443a94db, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SmallBuilding_Windows_Phong
+    second: {fileID: 2100000, guid: 3e971d14a0822994cbd9f09d1297ef40, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tower_Floor_Lambert
+    second: {fileID: 2100000, guid: 2d2191d1dbb19364d95f7c22c3423915, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tower_Lambert06
+    second: {fileID: 2100000, guid: 780ca442425554449a84fd9f72e322cc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tower_Windows
+    second: {fileID: 2100000, guid: 0c07c991b8d9adc4bb9bfe77704666ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TriangleBuilding_lambert
+    second: {fileID: 2100000, guid: 8571d7523dad1d541874e5b91d30c06c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Triangle_Window
+    second: {fileID: 2100000, guid: 298925ba0fb44974dbf80189a2e51876, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: bb3b6a3451ea6be42bddf81f3bf22086, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
