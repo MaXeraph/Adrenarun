@@ -9,6 +9,8 @@ public class CompassUI : MonoBehaviour
     private static Transform CameraTransform;
     private static RectTransform CompassBar;
 
+    private static Transform mask;
+
     private static RectTransform[] directionTransforms = new RectTransform[8];
 
     private static string[] directionNames = new string[] { "North", "South", "East", "West", "NW", "NE", "SW", "SE" };
@@ -16,8 +18,15 @@ public class CompassUI : MonoBehaviour
     private static Vector3[] directionVectors = new Vector3[] {Vector3.forward* 1000, Vector3.back* 1000, Vector3.right* 1000, Vector3.left* 1000,
                                                        (Vector3.right + Vector3.forward)* 1000, (Vector3.left + Vector3.forward)* 1000, (Vector3.right + Vector3.back)* 1000, (Vector3.left + Vector3.back)* 1000 };
 
+    private static List<Transform> enemies = new List<Transform>();
+    private static List<GameObject> enemyMarkers = new List<GameObject>();
+
+    public static CompassUI instance;
+
     void Awake()
     {
+        instance = this;
+        mask = transform.GetChild(1);
         CameraTransform = Camera.main.transform;
         CompassBar = transform.GetChild(1).GetComponent<RectTransform>();
         for (int i = 0;i < directionNames.Length; i++)
@@ -27,11 +36,38 @@ public class CompassUI : MonoBehaviour
         }
     }
 
+    public static void addEnemy(Transform entity)
+    {
+        enemies.Add(entity);
+        GameObject marker = GameObject.Instantiate(Resources.Load("CompassWarning")) as GameObject;
+        marker.transform.SetParent(mask);
+        enemyMarkers.Add(marker);
+    }
+
+    public static void enemyDied(int enemy)
+    {
+        enemies.Remove(enemies[enemy]);
+        GameObject mark = enemyMarkers[enemy];
+        Destroy(mark);
+        enemyMarkers.Remove(mark);
+    }
+
+    static void updateEnemyPosition(int enemy)
+    {
+        if (enemies[enemy] == null) enemyDied(enemy);
+        else SetMarkerPosition(enemyMarkers[enemy].GetComponent<RectTransform>(), enemies[enemy].position); 
+    }
+
     public static void updateCompass()
     {
         for (int i = 0; i < directionNames.Length; i++)
         {
             SetMarkerPosition(directionTransforms[i], directionVectors[i]);
+        }
+
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            updateEnemyPosition(i);
         }
     }
 
