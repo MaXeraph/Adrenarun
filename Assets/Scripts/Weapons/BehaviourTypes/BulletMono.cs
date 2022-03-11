@@ -30,6 +30,6 @@ public class BulletMono : MonoBehaviour
         if (c.gameObject.tag == "Detector") { if (_attackBehaviour.Owner == EntityType.ENEMY) { CrosshairUI.addIndicator(c.transform.position); } return; }
 
         _attackBehaviour.onHit(this, c.gameObject);
-        if (c.gameObject.tag == "Enemy") UIManager.DamageText(transform.position + transform.up * 0.15f, -_attackBehaviour._damage);
+        if (c.gameObject.tag == "Enemy" && _attackBehaviour.Owner != EntityType.ENEMY) UIManager.DamageText(transform.position + transform.up * 0.15f, -_attackBehaviour._damage);
     }
 }

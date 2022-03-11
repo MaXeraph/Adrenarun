@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 //For healing text
@@ -123,12 +122,13 @@ public class UIManager : MonoBehaviour
 
     public static void showPowerups(PowerUpType[] _powerUpSelectionList)
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+       // Cursor.lockState = CursorLockMode.None;
+       // Cursor.visible = true;
         UpgradeUI.powerUpSelectionList = _powerUpSelectionList;
         //UpgradeUI.instance.gameObject.SetActive(true);
         UpgradeUI.init();
     }
 
     public static int powerSelection = -1;
+
 }

@@ -51,10 +51,10 @@ public class AmmoUI : MonoBehaviour
 
         for (var i = 0; i < AmmoCapacity; i++)
         {
-            if (i == 0) {AmmoSlots[i] = AmmoSlot;}
+            if (i == 0) { AmmoSlots[i] = AmmoSlot; }
             else
             {
-                
+
                 GameObject copy = Instantiate(AmmoSlot);
                 copy.transform.SetParent(Clip);
                 copy.transform.localScale = AmmoSlot.transform.localScale;
@@ -88,12 +88,16 @@ public class AmmoUI : MonoBehaviour
           
             if (reloading && current != AmmoCapacity)
             {
-                AmmoSlots[current].transform.DOScale(new Vector3(1f, 1f, 1f), 0.2f);
+                AmmoSlots[current].GetComponent<ammoSlot>().used = false;
                 AmmoPanelColor.color = PanelColorReload;
                 if (current == AmmoCapacity-1) { AmmoPanelColor.color = PanelColorNormal; }
             }
 
-            else if (current != AmmoCapacity && current <= CurrentAmmo){ AmmoSlots[current].transform.DOScale(new Vector3(0f, 0f, 0f), 0.2f); AmmoPanelColor.color = PanelColorNormal; }
+            else if (current != AmmoCapacity && current <= CurrentAmmo)
+            {
+                AmmoSlots[current].GetComponent<ammoSlot>().used = true;
+                AmmoPanelColor.color = PanelColorNormal; 
+            }
         }
     }
 

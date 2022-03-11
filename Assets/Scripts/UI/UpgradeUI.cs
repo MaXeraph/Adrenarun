@@ -1,7 +1,5 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 using TMPro;
 
 public class UpgradeUI : MonoBehaviour
@@ -28,6 +26,7 @@ public class UpgradeUI : MonoBehaviour
         for (var i = 0; i < 3; i++)
         {
             setButton(choiceButtons[i], i);
+            setButton(choiceButtons[i], i);
             choiceButtons[i].GetComponent<UpgradeChoice>().choiceNum = i;
         }
 
@@ -36,6 +35,7 @@ public class UpgradeUI : MonoBehaviour
 
     public static void init()
     {
+        Menu.open();
         instance.gameObject.SetActive(true);
         for (var i = 0; i < 3; i++)
         {
@@ -57,6 +57,7 @@ public class UpgradeUI : MonoBehaviour
 
     void exit()
     {
+        
         Cursor.lockState = CursorLockMode.Locked;
         UIManager.UpdateWeapon();
         UIManager.Reloading = true;

@@ -39,7 +39,6 @@ public class Stats : MonoBehaviour
     }
     public float maxHealth;
     public EntityType owner;
-    bool dead = false;
 
     public Stats(float maxHealth = 100f)
     {

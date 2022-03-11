@@ -1,7 +1,5 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class deathUI : MonoBehaviour
 {
@@ -18,32 +16,26 @@ public class deathUI : MonoBehaviour
         retry = transform.GetChild(0).transform.GetChild(0).GetComponent<Button>();
         leave = transform.GetChild(0).transform.GetChild(1).GetComponent<Button>();
         retry.onClick.AddListener(rewind);
-        leave.onClick.AddListener(quit);
+        leave.onClick.AddListener(done);
         instance.SetActive(false);
     }
 
     public static void reveal(GameObject inst)
     {
+        Menu.open();
+        Menu.pause();
         UIManager.dead = true;
         instance.SetActive(true);
-        PlayerCentral.paused = true;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 
-    void quit()
+    public void done()
     {
-        Application.Quit();
+        Menu.quit();
     }
 
    public void rewind()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        Time.timeScale = 1f;
-        SpeedManager.updateSpeeds(1f);
-        PlayerCentral.paused = false;
+        Menu.restart();
         gameObject.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
     }
 }

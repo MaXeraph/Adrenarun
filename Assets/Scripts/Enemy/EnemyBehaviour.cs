@@ -69,7 +69,7 @@ public class EnemyBehaviour : MonoBehaviour
         Animation anim = gameObject.transform.GetChild(0).GetComponent<Animation>();
         // Look. Determine look direction.
         _direction = (_targetTransform.position - transform.position).normalized;
-        _direction.y = 0;
+        //_direction.y = 0;
         _lookRotation = Quaternion.LookRotation(_direction);
         transform.rotation = _lookRotation;
         
