@@ -40,7 +40,7 @@ public class AmmoUI : MonoBehaviour
     {
   
 
-        for (var i = 0; i < AmmoCapacity; i++)
+        for (var i = 1; i < AmmoCapacity; i++)
         {
             if (i != 0) { Destroy(AmmoSlots[i]); }
         }
