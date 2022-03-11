@@ -11,7 +11,7 @@ public class ArtilleryAttackBehaviour : BulletAttackBehaviour
     public float thermiteDamageCooldown;
     
 
-    public ArtilleryAttackBehaviour(EntityType owner, float damage = 10f, float bulletSpeed = 10f, int durability = 10, float damageCooldown = 1f)
+    public ArtilleryAttackBehaviour(EntityType owner, float damage = 5f, float bulletSpeed = 10f, int durability = 10, float damageCooldown = 0.25f)
         : base(owner, damage, bulletSpeed)
     {
         thermiteDurability = durability;

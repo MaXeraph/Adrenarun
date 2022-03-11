@@ -5,8 +5,6 @@ using UnityEngine;
 public class ThermitePoolMono : MonoBehaviour
 {
     private double _lastTick = 0;
-    private double _damageCooldown = 1;
-    private float _damage = 20f;
     private int _ticks = 0;
     private ArtilleryAttackBehaviour _attackBehaviour;
     private Dictionary<GameObject, int> _currentCollisions = new Dictionary<GameObject, int>();
