@@ -64,7 +64,6 @@ public class UI_health : MonoBehaviour
     public static void impact_fill(float fill)
     {
         Sequence damaged = DOTween.Sequence();
-        damaged.SetUpdate(UpdateType.Late, true);
         damaged.Append(instance.transform.DOShakePosition(shake_duration, new Vector3(2f, 2f, 2f), 10, 15f).SetLoops(3));
         damaged.Insert(0, instance.transform.DOShakeRotation(shake_duration, new Vector3(2, 2, 2), 10, 15f).SetLoops(3));
         damaged.Append(slow_fill.DOFillAmount(fill / max, fill_duration));
