@@ -18,9 +18,7 @@ public class Stats : MonoBehaviour
                 int rand = Random.Range(0, 20);
                 if(rand == 0)
                 {
-                    GameObject newHealingPill = GameObject.Instantiate(Resources.Load("HealingPill")) as GameObject;
-                    Transform pillTransform = newHealingPill.GetComponent<Transform>();
-                    pillTransform.position = gameObject.transform.position;
+                    HealingPill.SpawnPill(gameObject.transform.position);
                 }
             }
             else if (owner == EntityType.PLAYER) {

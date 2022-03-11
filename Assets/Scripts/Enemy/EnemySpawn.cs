@@ -110,6 +110,7 @@ public class EnemySpawn : MonoBehaviour
 
             if (currentNumEnemies == 0 && !_timeout)
             {
+                HealingPill.DespawnPills();
                 currentWaveNumber++;
                 enemiesPerWave += enemiesPerWave;
 
