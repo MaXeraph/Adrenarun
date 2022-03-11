@@ -1,0 +1,74 @@
+name: Build Project and Publish to itch.io
+on:
+  push:
+    branches: [production]
+jobs:
+  buildForWindows:
+    name: Build Windows and Publish to itch.io ✨
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      - uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library
+      - name: Build Windows
+        uses: game-ci/unity-builder@v2
+        env:
+          UNITY_EMAIL: '${{ secrets.UNITY_EMAIL }}'
+          UNITY_PASSWORD: '${{ secrets.UNITY_PASSWORD }}'
+          UNITY_SERIAL: '${{ secrets.UNITY_SERIAL }}'
+        with:
+          targetPlatform: StandaloneWindows
+          unityVersion: 2020.3.18f1
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Adrenarun_CI_Build
+          path: build
+      # Upload to Itch
+      - name: Upload win to itch.io
+        uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: win
+          ITCH_GAME: Adrenarun
+          ITCH_USER: azhu
+          PACKAGE: build/StandaloneWindows
+
+  buildForWebGL:
+    name: Build WebGL and Publish to itch.io ✨
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      - uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library
+      - name: Build WebGL
+        uses: game-ci/unity-builder@v2
+        env:
+          UNITY_EMAIL: '${{ secrets.UNITY_EMAIL }}'
+          UNITY_PASSWORD: '${{ secrets.UNITY_PASSWORD }}'
+          UNITY_SERIAL: '${{ secrets.UNITY_SERIAL }}'
+        with:
+          targetPlatform: WebGL
+          unityVersion: 2020.3.18f1
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Adrenarun_CI_Build
+          path: build
+      # Upload to Itch
+      - name: Upload WebGL to itch.io
+        uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: html5
+          ITCH_GAME: Adrenarun
+          ITCH_USER: azhu
+          PACKAGE: build/WebGL
