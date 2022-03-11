@@ -20,6 +20,9 @@ public class PlayerCentral : MonoBehaviour
     bool canWallJump;
     bool _cooldown = false;
     float dashCD = 3f;
+    float lastDashTime;
+    float availDashTime;
+    bool dashAvailable = true;
     float wallJumpSlope = 0.1f;
     Vector3 wallJumpVector;
 
@@ -71,12 +74,14 @@ public class PlayerCentral : MonoBehaviour
         //     Movement.playerSprint(_player);
         // }
 
+        //Dash
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            if(!_cooldown && _controller.velocity.magnitude > 0f){
+            Vector3 XZInputVector = new Vector3(_controller.velocity.x, 0, _controller.velocity.z);
+            if(dashAvailable && XZInputVector.magnitude > 0f){
                 StartCoroutine(Dash());
-                _cooldown = true;
-                StartCoroutine(dashCooldown());
+                dashAvailable = false;
+                lastDashTime = Time.time;
                 AudioManager.PlayDashAudio();
             }
         }
@@ -92,6 +97,8 @@ public class PlayerCentral : MonoBehaviour
         //Reload
         if (Input.GetButtonDown("Reload")) _weapon.Reload();
 
+        availDashTime = lastDashTime + (dashCD / SpeedManager.playerMovementScaling);
+        if (Time.time > availDashTime) dashAvailable = true;
 
         applyGravity();
         resetYVelocity();
@@ -180,12 +187,6 @@ public class PlayerCentral : MonoBehaviour
             _controller.Move(move.normalized * dashSpeed * Time.deltaTime);
             yield return null;
         }
-    }
-
-    IEnumerator dashCooldown()
-    {
-        yield return new WaitForSeconds(dashCD/SpeedManager.playerMovementScaling);
-        _cooldown = false;
     }
 
     IEnumerator wallJump(Vector3 normal)
