@@ -35,7 +35,7 @@ public class EnemySpawn : MonoBehaviour
     private PowerUpManager pum;
 
     private int totalWaveNumber;
-    private int enemiesPerWave = 10;
+    private int enemiesPerWave = 15;
     private const int spawnInterval = 0;
     private int enemiesSpawned = 0;
     private int currentNumEnemies = 0;
@@ -110,6 +110,7 @@ public class EnemySpawn : MonoBehaviour
 
             if (currentNumEnemies == 0 && !_timeout)
             {
+                HealingPill.DespawnPills();
                 currentWaveNumber++;
                 enemiesPerWave += enemiesPerWave;
 
@@ -196,19 +197,8 @@ public class EnemySpawn : MonoBehaviour
         // default is None for a type from factory 
 
         Vector3 targetSpawn;
-        EnemyVariantType variant;
+        EnemyVariantType variant = EnemyVariantType.NONE;
         EnemyType enemyType; 
-        int random = Random.Range(0, 15); // this could be iffy 
-        if (random == 0)
-        {
-            variant = EnemyVariantType.HEALER;
-            enemyType = EnemyType.TURRET;
-        }
-        else
-        {
-            variant = EnemyVariantType.NONE;
-            enemyType = enemy;
-        }
 
         // 50% to be predictive if turret or ranged.
         if ((enemyType == EnemyType.TURRET || enemyType == EnemyType.RANGED) && Random.Range(0, 2) == 0)
@@ -223,7 +213,7 @@ public class EnemySpawn : MonoBehaviour
         if (RandomPoint(platformRadius, out targetSpawn))
         {
             Debug.DrawRay(targetSpawn, Vector3.up, Color.blue, 1.0f);
-            EnemyFactory.Instance.CreateEnemy(targetSpawn, enemyType, variant);
+            EnemyFactory.Instance.CreateEnemy(targetSpawn, enemy, variant);
             // UIManager.enemiesTotal += 1;
             // UIManager.enemiesLeft += 1;
         }
