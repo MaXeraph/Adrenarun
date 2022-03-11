@@ -4,6 +4,26 @@ using UnityEngine;
 
 public class HealingPill : MonoBehaviour
 {
+    private static List<GameObject> currentPills = new List<GameObject>();
+
+    public static GameObject SpawnPill(Vector3 position)
+    {
+        GameObject newHealingPill = GameObject.Instantiate(Resources.Load("HealingPill")) as GameObject;
+        Transform pillTransform = newHealingPill.GetComponent<Transform>();
+        pillTransform.position = position;
+        currentPills.Add(newHealingPill);
+        return newHealingPill;
+    }
+
+    public static void DespawnPills()
+    {
+        foreach (GameObject pill in currentPills)
+        {
+            Destroy(pill);
+        }
+        currentPills.Clear();
+    }
+    
     void Update(){
         gameObject.transform.rotation *= Quaternion.AngleAxis(-3, Vector3.forward);
     }
