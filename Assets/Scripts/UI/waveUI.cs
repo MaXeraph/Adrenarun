@@ -20,19 +20,12 @@ public class waveUI : MonoBehaviour
 
     public static void setTotal(int num)
     {
-        string pre = "";
-        if (num < 10) pre = " ";
-        total.text = pre + num.ToString();
         _total = num;
     }
 
     public static void setLeft(int num)
     {
-        string pre = "";
-        if (num < 10) pre = " ";
-        left.text = pre + num.ToString();
-        _left = num;
-        //left.transform.DOPunchScale(new Vector3(0.1f, 0.2f, 0.2f), 0.5f, 1, 0.1f);
+        left.text = num.ToString() + " / " + _total.ToString();
     }
 
 }
