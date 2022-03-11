@@ -43,6 +43,7 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
                 GameObject.Destroy(bm.gameObject);
                 if (statsComponent.owner == EntityType.ENEMY) {
                     AudioManager.PlayImpactAudio();
+                    UIManager.DamageText(bm.gameObject.transform.position + bm.gameObject.transform.up * 0.15f, -_damage);
                 }
             }
         }
