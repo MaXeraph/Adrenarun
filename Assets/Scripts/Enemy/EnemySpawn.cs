@@ -210,11 +210,16 @@ public class EnemySpawn : MonoBehaviour
             enemyType = enemy;
         }
 
-        random = Random.Range(0, 10);
-        if (enemyType == EnemyType.TURRET && random < 5)
+        // 50% to be predictive if turret or ranged.
+        if ((enemyType == EnemyType.TURRET || enemyType == EnemyType.RANGED) && Random.Range(0, 2) == 0)
+        {
+            variant = EnemyVariantType.PREDICTIVE;
+        }
+        else if (enemyType == EnemyType.TURRET && Random.Range(0, 2) == 0)
         {
             variant = EnemyVariantType.SET;
         }
+        
         if (RandomPoint(platformRadius, out targetSpawn))
         {
             Debug.DrawRay(targetSpawn, Vector3.up, Color.blue, 1.0f);

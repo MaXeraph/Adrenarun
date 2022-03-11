@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -59,6 +60,31 @@ public static class Globals
         return direction;
     }
 
+	public static Func<Transform, Transform, Vector3> CreatePredictiveTargeting(Transform target, float bSpeed) {
+		float bulletSpeed = bSpeed;
+		Vector3 prevPosition = new Vector3(target.position.x, target.position.y, target.position.z);
+		float prevTime = Time.time;
+		Func<Transform, Transform, Vector3> predictive = delegate(Transform from, Transform to) {
+			float modifiedBulletSpeed = bulletSpeed*SpeedManager.bulletSpeedScaling;
+			Vector3 enemyDir = (to.position - prevPosition).normalized;
+			Vector3 plane = MathModule.determinePlaneNormal(from.position, to.position, to.position + enemyDir);
+			float now = Time.time;
+			float enemySpeed = (to.position - prevPosition).magnitude/(now - prevTime);
+			// Use law of sines
+			float angleBeta = Vector3.Angle(from.position - to.position, enemyDir);
+			// Angles towards or away cause the plane defined to not have a major y-component... in these cases, just shoot at them
+			if (angleBeta >= 170f || angleBeta <= 10f) return (to.position - from.position).normalized;
+			float angleAlpha = Mathf.Abs(Mathf.Rad2Deg*Mathf.Asin(enemySpeed*Mathf.Sin(angleBeta*Mathf.Deg2Rad)/modifiedBulletSpeed));
+			Vector3 firingDirection = Quaternion.AngleAxis(angleAlpha, plane) * (to.position - from.position);
+			prevPosition.x = to.position.x;
+			prevPosition.y = to.position.y;
+			prevPosition.z = to.position.z;
+			prevTime = now;
+			return firingDirection.normalized;
+		};
+		return predictive;
+	}
+
 	public static Vector3 GrenadierTargeting(Transform from, Transform to) {
 		return to.position;
 	}
@@ -69,6 +95,11 @@ public static class Globals
         { EnemyType.GRENADIER, "Grenadier"},
         { EnemyType.RANGED, "Ranged"}
     };
+
+	public static Dictionary<EnemyType, float> enemyBulletSpeeds = new Dictionary<EnemyType, float>() {
+		{ EnemyType.TURRET, 20f },
+		{ EnemyType.RANGED, 20f }
+	};
 }
 
 public enum EnemyType
@@ -82,7 +113,8 @@ public enum EnemyVariantType
 {
     NONE,
     HEALER,
-	SET
+	SET,
+	PREDICTIVE
 }
 
 public enum EntityType
