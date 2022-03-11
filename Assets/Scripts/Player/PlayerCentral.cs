@@ -20,7 +20,7 @@ public class PlayerCentral : MonoBehaviour
     bool canWallJump;
     bool _cooldown = false;
     float dashCD = 3f;
-    float lastDashTime;
+    double lastDashTime = -3;
     float availDashTime;
     bool dashAvailable = true;
     float wallJumpSlope = 0.1f;
@@ -78,10 +78,9 @@ public class PlayerCentral : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             Vector3 XZInputVector = new Vector3(_controller.velocity.x, 0, _controller.velocity.z);
-            if(dashAvailable && XZInputVector.magnitude > 0f){
+            if(SpeedManager.realTime - dashCD > lastDashTime && XZInputVector.magnitude > 0f){
                 StartCoroutine(Dash());
-                dashAvailable = false;
-                lastDashTime = Time.time;
+                lastDashTime = SpeedManager.realTime;
                 AudioManager.PlayDashAudio();
             }
         }
@@ -97,8 +96,6 @@ public class PlayerCentral : MonoBehaviour
         //Reload
         if (Input.GetButtonDown("Reload")) _weapon.Reload();
 
-        availDashTime = lastDashTime + (dashCD / SpeedManager.playerMovementScaling);
-        if (Time.time > availDashTime) dashAvailable = true;
 
         applyGravity();
         resetYVelocity();
