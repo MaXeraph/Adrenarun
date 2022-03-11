@@ -21,8 +21,6 @@ public class PlayerCentral : MonoBehaviour
     bool _cooldown = false;
     float dashCD = 3f;
     double lastDashTime = -3;
-    float availDashTime;
-    bool dashAvailable = true;
     float wallJumpSlope = 0.1f;
     Vector3 wallJumpVector;
 
