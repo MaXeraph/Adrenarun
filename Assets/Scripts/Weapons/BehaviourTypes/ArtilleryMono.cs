@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class ArtilleryMono : BulletMono
 {
-    public static float vertexHeight = 10f;
+    public static float vertexHeight = 40f;
 
     public Vector3 gpPlane;
 
     public float d;
 
-    public float dir = 1f;
-    
     private ArtilleryAttackBehaviour _attackBehaviour;
 
     public float[] quadratic = new float[3];
@@ -37,12 +35,11 @@ public class ArtilleryMono : BulletMono
         
         Vector3 positionXY = MathModule.convertToXY(behaviour.gpPlane, position, behaviour.d);
         Vector3 targetXY = MathModule.convertToXY(behaviour.gpPlane, direction, behaviour.d);
-        if (targetXY.x < positionXY.x) behaviour.dir = -1f;
         Vector3 vertexXY = MathModule.convertToXY(behaviour.gpPlane, vertex, behaviour.d);
 
         behaviour.quadratic = MathModule.calculateQuadratic(new Vector3[3] { positionXY, targetXY, vertexXY });
         
-        behaviour.incrementX = Mathf.Abs(targetXY.x - positionXY.x)/200; 
+        behaviour.incrementX = (targetXY.x - positionXY.x)/300; 
 
         return newBullet;
     }
@@ -51,7 +48,7 @@ public class ArtilleryMono : BulletMono
     {
         Vector3 posXY = MathModule.convertToXY(gpPlane, transform.position, d);
         
-        float nextX = posXY.x + incrementX * SpeedManager.bulletSpeedScaling * dir;
+        float nextX = posXY.x + incrementX * SpeedManager.bulletSpeedScaling;
         float nextY = quadratic[0]*nextX*nextX + quadratic[1]*nextX + quadratic[2];
         Vector3 newPosXY = new Vector3(nextX, nextY, 0);
         Vector3 newPosition = MathModule.convertToPlane(gpPlane, newPosXY, d);

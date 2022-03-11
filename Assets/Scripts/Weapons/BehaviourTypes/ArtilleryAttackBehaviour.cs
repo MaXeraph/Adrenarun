@@ -28,6 +28,19 @@ public class ArtilleryAttackBehaviour : BulletAttackBehaviour
         if (target.tag != "Enemy" && target.tag != "Detector" && (target.tag == "Player" || target.GetComponent<BulletMono>() == null)) // if not another bullet...
         {
             Vector3 position = bm.gameObject.GetComponent<Transform>().position;
+            Collider[] explosionHits = Physics.OverlapSphere(position, 4f); // 4f = scale of ThermitePool/2
+            for (int i = 0; i < explosionHits.Length; i++)
+            {
+                Collider collider = explosionHits[i];
+                if (collider.gameObject.tag == "Player")
+                {
+                    Stats statsComponent = collider.gameObject.GetComponent<Stats>();
+                    statsComponent.currentHealth -= _damage/2; // Deal half damage on explosion.
+                    GameObject.Destroy(bm.gameObject);
+                    break;
+                }
+            }
+            
             RaycastHit[] hitInfo = Physics.RaycastAll(position + new Vector3(0, 5, 0), new Vector3(0, -1, 0));
             for (int i = 0; i < hitInfo.Length; i++)
             {
