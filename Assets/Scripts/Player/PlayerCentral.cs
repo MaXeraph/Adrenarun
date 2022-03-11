@@ -19,7 +19,8 @@ public class PlayerCentral : MonoBehaviour
     bool isGrounded;
     bool canWallJump;
     bool _cooldown = false;
-    float dashCooldown = 3f;
+    float dashCD = 3f;
+    double lastDashTime = -3;
     float wallJumpSlope = 0.1f;
     Vector3 wallJumpVector;
 
@@ -50,6 +51,8 @@ public class PlayerCentral : MonoBehaviour
 
         //Look
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0) Movement.RotatePlayer(_player, _camera);
+        //Moved out of movement because now it shows enemy position and needs to updated every frame
+        CompassUI.updateCompass();
 
         //Move
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) {
@@ -71,18 +74,19 @@ public class PlayerCentral : MonoBehaviour
         //     Movement.playerSprint(_player);
         // }
 
-        if (Input.GetButtonDown("Fire2"))
+        //Dash
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            if(!_cooldown){
+            Vector3 XZInputVector = new Vector3(_controller.velocity.x, 0, _controller.velocity.z);
+            if(SpeedManager.realTime - dashCD > lastDashTime && XZInputVector.magnitude > 0f){
                 StartCoroutine(Dash());
-                _cooldown = true;
-                StartCoroutine(Cooldown());
+                lastDashTime = SpeedManager.realTime;
                 AudioManager.PlayDashAudio();
             }
         }
 
         //Shoot
-        if (Input.GetButton("Fire1"))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             Vector3 position = _camera.transform.forward + _camera.transform.position;
             Vector3 direction = _camera.transform.forward;
@@ -180,12 +184,6 @@ public class PlayerCentral : MonoBehaviour
             _controller.Move(move.normalized * dashSpeed * Time.deltaTime);
             yield return null;
         }
-    }
-
-    IEnumerator Cooldown()
-    {
-        yield return new WaitForSeconds(dashCooldown);
-        _cooldown = false;
     }
 
     IEnumerator wallJump(Vector3 normal)

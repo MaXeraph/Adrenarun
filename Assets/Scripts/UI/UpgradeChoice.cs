@@ -18,6 +18,6 @@ public class UpgradeChoice : MonoBehaviour
     public void OnPointerEnterDelegate()
     {
         PowerUpType type = UpgradeUI.powerUpSelectionList[choiceNum];
-        UpgradeUI.updateInfo(type);
+        UpgradeUI.updateInfo(type); 
     }
 }

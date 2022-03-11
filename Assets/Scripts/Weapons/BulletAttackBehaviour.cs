@@ -11,7 +11,7 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
     public Dictionary<string, int> _hitTypeModifiers;
     public Dictionary<string, float> _hitStatsModifiers;
 
-    public BulletAttackBehaviour(EntityType owner, float damage = 10f, float bulletSpeed = 10f) 
+    public BulletAttackBehaviour(EntityType owner, float damage = 10f, float bulletSpeed = 20f) 
         : base(owner, damage)
     {
         _bulletSpeed = bulletSpeed;

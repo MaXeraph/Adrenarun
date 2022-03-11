@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
     public static float jumpVelocity = Mathf.Sqrt(jumpHeight * -2f * -45.81f);
 
     // MouseLook variables
-    static float mouseSensitivity = 100f;
+    static float mouseSensitivity = 33f;
     static float xRotation = 0f;
 
     public static void RotatePlayer(GameObject player, Camera camera)
@@ -27,7 +27,6 @@ public class Movement : MonoBehaviour
 
         camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         player.transform.Rotate(Vector3.up * mouseX);
-        CompassUI.updateCompass();
     }
     public static void MoveXY(GameObject player)
     {

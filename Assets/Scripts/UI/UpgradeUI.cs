@@ -40,6 +40,7 @@ public class UpgradeUI : MonoBehaviour
         for (var i = 0; i < 3; i++)
         {
             choiceTexts[i].text = powerUpSelectionList[i].ToString();
+            choiceImages[i].sprite = Globals.PowerUpIconDictionary[powerUpSelectionList[i]];
         }
     }
 

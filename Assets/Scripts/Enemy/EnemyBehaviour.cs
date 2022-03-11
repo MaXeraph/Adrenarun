@@ -20,7 +20,7 @@ public class EnemyBehaviour : MonoBehaviour
     // Method to pathfind from Transform to Transform, returns Vector3, the direction to move in next.
     private Action<GameObject, Vector3> NavAgentMove;
     // Method to determine aiming direction from Transform to Transform, returns Vector3, the direction to fire in.
-    private Func<Transform, Transform, Vector3> GetAimDirection;
+    public Func<Transform, Transform, Vector3> GetAimDirection;
     
     IEnumerator Cooldown()
     {
