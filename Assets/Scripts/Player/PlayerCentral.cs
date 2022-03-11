@@ -50,6 +50,8 @@ public class PlayerCentral : MonoBehaviour
 
         //Look
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0) Movement.RotatePlayer(_player, _camera);
+        //Moved out of movement because now it shows enemy position and needs to updated every frame
+        CompassUI.updateCompass();
 
         //Move
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) {
@@ -85,7 +87,7 @@ public class PlayerCentral : MonoBehaviour
         if (Input.GetButton("Fire1"))
         {
             Vector3 position = _camera.transform.forward + _camera.transform.position;
-            Vector3 direction = _camera.transform.forward + new Vector3(-0.0075f, 0.003f, 0);
+            Vector3 direction = _camera.transform.forward;
             if (_weapon.Attack(position, direction, EntityType.PLAYER)) shootEffects(position + (0.22f * _camera.transform.right) + (-0.18f * _camera.transform.up));
         }
 
