@@ -47,7 +47,7 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
                 }
             }
         }
-        else if (target.GetComponent<BulletMono>() == null) // if not another bullet...
+        else if (target.tag == "Platform") 
         {
             GameObject.Destroy(bm.gameObject);
         }

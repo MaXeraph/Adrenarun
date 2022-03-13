@@ -207,8 +207,11 @@ public class EnemySpawn : MonoBehaviour
         else if (enemy == EnemyType.TURRET && Random.Range(0, 2) == 0)
         {
             variant = EnemyVariantType.SET;
+        } 
+        else if (enemy == EnemyType.TANK)
+        {
+            variant = EnemyVariantType.SHIELD;
         }
-        
         if (RandomPoint(platformRadius, out targetSpawn))
         {
             Debug.DrawRay(targetSpawn, Vector3.up, Color.blue, 1.0f);

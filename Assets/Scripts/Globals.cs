@@ -115,7 +115,8 @@ public enum EnemyVariantType
     NONE,
     HEALER,
 	SET,
-	PREDICTIVE
+	PREDICTIVE,
+	SHIELD,
 }
 
 public enum EntityType

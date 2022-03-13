@@ -55,6 +55,7 @@ public class EnemyFactory
         AddHealerVariantToRoster();
         _enemyInfo.Add(EnemyType.TANK, new EnemyInfo(EnemyMovements.TankMovement, Globals.DirectTargeting, EnemyMovements.TankSetup, new SweepAttackBehaviour(EntityType.ENEMY, 10f, 10f), 0.1f));
         _enemyPostSetups.Add(EnemyVariantType.PREDICTIVE, CreatePredictiveVariant);
+        _enemyPostSetups.Add(EnemyVariantType.SHIELD, CreateShieldVariant);
     }
 
     public GameObject CreateEnemy(Vector3 position, EnemyType enemyType, EnemyVariantType variantType = EnemyVariantType.NONE)
@@ -120,5 +121,13 @@ public class EnemyFactory
     void CreatePredictiveVariant(EnemyBehaviour eb, EnemyType et)
     {
         eb.GetAimDirection = Globals.CreatePredictiveTargeting(GameObject.FindGameObjectWithTag("Player").transform, Globals.enemyBulletSpeeds[et]);
+    }
+
+    // Requires a Shield gameObject as a child object of the enemy
+    void CreateShieldVariant(EnemyBehaviour eb, EnemyType et)
+    {
+        Debug.Log(eb.gameObject.transform.Find("Shield").gameObject);
+        Debug.Log(eb.gameObject.transform.Find("Shield").gameObject.activeSelf);
+        eb.gameObject.transform.Find("Shield").gameObject.SetActive(true);
     }
 }

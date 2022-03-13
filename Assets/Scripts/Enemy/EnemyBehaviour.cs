@@ -68,10 +68,10 @@ public class EnemyBehaviour : MonoBehaviour
 
         Animation anim = gameObject.transform.childCount > 0 ? gameObject.transform.GetChild(0).GetComponent<Animation>() : null;
         // Look. Determine look direction.
-        _direction = (_targetTransform.position - transform.position).normalized;
-        _direction.y = 0;
-        _lookRotation = Quaternion.LookRotation(_direction);
-        transform.rotation = _lookRotation;
+        // _direction = (_targetTransform.position - transform.position).normalized;
+        // _direction.y = 0;
+        // _lookRotation = Quaternion.LookRotation(_direction);
+        // transform.rotation = _lookRotation;
         
         NavAgentMove(this.gameObject, _targetTransform.position);
         

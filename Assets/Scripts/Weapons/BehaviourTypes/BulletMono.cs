@@ -5,7 +5,7 @@ using UnityEngine;
 // Behaviour for Bullet game objects
 public class BulletMono : MonoBehaviour
 {
-    private BulletAttackBehaviour _attackBehaviour;
+    public BulletAttackBehaviour _attackBehaviour;
 
     public static GameObject create(BulletAttackBehaviour attackBehaviour, Vector3 position, Vector3 direction)
     {
