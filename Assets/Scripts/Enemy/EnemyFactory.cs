@@ -53,7 +53,7 @@ public class EnemyFactory
         _enemyInfo.Add(EnemyType.GRENADIER, new EnemyInfo(EnemyMovements.GrenadierMovement, Globals.GrenadierTargeting, EnemyMovements.GrenadierSetup, new ArtilleryAttackBehaviour(EntityType.ENEMY, 5f), 3f));
         _enemyInfo.Add(EnemyType.RANGED, new EnemyInfo(EnemyMovements.RangedMovement, Globals.DirectTargeting, EnemyMovements.RangedSetup, new BulletAttackBehaviour(EntityType.ENEMY, 5f, Globals.enemyBulletSpeeds[EnemyType.RANGED]), 1f));
         AddHealerVariantToRoster();
-        _enemyInfo.Add(EnemyType.TANK, new EnemyInfo(EnemyMovements.TankMovement, Globals.DirectTargeting, EnemyMovements.TankSetup, new SweepAttackBehaviour(EntityType.ENEMY, 10f, 10f), 0.1f));
+        _enemyInfo.Add(EnemyType.TANK, new EnemyInfo(EnemyMovements.TankMovement, Globals.ForwardTargeting, EnemyMovements.TankSetup, new SweepAttackBehaviour(EntityType.ENEMY, 10f, 10f), 0.1f));
         _enemyPostSetups.Add(EnemyVariantType.PREDICTIVE, CreatePredictiveVariant);
         _enemyPostSetups.Add(EnemyVariantType.SHIELD, CreateShieldVariant);
     }

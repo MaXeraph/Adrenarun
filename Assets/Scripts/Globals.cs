@@ -59,6 +59,11 @@ public static class Globals
         return direction;
     }
 
+	public static Vector3 ForwardTargeting(Transform from, Transform to)
+	{
+		return from.forward;
+	}
+
 	public static Func<Transform, Transform, Vector3> CreatePredictiveTargeting(Transform target, float bSpeed) {
 		float bulletSpeed = bSpeed;
 		Vector3 prevPosition = new Vector3(target.position.x, target.position.y, target.position.z);
