@@ -7,6 +7,7 @@ public static class EnemyMovements
 {
     private const float _grenadierBaseSpeed = 6f;
     private const float _rangedBaseSpeed = 8f;
+	private const float _tankBaseSpeed = 12f;
 
     public static void GrenadierSetup(Vector3 transform) {
 
@@ -49,4 +50,16 @@ public static class EnemyMovements
         else anim.Stop();
     }
 
+	public static void TankMovement(GameObject gameObject, Vector3 playerPosition) {
+		Vector3 position = gameObject.transform.position;
+        NavMeshAgent navAgent = gameObject.GetComponent<NavMeshAgent>();
+        navAgent.speed = _tankBaseSpeed * SpeedManager.enemyMovementScaling;
+        float playerDistance = Vector3.Distance(position, playerPosition);
+        if (playerDistance > 10) {
+            navAgent.SetDestination(playerPosition);
+        }
+	}
+	public static void TankSetup(Vector3 transform) {
+
+	}
 }

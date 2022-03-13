@@ -66,7 +66,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (!_initialized) return;
 
-        Animation anim = gameObject.transform.GetChild(0).GetComponent<Animation>();
+        Animation anim = gameObject.transform.childCount > 0 ? gameObject.transform.GetChild(0).GetComponent<Animation>() : null;
         // Look. Determine look direction.
         _direction = (_targetTransform.position - transform.position).normalized;
         _direction.y = 0;
@@ -79,7 +79,7 @@ public class EnemyBehaviour : MonoBehaviour
         Vector3 aimDirection = GetAimDirection(transform, _targetTransform);
 
         // TODO: spawn bullet outside of model
-        if (_weapon.Attack(transform.position, aimDirection, EntityType.ENEMY))
+        if (_weapon.Attack(transform.position, aimDirection, EntityType.ENEMY) && anim)
         {
             foreach (AnimationState state in anim)
             {
