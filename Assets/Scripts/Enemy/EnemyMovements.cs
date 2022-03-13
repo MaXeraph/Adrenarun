@@ -55,7 +55,7 @@ public static class EnemyMovements
         NavMeshAgent navAgent = gameObject.GetComponent<NavMeshAgent>();
         navAgent.speed = _tankBaseSpeed * SpeedManager.enemyMovementScaling;
         float playerDistance = Vector3.Distance(position, playerPosition);
-        if (playerDistance > 10) {
+        if (playerDistance > 0) {
             navAgent.SetDestination(playerPosition);
         }
 	}
