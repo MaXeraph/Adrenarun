@@ -38,7 +38,7 @@ public class Weapon : MonoBehaviour
     public bool Attack(Vector3 position, Vector3 direction, EntityType entityType)
     {
 
-        if (Time.time - lastShot > _fireRate && !_reloading)
+        if (SpeedManager.realTime - lastShot > _fireRate && !_reloading)
         {
             if (_currentMagazine > 0)
             {                
@@ -61,7 +61,7 @@ public class Weapon : MonoBehaviour
                 if (entityType == EntityType.PLAYER) {
                     AudioManager.PlayFireAudio();
                 }
-                lastShot = Time.time;
+                lastShot = SpeedManager.realTime;
                 return true;
             }
             else
