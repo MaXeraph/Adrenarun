@@ -126,8 +126,6 @@ public class EnemyFactory
     // Requires a Shield gameObject as a child object of the enemy
     void CreateShieldVariant(EnemyBehaviour eb, EnemyType et)
     {
-        Debug.Log(eb.gameObject.transform.Find("Shield").gameObject);
-        Debug.Log(eb.gameObject.transform.Find("Shield").gameObject.activeSelf);
         eb.gameObject.transform.Find("Shield").gameObject.SetActive(true);
     }
 }
