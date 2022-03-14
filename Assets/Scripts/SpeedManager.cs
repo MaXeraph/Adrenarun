@@ -18,8 +18,9 @@ public class SpeedManager : MonoBehaviour
         enemySpawnScaling = coreSpeed; //TODO: determine spawn rate based on speed
         enemyMovementScaling = coreSpeed;
     }
-    public static void updateSpeeds(float healthRatio) {
-        coreSpeed = healthRatio;
+    public static void updateSpeeds(float healthRatio)
+    {
+        coreSpeed = 0.2f + healthRatio * 0.8f;
         updateGameObjectSpeed();
     }
 
