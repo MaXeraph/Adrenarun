@@ -17,7 +17,7 @@ public class ArtilleryMono : BulletMono
     public float incrementX;
 
     // direction is actually the position of the enemy
-    public static GameObject create(ArtilleryAttackBehaviour attackBehaviour, Vector3 position, Vector3 direction)
+    public static GameObject Create(ArtilleryAttackBehaviour attackBehaviour, Vector3 position, Vector3 direction)
     {
         GameObject newBullet = ObjectPool.Create("Artillery");
 
@@ -42,6 +42,11 @@ public class ArtilleryMono : BulletMono
         behaviour.incrementX = (targetXY.x - positionXY.x)/300; 
 
         return newBullet;
+    }
+
+    public static void Destroy(GameObject artillery)
+    {
+        ObjectPool.Destroy("Artillery", artillery);
     }
 
     void Update()

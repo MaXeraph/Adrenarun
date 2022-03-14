@@ -7,7 +7,7 @@ public class BulletMono : MonoBehaviour
 {
     private BulletAttackBehaviour _attackBehaviour;
 
-    public static GameObject create(BulletAttackBehaviour attackBehaviour, Vector3 position, Vector3 direction)
+    public static GameObject Create(BulletAttackBehaviour attackBehaviour, Vector3 position, Vector3 direction)
     {
         GameObject newBullet = ObjectPool.Create("Bullet");
 
@@ -16,9 +16,16 @@ public class BulletMono : MonoBehaviour
         newBullet.transform.position = position;
         newBullet.transform.forward = direction;
         if (attackBehaviour.Owner == EntityType.ENEMY) newBullet.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
-        else newBullet.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
 
         return newBullet;
+    }
+
+    public static void Destroy(GameObject bullet)
+    {
+        // Reset to default values
+        bullet.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
+        bullet.GetComponent<TrailRenderer>().Clear();
+        ObjectPool.Destroy("Bullet", bullet);
     }
 
     void Update()

@@ -20,7 +20,7 @@ public class ArtilleryAttackBehaviour : BulletAttackBehaviour
     
     public override void initiateAttack(Vector3 position, Vector3 direction)
     {
-        ArtilleryMono.create(this, position, direction);
+        ArtilleryMono.Create(this, position, direction);
     }
 
     public override void onHit(BulletMono bm, GameObject target)
@@ -36,7 +36,7 @@ public class ArtilleryAttackBehaviour : BulletAttackBehaviour
                 {
                     Stats statsComponent = collider.gameObject.GetComponent<Stats>();
                     statsComponent.currentHealth -= _damage/2; // Deal half damage on explosion.
-                    ObjectPool.Destroy("Artillery", bm.gameObject);
+                    ArtilleryMono.Destroy(bm.gameObject);
                     break;
                 }
             }
@@ -50,7 +50,7 @@ public class ArtilleryAttackBehaviour : BulletAttackBehaviour
                     // Spawn the pool on the ground.
                     thermitePool.GetComponent<Transform>().position = hitInfo[i].point;
                     thermitePool.GetComponent<ThermitePoolMono>().Initialize(this);
-                    ObjectPool.Destroy("Artillery", bm.gameObject);
+                    ArtilleryMono.Destroy(bm.gameObject);
                     return;
                 }
             }

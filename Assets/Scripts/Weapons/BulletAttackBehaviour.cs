@@ -29,7 +29,7 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
 
     public override void initiateAttack(Vector3 position, Vector3 direction)
     {
-        BulletMono.create(this, position, direction);
+        BulletMono.Create(this, position, direction);
     }
 
     public virtual void onHit(BulletMono bm, GameObject target)
@@ -40,8 +40,7 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
             if (statsComponent.owner != _owner)
             {
                 statsComponent.currentHealth -= _damage;
-                bm.gameObject.GetComponent<TrailRenderer>().Clear();
-                ObjectPool.Destroy("Bullet", bm.gameObject);
+                BulletMono.Destroy(bm.gameObject);
                 if (statsComponent.owner == EntityType.ENEMY) {
                     AudioManager.PlayImpactAudio();
                     UIManager.DamageText(bm.gameObject.transform.position + bm.gameObject.transform.up * 0.15f, -_damage);
@@ -50,8 +49,7 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
         }
         else if (target.GetComponent<BulletMono>() == null) // if not another bullet...
         {
-            bm.gameObject.GetComponent<TrailRenderer>().Clear();
-            ObjectPool.Destroy("Bullet", bm.gameObject);
+            BulletMono.Destroy(bm.gameObject);
         }
     }
 }
