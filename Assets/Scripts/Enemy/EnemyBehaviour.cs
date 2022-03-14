@@ -9,24 +9,17 @@ using UnityEngine;
 public class EnemyBehaviour : MonoBehaviour
 {
     private bool _initialized = false;
+	public EnemyType enemyType;
     // Transform of the enemy's target.
     private Transform _targetTransform;
     private Quaternion _lookRotation;
     private Vector3 _direction;
-    private bool _cooldown = false;
-    private float _cooldownDelay = 1f;
     private Weapon _weapon;
 
     // Method to pathfind from Transform to Transform, returns Vector3, the direction to move in next.
     private Action<GameObject, Vector3> NavAgentMove;
     // Method to determine aiming direction from Transform to Transform, returns Vector3, the direction to fire in.
     public Func<Transform, Transform, Vector3> GetAimDirection;
-    
-    IEnumerator Cooldown()
-    {
-        yield return new WaitForSeconds(_cooldownDelay);
-        _cooldown = false;
-    }
 
     public static EnemyBehaviour AddToGameObject(
         GameObject gameObject, 
@@ -49,6 +42,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (_initialized) return false;
         _initialized = true;
 
+		enemyType = info.enemyType;
         _weapon = weapon;
         _targetTransform = target.GetComponent<Transform>();
         NavAgentMove = info.navAgentMove;
@@ -58,8 +52,12 @@ public class EnemyBehaviour : MonoBehaviour
         return true;
     }
     
-    // Start is called before the first frame update
-    void Start() {}
+	public static void Destroy(GameObject enemy) {
+		EnemyBehaviour eb = enemy.GetComponent<EnemyBehaviour>();
+		EnemyType type = eb.enemyType;
+		Destroy(eb);
+		ObjectPool.Destroy(Globals.enemyPrefabNames[type], enemy);
+	}
 
     // Update is called once per frame
     void Update()

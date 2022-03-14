@@ -14,7 +14,7 @@ public class Stats : MonoBehaviour
         {
             _currentHealth = value;
             if (value <= 0 && owner == EntityType.ENEMY) {
-                Destroy(gameObject);
+                EnemyBehaviour.Destroy(gameObject);
                 int rand = Random.Range(0, 20);
                 if(rand == 0)
                 {

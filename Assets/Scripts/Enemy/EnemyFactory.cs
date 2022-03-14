@@ -6,15 +6,17 @@ using UnityEngine;
 // Define EnemyInfo for convenience.
 public struct EnemyInfo
 {
+    public EnemyType enemyType;
     public Action<GameObject, Vector3> navAgentMove;
     public Func<Transform, Transform, Vector3> aim;
     public Action<Vector3> navAgentSetup;
     public AbstractAttackBehaviour attackBehaviour;
     public float fireRate;
 
-    public EnemyInfo(Action<GameObject, Vector3> navAgentMoveFunc, Func<Transform, Transform, Vector3> aimFunc,
+    public EnemyInfo(EnemyType type, Action<GameObject, Vector3> navAgentMoveFunc, Func<Transform, Transform, Vector3> aimFunc,
         Action<Vector3> navAgentSetupFunc, AbstractAttackBehaviour attackBehaviour, float fireRate)
     {
+        enemyType = type;
         navAgentMove = navAgentMoveFunc;
         aim = aimFunc;
         navAgentSetup = navAgentSetupFunc;
@@ -50,8 +52,8 @@ public class EnemyFactory
     {
         // Define enemyInfo for each type.
         AddTurretToRoster();
-        _enemyInfo.Add(EnemyType.GRENADIER, new EnemyInfo(EnemyMovements.GrenadierMovement, Globals.GrenadierTargeting, EnemyMovements.GrenadierSetup, new ArtilleryAttackBehaviour(EntityType.ENEMY, 5f), 3f));
-        _enemyInfo.Add(EnemyType.RANGED, new EnemyInfo(EnemyMovements.RangedMovement, Globals.DirectTargeting, EnemyMovements.RangedSetup, new BulletAttackBehaviour(EntityType.ENEMY, 5f, Globals.enemyBulletSpeeds[EnemyType.RANGED]), 1f));
+        _enemyInfo.Add(EnemyType.GRENADIER, new EnemyInfo(EnemyType.GRENADIER, EnemyMovements.GrenadierMovement, Globals.GrenadierTargeting, EnemyMovements.GrenadierSetup, new ArtilleryAttackBehaviour(EntityType.ENEMY, 5f), 3f));
+        _enemyInfo.Add(EnemyType.RANGED, new EnemyInfo(EnemyType.RANGED, EnemyMovements.RangedMovement, Globals.DirectTargeting, EnemyMovements.RangedSetup, new BulletAttackBehaviour(EntityType.ENEMY, 5f, Globals.enemyBulletSpeeds[EnemyType.RANGED]), 1f));
         AddHealerVariantToRoster();
         _enemyPostSetups.Add(EnemyVariantType.PREDICTIVE, CreatePredictiveVariant);
     }
@@ -64,8 +66,8 @@ public class EnemyFactory
         if (!Globals.enemyPrefabNames.ContainsKey(enemyType)) return null;
 
         string enemyName = Globals.enemyPrefabNames[enemyType];
-        
-        GameObject newEnemyObject = GameObject.Instantiate(Resources.Load(enemyName)) as GameObject;
+
+        GameObject newEnemyObject = ObjectPool.Create(enemyName);
         Transform enemyTransform = newEnemyObject.GetComponent<Transform>();
         CompassUI.addEnemy(enemyTransform);
 
@@ -105,7 +107,7 @@ public class EnemyFactory
         float fireRate = 5f;
 
         // Define enemyInfo for each type.
-        _enemyInfo.Add(EnemyType.TURRET, new EnemyInfo(EnemyMovements.TurretMovement, Globals.DirectTargeting, EnemyMovements.TurretSetup, bulletBehaviour, fireRate));
+        _enemyInfo.Add(EnemyType.TURRET, new EnemyInfo(EnemyType.TURRET, EnemyMovements.TurretMovement, Globals.DirectTargeting, EnemyMovements.TurretSetup, bulletBehaviour, fireRate));
         
         _enemyPostSetups.Add(EnemyVariantType.SET, CreateSetVariant);
     }
