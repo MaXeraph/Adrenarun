@@ -6,7 +6,7 @@ public class ObjectPool
 {
 	private static Dictionary<string, HashSet<GameObject>> available = new Dictionary<string, HashSet<GameObject>>();
 	private static Dictionary<string, HashSet<GameObject>> occupied = new Dictionary<string, HashSet<GameObject>>();
-	
+
 	public static GameObject Create(string prefab)
 	{
 		HashSet<GameObject> availableObjects;
