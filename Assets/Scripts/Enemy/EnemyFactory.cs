@@ -66,7 +66,7 @@ public class EnemyFactory
         if (!Globals.enemyPrefabNames.ContainsKey(enemyType)) return null;
 
         string enemyName = Globals.enemyPrefabNames[enemyType];
-        
+
         GameObject newEnemyObject = GameObject.Instantiate(Resources.Load(enemyName)) as GameObject;
         Transform enemyTransform = newEnemyObject.GetComponent<Transform>();
         CompassUI.addEnemy(enemyTransform);
@@ -75,7 +75,7 @@ public class EnemyFactory
         enemyTransform.position = position + new Vector3(0, 1, 0);
 
         EnemyInfo enemyInfo = _enemyInfo[enemyType];
-        
+
         Weapon enemyWeapon = newEnemyObject.AddComponent<Weapon>();
         enemyWeapon.Initialize(enemyInfo.attackBehaviour, enemyInfo.fireRate);
 
@@ -98,7 +98,7 @@ public class EnemyFactory
     void CreateHealerVariant(EnemyBehaviour eb, EnemyType et)
     {
         AbstractAttackBehaviour enemyAttackBehaviour = eb.GetComponent<Weapon>()._attackBehaviour;
-        if (enemyAttackBehaviour._damage > 0) enemyAttackBehaviour._damage *= -1; 
+        if (enemyAttackBehaviour._damage > 0) enemyAttackBehaviour._damage *= -1;
     }
 
     void AddTurretToRoster()
@@ -108,7 +108,7 @@ public class EnemyFactory
 
         // Define enemyInfo for each type.
         _enemyInfo.Add(EnemyType.TURRET, new EnemyInfo(EnemyMovements.TurretMovement, Globals.DirectTargeting, EnemyMovements.TurretSetup, bulletBehaviour, fireRate));
-        
+
         _enemyPostSetups.Add(EnemyVariantType.SET, CreateSetVariant);
     }
 

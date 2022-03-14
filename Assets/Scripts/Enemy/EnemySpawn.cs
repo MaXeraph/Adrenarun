@@ -39,7 +39,7 @@ public class EnemySpawn : MonoBehaviour
     private const int spawnInterval = 0;
     private int enemiesSpawned = 0;
     private int currentNumEnemies = 0;
-    private bool _timeout = false; 
+    private bool _timeout = false;
     private EnemyType[] enemy;
 
     public Wave[] waves;
@@ -71,7 +71,7 @@ public class EnemySpawn : MonoBehaviour
             StartCoroutine(TimeOut());
         }
 
-        
+
     }
 
     IEnumerator TimeOut()
@@ -92,7 +92,7 @@ public class EnemySpawn : MonoBehaviour
     {
         canSpawn = false;
         startSpawn = false;
-        
+
     }
     // Update is called once per frame
     void Update()
@@ -161,7 +161,7 @@ public class EnemySpawn : MonoBehaviour
                 _cooldown = true;
                 currentNumEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
                 enemiesSpawned += 1;
-                UIManager.enemiesLeft =  enemiesPerWave - (enemiesSpawned - currentNumEnemies);
+                UIManager.enemiesLeft = enemiesPerWave - (enemiesSpawned - currentNumEnemies);
                 //Debug.Log(enemiesSpawned);
                 StartCoroutine(Cooldown());
             }
@@ -207,7 +207,7 @@ public class EnemySpawn : MonoBehaviour
         else if (enemy == EnemyType.TURRET && Random.Range(0, 2) == 0)
         {
             variant = EnemyVariantType.SET;
-        } 
+        }
         else if (enemy == EnemyType.TANK)
         {
             variant = EnemyVariantType.SHIELD;

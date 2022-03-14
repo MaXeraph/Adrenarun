@@ -21,7 +21,7 @@ public class EnemyBehaviour : MonoBehaviour
     private Action<GameObject, Vector3> NavAgentMove;
     // Method to determine aiming direction from Transform to Transform, returns Vector3, the direction to fire in.
     public Func<Transform, Transform, Vector3> GetAimDirection;
-    
+
     IEnumerator Cooldown()
     {
         yield return new WaitForSeconds(_cooldownDelay);
@@ -29,8 +29,8 @@ public class EnemyBehaviour : MonoBehaviour
     }
 
     public static EnemyBehaviour AddToGameObject(
-        GameObject gameObject, 
-        GameObject target, 
+        GameObject gameObject,
+        GameObject target,
         EnemyInfo info,
         Weapon weapon)
     {
@@ -42,7 +42,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     // Initialize must be run for the Update loop to run.
     // This is because the mechanisms (Pathfind, Aim, etc.) aren't set until Initialize is called.
-    public bool Initialize(GameObject target, 
+    public bool Initialize(GameObject target,
         EnemyInfo info,
         Weapon weapon)
     {
@@ -54,12 +54,12 @@ public class EnemyBehaviour : MonoBehaviour
         NavAgentMove = info.navAgentMove;
         GetAimDirection = info.aim;
         info.navAgentSetup(new Vector3(0, 0, 0));
-        
+
         return true;
     }
-    
+
     // Start is called before the first frame update
-    void Start() {}
+    void Start() { }
 
     // Update is called once per frame
     void Update()
@@ -72,9 +72,9 @@ public class EnemyBehaviour : MonoBehaviour
         // _direction.y = 0;
         // _lookRotation = Quaternion.LookRotation(_direction);
         // transform.rotation = _lookRotation;
-        
+
         NavAgentMove(this.gameObject, _targetTransform.position);
-        
+
         // Aim. Determine firing direction.
         Vector3 aimDirection = GetAimDirection(transform, _targetTransform);
 
