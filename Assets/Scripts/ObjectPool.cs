@@ -42,9 +42,12 @@ public class ObjectPool
 	{
 		HashSet<GameObject> occupiedObjects;
 		occupied.TryGetValue(prefab, out occupiedObjects);
-		if (occupiedObjects == null || !occupiedObjects.Contains(gameObject)) Debug.LogError("ObjectPool: Tried to destroy non-existent prefab type " + prefab);
-		occupied[prefab].Remove(gameObject);
-		gameObject.SetActive(false);
-		available[prefab].Add(gameObject);
+		if (occupiedObjects == null) Debug.LogError("ObjectPool: Tried to destroy non-existent prefab type " + prefab);
+		if (occupied[prefab].Contains(gameObject))
+		{
+			occupied[prefab].Remove(gameObject);
+			gameObject.SetActive(false);
+			available[prefab].Add(gameObject);
+		}
 	}
 }

@@ -8,7 +8,7 @@ public class HealingPill : MonoBehaviour
 
     public static GameObject SpawnPill(Vector3 position)
     {
-        GameObject newHealingPill = GameObject.Instantiate(Resources.Load("HealingPill")) as GameObject;
+        GameObject newHealingPill = ObjectPool.Create("HealingPill");
         Transform pillTransform = newHealingPill.GetComponent<Transform>();
         pillTransform.position = position;
         currentPills.Add(newHealingPill);
@@ -19,7 +19,7 @@ public class HealingPill : MonoBehaviour
     {
         foreach (GameObject pill in currentPills)
         {
-            Destroy(pill);
+            ObjectPool.Destroy("HealingPill", pill);
         }
         currentPills.Clear();
     }
@@ -38,7 +38,7 @@ public class HealingPill : MonoBehaviour
             {
                 statComponent.currentHealth = statComponent.maxHealth;
             }
-            Destroy(gameObject);
+            ObjectPool.Destroy("HealingPill", gameObject);
         }
     }
 }
