@@ -7,7 +7,7 @@ using DG.Tweening;
 public class Weapon : MonoBehaviour
 {
     private bool _initialized = false;
-	public List<AbstractFiringPowerUp> firingMods = new List<AbstractFiringPowerUp>();
+    public List<AbstractFiringPowerUp> firingMods = new List<AbstractFiringPowerUp>();
 
     public AbstractAttackBehaviour _attackBehaviour;
     public float _fireRate; // shots per second
@@ -41,24 +41,25 @@ public class Weapon : MonoBehaviour
         if (SpeedManager.realTime - lastShot > _fireRate && !_reloading)
         {
             if (_currentMagazine > 0)
-            {                
+            {
                 List<(Vector3, float)> attackDirections = new List<(Vector3, float)>();
                 attackDirections.Add((direction, 0f));
-                      
+
                 // apply each powerup in poweruplist, creating a growing list of firing directions
                 // assumptions: firingMods is sorted (handled in PowerUpManager)
-				for (int i = 0; i < firingMods.Count; i++)
+                for (int i = 0; i < firingMods.Count; i++)
                 {
                     attackDirections = firingMods[i].applyPowerUp(attackDirections);
                 }
 
                 // for each direction, initiate an attack
-				for (int j = 0; j < attackDirections.Count; j++)
+                for (int j = 0; j < attackDirections.Count; j++)
                 {
                     StartCoroutine(ShootAfterDelay(position, attackDirections[j].Item1, attackDirections[j].Item2));
                 }
                 _currentMagazine -= 1; // Comment out for infinite ammo
-                if (entityType == EntityType.PLAYER) {
+                if (entityType == EntityType.PLAYER)
+                {
                     AudioManager.PlayFireAudio();
                 }
                 lastShot = SpeedManager.realTime;
@@ -77,7 +78,8 @@ public class Weapon : MonoBehaviour
     public void Reload()
     {
         _reloading = true;
-        if (_attackBehaviour.Owner.ToString() == "PLAYER") {
+        if (_attackBehaviour.Owner.ToString() == "PLAYER")
+        {
             UIManager.Reloading = true;
             AudioManager.PlayReloadAudio();
         }
