@@ -21,6 +21,7 @@ public class SpeedManager : MonoBehaviour
     public static void updateSpeeds(float healthRatio)
     {
         coreSpeed = 0.2f + healthRatio * 0.8f;
+        if (healthRatio > 1) coreSpeed = (healthRatio - 1f) * 6f - 1f;
         updateGameObjectSpeed();
     }
 
