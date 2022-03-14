@@ -19,7 +19,7 @@ public class ArtilleryMono : BulletMono
     // direction is actually the position of the enemy
     public static GameObject create(ArtilleryAttackBehaviour attackBehaviour, Vector3 position, Vector3 direction)
     {
-        GameObject newBullet = Instantiate(Resources.Load("Artillery")) as GameObject;
+        GameObject newBullet = ObjectPool.Create("Artillery");
 
         ArtilleryMono behaviour = newBullet.GetComponent<ArtilleryMono>();
         

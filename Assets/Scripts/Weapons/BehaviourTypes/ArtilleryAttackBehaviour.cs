@@ -36,7 +36,7 @@ public class ArtilleryAttackBehaviour : BulletAttackBehaviour
                 {
                     Stats statsComponent = collider.gameObject.GetComponent<Stats>();
                     statsComponent.currentHealth -= _damage/2; // Deal half damage on explosion.
-                    GameObject.Destroy(bm.gameObject);
+                    ObjectPool.Destroy("Artillery", bm.gameObject);
                     break;
                 }
             }
@@ -50,7 +50,7 @@ public class ArtilleryAttackBehaviour : BulletAttackBehaviour
                     // Spawn the pool on the ground.
                     thermitePool.GetComponent<Transform>().position = hitInfo[i].point;
                     thermitePool.GetComponent<ThermitePoolMono>().Initialize(this);
-                    GameObject.Destroy(bm.gameObject);
+                    ObjectPool.Destroy("Artillery", bm.gameObject);
                     return;
                 }
             }
