@@ -57,8 +57,8 @@ public class EnemySpawn : MonoBehaviour
 
 		/*for (int i = 0; i < totalWaveNumber; i++)
 		{
-		    string name = "wave " + i.ToString();
-		    waves[i] = new Wave(name, enemiesPerWave, enemy, spawnInterval);
+			string name = "wave " + i.ToString();
+			waves[i] = new Wave(name, enemiesPerWave, enemy, spawnInterval);
 		}*/
 
 		if (!_timeout)
@@ -121,20 +121,20 @@ public class EnemySpawn : MonoBehaviour
 				/*
 				if (currentWaveNumber >= totalWaveNumber)
 				{
-				    //Debug.Log("Game Over!");
-				    // TODO : GAME OVER UI
+					//Debug.Log("Game Over!");
+					// TODO : GAME OVER UI
 				}
 				else
 				{
-				    // still have more waves to spawn
+					// still have more waves to spawn
 
-				    currentWave = waves[currentWaveNumber];
-				    enemiesPerWave += 5;
-				    // grant power up here as well
-				    // TODO : POWER UP UI
-				    pum.presentPowerUps();
+					currentWave = waves[currentWaveNumber];
+					enemiesPerWave += 5;
+					// grant power up here as well
+					// TODO : POWER UP UI
+					pum.presentPowerUps();
 
-				    StartSpawningWave();
+					StartSpawningWave();
 				}
 				*/
 			}
