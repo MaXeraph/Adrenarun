@@ -10,7 +10,7 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
 	public float _bulletSpeed;
 	public Dictionary<string, int> _hitTypeModifiers;
 	public Dictionary<string, float> _hitStatsModifiers;
-	
+
 	public BulletAttackBehaviour(EntityType owner, float damage = 10f, float bulletSpeed = 20f)
 		: base(owner, damage)
 	{
@@ -31,7 +31,7 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
 	{
 		BulletMono.Create(this, position, direction);
 	}
-	
+
 	public virtual void onHit(BulletMono bm, GameObject target)
 	{
 		Stats statsComponent = target.GetComponent<Stats>();
