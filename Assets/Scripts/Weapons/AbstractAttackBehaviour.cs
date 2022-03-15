@@ -7,22 +7,22 @@ using UnityEngine;
  */
 public abstract class AbstractAttackBehaviour
 {
-    public EntityType Owner
-    {
-        get { return _owner; }
-        private set { _owner = value; }
-    }
-    protected EntityType _owner;
-    public float _damage;
-    
-    /**
+	public EntityType Owner
+	{
+		get { return _owner; }
+		private set { _owner = value; }
+	}
+	protected EntityType _owner;
+	public float _damage;
+
+	/**
      * Called to initiate an attack from position in direction.
      */
-    public abstract void initiateAttack(Vector3 position, Vector3 direction);
+	public abstract void initiateAttack(Vector3 position, Vector3 direction);
 
-    protected AbstractAttackBehaviour(EntityType owner, float damage)
-    {
-        _owner = owner;
-        _damage = damage;
-    }
+	protected AbstractAttackBehaviour(EntityType owner, float damage)
+	{
+		_owner = owner;
+		_damage = damage;
+	}
 }

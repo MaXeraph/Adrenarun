@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class bulletIndicator : MonoBehaviour
 {
-    public static Transform bulletLocation;
-    Transform Look;
+	public static Transform bulletLocation;
+	Transform Look;
 
 }
