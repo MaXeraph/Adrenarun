@@ -15,8 +15,8 @@ public class CompassUI : MonoBehaviour
 
 	private static string[] directionNames = new string[] { "North", "South", "East", "West", "NW", "NE", "SW", "SE" };
 
-	private static Vector3[] directionVectors = new Vector3[] {Vector3.forward* 1000, Vector3.back* 1000, Vector3.right* 1000, Vector3.left* 1000,
-													   (Vector3.right + Vector3.forward)* 1000, (Vector3.left + Vector3.forward)* 1000, (Vector3.right + Vector3.back)* 1000, (Vector3.left + Vector3.back)* 1000 };
+	private static Vector3[] directionVectors = new Vector3[] { Vector3.forward * 1000, Vector3.back * 1000, Vector3.right * 1000, Vector3.left * 1000,
+	(Vector3.right + Vector3.forward) * 1000, (Vector3.left + Vector3.forward) * 1000, (Vector3.right + Vector3.back) * 1000, (Vector3.left + Vector3.back) * 1000 };
 
 	private static List<Transform> enemies = new List<Transform>();
 	private static List<GameObject> enemyMarkers = new List<GameObject>();

@@ -13,10 +13,12 @@ public class ThermitePoolMono : MonoBehaviour
 		_lastTick = SpeedManager.realTime;
 		gameObject.GetComponent<Renderer>().material.color = Color.red;
 	}
+
 	public void Initialize(ArtilleryAttackBehaviour attackBehaviour)
 	{
 		_attackBehaviour = attackBehaviour;
 	}
+
 	void FixedUpdate()
 	{
 		// Fire only when X 'real time' has passed since last damage tick.

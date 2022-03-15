@@ -16,8 +16,8 @@ public abstract class AbstractAttackBehaviour
 	public float _damage;
 
 	/**
-     * Called to initiate an attack from position in direction.
-     */
+	 * Called to initiate an attack from position in direction.
+	 */
 	public abstract void initiateAttack(Vector3 position, Vector3 direction);
 
 	protected AbstractAttackBehaviour(EntityType owner, float damage)

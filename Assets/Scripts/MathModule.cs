@@ -2,9 +2,9 @@ using UnityEngine;
 public static class MathModule
 {
 	/**
-     * Calculates the arc length of the quadratic in the form f(x) = ax^2 + bx + c from x = m to x = n.
-     * The arc length of a function is the definite integral of (dy/dx)^2 + 1.
-     */
+	 * Calculates the arc length of the quadratic in the form f(x) = ax^2 + bx + c from x = m to x = n.
+	 * The arc length of a function is the definite integral of (dy/dx)^2 + 1.
+	 */
 	public static float calculateQuadraticArcLength(float a, float b, float c, float m, float n)
 	{
 		float[] integralCoefficients = new float[] { 4 * a * a / 3, 4 * a * b / 2, b * b, 1 };
@@ -32,7 +32,7 @@ public static class MathModule
 		if (4 * p * p * p + 27 * q * q > 0) // There is one real root.
 		{
 			return Mathf.Pow(-1 * q / 2 + Mathf.Pow(q * q / 4 + p * p * p / 27, 1f / 2f), 1f / 3f) +
-				   Mathf.Pow(-1 * q / 2 - Mathf.Pow(q * q / 4 + p * p * p / 27, 1f / 2f), 1f / 3f) - tc;
+				Mathf.Pow(-1 * q / 2 - Mathf.Pow(q * q / 4 + p * p * p / 27, 1f / 2f), 1f / 3f) - tc;
 		}
 
 		return -1;
@@ -50,8 +50,8 @@ public static class MathModule
 	}
 
 	/**
-     * Return the normal of the plane defined by three points a, b, c.
-     */
+	 * Return the normal of the plane defined by three points a, b, c.
+	 */
 	public static Vector3 determinePlaneNormal(Vector3 a, Vector3 b, Vector3 c)
 	{
 		return Vector3.Cross(b - a, c - a).normalized;
