@@ -12,7 +12,7 @@ public class BulletMono : MonoBehaviour
         GameObject newBullet = ObjectPool.Create("Bullet");
 
         newBullet.GetComponent<BulletMono>()._attackBehaviour = attackBehaviour;
-        
+
         newBullet.transform.position = position;
         newBullet.transform.forward = direction;
         if (attackBehaviour.Owner == EntityType.ENEMY) newBullet.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);

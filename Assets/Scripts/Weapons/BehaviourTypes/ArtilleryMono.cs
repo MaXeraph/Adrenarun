@@ -22,9 +22,9 @@ public class ArtilleryMono : BulletMono
         GameObject newBullet = ObjectPool.Create("Artillery");
 
         ArtilleryMono behaviour = newBullet.GetComponent<ArtilleryMono>();
-        
+
         behaviour._attackBehaviour = attackBehaviour;
-        
+
         newBullet.transform.position = position;
 
         Vector3 vertex = position + (direction - position) / 2 + new Vector3(0, ArtilleryMono.vertexHeight, 0);
@@ -32,14 +32,14 @@ public class ArtilleryMono : BulletMono
         behaviour.gpPlane = MathModule.determinePlaneNormal(position, direction, vertex);
 
         behaviour.d = -1 * (behaviour.gpPlane.x * position.x + behaviour.gpPlane.y * position.y + behaviour.gpPlane.z * position.z);
-        
+
         Vector3 positionXY = MathModule.convertToXY(behaviour.gpPlane, position, behaviour.d);
         Vector3 targetXY = MathModule.convertToXY(behaviour.gpPlane, direction, behaviour.d);
         Vector3 vertexXY = MathModule.convertToXY(behaviour.gpPlane, vertex, behaviour.d);
 
         behaviour.quadratic = MathModule.calculateQuadratic(new Vector3[3] { positionXY, targetXY, vertexXY });
-        
-        behaviour.incrementX = (targetXY.x - positionXY.x)/300; 
+
+        behaviour.incrementX = (targetXY.x - positionXY.x) / 300;
 
         return newBullet;
     }
@@ -52,9 +52,9 @@ public class ArtilleryMono : BulletMono
     void Update()
     {
         Vector3 posXY = MathModule.convertToXY(gpPlane, transform.position, d);
-        
+
         float nextX = posXY.x + incrementX * SpeedManager.bulletSpeedScaling;
-        float nextY = quadratic[0]*nextX*nextX + quadratic[1]*nextX + quadratic[2];
+        float nextY = quadratic[0] * nextX * nextX + quadratic[1] * nextX + quadratic[2];
         Vector3 newPosXY = new Vector3(nextX, nextY, 0);
         Vector3 newPosition = MathModule.convertToPlane(gpPlane, newPosXY, d);
 

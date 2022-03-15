@@ -11,7 +11,7 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
     public Dictionary<string, int> _hitTypeModifiers;
     public Dictionary<string, float> _hitStatsModifiers;
 
-    public BulletAttackBehaviour(EntityType owner, float damage = 10f, float bulletSpeed = 20f) 
+    public BulletAttackBehaviour(EntityType owner, float damage = 10f, float bulletSpeed = 20f)
         : base(owner, damage)
     {
         _bulletSpeed = bulletSpeed;
@@ -41,7 +41,8 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
             {
                 statsComponent.currentHealth -= _damage;
                 BulletMono.Destroy(bm.gameObject);
-                if (statsComponent.owner == EntityType.ENEMY) {
+                if (statsComponent.owner == EntityType.ENEMY)
+                {
                     AudioManager.PlayImpactAudio();
                     UIManager.DamageText(bm.gameObject.transform.position + bm.gameObject.transform.up * 0.15f, -_damage);
                 }

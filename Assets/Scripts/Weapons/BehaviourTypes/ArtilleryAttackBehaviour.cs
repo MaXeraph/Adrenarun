@@ -9,7 +9,7 @@ public class ArtilleryAttackBehaviour : BulletAttackBehaviour
 {
     public int thermiteDurability;
     public float thermiteDamageCooldown;
-    
+
 
     public ArtilleryAttackBehaviour(EntityType owner, float damage = 5f, float bulletSpeed = 10f, int durability = 10, float damageCooldown = 0.25f)
         : base(owner, damage, bulletSpeed)
@@ -17,7 +17,7 @@ public class ArtilleryAttackBehaviour : BulletAttackBehaviour
         thermiteDurability = durability;
         thermiteDamageCooldown = damageCooldown;
     }
-    
+
     public override void initiateAttack(Vector3 position, Vector3 direction)
     {
         ArtilleryMono.Create(this, position, direction);
@@ -35,12 +35,12 @@ public class ArtilleryAttackBehaviour : BulletAttackBehaviour
                 if (collider.gameObject.tag == "Player")
                 {
                     Stats statsComponent = collider.gameObject.GetComponent<Stats>();
-                    statsComponent.currentHealth -= _damage/2; // Deal half damage on explosion.
+                    statsComponent.currentHealth -= _damage / 2; // Deal half damage on explosion.
                     ArtilleryMono.Destroy(bm.gameObject);
                     break;
                 }
             }
-            
+
             RaycastHit[] hitInfo = Physics.RaycastAll(position + new Vector3(0, 5, 0), new Vector3(0, -1, 0));
             for (int i = 0; i < hitInfo.Length; i++)
             {
