@@ -20,18 +20,18 @@ public class ThermitePoolMono : MonoBehaviour
 	}
 
 	void FixedUpdate()
-	{ 
+	{
 		//Fire only when X 'real time' has passed since last damage tick. 
 		if (SpeedManager.realTime - _lastTick >= _attackBehaviour.thermiteDamageCooldown)
 		{
 			_lastTick = SpeedManager.realTime;
 			foreach (KeyValuePair<GameObject, int> entry in _currentCollisions)
-			{ 
+			{
 				//If is colliding with both hitboxes and is the player... 
 				if (entry.Value == 2 && entry.Key.tag == "Player")
 				{
 					Stats statsComponent = entry.Key.GetComponent<Stats>();
-					// ...lower hp. 
+					// ...lower hp.
 					statsComponent.currentHealth -= _attackBehaviour._damage;
 				}
 			}
