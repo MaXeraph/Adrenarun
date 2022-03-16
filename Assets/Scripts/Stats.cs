@@ -12,7 +12,8 @@ public class Stats : MonoBehaviour
         get => _currentHealth;
         set
         {
-            _currentHealth = value;
+            if (_currentHealth - value < 0) _currentHealth -= (_currentHealth - value) * _damageTakenMultiplier;
+            else _currentHealth = value;
             if (value <= 0 && owner == EntityType.ENEMY) {
                 Destroy(gameObject);
                 int rand = Random.Range(0, 20);
@@ -38,6 +39,19 @@ public class Stats : MonoBehaviour
     public float maxHealth;
     public EntityType owner;
     bool dead = false;
+    public Dictionary<object, float> damageTakenMultipliers = new Dictionary<object, float>() { };
+
+    private float _damageTakenMultiplier
+    {
+        get {
+            float total = 1f;
+            Dictionary<object, float>.ValueCollection multipliers = damageTakenMultipliers.Values;
+            foreach (float mult in multipliers) {
+                total *= mult;
+            }
+            return total;
+        }
+    }
 
     public Stats(float maxHealth = 100f)
     {
@@ -57,4 +71,8 @@ public class Stats : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+    void Update()
+    {
+        
+    }
 }

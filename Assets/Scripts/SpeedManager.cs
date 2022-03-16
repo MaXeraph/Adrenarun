@@ -11,8 +11,11 @@ public class SpeedManager : MonoBehaviour
     public static float adrenalinModifier = 0f;
     public static float enemyMovementScaling;
     public static double realTime = 0;
+    public static MonoBehaviour instance; // So we can use this monobehaviour to start coroutines in non-monos
     
-    void Start() {
+    void Start()
+    {
+        instance = this;
         playerMovementScaling = coreSpeed; //TODO: determine player movement ratio based on speed
         bulletSpeedScaling = coreSpeed; //TODO: determine bullet speed ratio based on speed
         enemySpawnScaling = coreSpeed; //TODO: determine spawn rate based on speed
