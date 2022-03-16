@@ -10,7 +10,7 @@ public class BulletMono : MonoBehaviour
 	public static GameObject Create(BulletAttackBehaviour attackBehaviour, Vector3 position, Vector3 direction)
 	{
 		GameObject newBullet = ObjectPool.Create("Bullet");
-		
+
 		newBullet.GetComponent<BulletMono>()._attackBehaviour = attackBehaviour;
 		newBullet.transform.position = position;
 		newBullet.transform.forward = direction;

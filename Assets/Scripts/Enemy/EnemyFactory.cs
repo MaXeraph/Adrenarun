@@ -123,7 +123,7 @@ public class EnemyFactory
 	{
 		eb.GetAimDirection = Globals.CreatePredictiveTargeting(GameObject.FindGameObjectWithTag("Player").transform, Globals.enemyBulletSpeeds[et]);
 	}
-	
+
 	void CreateShieldVariant(EnemyBehaviour eb, EnemyType et)
 	{
 		eb.gameObject.transform.Find("Shield").gameObject.SetActive(true);
