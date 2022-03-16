@@ -17,7 +17,7 @@ public class ShieldBehaviour : MonoBehaviour
 			if (_currentCollisions[gameObject] == 2)
 			{
 				_currentCollisions.Remove(gameObject);
-				ObjectPool.Destroy(gameObject);
+				ObjectPool.Destroy("Bullet", gameObject);
 			}
 		}
 	}
