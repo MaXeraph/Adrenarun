@@ -48,7 +48,7 @@ public class Stats : MonoBehaviour
 		this.maxHealth = maxHealth;
 	}
 
-	void Awake()
+	void Start()
 	{
 		// TODO: refactor for more dynamic assignment
 		if (gameObject.tag == "Player")
@@ -57,6 +57,8 @@ public class Stats : MonoBehaviour
 			UIManager.MaxHealth = maxHealth;
 		}
 		else owner = EntityType.ENEMY;
+		
+		currentHealth = maxHealth;
 	}
 
 	// Assuming enable only happens due to object pooling
