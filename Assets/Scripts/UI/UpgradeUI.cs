@@ -30,8 +30,8 @@ public class UpgradeUI : MonoBehaviour
             setButton(choiceButtons[i], i);
             choiceButtons[i].GetComponent<UpgradeChoice>().choiceNum = i;
         }
-
-        gameObject.SetActive(false);
+		GetComponent<Canvas>().enabled = true;
+		gameObject.SetActive(false);
     }
 
     public static void init()
