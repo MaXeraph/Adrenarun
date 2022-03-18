@@ -178,7 +178,6 @@ public class PlayerCentral : MonoBehaviour
 
         float dashSpeed = 60f * SpeedManager.playerMovementScaling;
         float dashTime = 0.2f/SpeedManager.playerMovementScaling;
-		CrosshairUI.dash(dashCD);
         Vector3 move = _player.transform.right * ad_input + _player.transform.forward * ws_input;
         while(Time.time < startTime + dashTime)
         {
