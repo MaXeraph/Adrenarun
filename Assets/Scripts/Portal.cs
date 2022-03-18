@@ -28,6 +28,7 @@ public class Portal : MonoBehaviour
 			c.GetComponent<EnemyBehaviour>().enabled = false;
 			c.GetComponent<NavMeshAgent>().SetDestination(portalOpposite.transform.position * 1.05f);
 			c.GetComponent<EnemyBehaviour>().enabled = true;
+			c.transform.position = c.transform.position + distanceToExit * 1.05f;
 		} else {
 			c.transform.position = c.transform.position + distanceToExit * 1.05f;
 		}
