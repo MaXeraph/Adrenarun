@@ -115,7 +115,7 @@ public class EnemySpawn : MonoBehaviour
                 enemiesPerWave += enemiesPerWave;
 
                 currentWave = new Wave(name, enemiesPerWave, enemy, spawnInterval);
-                pum.presentPowerUps();
+                pum.presentPowerUps(59f, 1);
                 StartSpawningWave();
 
                 /*

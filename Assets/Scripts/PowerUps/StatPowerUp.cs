@@ -23,11 +23,11 @@ public class DamagePowerUp : AbstractStatPowerUp
 public class FireRatePowerUp : AbstractStatPowerUp
 {
     public FireRatePowerUp(){
-        _modifier = -0.04f;
+        _modifier = 0.7f;
     }
 
     public override void applyPowerUp(Weapon weapon){
-        weapon._fireRate += _modifier;
+        weapon._fireRate *= _modifier;
     }
 }
 
