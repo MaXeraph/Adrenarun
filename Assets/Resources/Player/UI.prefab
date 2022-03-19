@@ -1204,7 +1204,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &8272581637530748927
 MonoBehaviour:
@@ -4018,7 +4018,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0.51
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
