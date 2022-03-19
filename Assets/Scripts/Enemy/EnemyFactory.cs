@@ -31,7 +31,6 @@ public struct EnemyInfo
  */
 public class EnemyFactory
 {
-
 	// Additional setup for an enemy.
 	private static Dictionary<EnemyVariantType, Action<EnemyBehaviour, EnemyType>> _enemyPostSetups = new Dictionary<EnemyVariantType, Action<EnemyBehaviour, EnemyType>>();
 	private static Dictionary<EnemyType, EnemyInfo> _enemyInfo = new Dictionary<EnemyType, EnemyInfo>();
@@ -54,8 +53,10 @@ public class EnemyFactory
 		AddTurretToRoster();
 		_enemyInfo.Add(EnemyType.GRENADIER, new EnemyInfo(EnemyType.GRENADIER, EnemyMovements.GrenadierMovement, Globals.GrenadierTargeting, EnemyMovements.GrenadierSetup, new ArtilleryAttackBehaviour(EntityType.ENEMY, 5f), 3f));
 		_enemyInfo.Add(EnemyType.RANGED, new EnemyInfo(EnemyType.RANGED, EnemyMovements.RangedMovement, Globals.DirectTargeting, EnemyMovements.RangedSetup, new BulletAttackBehaviour(EntityType.ENEMY, 5f, Globals.enemyBulletSpeeds[EnemyType.RANGED]), 1f));
+		_enemyInfo.Add(EnemyType.TANK, new EnemyInfo(EnemyType.TANK, EnemyMovements.TankMovement, Globals.ForwardTargeting, EnemyMovements.TankSetup, new SweepAttackBehaviour(EntityType.ENEMY, 10f, 10f), 0.1f));
 		AddHealerVariantToRoster();
 		_enemyPostSetups.Add(EnemyVariantType.PREDICTIVE, CreatePredictiveVariant);
+		_enemyPostSetups.Add(EnemyVariantType.SHIELD, CreateShieldVariant);
 	}
 
 	public GameObject CreateEnemy(Vector3 position, EnemyType enemyType, EnemyVariantType variantType = EnemyVariantType.NONE)
@@ -121,5 +122,10 @@ public class EnemyFactory
 	void CreatePredictiveVariant(EnemyBehaviour eb, EnemyType et)
 	{
 		eb.GetAimDirection = Globals.CreatePredictiveTargeting(GameObject.FindGameObjectWithTag("Player").transform, Globals.enemyBulletSpeeds[et]);
+	}
+
+	void CreateShieldVariant(EnemyBehaviour eb, EnemyType et)
+	{
+		eb.gameObject.transform.Find("Shield").gameObject.SetActive(true);
 	}
 }

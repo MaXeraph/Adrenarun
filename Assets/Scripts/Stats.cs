@@ -57,7 +57,14 @@ public class Stats : MonoBehaviour
 			UIManager.MaxHealth = maxHealth;
 		}
 		else owner = EntityType.ENEMY;
+		
+		currentHealth = maxHealth;
+	}
 
+	// Assuming enable only happens due to object pooling
+	// Better to use object pooling's subscriptions to clean this up
+	void OnEnable()
+	{
 		currentHealth = maxHealth;
 	}
 
