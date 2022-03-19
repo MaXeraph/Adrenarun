@@ -10,9 +10,9 @@ public class ConsumableUI : MonoBehaviour
 
 	void Awake()
     {
-		Transform parent = transform.GetChild(2);
-		pill1 = parent.GetChild(0);
-		pill2 = parent.GetChild(1);
+		Transform parent = transform;
+		pill1 = parent.GetChild(2);
+		pill2 = parent.GetChild(3);
 		change_pill(pill1, false); change_pill(pill2, false);
 
 	}

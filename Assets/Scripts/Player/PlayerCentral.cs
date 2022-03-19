@@ -28,7 +28,7 @@ public class PlayerCentral : MonoBehaviour
 		get => _healingPills;
 		set 
 		{
-			_healingPills = value;
+			_healingPills = Mathf.Clamp(value, 0, 2);
 			ConsumableUI.update_pill_amount(value);
 		}
 	}
