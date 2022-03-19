@@ -29,6 +29,7 @@ public class PlayerCentral : MonoBehaviour
 		set 
 		{
 			_healingPills = value;
+			ConsumableUI.update_pill_amount(value);
 		}
 	}
 
