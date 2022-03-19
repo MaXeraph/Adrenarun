@@ -5,14 +5,13 @@ using UnityEngine;
 // Behaviour for Bullet game objects
 public class BulletMono : MonoBehaviour
 {
-	private BulletAttackBehaviour _attackBehaviour;
+	public BulletAttackBehaviour _attackBehaviour;
 
 	public static GameObject Create(BulletAttackBehaviour attackBehaviour, Vector3 position, Vector3 direction)
 	{
 		GameObject newBullet = ObjectPool.Create("Bullet");
 
 		newBullet.GetComponent<BulletMono>()._attackBehaviour = attackBehaviour;
-
 		newBullet.transform.position = position;
 		newBullet.transform.forward = direction;
 		if (attackBehaviour.Owner == EntityType.ENEMY) newBullet.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);

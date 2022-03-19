@@ -54,26 +54,33 @@ public static class Globals
 	};
 
 	public static Vector3 DirectTargeting(Transform from, Transform to)
-    {
-        Vector3 direction = (to.position - from.position).normalized;
-        return direction;
-    }
+	{
+		Vector3 direction = (to.position - from.position).normalized;
+		return direction;
+	}
 
-	public static Func<Transform, Transform, Vector3> CreatePredictiveTargeting(Transform target, float bSpeed) {
+	public static Vector3 ForwardTargeting(Transform from, Transform to)
+	{
+		return from.forward;
+	}
+
+	public static Func<Transform, Transform, Vector3> CreatePredictiveTargeting(Transform target, float bSpeed)
+	{
 		float bulletSpeed = bSpeed;
 		Vector3 prevPosition = new Vector3(target.position.x, target.position.y, target.position.z);
 		float prevTime = Time.time;
-		Func<Transform, Transform, Vector3> predictive = delegate(Transform from, Transform to) {
-			float modifiedBulletSpeed = bulletSpeed*SpeedManager.bulletSpeedScaling;
+		Func<Transform, Transform, Vector3> predictive = delegate (Transform from, Transform to)
+		{
+			float modifiedBulletSpeed = bulletSpeed * SpeedManager.bulletSpeedScaling;
 			Vector3 enemyDir = (to.position - prevPosition).normalized;
 			Vector3 plane = MathModule.determinePlaneNormal(from.position, to.position, to.position + enemyDir);
 			float now = Time.time;
-			float enemySpeed = (to.position - prevPosition).magnitude/(now - prevTime);
+			float enemySpeed = (to.position - prevPosition).magnitude / (now - prevTime);
 			// Use law of sines
 			float angleBeta = Vector3.Angle(from.position - to.position, enemyDir);
 			// Angles towards or away cause the plane defined to not have a major y-component... in these cases, just shoot at them
 			if (angleBeta >= 170f || angleBeta <= 10f) return (to.position - from.position).normalized;
-			float angleAlpha = Mathf.Abs(Mathf.Rad2Deg*Mathf.Asin(enemySpeed*Mathf.Sin(angleBeta*Mathf.Deg2Rad)/modifiedBulletSpeed));
+			float angleAlpha = Mathf.Abs(Mathf.Rad2Deg * Mathf.Asin(enemySpeed * Mathf.Sin(angleBeta * Mathf.Deg2Rad) / modifiedBulletSpeed));
 			Vector3 firingDirection = Quaternion.AngleAxis(angleAlpha, plane) * (to.position - from.position);
 			prevPosition.x = to.position.x;
 			prevPosition.y = to.position.y;
@@ -84,16 +91,18 @@ public static class Globals
 		return predictive;
 	}
 
-	public static Vector3 GrenadierTargeting(Transform from, Transform to) {
+	public static Vector3 GrenadierTargeting(Transform from, Transform to)
+	{
 		return to.position;
 	}
 
-    public static Dictionary<EnemyType, string> enemyPrefabNames = new Dictionary<EnemyType, string>()
-    {
-        { EnemyType.TURRET, "Turret" },
-        { EnemyType.GRENADIER, "Grenadier"},
-        { EnemyType.RANGED, "Ranged"}
-    };
+	public static Dictionary<EnemyType, string> enemyPrefabNames = new Dictionary<EnemyType, string>()
+	{
+		{ EnemyType.TURRET, "Turret" },
+		{ EnemyType.GRENADIER, "Grenadier"},
+		{ EnemyType.RANGED, "Ranged"},
+		{ EnemyType.TANK, "MeleeTank" },
+	};
 
 	public static Dictionary<EnemyType, float> enemyBulletSpeeds = new Dictionary<EnemyType, float>() {
 		{ EnemyType.TURRET, 20f },
@@ -106,23 +115,26 @@ public enum EnemyType
 	TURRET,
 	GRENADIER,
 	RANGED,
+	TANK,
 }
 
 public enum EnemyVariantType
 {
-    NONE,
-    HEALER,
+	NONE,
+	HEALER,
 	SET,
-	PREDICTIVE
+	PREDICTIVE,
+	SHIELD,
 }
 
 public enum EntityType
 {
-    PLAYER,
-    ENEMY
+	PLAYER,
+	ENEMY
 }
 
-public enum PowerUpType{
+public enum PowerUpType
+{
 	NONE,
 	DAMAGE,
 	FIRERATE,
@@ -133,7 +145,8 @@ public enum PowerUpType{
 	REPEATER
 }
 
-public enum PowerUpClass{
+public enum PowerUpClass
+{
 	STAT,
 	FIRING,
 	BULLET
