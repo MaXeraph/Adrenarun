@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 200
-  owner: 1
+  owner: 0
 --- !u!1 &6749158905559539591
 GameObject:
   m_ObjectHideFlags: 0
