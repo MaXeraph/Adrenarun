@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public static class Globals
 {
@@ -112,10 +113,10 @@ public static class Globals
 
 public enum EnemyType
 {
-	TURRET,
 	GRENADIER,
 	RANGED,
 	TANK,
+	TURRET,
 }
 
 public enum EnemyVariantType
@@ -151,3 +152,6 @@ public enum PowerUpClass
 	FIRING,
 	BULLET
 }
+
+
+

@@ -31,7 +31,8 @@ public class EnemySpawn : MonoBehaviour
 	private bool startSpawn = false; // for each wave
 	private float nextSpawnTime; // not used for now
 	private Wave currentWave;
-	private int currentWaveNumber = 0;
+	private int currentWaveNumber = 1;
+	private static int currentLevelNumber = 1;
 	private PowerUpManager pum;
 
 	private int totalWaveNumber;
@@ -50,10 +51,11 @@ public class EnemySpawn : MonoBehaviour
 	{
 		pum = GameObject.FindGameObjectWithTag("Player").GetComponent<PowerUpManager>();
 		// waves = new Wave[totalWaveNumber];
-		enemy = new EnemyType[3];
+		enemy = new EnemyType[4];
 		enemy[0] = EnemyType.TURRET;
 		enemy[1] = EnemyType.GRENADIER;
 		enemy[2] = EnemyType.RANGED;
+		enemy[3] = EnemyType.TANK;
 
 		// /*for (int i = 0; i < totalWaveNumber; i++)
 		// {
@@ -155,7 +157,7 @@ public class EnemySpawn : MonoBehaviour
 
 				// TODO: need to fix the way this is implemented
 				// Random on array
-				EnemyType[] currentTypes = currentWave.typeOfEnemies;
+				EnemyType[] currentTypes = SpawnBehaviour.GetEnemyTypes(currentLevelNumber, currentWaveNumber);
 				int index = Random.Range(0, currentTypes.Length);
 				SpawnEnemy(currentTypes[index]);
 				_cooldown = true;
@@ -176,29 +178,12 @@ public class EnemySpawn : MonoBehaviour
 		}
 
 	}
-	bool RandomPoint(float radius, out Vector3 result)
-	{
-		Vector3 randomPoint = Random.insideUnitSphere * radius;
-		NavMeshHit hit;
-		if (NavMesh.SamplePosition(randomPoint, out hit, radius, NavMesh.AllAreas))
-		{
-			result = hit.position;
-			return true;
-		}
-		result = Vector3.zero;
-		return false;
-	}
+	
 
 
 	void SpawnEnemy(EnemyType enemy)
 	{
-
-		// need to include variant type as a parameter
-		// default is None for a type from factory 
-
-		Vector3 targetSpawn;
 		EnemyVariantType variant = EnemyVariantType.NONE;
-
 		// 50% to be predictive if turret or ranged.
 		if ((enemy == EnemyType.TURRET || enemy == EnemyType.RANGED) && Random.Range(0, 2) == 0)
 		{
@@ -212,13 +197,8 @@ public class EnemySpawn : MonoBehaviour
 		{
 			variant = EnemyVariantType.SHIELD;
 		}
-		if (RandomPoint(platformRadius, out targetSpawn))
-		{
-			Debug.DrawRay(targetSpawn, Vector3.up, Color.blue, 1.0f);
-			EnemyFactory.Instance.CreateEnemy(targetSpawn, enemy, variant);
-			// UIManager.enemiesTotal += 1;
-			// UIManager.enemiesLeft += 1;
-		}
+		Vector3 spawnLocation = SpawnBehaviour.enemySpawnBehaviour[enemy][Random.Range(0, SpawnBehaviour.enemySpawnBehaviour[enemy].Length)](platformRadius);
+		EnemyFactory.Instance.CreateEnemy(spawnLocation, enemy, variant);
 	}
 
 	IEnumerator Cooldown()
