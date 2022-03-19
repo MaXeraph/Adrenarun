@@ -129,8 +129,8 @@ public enum EnemyVariantType
 
 public enum EntityType
 {
+	ENEMY,
 	PLAYER,
-	ENEMY
 }
 
 public enum PowerUpType
