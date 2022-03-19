@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 using UnityEngine.SceneManagement;
 
 public class deathUI : MonoBehaviour
@@ -11,12 +12,17 @@ public class deathUI : MonoBehaviour
     Button leave;
     public static GameObject instance;
 
+	static Krivodeling.UI.Effects.UIBlur blurPanel;
+	static CanvasGroup items;
+
    void Awake()
     {
         instance = this.gameObject;
-        toFade = GetComponentsInChildren<Image>();
-        retry = transform.GetChild(0).transform.GetChild(0).GetComponent<Button>();
-        leave = transform.GetChild(0).transform.GetChild(1).GetComponent<Button>();
+		blurPanel = GetComponent<Krivodeling.UI.Effects.UIBlur>();
+		items = transform.GetChild(0).GetComponent<CanvasGroup>();
+		toFade = GetComponentsInChildren<Image>();
+        retry = transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Button>();
+        leave = transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<Button>();
         retry.onClick.AddListener(rewind);
         leave.onClick.AddListener(quit);
         instance.SetActive(false);
@@ -25,11 +31,17 @@ public class deathUI : MonoBehaviour
     public static void reveal(GameObject inst)
     {
         UIManager.dead = true;
-        instance.SetActive(true);
+		DOTween.To(() => blurPanel.Intensity, x => blurPanel.Intensity = x, 1, 2).OnComplete(show_content);
+		instance.SetActive(true);
         PlayerCentral.paused = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
+
+	private static void show_content()
+    {
+		items.DOFade(1, 2);
+	}
 
     void quit()
     {
