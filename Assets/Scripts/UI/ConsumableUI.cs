@@ -1,27 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class ConsumableUI : MonoBehaviour
 {
-	public static GameObject pill1;
-	public static GameObject pill2;
+	public static Transform pill1;
+	public static Transform pill2;
 
 	void Awake()
     {
-		pill1 = transform.GetChild(0).gameObject;
-		pill2 = transform.GetChild(1).gameObject;
-    }
+		Transform parent = transform.GetChild(2);
+		pill1 = parent.GetChild(0);
+		pill2 = parent.GetChild(1);
+		change_pill(pill1, false); change_pill(pill2, false);
+
+	}
 
     public static void update_pill_amount(int amount)
     {
 		if(amount > 0)
         {
-			pill1.SetActive(true);
-			if (amount > 1) pill2.SetActive(true);
-			else pill2.SetActive(false);
+			change_pill(pill1, true);
+			if (amount > 1) change_pill(pill2, true);
+			else change_pill(pill2, false);
 
 		}
-        else { pill1.SetActive(false); pill2.SetActive(false); }
+        else { change_pill(pill1,false); change_pill(pill2, false); }
+    }
+
+	public static void change_pill(Transform pill,bool state)
+    {
+		float Target = 0;
+		if (state) Target = 1;
+		pill.DOScale(Target, 0.2f);
     }
 }
