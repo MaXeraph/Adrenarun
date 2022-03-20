@@ -17,7 +17,7 @@ public class AnimatePill : MonoBehaviour
 
 	void Animate(float delay)
     {
-		body.DOJumpAnchorPos(body.anchoredPosition, 3f, 1, 1.5f).SetLoops(-1).SetEase(Ease.InQuad).SetDelay(delay);
+		body.DOLocalJump(body.localPosition, 3f, 1, 1.5f).SetLoops(-1).SetEase(Ease.InQuad).SetDelay(delay);
     }
 
 
