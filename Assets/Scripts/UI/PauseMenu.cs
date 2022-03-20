@@ -36,12 +36,15 @@ public class PauseMenu : MonoBehaviour
 		blurPanel = blur.material;
 		blurPanel.SetFloat("_Intensity", 0);
 		blurPanel.SetFloat("_Multiplier", 0.5f);
-		blurPanel.SetColor("_Color", new Vector4(1f, 1f, 1f, 0));
+		blurPanel.SetColor("_Color", new Color(1f, 1f, 1f, 0));
+		MouseSensitivity.value = previousChange;
+		change_sensitivity();
 	}
 
 	public void reveal()
 	{
-		blurPanel.SetColor("_Color", new Vector4(1f, 1f, 1f, 0));
+		blurPanel.SetFloat("_Intensity", 0);
+		blurPanel.SetColor("_Color", new Color(1f, 1f, 1f, 0));
 		DOTween.To(() => blurPanel.GetColor("_Color"), x => blurPanel.SetColor("_Color", x), new Color(0.6f, 0.6f, 0.6f, 1), 0.4f);
 		blur.DOFade(1, 0.4f);
 		DOTween.To(() => blurPanel.GetFloat("_Intensity"), x => blurPanel.SetFloat("_Intensity", x), 1, 0.5f).OnComplete(show_content);
@@ -83,7 +86,7 @@ public class PauseMenu : MonoBehaviour
 
 	void Update()
     {
-		if (Input.GetKeyDown(KeyCode.P))
+		if (Input.GetKeyDown(KeyCode.P) && !UIManager.dead)
 		{
 			if (!revealed) { reveal(); revealed = true; }
 			else { exit(); revealed = false; }

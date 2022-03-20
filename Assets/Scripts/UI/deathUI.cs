@@ -16,7 +16,7 @@ public class deathUI : MonoBehaviour
 
    void Awake()
     {
-        instance = this.gameObject;
+		instance = this.gameObject;
 		items = transform.GetChild(0).GetComponent<CanvasGroup>();
 		toFade = GetComponentsInChildren<Image>();
         retry = transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Button>();
@@ -56,8 +56,6 @@ public class deathUI : MonoBehaviour
         Time.timeScale = 1f;
         SpeedManager.updateSpeeds(1f);
         PlayerCentral.paused = false;
-		//CompassUI.instance.gameObject.SetActive(false);
-		//CompassUI.instance.gameObject.SetActive(true);
 		UIManager.dead = false;
 		CompassUI.enemies.Clear();
 		CompassUI.enemyMarkers.Clear();
