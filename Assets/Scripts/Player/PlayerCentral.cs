@@ -23,6 +23,16 @@ public class PlayerCentral : MonoBehaviour
     double lastDashTime = -3;
     float wallJumpSlope = 0.1f;
     Vector3 wallJumpVector;
+	private int _healingPills = 0;
+	public int healingPills {
+		get => _healingPills;
+		set 
+		{
+			_healingPills = Mathf.Clamp(value, 0, 2);
+			ConsumableUI.update_pill_amount(value);
+		}
+	}
+
 
     void Start()
     {
@@ -106,6 +116,14 @@ public class PlayerCentral : MonoBehaviour
 
         //Reload
         if (Input.GetButtonDown("Reload")) _weapon.Reload();
+
+		//Healing Pill
+		if (Input.GetKeyDown(KeyCode.Q) && healingPills > 0) 
+		{
+			healingPills -= 1;
+			_player.GetComponent<Stats>().currentHealth += 15;
+		
+		}
 
 
         applyGravity();
