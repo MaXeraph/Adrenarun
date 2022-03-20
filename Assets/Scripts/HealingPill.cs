@@ -5,6 +5,7 @@ using UnityEngine;
 public class HealingPill : MonoBehaviour
 {
 	private static List<GameObject> currentPills = new List<GameObject>();
+	private int healingPillCap = 2;
 
 	public static GameObject SpawnPill(Vector3 position)
 	{
@@ -33,13 +34,11 @@ public class HealingPill : MonoBehaviour
 	{
 		if (other.tag == "Player")
 		{
-			Stats statComponent = other.gameObject.GetComponent<Stats>();
-			statComponent.currentHealth += 15;
-			if (statComponent.currentHealth >= statComponent.maxHealth)
-			{
-				statComponent.currentHealth = statComponent.maxHealth;
+			PlayerCentral playerCentral = other.gameObject.GetComponent<PlayerCentral>();
+			if (playerCentral.healingPills < healingPillCap){
+				playerCentral.healingPills += 1;
+				ObjectPool.Destroy("HealingPill", gameObject);
 			}
-			ObjectPool.Destroy("HealingPill", gameObject);
 		}
 	}
 }

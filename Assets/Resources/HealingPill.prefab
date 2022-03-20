@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4801412662141040987}
   - component: {fileID: 8985098991937909206}
   - component: {fileID: 8531253506150375960}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HealingPill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,5 +106,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.25
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}

@@ -23,6 +23,16 @@ public class PlayerCentral : MonoBehaviour
     double lastDashTime = -3;
     float wallJumpSlope = 0.1f;
     Vector3 wallJumpVector;
+	private int _healingPills = 0;
+	public int healingPills {
+		get => _healingPills;
+		set 
+		{
+			_healingPills = Mathf.Clamp(value, 0, 2);
+			ConsumableUI.update_pill_amount(value);
+		}
+	}
+
 
     void Start()
     {
@@ -42,12 +52,23 @@ public class PlayerCentral : MonoBehaviour
 
     }
 
+	private bool test = false;
+	private GameObject o = null;
 
     void Update()
     {
         if (paused) return;
 
         checkGround();
+
+		if (Input.GetKey(KeyCode.O) && !test) {
+			test = true;
+			o = EnemyFactory.Instance.CreateEnemy(new Vector3(0, 2, 8), EnemyType.TANK, EnemyVariantType.SHIELD);
+		}
+		if (Input.GetKey(KeyCode.P) && test) {
+			test = false;
+			// Destroy(o);
+		}
 
         //Look
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0) Movement.RotatePlayer(_player, _camera);
@@ -95,6 +116,14 @@ public class PlayerCentral : MonoBehaviour
 
         //Reload
         if (Input.GetButtonDown("Reload")) _weapon.Reload();
+
+		//Healing Pill
+		if (Input.GetKeyDown(KeyCode.Q) && healingPills > 0) 
+		{
+			healingPills -= 1;
+			_player.GetComponent<Stats>().currentHealth += 15;
+		
+		}
 
 
         applyGravity();
