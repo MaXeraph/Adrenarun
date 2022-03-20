@@ -70,7 +70,7 @@ public class EnemyFactory
 
 		GameObject newEnemyObject = ObjectPool.Create(enemyName);
 		Transform enemyTransform = newEnemyObject.GetComponent<Transform>();
-		CompassUI.addEnemy(enemyTransform);
+		CompassUI.addEnemy(newEnemyObject);
 
 		// TODO: change default vector to dynamically adjust height of enemy spawn so they don't spawn under the ground.
 		enemyTransform.position = position + new Vector3(0, 1, 0);
