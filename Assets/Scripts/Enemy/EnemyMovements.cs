@@ -73,4 +73,21 @@ public static class EnemyMovements
 	{
 
 	}
+
+	public static void HealerMovement(GameObject gameObject, Vector3 playerPosition)
+	{
+		Vector3 position = gameObject.transform.position;
+		NavMeshAgent navAgent = gameObject.GetComponent<NavMeshAgent>();
+		navAgent.speed = _tankBaseSpeed * SpeedManager.enemyMovementScaling;
+		float playerDistance = Vector3.Distance(position, playerPosition);
+		if (playerDistance > 15)
+		{
+			navAgent.SetDestination(playerPosition);
+		}
+	}
+	
+	public static void HealerSetup(Vector3 transform)
+	{
+
+	}
 }

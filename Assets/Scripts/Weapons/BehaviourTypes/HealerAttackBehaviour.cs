@@ -6,7 +6,7 @@ using UnityEngine;
 public class HealerAttackBehaviour : AbstractAttackBehaviour
 {
 	private static float debuffMultiplier = 2f;
-	private Coroutine debuffDecay;
+	private IEnumerator debuffDecay;
 
 	public HealerAttackBehaviour(EntityType owner, float damage) : base(owner, damage)
 	{
@@ -26,7 +26,8 @@ public class HealerAttackBehaviour : AbstractAttackBehaviour
 			{
 				statsComponent.currentHealth -= _damage;
                 if (debuffDecay != null) SpeedManager.instance.StopCoroutine(debuffDecay);
-				debuffDecay = SpeedManager.instance.StartCoroutine(applyDebuff(statsComponent, this));
+                debuffDecay = applyDebuff(statsComponent, this);
+				SpeedManager.instance.StartCoroutine(debuffDecay);
 			}
 			if (hit.transform.gameObject.tag == "Platform") return;
 		}
@@ -34,11 +35,10 @@ public class HealerAttackBehaviour : AbstractAttackBehaviour
 
 	private IEnumerator applyDebuff(Stats target, object source)
 	{
-		Debug.Log("Applied.");
 		target.damageTakenMultipliers[source] = debuffMultiplier;
 		yield return new WaitForSeconds(1f);
 		target.damageTakenMultipliers.Remove(source);
 		debuffDecay = null;
-		Debug.Log("Removed.");
+		Debug.Log("Removed");
 	}
 }
