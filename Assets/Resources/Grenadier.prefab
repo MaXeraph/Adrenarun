@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 30
-  owner: 1
+  owner: 0
 --- !u!195 &-8702765108055079227
 NavMeshAgent:
   m_ObjectHideFlags: 0
