@@ -12,13 +12,13 @@ public class deathUI : MonoBehaviour
     Button leave;
     public static GameObject instance;
 
-	static Krivodeling.UI.Effects.UIBlur blurPanel;
+	static UI.Effects.UIBlur blurPanel;
 	static CanvasGroup items;
 
    void Awake()
     {
         instance = this.gameObject;
-		blurPanel = GetComponent<Krivodeling.UI.Effects.UIBlur>();
+		blurPanel = GetComponent<UI.Effects.UIBlur>();
 		items = transform.GetChild(0).GetComponent<CanvasGroup>();
 		toFade = GetComponentsInChildren<Image>();
         retry = transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Button>();

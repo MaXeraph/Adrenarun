@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Krivodeling.UI.Effects
+namespace UI.Effects
 {
     [Flags]
     public enum FlipMode

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Krivodeling.UI.Effects
+namespace UI.Effects
 {
     public class UIBlur : MonoBehaviour
     {

@@ -7,7 +7,7 @@ using DG.Tweening;
 public class PauseMenu : MonoBehaviour
 {
 
-	static Krivodeling.UI.Effects.UIBlur blurPanel;
+	static UI.Effects.UIBlur blurPanel;
 	static CanvasGroup items;
 	static Slider MouseSensitivity;
 
@@ -22,7 +22,7 @@ public class PauseMenu : MonoBehaviour
 	void Awake()
     {
 		instance = this.gameObject;
-		blurPanel = transform.GetChild(0).GetComponent<Krivodeling.UI.Effects.UIBlur>();
+		blurPanel = transform.GetChild(0).GetComponent<UI.Effects.UIBlur>();
 		items = transform.GetChild(1).GetComponent<CanvasGroup>();
 		MouseSensitivity = transform.GetChild(1).GetChild(2).GetComponent<Slider>();
 		MouseSensitivity.onValueChanged.AddListener(delegate { change_sensitivity(); });
