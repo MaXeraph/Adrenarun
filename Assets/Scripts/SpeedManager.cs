@@ -26,7 +26,7 @@ public class SpeedManager : MonoBehaviour
         updateGameObjectSpeed();
     }
 
-    static void updateGameObjectSpeed()
+    public static void updateGameObjectSpeed()
     {
         playerMovementScaling = coreSpeed + adrenalin();
         bulletSpeedScaling = coreSpeed;
