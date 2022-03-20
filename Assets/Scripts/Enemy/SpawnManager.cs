@@ -5,17 +5,22 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random=UnityEngine.Random;
 
-public class SpawnBehaviour {
+public static class SpawnManager {
 
 
     // chance of enemy spawning on level i wave j is _[ENEMY]SpawnChances[i-1,j-1]
 	// make sure the sum of SpawnChances[i,j] = 1
 	// also assuming the lowest spawn chance will be 0.05f, everything else in increments of that
 	private static int[,] _flyingSpawnChances = {{10, 10, 10, 10}};
-	private static int[,] _grenadierSpawnChances = {{35, 10, 10, 10}};
-	private static int[,] _rangedSpawnChances = {{40, 10, 10, 10}};
-	private static int[,] _tankSpawnChances = {{0, 0, 5, 0}, {5, 5, 10, 10}, {10, 10, 10, 10}};
-	private static int[,] _turretSpawnChances = {{25, 10, 10, 10}};
+
+	// private static int[,] _tankSpawnChances = {{0, 0, 5, 0}, {5, 5, 10, 10}, {10, 10, 10, 10}};
+
+
+
+	private static int[,] _grenadierSpawnChances = {{15, 20, 30, 30, 35, 35}};
+	private static int[,] _rangedSpawnChances    = {{60, 50, 40, 40, 40, 40}};
+	private static int[,] _tankSpawnChances 	 = {{0,   0,  5,  5, 10, 10}};
+	private static int[,] _turretSpawnChances    = {{25, 30, 25, 25, 20, 20}};
 	private static Dictionary<EnemyType, int[,]> enemySpawnChances = new Dictionary<EnemyType, int[,]>() {
 		{EnemyType.GRENADIER, _grenadierSpawnChances},
 		{EnemyType.RANGED, _rangedSpawnChances},
@@ -36,11 +41,11 @@ public class SpawnBehaviour {
 		return temp;
 	}
 
-	private static Func<float, Vector3>[] _grenadierSpawnBehaviours = {SpawnBehaviour.SpawnGrenadierDefault};
-	private static Func<float, Vector3>[] _flyingSpawnBehaviours = {SpawnBehaviour.SpawnFlyingDefault};
-	private static Func<float, Vector3>[] _rangedSpawnBehaviours = {SpawnBehaviour.SpawnRangedDefault};
-	private static Func<float, Vector3>[] _tankSpawnBehaviours = {SpawnBehaviour.SpawnTankDefault};
-	private static Func<float, Vector3>[] _turretSpawnBehaviours = {SpawnBehaviour.SpawnTurretDefault};
+	private static Func<float, Vector3>[] _grenadierSpawnBehaviours = {SpawnDefault};
+	private static Func<float, Vector3>[] _flyingSpawnBehaviours = {SpawnDefault};
+	private static Func<float, Vector3>[] _rangedSpawnBehaviours = {SpawnDefault};
+	private static Func<float, Vector3>[] _tankSpawnBehaviours = {SpawnDefault};
+	private static Func<float, Vector3>[] _turretSpawnBehaviours = {SpawnTurretDefault};
 	public static Dictionary<EnemyType, Func<float, Vector3>[]> enemySpawnBehaviour = new Dictionary<EnemyType, Func<float, Vector3>[]>() {
 		{EnemyType.GRENADIER, _grenadierSpawnBehaviours},
 		{EnemyType.RANGED, _rangedSpawnBehaviours},
@@ -51,36 +56,7 @@ public class SpawnBehaviour {
 
 
 
-    public static Vector3 SpawnFlyingDefault(float platformRadius) {
-        Vector3 targetSpawn;
-        if (RandomPoint(platformRadius, out targetSpawn))
-		{
-            return targetSpawn;
-		}
-        return new Vector3(0, 0, 0);
-    }
-
-
-    public static Vector3 SpawnGrenadierDefault(float platformRadius) {
-        Vector3 targetSpawn;
-        if (RandomPoint(platformRadius, out targetSpawn))
-		{
-            return targetSpawn;
-		}
-        return new Vector3(0, 0, 0);
-    }
-
-    public static Vector3 SpawnRangedDefault(float platformRadius) {
-        Vector3 targetSpawn;
-        if (RandomPoint(platformRadius, out targetSpawn))
-		{
-            return targetSpawn;
-		}
-        return new Vector3(0, 0, 0);
-    }
-
-    
-    public static Vector3 SpawnTankDefault(float platformRadius) {
+    public static Vector3 SpawnDefault(float platformRadius) {
         Vector3 targetSpawn;
         if (RandomPoint(platformRadius, out targetSpawn))
 		{
@@ -90,6 +66,7 @@ public class SpawnBehaviour {
     }
 
     public static Vector3 SpawnTurretDefault(float platformRadius) {
+		platformRadius /= 1.5f;
         Vector3 targetSpawn;
         if (RandomPoint(platformRadius, out targetSpawn))
 		{

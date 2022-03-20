@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawn : MonoBehaviour
+public class WaveManager : MonoBehaviour
 {
 	// private Vector3 _enemySpawn = Vector3.zero;
 	private bool _cooldown = false;
@@ -92,7 +92,7 @@ public class EnemySpawn : MonoBehaviour
 			_cooldownDelay = SpeedManager.enemySpawnScaling;
 			if (canSpawn && enemiesSpawned < enemiesPerWave)
 			{
-				EnemyType[] currentTypes = SpawnBehaviour.GetEnemyTypes(currentLevelNumber, currentWaveNumber);
+				EnemyType[] currentTypes = SpawnManager.GetEnemyTypes(currentLevelNumber, currentWaveNumber);
 				int index = Random.Range(0, currentTypes.Length);
 				SpawnEnemy(currentTypes[index]);
 				_cooldown = true;
@@ -128,7 +128,7 @@ public class EnemySpawn : MonoBehaviour
 		{
 			variant = EnemyVariantType.SHIELD;
 		}
-		Vector3 spawnLocation = SpawnBehaviour.enemySpawnBehaviour[enemy][Random.Range(0, SpawnBehaviour.enemySpawnBehaviour[enemy].Length)](platformRadius);
+		Vector3 spawnLocation = SpawnManager.enemySpawnBehaviour[enemy][Random.Range(0, SpawnManager.enemySpawnBehaviour[enemy].Length)](platformRadius);
 		EnemyFactory.Instance.CreateEnemy(spawnLocation, enemy, variant);
 	}
 
