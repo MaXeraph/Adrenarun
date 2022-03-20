@@ -21,19 +21,23 @@ public class SpeedManager : MonoBehaviour
         enemySpawnScaling = coreSpeed; //TODO: determine spawn rate based on speed
         enemyMovementScaling = coreSpeed;
     }
-    public static void updateSpeeds(float healthRatio) {
-        coreSpeed = healthRatio;
+    public static void updateSpeeds(float healthRatio)
+    {
+        coreSpeed = 0.2f + healthRatio * 0.8f;
+        if (healthRatio > 1) coreSpeed = 4 * (healthRatio - 1) * (healthRatio - 1) + 1;
         updateGameObjectSpeed();
     }
 
-    static void updateGameObjectSpeed(){
+    static void updateGameObjectSpeed()
+    {
         playerMovementScaling = coreSpeed + adrenalin();
         bulletSpeedScaling = coreSpeed;
         enemySpawnScaling = 0.2f / coreSpeed;
         enemyMovementScaling = coreSpeed;
     }
 
-    static float adrenalin(){
+    static float adrenalin()
+    {
         // experimental function for adjusting the game speed
         // the lower hp we are, the more adrenalin does
         //
