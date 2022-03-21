@@ -223,7 +223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2788843162004543258, guid: 2cb2052cea3c8654bb0ad4032c47a912, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2788843162004543258, guid: 2cb2052cea3c8654bb0ad4032c47a912, type: 3}
       propertyPath: m_LocalPosition.x
@@ -298,7 +298,7 @@ Transform:
   m_LocalScale: {x: 16, y: 115.6, z: 16}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &180578228
 MeshCollider:
@@ -333,7 +333,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 77994bff7f734734a905413e969f0462, type: 2}
+  - {fileID: 2100000, guid: 068d39ad2a610284589321a74477fca7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2860,17 +2860,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ffcaa6ea6775c44967ddc5c21c6ae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waves:
-  - waveName: firstWave
-    numOfEnemies: 9
-    typeOfEnemies: 00000000
-    spawnInterval: 0
-  spawnPoints:
-  - {x: 2.3547e-41, y: 7.26e-43, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 4.6e-44, y: 2.5496919e+17, z: 1.0608541e-22}
-  - {x: 7.26e-43, y: 1.0608581e-22, z: 7.26e-43}
-  - {x: -1.5873377e+29, y: 7.23e-43, z: 6.9e-44}
 --- !u!1001 &1900235734
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3179,7 +3168,7 @@ Transform:
   - {fileID: 743742209}
   - {fileID: 911912580}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1957441755
 PrefabInstance:
