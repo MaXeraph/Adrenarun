@@ -180,7 +180,7 @@ public class EnemySpawn : MonoBehaviour
     {
         Vector3 randomPoint = Random.insideUnitSphere * radius;
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomPoint, out hit, radius, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(randomPoint, out hit, radius, 1))
         {
             result = hit.position;
             return true;
