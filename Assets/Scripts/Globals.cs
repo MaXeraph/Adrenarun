@@ -113,11 +113,11 @@ public static class Globals
 
 public enum EnemyType
 {
-	TURRET,
 	GRENADIER,
 	RANGED,
 	TANK,
 	HEALER,
+	TURRET,
 }
 
 public enum EnemyVariantType
