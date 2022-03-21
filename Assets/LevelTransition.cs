@@ -6,8 +6,19 @@ using UnityEngine.SceneManagement;
 public class LevelTransition : MonoBehaviour
 {
 
-	public string transitionTo = "Level 2";
+	public int transitionTo = 0;
 
+	void Awake()
+    {
+		if(transitionTo == 0) transitionTo = (SceneManager.GetActiveScene().buildIndex + 1);
+		gameObject.SetActive(false);
+	}
+
+	public void init(WaveManager Spawner)
+    {
+		gameObject.SetActive(true);
+		Spawner.enabled = false;
+    }
 
 	void OnTriggerEnter(Collider c)
 	{

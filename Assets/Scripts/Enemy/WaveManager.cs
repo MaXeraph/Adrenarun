@@ -16,17 +16,18 @@ public class WaveManager : MonoBehaviour
 	private PowerUpManager pum;
 
 	private int totalWaveNumber =  4;
-	private int enemiesPerWave = 1;
+	private int enemiesPerWave = 10;
 	private const int spawnInterval = 0;
 	private int enemiesSpawned = 0;
 	private int currentNumEnemies = 0;
 	private bool _timeout = false;
-	private bool _levelComplete = false; 
+	private bool _levelComplete = false;
+	public LevelTransition transition;
 
 
-	// Start is called before the first frame update
 	void Start()
 	{
+		transition = transform.GetChild(0).GetComponent<LevelTransition>();
 		pum = GameObject.FindGameObjectWithTag("Player").GetComponent<PowerUpManager>();
 		if (!_timeout)
 		{
@@ -59,7 +60,6 @@ public class WaveManager : MonoBehaviour
 	{
 		canSpawn = false;
 		startSpawn = false;
-
 	}
 
 
@@ -84,15 +84,8 @@ public class WaveManager : MonoBehaviour
 				enemiesPerWave += enemiesPerWave;
 				pum.presentPowerUps();
 
-				if (currentWaveNumber < totalWaveNumber)
-				{
-					StartSpawningWave();
-				} else
-				{
-
-					gameObject.SetActive(false);
-				}
-				
+				if (currentWaveNumber < totalWaveNumber) StartSpawningWave();
+				else transition.init(this);
 			}
 		}
 	}

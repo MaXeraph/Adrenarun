@@ -9,6 +9,7 @@ TagManager:
   - Crit
   - overlay
   - Detector
+  - Transition
   layers:
   - Default
   - TransparentFX

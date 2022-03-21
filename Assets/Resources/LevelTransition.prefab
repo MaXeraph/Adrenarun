@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5884914429435330596}
   m_Layer: 0
   m_Name: LevelTransition
-  m_TagString: Untagged
+  m_TagString: Transition
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6935695344925555760}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.28, z: 0}
+  m_LocalPosition: {x: 0, y: 2.28, z: -4.6}
   m_LocalScale: {x: 8, y: 10, z: 1}
   m_Children:
   - {fileID: 8609711203231701003}
@@ -44,10 +44,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5565717
+  m_Radius: 0.59
   m_Height: 1.3820727
   m_Direction: 1
-  m_Center: {x: -0.056571722, y: 0.13446462, z: 0}
+  m_Center: {x: 0.08360267, y: 0.13446465, z: 0.23000002}
 --- !u!54 &1758681943360945684
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2d2b81ea1a061449e81df04ec28c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTo: Level 2
+  transitionTo: 0
 --- !u!1 &7211398152079517321
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,7 +104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7211398152079517321}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.08, y: 0, z: 0.19}
   m_LocalScale: {x: -1.11, y: 0.5, z: 0.22}
   m_Children: []
   m_Father: {fileID: 7424718303303212030}
