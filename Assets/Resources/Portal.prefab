@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 8526567334474048027}
   m_Layer: 0
   m_Name: Entry
-  m_TagString: Untagged
+  m_TagString: Portal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,7 +93,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 12064025c24f2ec40ba5dfac02817d98, type: 2}
+  - {fileID: 2100000, guid: 80feb88eb81275049a7d4150b2093385, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 8526567334800904262}
   m_Layer: 0
   m_Name: Exit
-  m_TagString: Untagged
+  m_TagString: Portal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

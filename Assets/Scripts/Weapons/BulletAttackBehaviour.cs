@@ -48,7 +48,7 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
 				}
 			}
 		}
-		else if (target.GetComponent<BulletMono>() == null) // if not another bullet...
+		else if (target.GetComponent<BulletMono>() == null && target.tag != "Portal") // if not another bullet...
 		{
 			BulletMono.Destroy(bm.gameObject);
 		}

@@ -8,27 +8,33 @@ public class Portal : MonoBehaviour
 	// Start is called before the first frame update
 	public GameObject portalOpposite;
 	Vector3 distanceToExit;
+	Vector3 locationAfterTeleport;
 	void Start()
 	{
 		distanceToExit = portalOpposite.transform.position - transform.position;
+		locationAfterTeleport = distanceToExit * 1.05f;
 	}
 
 	void OnTriggerEnter(Collider c)
 	{
-		Debug.Log(c.gameObject.tag);
-		Debug.Log("distance: " + distanceToExit);
-		if (c.gameObject.tag == "Player")
+		GameObject target = c.gameObject;
+		if (target.tag == "Enemy"){
+			c.transform.position += locationAfterTeleport;
+		}
+		if (target.tag == "Player")
 		{
 			c.GetComponent<CharacterController>().enabled = false;
-			c.transform.position = c.transform.position + distanceToExit * 1.05f;
+			c.transform.position += locationAfterTeleport;
 			c.GetComponent<CharacterController>().enabled = true;
 		}
-		else if (c.gameObject.tag == "Enemy")
-		{
-			c.GetComponent<EnemyBehaviour>().enabled = false;
-			c.GetComponent<NavMeshAgent>().SetDestination(portalOpposite.transform.position * 1.05f);
-			c.GetComponent<EnemyBehaviour>().enabled = true;
+		else if (target.tag == "Projectile")
+		{	
+			if (target.name.Contains("Bullet"))
+			{
+				c.GetComponent<BulletMono>().enabled = false;
+				c.transform.position += locationAfterTeleport;
+				c.GetComponent<BulletMono>().enabled = true;
+			}
 		}
-
 	}
 }
