@@ -12,8 +12,6 @@ public class Stats : MonoBehaviour
 		get => _currentHealth;
 		set
 		{
-			// if (value - _currentHealth < 0) Debug.Log((value - _currentHealth) + " | actual: " + (value - _currentHealth) * _damageTakenMultiplier);
-			if (owner == EntityType.PLAYER) Debug.Log(value);
 			if (value - _currentHealth < 0) _currentHealth = _currentHealth + (value - _currentHealth) * _damageTakenMultiplier;
 			else _currentHealth = value;
 			if (value <= 0 && owner == EntityType.ENEMY)

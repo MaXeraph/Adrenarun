@@ -9,6 +9,8 @@ TagManager:
   - Crit
   - overlay
   - Detector
+  - Bullet
+  - PlatformObjects
   layers:
   - Default
   - TransparentFX

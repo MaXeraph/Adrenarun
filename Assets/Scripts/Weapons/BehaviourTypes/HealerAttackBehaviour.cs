@@ -29,7 +29,7 @@ public class HealerAttackBehaviour : AbstractAttackBehaviour
                 debuffDecay = applyDebuff(statsComponent, this);
 				SpeedManager.instance.StartCoroutine(debuffDecay);
 			}
-			if (hit.transform.gameObject.tag == "Platform") return;
+			if (hit.transform.root.gameObject.tag == "PlatformObjects") return;
 		}
 	}
 
@@ -39,6 +39,5 @@ public class HealerAttackBehaviour : AbstractAttackBehaviour
 		yield return new WaitForSeconds(1f);
 		target.damageTakenMultipliers.Remove(source);
 		debuffDecay = null;
-		Debug.Log("Removed");
 	}
 }
