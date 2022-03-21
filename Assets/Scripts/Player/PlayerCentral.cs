@@ -42,23 +42,11 @@ public class PlayerCentral : MonoBehaviour
 
     }
 
-	private bool test = false;
-	private GameObject o = null;
-
     void Update()
     {
         if (paused) return;
 
         checkGround();
-
-		if (Input.GetKey(KeyCode.O) && !test) {
-			test = true;
-			o = EnemyFactory.Instance.CreateEnemy(new Vector3(0, 2, 8), EnemyType.TANK, EnemyVariantType.SHIELD);
-		}
-		if (Input.GetKey(KeyCode.P) && test) {
-			test = false;
-			// Destroy(o);
-		}
 
         //Look
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0) Movement.RotatePlayer(_player, _camera);
