@@ -15,12 +15,13 @@ public class WaveManager : MonoBehaviour
 	private static int currentLevelNumber = 1;
 	private PowerUpManager pum;
 
-	private int totalWaveNumber =  1;
+	private int totalWaveNumber =  4;
 	private int enemiesPerWave = 1;
 	private const int spawnInterval = 0;
 	private int enemiesSpawned = 0;
 	private int currentNumEnemies = 0;
 	private bool _timeout = false;
+	private bool _levelComplete = false; 
 
 
 	// Start is called before the first frame update
@@ -58,6 +59,7 @@ public class WaveManager : MonoBehaviour
 	{
 		canSpawn = false;
 		startSpawn = false;
+
 	}
 
 
@@ -73,14 +75,24 @@ public class WaveManager : MonoBehaviour
 			currentNumEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
 			UIManager.enemiesLeft = enemiesPerWave - (enemiesSpawned - currentNumEnemies);
 
-			if (currentNumEnemies == 0 && !_timeout)
+			if (currentNumEnemies == 0 && !_timeout )
 			{
+
+
 				HealingPill.DespawnPills();
 				currentWaveNumber++;
 				enemiesPerWave += enemiesPerWave;
 				pum.presentPowerUps();
-				StartSpawningWave();
-					
+
+				if (currentWaveNumber < totalWaveNumber)
+				{
+					StartSpawningWave();
+				} else
+				{
+
+					gameObject.SetActive(false);
+				}
+				
 			}
 		}
 	}
