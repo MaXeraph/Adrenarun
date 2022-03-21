@@ -36,6 +36,12 @@ public class CompassUI : MonoBehaviour
         }
     }
 
+	public static void reset()
+    {
+		enemies.Clear();
+		enemyMarkers.Clear();
+    }
+
     public static void addEnemy(GameObject entity)
     {
         enemies.Add(entity);

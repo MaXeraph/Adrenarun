@@ -38,7 +38,8 @@ public class deathUI : MonoBehaviour
 
    public void rewind()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+		CompassUI.reset();
+		Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Time.timeScale = 1f;
         SpeedManager.updateSpeeds(1f);

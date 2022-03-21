@@ -11,11 +11,14 @@ public class LevelTransition : MonoBehaviour
 
 	void OnTriggerEnter(Collider c)
 	{
-		Debug.Log(c);
 		Stats statsComponent = c.GetComponent<Stats>();
 		if (statsComponent)
 		{
-			if (statsComponent.owner == EntityType.PLAYER) SceneManager.LoadScene(transitionTo, LoadSceneMode.Single);
+			if (statsComponent.owner == EntityType.PLAYER)
+			{
+				SceneManager.LoadScene(transitionTo, LoadSceneMode.Single);
+				CompassUI.reset();
+			}
 		}
 	}
 }
