@@ -22,7 +22,7 @@ public class WaveManager : MonoBehaviour
 	private int currentNumEnemies = 0;
 	private bool _timeout = false;
 	private bool _levelComplete = false;
-	public LevelTransition transition;
+	private LevelTransition transition;
 
 
 	void Start()
