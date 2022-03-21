@@ -377,7 +377,7 @@ Transform:
   m_GameObject: {fileID: 180578226}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 10}
+  m_LocalScale: {x: 10, y: 1, z: 9.6}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -2205,6 +2205,38 @@ PrefabInstance:
     - target: {fileID: 645961371358757029, guid: f98c3b3e2cb7c7a4b97894c381441727, type: 3}
       propertyPath: m_Name
       value: BigTree
+      objectReference: {fileID: 0}
+    - target: {fileID: 6873931528281638402, guid: f98c3b3e2cb7c7a4b97894c381441727, type: 3}
+      propertyPath: m_Shape
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6873931528281638402, guid: f98c3b3e2cb7c7a4b97894c381441727, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6873931528281638402, guid: f98c3b3e2cb7c7a4b97894c381441727, type: 3}
+      propertyPath: m_Center.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6873931528281638402, guid: f98c3b3e2cb7c7a4b97894c381441727, type: 3}
+      propertyPath: m_Center.y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6873931528281638402, guid: f98c3b3e2cb7c7a4b97894c381441727, type: 3}
+      propertyPath: m_Center.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6873931528281638402, guid: f98c3b3e2cb7c7a4b97894c381441727, type: 3}
+      propertyPath: m_Extents.x
+      value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6873931528281638402, guid: f98c3b3e2cb7c7a4b97894c381441727, type: 3}
+      propertyPath: m_Extents.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6873931528281638402, guid: f98c3b3e2cb7c7a4b97894c381441727, type: 3}
+      propertyPath: m_Extents.z
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f98c3b3e2cb7c7a4b97894c381441727, type: 3}
