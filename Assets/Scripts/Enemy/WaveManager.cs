@@ -15,8 +15,8 @@ public class WaveManager : MonoBehaviour
 	private static int currentLevelNumber = 1;
 	private PowerUpManager pum;
 
-	private int totalWaveNumber;
-	private int enemiesPerWave = 15;
+	private int totalWaveNumber =  1;
+	private int enemiesPerWave = 1;
 	private const int spawnInterval = 0;
 	private int enemiesSpawned = 0;
 	private int currentNumEnemies = 0;
@@ -80,6 +80,7 @@ public class WaveManager : MonoBehaviour
 				enemiesPerWave += enemiesPerWave;
 				pum.presentPowerUps();
 				StartSpawningWave();
+					
 			}
 		}
 	}
