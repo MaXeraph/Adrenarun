@@ -48,7 +48,7 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
 				}
 			}
 		}
-		else if (target.tag != "Bullet" && target.tag != "Detector")
+		else if (target.tag != "Projectile" && target.tag != "Detector" && target.tag != "Portal")
 		{
 			BulletMono.Destroy(bm.gameObject);
 		}

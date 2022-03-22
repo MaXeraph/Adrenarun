@@ -9,6 +9,8 @@ TagManager:
   - Crit
   - overlay
   - Detector
+  - Portal
+  - Projectile
   layers:
   - Default
   - TransparentFX

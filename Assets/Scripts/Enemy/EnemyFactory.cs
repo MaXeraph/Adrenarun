@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 // Define EnemyInfo for convenience.
 public struct EnemyInfo
@@ -74,7 +75,13 @@ public class EnemyFactory
 		CompassUI.addEnemy(newEnemyObject);
 
 		// TODO: change default vector to dynamically adjust height of enemy spawn so they don't spawn under the ground.
-		enemyTransform.position = position + new Vector3(0, 1, 0);
+		NavMeshAgent navAgent = newEnemyObject.GetComponent<NavMeshAgent>();
+		if (navAgent != null) {
+			navAgent.Warp(position);
+		}
+		else {
+			enemyTransform.position = position + new Vector3(0, 1, 0);
+		}
 
 		EnemyInfo enemyInfo = _enemyInfo[enemyType];
 
