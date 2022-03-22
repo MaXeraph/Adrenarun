@@ -102,17 +102,20 @@ public static class Globals
 		{ EnemyType.GRENADIER, "Grenadier"},
 		{ EnemyType.RANGED, "Ranged"},
 		{ EnemyType.TANK, "MeleeTank" },
+		{ EnemyType.FLYING, "Flying"}
 	};
 
 	public static Dictionary<EnemyType, float> enemyBulletSpeeds = new Dictionary<EnemyType, float>() {
 		{ EnemyType.TURRET, 20f },
-		{ EnemyType.RANGED, 20f }
+		{ EnemyType.RANGED, 20f },
+		{ EnemyType.FLYING, 20f }
 	};
 }
 
 public enum EnemyType
 {
 	GRENADIER,
+	FLYING,
 	RANGED,
 	TANK,
 	TURRET,

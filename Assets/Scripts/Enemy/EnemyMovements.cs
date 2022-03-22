@@ -73,4 +73,21 @@ public static class EnemyMovements
 	{
 
 	}
+
+	public static void FlyingMovement(GameObject gameObject, Vector3 playerPosition)
+	{
+		Vector3 position = gameObject.transform.position;
+		NavMeshAgent navAgent = gameObject.GetComponent<NavMeshAgent>();
+		navAgent.speed = _grenadierBaseSpeed * SpeedManager.enemyMovementScaling;
+		float playerDistance = Vector3.Distance(position, playerPosition);
+		if (playerDistance > 10)
+		{
+			navAgent.SetDestination(playerPosition);
+		}
+
+	}
+	
+	public static void FlyingSetup(Vector3 transform) {
+
+	}
 }
