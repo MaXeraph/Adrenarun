@@ -306,6 +306,30 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1206874426333947015, guid: 2c41bbe3467eaac4586b6fd700ebc216, type: 3}
+      propertyPath: m_AABB.m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1206874426333947015, guid: 2c41bbe3467eaac4586b6fd700ebc216, type: 3}
+      propertyPath: m_AABB.m_Center.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: -1206874426333947015, guid: 2c41bbe3467eaac4586b6fd700ebc216, type: 3}
+      propertyPath: m_AABB.m_Center.z
+      value: -0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: -1206874426333947015, guid: 2c41bbe3467eaac4586b6fd700ebc216, type: 3}
+      propertyPath: m_AABB.m_Extent.x
+      value: 0.008
+      objectReference: {fileID: 0}
+    - target: {fileID: -1206874426333947015, guid: 2c41bbe3467eaac4586b6fd700ebc216, type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: -1206874426333947015, guid: 2c41bbe3467eaac4586b6fd700ebc216, type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: -5203380531122564, guid: 2c41bbe3467eaac4586b6fd700ebc216, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 2.522117e-13
