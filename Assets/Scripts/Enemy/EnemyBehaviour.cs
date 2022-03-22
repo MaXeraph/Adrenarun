@@ -83,6 +83,10 @@ public class EnemyBehaviour : MonoBehaviour
 			foreach (AnimationState state in anim)
 			{
 				if (state.name == "shoot") anim.Play("shoot");
+				else if (state.name == "attack") {
+					anim.Stop();
+					anim.Play("attack");
+				}
 			}
 		}
 	}
