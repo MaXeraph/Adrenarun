@@ -5,6 +5,17 @@ using UnityEngine;
 
 public static class Globals
 {
+	public static Dictionary<PowerUpType, int> TransitionPowerUpDictionary = new Dictionary<PowerUpType, int>()
+	{
+		{PowerUpType.DAMAGE, 4},
+		{PowerUpType.FIRERATE, 0 },
+		{PowerUpType.RELOADSPD, 0 },
+		{PowerUpType.CLIPSIZE, 0 },
+		{PowerUpType.ADRENALIN, 0 },
+		{PowerUpType.SHOTGUN, 0 },
+		{PowerUpType.REPEATER, 0 }
+	};
+
 	public static Dictionary<PowerUpType, AbstractStatPowerUp> StatPowerUpDictionary = new Dictionary<PowerUpType, AbstractStatPowerUp>
 	{{PowerUpType.DAMAGE, new DamagePowerUp()},
 	{PowerUpType.FIRERATE, new FireRatePowerUp()},
