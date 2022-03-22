@@ -67,11 +67,11 @@ public class LevelTransition : MonoBehaviour
 		{
 			Levels[t] = _level[t];
 		}
-		for (int t = 0; t < Levels.Length; t++)
-		{
-			Debug.Log(Levels[t]);
-		}
-		currentLevel = Levels[0];
+		//for (int t = 0; t < Levels.Length; t++)
+		//{
+		//	Debug.Log(Levels[t]);
+		//}
+		//currentLevel = Levels[0];
 		//Levels[progression]
 		SceneManager.LoadScene(1, LoadSceneMode.Single);
 	}

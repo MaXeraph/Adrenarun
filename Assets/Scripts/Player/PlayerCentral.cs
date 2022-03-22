@@ -25,6 +25,8 @@ public class PlayerCentral : MonoBehaviour
     float wallJumpSlope = 0.1f;
     Vector3 wallJumpVector;
 	private int _healingPills = 0;
+	public Vector3 SpawnLocation;
+
 	public int healingPills {
 		get => _healingPills;
 		set 
@@ -37,6 +39,7 @@ public class PlayerCentral : MonoBehaviour
 
     void Start()
     {
+		SpawnLocation = transform.position;
        Cursor.lockState = CursorLockMode.Locked;
 
         _player = GameObject.FindWithTag("Player");
