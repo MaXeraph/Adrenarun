@@ -27,6 +27,7 @@ public class Portal : MonoBehaviour
 		{
 			if(reverseExitDirection) Camera.main.transform.localRotation = Quaternion.Inverse(Camera.main.transform.rotation);
 			Movement.RotatePlayer(c.gameObject, Camera.main);
+			AudioManager.PlayPortalAudio();
 
 			c.GetComponent<CharacterController>().enabled = false;
 			c.transform.position += locationAfterTeleport;

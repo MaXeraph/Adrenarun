@@ -12,6 +12,8 @@ public class AudioManager : MonoBehaviour
     private static AudioSource _musicAudio;
     private static AudioSource _reloadAudio;
     private static AudioSource _walkAudio;
+    private static AudioSource _portalAudio;
+
 
     private static bool _walkAudioPlaying = false;
     // Start is called before the first frame update
@@ -29,6 +31,7 @@ public class AudioManager : MonoBehaviour
         _musicAudio = audios[4];
         _reloadAudio = audios[5];
         _walkAudio = audios[6];
+        _portalAudio = audios[7];
 
         player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -69,6 +72,10 @@ public class AudioManager : MonoBehaviour
         float _reloadSpeed = player.GetComponent<Weapon>()._reloadSpeed;
         _reloadAudio.pitch = 1 / _reloadSpeed;
         _reloadAudio.Play();
+    }
+
+    public static void PlayPortalAudio() {
+        _portalAudio.Play();
     }
 
 
