@@ -65,6 +65,11 @@ public class ObjectPool
 		}
 	}
 
+	public static void Clear() {
+		available = new Dictionary<string, HashSet<GameObject>>();
+		occupied = new Dictionary<string, HashSet<GameObject>>();
+	}
+
 	// Returns function to unsubscribe
 	public static Action Subscribe(GameObject gameObject, Action<GameObject> callback)
 	{

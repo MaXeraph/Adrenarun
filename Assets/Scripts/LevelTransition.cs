@@ -85,6 +85,7 @@ public class LevelTransition : MonoBehaviour
 			if (statsComponent.owner == EntityType.PLAYER)
 			{
 				// update the hp before we load the scene 
+				ObjectPool.Clear();
 				SceneManager.LoadScene(transitionTo, LoadSceneMode.Single);
 				CompassUI.reset();
 				SceneManager.LoadScene(transitionTo, LoadSceneMode.Single);
