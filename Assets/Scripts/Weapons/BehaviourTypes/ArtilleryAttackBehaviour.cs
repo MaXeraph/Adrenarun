@@ -48,7 +48,7 @@ public class ArtilleryAttackBehaviour : BulletAttackBehaviour
 				{
 					GameObject thermitePool = GameObject.Instantiate(Resources.Load("ThermitePool")) as GameObject;
 					// Spawn the pool on the ground.
-					thermitePool.GetComponent<Transform>().position = hitInfo[i].point;
+					thermitePool.GetComponent<Transform>().position = hitInfo[i].point + new Vector3(0, 0.1f, 0);
 					thermitePool.GetComponent<ThermitePoolMono>().Initialize(this);
 					ArtilleryMono.Destroy(bm.gameObject);
 					return;

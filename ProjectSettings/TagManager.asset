@@ -10,6 +10,9 @@ TagManager:
   - overlay
   - Detector
   - Transition
+  - Portal
+  - Projectile
+
   layers:
   - Default
   - TransparentFX
@@ -20,29 +23,29 @@ TagManager:
   - Character
   - Bullet
   - 3DIcon
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
   m_SortingLayers:
   - name: Default
     uniqueID: 0

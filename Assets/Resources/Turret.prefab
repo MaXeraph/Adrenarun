@@ -171,6 +171,30 @@ PrefabInstance:
       propertyPath: m_ReceiveShadows
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -3907060462511952302, guid: 095f1fa804951d94c9450a3502dedf1d, type: 3}
+      propertyPath: m_AABB.m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3907060462511952302, guid: 095f1fa804951d94c9450a3502dedf1d, type: 3}
+      propertyPath: m_AABB.m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3907060462511952302, guid: 095f1fa804951d94c9450a3502dedf1d, type: 3}
+      propertyPath: m_AABB.m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3907060462511952302, guid: 095f1fa804951d94c9450a3502dedf1d, type: 3}
+      propertyPath: m_AABB.m_Extent.x
+      value: 0.007
+      objectReference: {fileID: 0}
+    - target: {fileID: -3907060462511952302, guid: 095f1fa804951d94c9450a3502dedf1d, type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.012
+      objectReference: {fileID: 0}
+    - target: {fileID: -3907060462511952302, guid: 095f1fa804951d94c9450a3502dedf1d, type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: -3284680928231278405, guid: 095f1fa804951d94c9450a3502dedf1d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -0.0000025044758

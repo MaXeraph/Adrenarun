@@ -9,7 +9,7 @@ public class ShieldBehaviour : MonoBehaviour
 	void OnTriggerEnter(Collider other)
 	{
 		GameObject gameObject = other.gameObject;
-		if (gameObject.tag == "Bullet" && gameObject.GetComponent<BulletMono>()._attackBehaviour.Owner != EntityType.ENEMY)
+		if (gameObject.tag == "Projectile" && gameObject.GetComponent<BulletMono>()._attackBehaviour.Owner != EntityType.ENEMY)
 		{
 			if (!_currentCollisions.ContainsKey(gameObject)) ObjectPool.Subscribe(gameObject,
 				(obj) => { _currentCollisions[obj] = 0; });
@@ -27,7 +27,7 @@ public class ShieldBehaviour : MonoBehaviour
 	void OnTriggerExit(Collider other)
 	{
 		GameObject gameObject = other.gameObject;
-		if (gameObject.tag == "Bullet" && _currentCollisions.ContainsKey(gameObject))
+		if (gameObject.tag == "Projectile" && _currentCollisions.ContainsKey(gameObject))
 		{
 			_currentCollisions[gameObject] = _currentCollisions[gameObject] - 1;
 		}
