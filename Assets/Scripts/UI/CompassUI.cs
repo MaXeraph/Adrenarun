@@ -18,8 +18,8 @@ public class CompassUI : MonoBehaviour
     private static Vector3[] directionVectors = new Vector3[] {Vector3.forward* 1000, Vector3.back* 1000, Vector3.right* 1000, Vector3.left* 1000,
                                                        (Vector3.right + Vector3.forward)* 1000, (Vector3.left + Vector3.forward)* 1000, (Vector3.right + Vector3.back)* 1000, (Vector3.left + Vector3.back)* 1000 };
 
-    private static List<GameObject> enemies = new List<GameObject>();
-    private static List<GameObject> enemyMarkers = new List<GameObject>();
+    public static List<GameObject> enemies = new List<GameObject>();
+	public static List<GameObject> enemyMarkers = new List<GameObject>();
 
     public static CompassUI instance;
 
@@ -54,7 +54,7 @@ public class CompassUI : MonoBehaviour
 
     static void updateEnemyPosition(int enemy)
     {
-        if (enemies[enemy].activeInHierarchy == false) enemyDied(enemy);
+        if (enemies[enemy] == null && enemies[enemy].activeInHierarchy == false) enemyDied(enemy);
         else SetMarkerPosition(enemyMarkers[enemy].GetComponent<RectTransform>(), enemies[enemy].transform.position); 
     }
 
