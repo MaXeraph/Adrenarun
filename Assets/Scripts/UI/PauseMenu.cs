@@ -43,6 +43,8 @@ public class PauseMenu : MonoBehaviour
 
 	public void reveal()
 	{
+		items.DOKill();
+		blurPanel.DOKill();
 		blurPanel.SetFloat("_Intensity", 0);
 		blurPanel.SetColor("_Color", new Color(1f, 1f, 1f, 0));
 		DOTween.To(() => blurPanel.GetColor("_Color"), x => blurPanel.SetColor("_Color", x), new Color(0.6f, 0.6f, 0.6f, 1), 0.4f);
@@ -57,7 +59,7 @@ public class PauseMenu : MonoBehaviour
 
 	private void show_content()
 	{
-		items.DOFade(1, 0.5f);
+		if (revealed) items.DOFade(1, 0.5f);
 	}
 
 	private void hide_content()
@@ -68,13 +70,19 @@ public class PauseMenu : MonoBehaviour
 
 	public void exit()
     {
+		items.DOKill();
+		blurPanel.DOKill();
 		Time.timeScale = 1;
+		//blurPanel.SetFloat("_Intensity", 0);
+		//blurPanel.SetColor("_Color", new Color(1f, 1f, 1f, 0));
+		//items.alpha = 0;
 		items.DOFade(0, 0.5f).OnComplete(hide_content);
 		PlayerCentral.paused = false;
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
 
 	}
+
 
 	public static void change_sensitivity()
     {
@@ -86,6 +94,7 @@ public class PauseMenu : MonoBehaviour
 
 	void Update()
     {
+
 		if (Input.GetKeyDown(KeyCode.P) && !UIManager.dead)
 		{
 			if (!revealed) { reveal(); revealed = true; }
