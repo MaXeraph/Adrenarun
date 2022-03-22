@@ -6,12 +6,15 @@ using UnityEngine.SceneManagement;
 public class LevelTransition : MonoBehaviour
 {
 
-	private int transitionTo = 0;
+	public int transitionTo = 0;
 	public static int[] Levels;
 	private static int progression = 0;
 
 	public static int currentLevel = 1;
 	public static int maxLevel = 5;
+
+	private Transform text;
+	private Transform player;
 
 	//On  game started (Pressing start on the title screen)
 	public static void init()
@@ -31,6 +34,8 @@ public class LevelTransition : MonoBehaviour
 	void Awake()
     {
 		if (transitionTo == 0) transitionTo = (Levels[progression+=1]);
+		text = transform.GetChild(0);
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 		gameObject.SetActive(false);
 	}
 
@@ -38,7 +43,8 @@ public class LevelTransition : MonoBehaviour
 	public void LevelComplete(WaveManager Spawner)
     {
 		gameObject.SetActive(true);
-		currentLevel = Levels[progression];
+		//Levels[progression]
+		currentLevel = transitionTo;
 		Spawner.enabled = false;
     }
 
@@ -66,7 +72,8 @@ public class LevelTransition : MonoBehaviour
 			Debug.Log(Levels[t]);
 		}
 		currentLevel = Levels[0];
-		SceneManager.LoadScene(Levels[progression], LoadSceneMode.Single);
+		//Levels[progression]
+		SceneManager.LoadScene(1, LoadSceneMode.Single);
 	}
 
 	//Exit level
@@ -84,4 +91,9 @@ public class LevelTransition : MonoBehaviour
 			}
 		}
 	}
+
+	void Update()
+    {
+		text.LookAt(player.position);
+    }
 }

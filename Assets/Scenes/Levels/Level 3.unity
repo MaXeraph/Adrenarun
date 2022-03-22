@@ -1661,6 +1661,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1893369736}
     m_Modifications:
+    - target: {fileID: 5884914429435330596, guid: e268eeff50376944698e6d333f93b1f1, type: 3}
+      propertyPath: transitionTo
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6935695344925555760, guid: e268eeff50376944698e6d333f93b1f1, type: 3}
       propertyPath: m_Name
       value: LevelTransition
