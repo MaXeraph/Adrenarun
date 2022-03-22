@@ -76,11 +76,10 @@ public class EnemyFactory
 		// TODO: change default vector to dynamically adjust height of enemy spawn so they don't spawn under the ground.
 		NavMeshAgent navAgent = newEnemyObject.GetComponent<NavMeshAgent>();
 		if (navAgent != null) {
-			navAgent.enabled = false;
+			navAgent.Warp(position);
 		}
-		enemyTransform.position = position + new Vector3(0, 1, 0);
-		if (navAgent != null) {
-			navAgent.enabled = true;
+		else {
+			enemyTransform.position = position + new Vector3(0, 1, 0);
 		}
 
 		EnemyInfo enemyInfo = _enemyInfo[enemyType];
