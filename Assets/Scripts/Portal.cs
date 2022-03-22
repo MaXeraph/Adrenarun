@@ -12,9 +12,9 @@ public class Portal : MonoBehaviour
 	Vector3 locationAfterTeleport;
 	void Start()
 	{
-		if (reverseExitDirection) exitDirection = 0.97f;
+		if (reverseExitDirection) exitDirection = 0.95f;
 		distanceToExit = portalOpposite.transform.position - transform.position;
-		locationAfterTeleport = distanceToExit * 1.05f;
+		locationAfterTeleport = distanceToExit * exitDirection;
 	}
 
 	void OnTriggerEnter(Collider c)
