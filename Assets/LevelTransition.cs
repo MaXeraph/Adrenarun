@@ -13,10 +13,9 @@ public class LevelTransition : MonoBehaviour
 	public static int currentLevel = 1;
 	public static int maxLevel = 5;
 
-	//On  game started
+	//On  game started (Pressing start on the title screen)
 	public static void init()
     {
-		//WaveManager.maxLevelNumber = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings-1;
 		maxLevel = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings-1;
 		WaveManager.maxLevelNumber = maxLevel;
 		Levels = new int[maxLevel];
@@ -32,8 +31,6 @@ public class LevelTransition : MonoBehaviour
 	void Awake()
     {
 		if (transitionTo == 0) transitionTo = (Levels[progression+=1]);
-		Debug.Log(progression);
-		Debug.Log(transitionTo);
 		gameObject.SetActive(false);
 	}
 
@@ -45,7 +42,7 @@ public class LevelTransition : MonoBehaviour
 		Spawner.enabled = false;
     }
 
-	//Randomize level order (except level 6 is always last)
+	//Randomize level order (except the last level is always last)
 	static void reshuffle()
 	{
 		int[] _level = new int[(maxLevel - 2)];
