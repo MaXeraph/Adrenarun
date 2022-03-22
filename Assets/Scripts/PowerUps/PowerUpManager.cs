@@ -19,6 +19,7 @@ public class PowerUpManager : MonoBehaviour
     {
         generatorList = Enumerable.Range(0, System.Enum.GetNames(typeof(PowerUpType)).Length).ToArray();
         powerUpSelectionList = new PowerUpType[numPowerUpOptions];
+
     }
 
     // we generate powerups randomly by shuffling a premade list
@@ -71,7 +72,7 @@ public class PowerUpManager : MonoBehaviour
     }
 
     // apply stat powerups directly, or add non stat ones to a powerup list
-    private void applyPowerUp(PowerUpType type)
+    public void applyPowerUp(PowerUpType type)
     {
         _weapon = GameObject.FindWithTag("Player").GetComponent<Weapon>();
         UIManager.powerSelection = -1;
@@ -115,6 +116,7 @@ public class PowerUpManager : MonoBehaviour
             }
             yield return null;
         }
+		Globals.TransitionPowerUpDictionary[selection] += 1;
         applyPowerUp(selection);
         Time.timeScale = 1;
     }

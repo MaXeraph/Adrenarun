@@ -9,8 +9,10 @@ TagManager:
   - Crit
   - overlay
   - Detector
+  - Transition
   - Portal
   - Projectile
+
   layers:
   - Default
   - TransparentFX
@@ -20,30 +22,30 @@ TagManager:
   - UI
   - Character
   - Bullet
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - 3DIcon
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
   m_SortingLayers:
   - name: Default
     uniqueID: 0
