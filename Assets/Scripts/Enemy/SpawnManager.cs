@@ -11,19 +11,20 @@ public static class SpawnManager {
     // chance of enemy spawning on level i wave j is _[ENEMY]SpawnChances[i-1,j-1]
 	// make sure the sum of SpawnChances[i,j] = 1
 	// also assuming the lowest spawn chance will be 0.05f, everything else in increments of that
-	private static int[,] _flyingSpawnChances = {{10, 10, 10, 10}};
 
 	// private static int[,] _tankSpawnChances = {{0, 0, 5, 0}, {5, 5, 10, 10}, {10, 10, 10, 10}};
 
 
 
-	private static int[,] _grenadierSpawnChances = {{15, 20, 30, 30, 35, 35}};
-	private static int[,] _rangedSpawnChances    = {{60, 50, 40, 40, 40, 40}};
-	private static int[,] _tankSpawnChances 	 = {{0,   0,  5,  5, 10, 10}};
-	private static int[,] _turretSpawnChances    = {{25, 30, 25, 25, 20, 20}};
+	private static int[,] _grenadierSpawnChances = {{0,   20, 30, 30, 30, 30}};
+	private static int[,] _flyingSpawnChances 	 = {{100, 10, 10, 10, 10, 10}};
+	private static int[,] _rangedSpawnChances    = {{0,   40, 30, 30, 30, 30}};
+	private static int[,] _tankSpawnChances 	 = {{0,    0,  5,  5, 10, 10}};
+	private static int[,] _turretSpawnChances    = {{0,   30, 25, 25, 20, 20}};
 	private static Dictionary<EnemyType, int[,]> enemySpawnChances = new Dictionary<EnemyType, int[,]>() {
 		{EnemyType.GRENADIER, _grenadierSpawnChances},
 		{EnemyType.RANGED, _rangedSpawnChances},
+		{EnemyType.FLYING, _flyingSpawnChances},
 		{EnemyType.TANK, _tankSpawnChances},
 		{EnemyType.TURRET, _turretSpawnChances}
 	};
@@ -48,6 +49,7 @@ public static class SpawnManager {
 	private static Func<float, Vector3>[] _turretSpawnBehaviours = {SpawnTurretDefault};
 	public static Dictionary<EnemyType, Func<float, Vector3>[]> enemySpawnBehaviour = new Dictionary<EnemyType, Func<float, Vector3>[]>() {
 		{EnemyType.GRENADIER, _grenadierSpawnBehaviours},
+		{EnemyType.FLYING, _flyingSpawnBehaviours},
 		{EnemyType.RANGED, _rangedSpawnBehaviours},
 		{EnemyType.TANK, _tankSpawnBehaviours},
 		{EnemyType.TURRET, _turretSpawnBehaviours}
@@ -80,7 +82,7 @@ public static class SpawnManager {
 	{
 		Vector3 randomPoint = Random.insideUnitSphere * radius;
 		NavMeshHit hit;
-		if (NavMesh.SamplePosition(randomPoint, out hit, radius, NavMesh.AllAreas))
+		if (NavMesh.SamplePosition(randomPoint, out hit, radius, 1))
 		{
 			result = hit.position;
 			return true;

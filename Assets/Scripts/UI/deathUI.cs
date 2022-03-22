@@ -23,8 +23,9 @@ public class deathUI : MonoBehaviour
         leave = transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<Button>();
         retry.onClick.AddListener(rewind);
         leave.onClick.AddListener(quit);
-        instance.SetActive(false);
-	}
+		GetComponent<Canvas>().enabled = true;
+		instance.SetActive(false);
+    }
 
     public static void reveal(GameObject inst)
     {
