@@ -7,7 +7,7 @@ public static class Globals
 {
 	public static Dictionary<PowerUpType, int> TransitionPowerUpDictionary = new Dictionary<PowerUpType, int>()
 	{
-		{PowerUpType.DAMAGE, 4},
+		{PowerUpType.DAMAGE, 0},
 		{PowerUpType.FIRERATE, 0 },
 		{PowerUpType.RELOADSPD, 0 },
 		{PowerUpType.CLIPSIZE, 0 },
