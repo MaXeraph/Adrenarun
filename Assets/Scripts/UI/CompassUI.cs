@@ -60,7 +60,7 @@ public class CompassUI : MonoBehaviour
 
     static void updateEnemyPosition(int enemy)
     {
-        if (enemies[enemy] == null && enemies[enemy].activeInHierarchy == false) enemyDied(enemy);
+        if (enemies[enemy] == null || enemies[enemy].activeInHierarchy == false) enemyDied(enemy);
         else SetMarkerPosition(enemyMarkers[enemy].GetComponent<RectTransform>(), enemies[enemy].transform.position); 
     }
 
