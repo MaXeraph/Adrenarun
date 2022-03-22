@@ -88,12 +88,12 @@ public class AmmoUI : MonoBehaviour
           
             if (reloading && current != AmmoCapacity)
             {
-                AmmoSlots[current].transform.DOScale(new Vector3(1f, 1f, 1f), 0.2f);
+                AmmoSlots[current].transform.DOScale(new Vector3(1f, 1f, 1f), 0.2f).SetUpdate(UpdateType.Fixed, true);
                 AmmoPanelColor.color = PanelColorReload;
                 if (current == AmmoCapacity-1) { AmmoPanelColor.color = PanelColorNormal; }
             }
 
-            else if (current != AmmoCapacity && current <= CurrentAmmo){ AmmoSlots[current].transform.DOScale(new Vector3(0f, 0f, 0f), 0.2f); AmmoPanelColor.color = PanelColorNormal; }
+            else if (current != AmmoCapacity && current <= CurrentAmmo){ AmmoSlots[current].transform.DOScale(new Vector3(0f, 0f, 0f), 0.2f).SetUpdate(UpdateType.Fixed, true); AmmoPanelColor.color = PanelColorNormal; }
         }
     }
 
