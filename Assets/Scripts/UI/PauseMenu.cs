@@ -35,6 +35,11 @@ public class PauseMenu : MonoBehaviour
 		MouseSensitivity.onValueChanged.AddListener(delegate { change_sensitivity(); });
 		blurPanel = blur.material;
 		blurPanel.SetFloat("_Intensity", 0);
+#if UNITY_EDITOR
+        blurPanel.SetFloat("_FlipY", 0f);
+#else
+		if (Application.platform == RuntimePlatform.WebGLPlayer) blurPanel.SetFloat("_FlipY", 1f);
+#endif
 		blurPanel.SetFloat("_Multiplier", 0.5f);
 		blurPanel.SetColor("_Color", new Color(1f, 1f, 1f, 0));
 		MouseSensitivity.value = previousChange;
