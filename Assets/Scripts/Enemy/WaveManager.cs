@@ -12,7 +12,8 @@ public class WaveManager : MonoBehaviour
 	private bool canSpawn = false; // for within wave
 	private bool startSpawn = false; // for each wave
 	private int currentWaveNumber = 1;
-	private static int currentLevelNumber = 1;
+	public static int currentLevelNumber = 1;
+	public static int maxLevelNumber = 5;
 	private PowerUpManager pum;
 
 	private int totalWaveNumber =  4;
@@ -21,12 +22,13 @@ public class WaveManager : MonoBehaviour
 	private int enemiesSpawned = 0;
 	private int currentNumEnemies = 0;
 	private bool _timeout = false;
-	private bool _levelComplete = false;
+	private bool _infinite = false;
 	private LevelTransition transition;
 
 
 	void Start()
 	{
+		if (LevelTransition.currentLevel == maxLevelNumber) _infinite = true;
 		transition = transform.GetChild(0).GetComponent<LevelTransition>();
 		pum = GameObject.FindGameObjectWithTag("Player").GetComponent<PowerUpManager>();
 		if (!_timeout)
@@ -48,6 +50,7 @@ public class WaveManager : MonoBehaviour
 
 	void StartSpawningWave()
 	{
+		if (_infinite) totalWaveNumber += 1;
 		UIManager.enemiesTotal = enemiesPerWave;
 		UIManager.enemiesLeft = enemiesPerWave;
 		enemiesSpawned = 0;
@@ -85,7 +88,7 @@ public class WaveManager : MonoBehaviour
 				pum.presentPowerUps();
 
 				if (currentWaveNumber < totalWaveNumber) StartSpawningWave();
-				else transition.init(this);
+				else transition.LevelComplete(this);
 			}
 		}
 	}
@@ -116,7 +119,7 @@ public class WaveManager : MonoBehaviour
 			}
 		}
 	}
-	
+
 
 	void SpawnEnemy(EnemyType enemy)
 	{
