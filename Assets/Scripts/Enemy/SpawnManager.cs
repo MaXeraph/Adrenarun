@@ -16,11 +16,11 @@ public static class SpawnManager {
 
 
 
-	private static int[,] _grenadierSpawnChances = {{0, 20, 30, 30, 35, 35}};
-	private static int[,] _flyingSpawnChances 	 = {{100, 10, 10, 10}};
-	private static int[,] _rangedSpawnChances    = {{0, 50, 40, 40, 40, 40}};
-	private static int[,] _tankSpawnChances 	 = {{0,   0,  5,  5, 10, 10}};
-	private static int[,] _turretSpawnChances    = {{0, 30, 25, 25, 20, 20}};
+	private static int[,] _grenadierSpawnChances = {{0,   20, 30, 30, 30, 30}};
+	private static int[,] _flyingSpawnChances 	 = {{100, 10, 10, 10, 10, 10}};
+	private static int[,] _rangedSpawnChances    = {{0,   40, 30, 30, 30, 30}};
+	private static int[,] _tankSpawnChances 	 = {{0,    0,  5,  5, 10, 10}};
+	private static int[,] _turretSpawnChances    = {{0,   30, 25, 25, 20, 20}};
 	private static Dictionary<EnemyType, int[,]> enemySpawnChances = new Dictionary<EnemyType, int[,]>() {
 		{EnemyType.GRENADIER, _grenadierSpawnChances},
 		{EnemyType.RANGED, _rangedSpawnChances},

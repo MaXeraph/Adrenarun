@@ -11,6 +11,7 @@ public class HealingPill : MonoBehaviour
 	{
 		GameObject newHealingPill = ObjectPool.Create("HealingPill");
 		Transform pillTransform = newHealingPill.GetComponent<Transform>();
+		position.y = 1;
 		pillTransform.position = position;
 		currentPills.Add(newHealingPill);
 		return newHealingPill;
