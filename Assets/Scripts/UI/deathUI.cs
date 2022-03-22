@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -50,20 +51,32 @@ public class deathUI : MonoBehaviour
 
    public void rewind()
     {
+		Time.timeScale = 1f;
+
+		Globals.TransitionPowerUpDictionary = new Dictionary<PowerUpType, int>()
+	{
+		{PowerUpType.DAMAGE, 0},
+		{PowerUpType.FIRERATE, 0 },
+		{PowerUpType.RELOADSPD, 0 },
+		{PowerUpType.CLIPSIZE, 0 },
+		{PowerUpType.ADRENALIN, 0 },
+		{PowerUpType.SHOTGUN, 0 },
+		{PowerUpType.REPEATER, 0 }
+	};
+
 		CompassUI.reset();
 		PauseMenu.blurPanel.SetFloat("_Intensity", 0);
 		PauseMenu.blurPanel.SetColor("_Color", new Color(1f, 1f, 1f, 0));
 		Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        Time.timeScale = 1f;
         SpeedManager.updateSpeeds(1f);
         PlayerCentral.paused = false;
-		UIManager.dead = false;
-		CompassUI.enemies.Clear();
-		CompassUI.enemyMarkers.Clear();
 
-		StopAllCoroutines();
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
-		gameObject.SetActive(false);
-	}
+		    UIManager.dead = false;
+		      StopAllCoroutines();
+
+        gameObject.SetActive(false);
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
+    }
+
 }
