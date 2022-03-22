@@ -16,7 +16,7 @@ public class WaveManager : MonoBehaviour
 	public static int maxLevelNumber = 5;
 	private PowerUpManager pum;
 
-	private int totalWaveNumber =  4;
+	private int totalWaveNumber =  2;
 	private int enemiesPerWave = 10;
 	private const int spawnInterval = 0;
 	private int enemiesSpawned = 0;

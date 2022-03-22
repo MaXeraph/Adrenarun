@@ -147,7 +147,7 @@ public class PlayerCentral : MonoBehaviour
     private void shootEffects(Vector3 pos)
     {
     //Update UI
-    UIManager.Ammo -= 1;
+    // UIManager.Ammo -= 1;
 
     //Muzzleflash
     GameObject flash = Instantiate(Resources.Load("Muzzleflash")) as GameObject;
