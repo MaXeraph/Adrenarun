@@ -76,8 +76,8 @@ public class PowerUpManager : MonoBehaviour
 		// TODO: find thresholds
 		// either through a calculation based on the enemies and which wave it is,
 		// or some static number that works
-        float highThreshold = 60f;
-		float midThreshold = 120f;
+        float highThreshold = 20f;
+		float midThreshold = 40f;
 		
 		// check which tier distribution for powerups we will use
 		// 0 = high, 1 = mid, 2 = low
@@ -134,7 +134,6 @@ public class PowerUpManager : MonoBehaviour
 	{
 		// unityengine is inclusive both bounds
 		int randNum = UnityEngine.Random.Range(0, 99);
-		Debug.Log(randNum);
 		PowerUpTier powerUpTier;
 		// distribution: h 15 - m 65 - l 20
 		if (pool == 0)
