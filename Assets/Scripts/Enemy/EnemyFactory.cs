@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 // Define EnemyInfo for convenience.
 public struct EnemyInfo
@@ -54,9 +55,10 @@ public class EnemyFactory
 		_enemyInfo.Add(EnemyType.GRENADIER, new EnemyInfo(EnemyType.GRENADIER, EnemyMovements.GrenadierMovement, Globals.GrenadierTargeting, EnemyMovements.GrenadierSetup, new ArtilleryAttackBehaviour(EntityType.ENEMY, 5f), 3f));
 		_enemyInfo.Add(EnemyType.RANGED, new EnemyInfo(EnemyType.RANGED, EnemyMovements.RangedMovement, Globals.DirectTargeting, EnemyMovements.RangedSetup, new BulletAttackBehaviour(EntityType.ENEMY, 5f, Globals.enemyBulletSpeeds[EnemyType.RANGED]), 1f));
 		_enemyInfo.Add(EnemyType.TANK, new EnemyInfo(EnemyType.TANK, EnemyMovements.TankMovement, Globals.ForwardTargeting, EnemyMovements.TankSetup, new SweepAttackBehaviour(EntityType.ENEMY, 10f, 10f), 0.1f));
+		_enemyInfo.Add(EnemyType.FLYING, new EnemyInfo(EnemyType.FLYING, EnemyMovements.FlyingMovement, Globals.DirectTargeting, EnemyMovements.FlyingSetup, new BulletAttackBehaviour(EntityType.ENEMY, 5f, Globals.enemyBulletSpeeds[EnemyType.FLYING]), 3f));
 		AddHealerVariantToRoster();
 		_enemyPostSetups.Add(EnemyVariantType.PREDICTIVE, CreatePredictiveVariant);
-		_enemyPostSetups.Add(EnemyVariantType.SHIELD, CreateShieldVariant);
+		// _enemyPostSetups.Add(EnemyVariantType.SHIELD, CreateShieldVariant);
 	}
 
 	public GameObject CreateEnemy(Vector3 position, EnemyType enemyType, EnemyVariantType variantType = EnemyVariantType.NONE)
@@ -73,7 +75,13 @@ public class EnemyFactory
 		CompassUI.addEnemy(newEnemyObject);
 
 		// TODO: change default vector to dynamically adjust height of enemy spawn so they don't spawn under the ground.
-		enemyTransform.position = position + new Vector3(0, 1, 0);
+		NavMeshAgent navAgent = newEnemyObject.GetComponent<NavMeshAgent>();
+		if (navAgent != null) {
+			navAgent.Warp(position);
+		}
+		else {
+			enemyTransform.position = position + new Vector3(0, 1, 0);
+		}
 
 		EnemyInfo enemyInfo = _enemyInfo[enemyType];
 
@@ -124,8 +132,8 @@ public class EnemyFactory
 		eb.GetAimDirection = Globals.CreatePredictiveTargeting(GameObject.FindGameObjectWithTag("Player").transform, Globals.enemyBulletSpeeds[et]);
 	}
 
-	void CreateShieldVariant(EnemyBehaviour eb, EnemyType et)
-	{
-		eb.gameObject.transform.Find("Shield").gameObject.SetActive(true);
-	}
+	// void CreateShieldVariant(EnemyBehaviour eb, EnemyType et)
+	// {
+	// 	eb.gameObject.transform.Find("Shield").gameObject.SetActive(true);
+	// }
 }

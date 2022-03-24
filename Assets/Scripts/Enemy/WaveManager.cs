@@ -12,20 +12,24 @@ public class WaveManager : MonoBehaviour
 	private bool canSpawn = false; // for within wave
 	private bool startSpawn = false; // for each wave
 	private int currentWaveNumber = 1;
-	private static int currentLevelNumber = 1;
+	public static int currentLevelNumber = 1;
+	public static int maxLevelNumber = 5;
 	private PowerUpManager pum;
 
-	private int totalWaveNumber;
-	private int enemiesPerWave = 15;
+	private int totalWaveNumber = 3;
+	private int enemiesPerWave = 10;
 	private const int spawnInterval = 0;
 	private int enemiesSpawned = 0;
 	private int currentNumEnemies = 0;
 	private bool _timeout = false;
+	private bool _infinite = false;
+	private LevelTransition transition;
 
 
-	// Start is called before the first frame update
 	void Start()
 	{
+		if (LevelTransition.currentLevel == maxLevelNumber) _infinite = true;
+		transition = transform.GetChild(0).GetComponent<LevelTransition>();
 		pum = GameObject.FindGameObjectWithTag("Player").GetComponent<PowerUpManager>();
 		if (!_timeout)
 		{
@@ -46,6 +50,7 @@ public class WaveManager : MonoBehaviour
 
 	void StartSpawningWave()
 	{
+		if (_infinite) totalWaveNumber += 1;
 		UIManager.enemiesTotal = enemiesPerWave;
 		UIManager.enemiesLeft = enemiesPerWave;
 		enemiesSpawned = 0;
@@ -73,13 +78,17 @@ public class WaveManager : MonoBehaviour
 			currentNumEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
 			UIManager.enemiesLeft = enemiesPerWave - (enemiesSpawned - currentNumEnemies);
 
-			if (currentNumEnemies == 0 && !_timeout)
+			if (currentNumEnemies == 0 && !_timeout )
 			{
+
+
 				HealingPill.DespawnPills();
 				currentWaveNumber++;
 				enemiesPerWave += enemiesPerWave;
-				pum.presentPowerUps(59f, 1);
-				StartSpawningWave();
+				pum.presentPowerUps();
+
+				if (currentWaveNumber < totalWaveNumber) StartSpawningWave();
+				else transition.LevelComplete(this);
 			}
 		}
 	}
@@ -110,7 +119,7 @@ public class WaveManager : MonoBehaviour
 			}
 		}
 	}
-	
+
 
 	void SpawnEnemy(EnemyType enemy)
 	{

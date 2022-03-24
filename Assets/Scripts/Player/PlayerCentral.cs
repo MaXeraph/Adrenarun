@@ -12,6 +12,7 @@ public class PlayerCentral : MonoBehaviour
 
     private Vector3 _velocity;
     private CharacterController _controller;
+	private PowerUpManager _powerUpManager;
 
     Transform arms;
     Transform gun;
@@ -24,6 +25,8 @@ public class PlayerCentral : MonoBehaviour
     float wallJumpSlope = 0.1f;
     Vector3 wallJumpVector;
 	private int _healingPills = 0;
+	public Vector3 SpawnLocation;
+
 	public int healingPills {
 		get => _healingPills;
 		set 
@@ -36,6 +39,7 @@ public class PlayerCentral : MonoBehaviour
 
     void Start()
     {
+		SpawnLocation = transform.position;
        Cursor.lockState = CursorLockMode.Locked;
 
         _player = GameObject.FindWithTag("Player");
@@ -44,13 +48,23 @@ public class PlayerCentral : MonoBehaviour
 
         _controller = GetComponent<CharacterController>();
 
+		_powerUpManager = GetComponent<PowerUpManager>();
+
         arms = transform.GetChild(0).GetChild(0).GetChild(0).Find("arms");
         gun = transform.GetChild(0).GetChild(0).GetChild(0).Find("gunF");
 
         _weapon = _player.AddComponent<Weapon>();
         _weapon.Initialize(new BulletAttackBehaviour(EntityType.PLAYER, damage: 10f, bulletSpeed:30f), 0.2f, 16, 1f);
 
-    }
+		foreach (PowerUpType powerUp in Globals.TransitionPowerUpDictionary.Keys)
+		{
+			for (int i = 0; i < Globals.TransitionPowerUpDictionary[powerUp]; i++)
+			{
+				_powerUpManager.applyPowerUp(powerUp);
+			}
+		}
+
+	}
 
 	private bool test = false;
 	private GameObject o = null;
@@ -136,7 +150,7 @@ public class PlayerCentral : MonoBehaviour
     private void shootEffects(Vector3 pos)
     {
     //Update UI
-    UIManager.Ammo -= 1;
+    // UIManager.Ammo -= 1;
 
     //Muzzleflash
     GameObject flash = Instantiate(Resources.Load("Muzzleflash")) as GameObject;
@@ -207,6 +221,7 @@ public class PlayerCentral : MonoBehaviour
 
         float dashSpeed = 60f * SpeedManager.playerMovementScaling;
         float dashTime = 0.2f/SpeedManager.playerMovementScaling;
+		CrosshairUI.dash(dashCD / SpeedManager.playerMovementScaling);
         Vector3 move = _player.transform.right * ad_input + _player.transform.forward * ws_input;
         while(Time.time < startTime + dashTime)
         {

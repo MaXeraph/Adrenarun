@@ -57,7 +57,7 @@ public class Weapon : MonoBehaviour
                 {
                     StartCoroutine(ShootAfterDelay(position, attackDirections[j].Item1, attackDirections[j].Item2));
                 }
-                _currentMagazine -= 1; // Comment out for infinite ammo
+                // _currentMagazine -= 1; // Comment out for infinite ammo
                 if (entityType == EntityType.PLAYER)
                 {
                     AudioManager.PlayFireAudio();

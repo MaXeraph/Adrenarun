@@ -5,6 +5,17 @@ using UnityEngine;
 
 public static class Globals
 {
+	public static Dictionary<PowerUpType, int> TransitionPowerUpDictionary = new Dictionary<PowerUpType, int>()
+	{
+		{PowerUpType.DAMAGE, 0},
+		{PowerUpType.FIRERATE, 0 },
+		{PowerUpType.RELOADSPD, 0 },
+		{PowerUpType.CLIPSIZE, 0 },
+		{PowerUpType.ADRENALIN, 0 },
+		{PowerUpType.SHOTGUN, 0 },
+		{PowerUpType.REPEATER, 0 }
+	};
+
 	public static Dictionary<PowerUpType, AbstractStatPowerUp> StatPowerUpDictionary = new Dictionary<PowerUpType, AbstractStatPowerUp>
 	{{PowerUpType.DAMAGE, new DamagePowerUp()},
 	{PowerUpType.FIRERATE, new FireRatePowerUp()},
@@ -101,18 +112,21 @@ public static class Globals
 		{ EnemyType.TURRET, "Turret" },
 		{ EnemyType.GRENADIER, "Grenadier"},
 		{ EnemyType.RANGED, "Ranged"},
-		{ EnemyType.TANK, "MeleeTank" },
+		{ EnemyType.TANK, "Tank" },
+		{ EnemyType.FLYING, "Flying"}
 	};
 
 	public static Dictionary<EnemyType, float> enemyBulletSpeeds = new Dictionary<EnemyType, float>() {
 		{ EnemyType.TURRET, 20f },
-		{ EnemyType.RANGED, 20f }
+		{ EnemyType.RANGED, 20f },
+		{ EnemyType.FLYING, 20f }
 	};
 }
 
 public enum EnemyType
 {
 	GRENADIER,
+	FLYING,
 	RANGED,
 	TANK,
 	TURRET,
