@@ -90,7 +90,7 @@ public class PowerUpManager : MonoBehaviour
             case PowerUpClass.BULLET:
                 // TODO: implement bullet powerups
                 AbstractBulletPowerUp bulletPowerUp = Globals.BulletPowerUpDictionary[type];
-                bulletPowerUps.Add(bulletPowerUp);
+				bulletPowerUp.applyPowerUp(_weapon._attackBehaviour);
                 break;
         }
     }
