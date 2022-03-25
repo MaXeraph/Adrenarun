@@ -61,15 +61,18 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
 	private void applyOnHitEffects(BulletMono bm, GameObject target)
 	{
 		// explode with radius dependent on amount of explode powerups
+		HashSet<GameObject> hitObject = new HashSet<GameObject>();
+		hitObject.Add(target);
 		Vector3 position = bm.gameObject.GetComponent<Transform>().position;
 		Collider[] explosionHits = Physics.OverlapSphere(position, 3f * _hitTypeModifiers["exploding"]); // 3f = slightly smaller than ThermitePool
 		for (int i = 0; i < explosionHits.Length; i++)
 		{
 			Collider collider = explosionHits[i];
 			Stats statsComponent = collider.gameObject.GetComponent<Stats>();
-			if (statsComponent && !bm.hitObjects.Contains(collider.gameObject) && statsComponent.owner != _owner)
+			if (statsComponent && !hitObject.Contains(collider.gameObject) && statsComponent.owner != _owner)
 			{
 				statsComponent.currentHealth -= _damage / 2; // Deal half damage on explosion.
+				hitObject.Add(collider.gameObject);
 				AudioManager.PlayImpactAudio();
 				UIManager.DamageText(collider.gameObject.transform.position + collider.gameObject.transform.up * 0.15f, -_damage / 2);
 			}

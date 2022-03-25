@@ -15,7 +15,7 @@ public class ExplodingBulletPowerUp : AbstractBulletPowerUp
 
     public override void applyPowerUp(AbstractAttackBehaviour bulletAttackBehaviour)
     {
-        bulletAttackBehaviour._hitTypeModifiers["explode"] += 1;
+        bulletAttackBehaviour._hitTypeModifiers["exploding"] += 1;
     }
 }
 
@@ -25,6 +25,6 @@ public class PiercingBulletPowerUp : AbstractBulletPowerUp
 
     public override void applyPowerUp(AbstractAttackBehaviour bulletAttackBehaviour)
     {
-        bulletAttackBehaviour._hitTypeModifiers["pierce"] += 1;
+        bulletAttackBehaviour._hitTypeModifiers["piercing"] += 1;
     }
 }
