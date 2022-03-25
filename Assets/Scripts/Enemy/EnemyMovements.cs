@@ -107,6 +107,45 @@ public static class EnemyMovements
 		}
 	}
 
+	private static bool CheckLOS(Vector3 posA, Vector3 posB)
+	{
+		RaycastHit[] hits = Physics.RaycastAll(posA, posB - posA);
+		Array.Sort(hits,
+			(RaycastHit a, RaycastHit b) => ((a.transform.position - posA).magnitude -
+			                                 (b.transform.position - posA).magnitude) > 0 ? 1 : -1);
+		for (int i = 0; i < hits.Length; i++)
+		{
+			if (Vector3.Distance(posA, hits[i].transform.position) == Vector3.Distance(posA, posB)) return true;
+			if (hits[i].transform.root.gameObject.tag == "PlatformObjects") return false;
+		}
+
+		return true;
+	}
+	
+	public static Action<GameObject, Vector3> CreateHealerMovement()
+	{
+		int angle = UnityEngine.Random.Range(-90, 90);
+		Vector3 vectorToEnemy = Vector3.zero;
+		return delegate(GameObject gameObject, Vector3 playerPosition)
+		{
+			Vector3 position = gameObject.transform.position;
+			if (vectorToEnemy == Vector3.zero) vectorToEnemy = (position - playerPosition).normalized;
+			// Animation anim = gameObject.transform.GetChild(0).GetComponent<Animation>();
+			NavMeshAgent navAgent = gameObject.GetComponent<NavMeshAgent>();
+			navAgent.speed = _grenadierBaseSpeed * SpeedManager.enemyMovementScaling;
+
+			vectorToEnemy.y = 0;
+			Vector3 newPosition = (Quaternion.AngleAxis(angle, Vector3.up) * vectorToEnemy) * 40 + playerPosition;
+			while (!CheckLOS(playerPosition, newPosition))
+			{
+				angle = UnityEngine.Random.Range(-90, 90);
+				newPosition = (Quaternion.AngleAxis(angle, Vector3.up) * vectorToEnemy) * 40 + playerPosition;
+			}
+			
+			navAgent.SetDestination(newPosition);
+		};
+	}
+
 	public static void HealerSetup(Vector3 transform)
 	{
 	}
