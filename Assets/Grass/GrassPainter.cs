@@ -11,63 +11,63 @@ using UnityEditor;
 public class GrassPainter : MonoBehaviour
 {
 
-    public Mesh mesh;
-    MeshFilter filter;
+	public Mesh mesh;
+	MeshFilter filter;
 
-    public Color AdjustedColor;
+	public Color AdjustedColor;
 
-    [Range(1, 600000)]
-    public int grassLimit = 50000;
+	[Range(1, 600000)]
+	public int grassLimit = 50000;
 
-    private Vector3 lastPosition = Vector3.zero;
+	private Vector3 lastPosition = Vector3.zero;
 
-    public int toolbarInt = 0;
+	public int toolbarInt = 0;
 
-    public int toolbarIntEdit = 0;
+	public int toolbarIntEdit = 0;
 
-    [SerializeField]
-    List<Vector3> positions = new List<Vector3>();
-    [SerializeField]
-    List<Color> colors = new List<Color>();
-    [SerializeField]
-    List<int> indicies = new List<int>();
-    [SerializeField]
-    List<Vector3> normals = new List<Vector3>();
-    [SerializeField]
-    List<Vector2> length = new List<Vector2>();
+	[SerializeField]
+	List<Vector3> positions = new List<Vector3>();
+	[SerializeField]
+	List<Color> colors = new List<Color>();
+	[SerializeField]
+	List<int> indicies = new List<int>();
+	[SerializeField]
+	List<Vector3> normals = new List<Vector3>();
+	[SerializeField]
+	List<Vector2> length = new List<Vector2>();
 
-    public int i = 0;
+	public int i = 0;
 
-    public float sizeWidth = 1f;
-    public float sizeLength = 1f;
-    public float density = 1f;
-
-
-    public float normalLimit = 1;
-
-    public float rangeR, rangeG, rangeB;
-    public LayerMask hitMask = 1;
-    public LayerMask paintMask = 1;
-    public float brushSize;
-    public float brushFalloffSize;
+	public float sizeWidth = 1f;
+	public float sizeLength = 1f;
+	public float density = 1f;
 
 
-    public float Flow;
+	public float normalLimit = 1;
 
-    private int flowTimer;
-
-    Vector3 mousePos;
-
-    [HideInInspector]
-    public Vector3 hitPosGizmo;
-
-    Vector3 hitPos;
-
-    [HideInInspector]
-    public Vector3 hitNormal;
+	public float rangeR, rangeG, rangeB;
+	public LayerMask hitMask = 1;
+	public LayerMask paintMask = 1;
+	public float brushSize;
+	public float brushFalloffSize;
 
 
-    int[] indi;
+	public float Flow;
+
+	private int flowTimer;
+
+	Vector3 mousePos;
+
+	[HideInInspector]
+	public Vector3 hitPosGizmo;
+
+	Vector3 hitPos;
+
+	[HideInInspector]
+	public Vector3 hitNormal;
+
+
+	int[] indi;
 
 
 #if UNITY_EDITOR
