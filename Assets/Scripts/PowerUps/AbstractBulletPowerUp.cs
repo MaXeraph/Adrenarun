@@ -5,12 +5,26 @@ using UnityEngine;
 public abstract class AbstractBulletPowerUp
 {
     //TODO: implement abstractbulletpowerup
+
+    public abstract void applyPowerUp(AbstractAttackBehaviour bulletAttackBehaviour);
 }
 
-public class TargetingBulletPowerUp : AbstractBulletPowerUp
+public class ExplodingBulletPowerUp : AbstractBulletPowerUp
 {
+    public ExplodingBulletPowerUp(){}
+
+    public override void applyPowerUp(AbstractAttackBehaviour bulletAttackBehaviour)
+    {
+        bulletAttackBehaviour._hitTypeModifiers["exploding"] += 1;
+    }
 }
 
-public class OnHitBulletPowerUp : AbstractBulletPowerUp
+public class PiercingBulletPowerUp : AbstractBulletPowerUp
 {
+    public PiercingBulletPowerUp(){}
+
+    public override void applyPowerUp(AbstractAttackBehaviour bulletAttackBehaviour)
+    {
+        bulletAttackBehaviour._hitTypeModifiers["piercing"] += 1;
+    }
 }
