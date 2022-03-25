@@ -9,15 +9,13 @@ public abstract class AbstractBulletPowerUp
     public abstract void applyPowerUp(AbstractAttackBehaviour bulletAttackBehaviour);
 }
 
-public class ExplosiveBulletPowerUp : AbstractBulletPowerUp
+public class ExplodingBulletPowerUp : AbstractBulletPowerUp
 {
-    public ExplosiveBulletPowerUp(){}
+    public ExplodingBulletPowerUp(){}
 
     public override void applyPowerUp(AbstractAttackBehaviour bulletAttackBehaviour)
     {
-        Debug.Log("tried to apply");
         bulletAttackBehaviour._hitTypeModifiers["explode"] += 1;
-        Debug.Log("applied explode");
     }
 }
 
@@ -27,8 +25,6 @@ public class PiercingBulletPowerUp : AbstractBulletPowerUp
 
     public override void applyPowerUp(AbstractAttackBehaviour bulletAttackBehaviour)
     {
-        Debug.Log("tried to apply");
         bulletAttackBehaviour._hitTypeModifiers["pierce"] += 1;
-        Debug.Log("applied pierce");
     }
 }

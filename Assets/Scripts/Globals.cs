@@ -14,7 +14,8 @@ public static class Globals
 		{PowerUpType.ADRENALIN, 0 },
 		{PowerUpType.SHOTGUN, 0 },
 		{PowerUpType.REPEATER, 0 },
-		{PowerUpType.PIERCING, 0 }
+		{PowerUpType.PIERCING, 0 },
+		{PowerUpType.EXPLODING, 0 }
 	};
 
 	public static Dictionary<PowerUpType, AbstractStatPowerUp> StatPowerUpDictionary = new Dictionary<PowerUpType, AbstractStatPowerUp>
@@ -31,7 +32,8 @@ public static class Globals
 	};
 
 	public static Dictionary<PowerUpType, AbstractBulletPowerUp> BulletPowerUpDictionary = new Dictionary<PowerUpType, AbstractBulletPowerUp>
-	{{PowerUpType.PIERCING, new PiercingBulletPowerUp()}
+	{{PowerUpType.PIERCING, new PiercingBulletPowerUp()},
+	{PowerUpType.EXPLODING, new ExplodingBulletPowerUp()}
 	};
 
 	public static Dictionary<PowerUpType, PowerUpClass> PowerUpClassDictionary = new Dictionary<PowerUpType, PowerUpClass>
@@ -42,7 +44,8 @@ public static class Globals
 	{PowerUpType.ADRENALIN, PowerUpClass.STAT},
 	{PowerUpType.SHOTGUN, PowerUpClass.FIRING},
 	{PowerUpType.REPEATER, PowerUpClass.FIRING},
-	{PowerUpType.PIERCING, PowerUpClass.BULLET}
+	{PowerUpType.PIERCING, PowerUpClass.BULLET},
+	{PowerUpType.EXPLODING, PowerUpClass.BULLET}
 	};
 
 	public static Dictionary<PowerUpType, string> PowerUpInfoDictionary = new Dictionary<PowerUpType, string>
@@ -54,7 +57,8 @@ public static class Globals
 	{PowerUpType.ADRENALIN, "Reduces effect of health-based speed scaling"},
 	{PowerUpType.SHOTGUN, "Shoot more bullets with increased spread"},
 	{PowerUpType.REPEATER, "Shoot an additional bullet with each shot"},
-	{PowerUpType.PIERCING, "Pierce through an additional enemy with each bullet"}
+	{PowerUpType.PIERCING, "Pierce through an additional enemy with each bullet"},
+	{PowerUpType.EXPLODING, "Bullets explode on contact"}
 	};
 
 	public static Dictionary<PowerUpType, Sprite> PowerUpIconDictionary = new Dictionary<PowerUpType, Sprite>
@@ -65,7 +69,8 @@ public static class Globals
 	{PowerUpType.ADRENALIN, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_front_spritesheet_1")[4]},
 	{PowerUpType.SHOTGUN, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_side_spritesheet_1")[1]},
 	{PowerUpType.REPEATER, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_side_spritesheet_1")[7]},
-	{PowerUpType.PIERCING, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_side_spritesheet_1")[7]}
+	{PowerUpType.PIERCING, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_side_spritesheet_1")[7]},
+	{PowerUpType.EXPLODING, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_side_spritesheet_1")[4]}
 	};
 
 	public static Vector3 DirectTargeting(Transform from, Transform to)
@@ -161,7 +166,8 @@ public enum PowerUpType
 	ADRENALIN,
 	SHOTGUN,
 	REPEATER,
-	PIERCING
+	PIERCING,
+	EXPLODING
 }
 
 public enum PowerUpClass
