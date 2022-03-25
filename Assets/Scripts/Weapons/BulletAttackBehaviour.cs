@@ -8,8 +8,8 @@ using UnityEngine;
 public class BulletAttackBehaviour : AbstractAttackBehaviour
 {
 	public float _bulletSpeed;
-	public Dictionary<string, int> _hitTypeModifiers;
 	public Dictionary<string, float> _hitStatsModifiers;
+	private int pierceCount = 0;
 
 	public BulletAttackBehaviour(EntityType owner, float damage = 10f, float bulletSpeed = 20f)
 		: base(owner, damage)
@@ -17,8 +17,8 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
 		_bulletSpeed = bulletSpeed;
 		_hitTypeModifiers = new Dictionary<string, int>()
 		{
-			{ "exploding", 0 },
-			{ "pierceThrough", 0 }
+			{ "explode", 0 },
+			{ "pierce", 0 }
 		};
 		_hitStatsModifiers = new Dictionary<string, float>()
 		{
@@ -37,14 +37,18 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
 		Stats statsComponent = target.GetComponent<Stats>();
 		if (statsComponent)
 		{
-			if (statsComponent.owner != _owner)
+			if (statsComponent.owner != _owner && !bm.piercedObjects.Contains(target))
 			{
 				statsComponent.currentHealth -= _damage;
-				BulletMono.Destroy(bm.gameObject);
+				bm.piercedObjects.Add(target);
 				if (statsComponent.owner == EntityType.ENEMY)
 				{
 					AudioManager.PlayImpactAudio();
 					UIManager.DamageText(bm.gameObject.transform.position + bm.gameObject.transform.up * 0.15f, -_damage);
+				}
+				if (bm.piercedObjects.Count > _hitTypeModifiers["pierce"])
+				{
+					BulletMono.Destroy(bm.gameObject);
 				}
 			}
 		}
@@ -53,4 +57,19 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
 			BulletMono.Destroy(bm.gameObject);
 		}
 	}
+
+	// private void applyOnHitEffects(BulletMono bm, GameObject target)
+	// {
+	// 	// destroy if pierce count is met
+	// 	pierceCount += 1;
+	// 	Debug.Log(pierceCount);
+	// 	Debug.Log(_hitTypeModifiers["pierce"]);
+	// 	if (pierceCount > _hitTypeModifiers["pierce"])
+	// 	{
+	// 		BulletMono.Destroy(bm.gameObject);
+	// 		pierceCount = 0;
+	// 	}
+
+	// 	// explode with radius dependent on amount of explode powerups
+	// }
 }
