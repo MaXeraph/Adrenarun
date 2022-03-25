@@ -8,7 +8,6 @@ using UnityEngine;
 public class BulletAttackBehaviour : AbstractAttackBehaviour
 {
 	public float _bulletSpeed;
-	public Dictionary<string, int> _hitTypeModifiers;
 	public Dictionary<string, float> _hitStatsModifiers;
 
 	public BulletAttackBehaviour(EntityType owner, float damage = 10f, float bulletSpeed = 20f)
@@ -18,7 +17,7 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
 		_hitTypeModifiers = new Dictionary<string, int>()
 		{
 			{ "exploding", 0 },
-			{ "pierceThrough", 0 }
+			{ "piercing", 0 }
 		};
 		_hitStatsModifiers = new Dictionary<string, float>()
 		{
@@ -37,20 +36,46 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
 		Stats statsComponent = target.GetComponent<Stats>();
 		if (statsComponent)
 		{
-			if (statsComponent.owner != _owner)
+			if (statsComponent.owner != _owner && !bm.hitObjects.Contains(target))
 			{
 				statsComponent.currentHealth -= _damage;
-				BulletMono.Destroy(bm.gameObject);
+				bm.hitObjects.Add(target);
+				applyOnHitEffects(bm, target);
 				if (statsComponent.owner == EntityType.ENEMY)
 				{
 					AudioManager.PlayImpactAudio();
 					UIManager.DamageText(bm.gameObject.transform.position + bm.gameObject.transform.up * 0.15f, -_damage);
 				}
+				if (bm.hitObjects.Count > _hitTypeModifiers["piercing"])
+				{
+					BulletMono.Destroy(bm.gameObject);
+				}
 			}
 		}
-		else if (target.tag != "Bullet" && target.tag != "Detector")
+		else if (target.tag != "Projectile" && target.tag != "Detector" && target.tag != "Portal")
 		{
 			BulletMono.Destroy(bm.gameObject);
+		}
+	}
+
+	private void applyOnHitEffects(BulletMono bm, GameObject target)
+	{
+		// explode with radius dependent on amount of explode powerups
+		HashSet<GameObject> hitObject = new HashSet<GameObject>();
+		hitObject.Add(target);
+		Vector3 position = bm.gameObject.GetComponent<Transform>().position;
+		Collider[] explosionHits = Physics.OverlapSphere(position, 3f * _hitTypeModifiers["exploding"]); // 3f = slightly smaller than ThermitePool
+		for (int i = 0; i < explosionHits.Length; i++)
+		{
+			Collider collider = explosionHits[i];
+			Stats statsComponent = collider.gameObject.GetComponent<Stats>();
+			if (statsComponent && !hitObject.Contains(collider.gameObject) && statsComponent.owner != _owner)
+			{
+				statsComponent.currentHealth -= _damage / 2; // Deal half damage on explosion.
+				hitObject.Add(collider.gameObject);
+				AudioManager.PlayImpactAudio();
+				UIManager.DamageText(collider.gameObject.transform.position + collider.gameObject.transform.up * 0.15f, -_damage / 2);
+			}
 		}
 	}
 }

@@ -22,7 +22,7 @@ public class MainMenuUI : MonoBehaviour
         switch (action)
         {
             case "start":
-                SceneManager.LoadScene("LevelPrototypeScene");
+				LevelTransition.init();
                 break;
             case "continue":
                 //Possibly implement a save system...

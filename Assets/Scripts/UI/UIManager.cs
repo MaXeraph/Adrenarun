@@ -70,7 +70,7 @@ public class UIManager : MonoBehaviour
         {
 	        health = value;
 	        UI_health.setHealth(health);
-            if (health <= 0) deathUI.reveal(deathUI.instance);
+            if (health <= 0 && !dead) deathUI.reveal(deathUI.instance);
         }
     }
     private static float health;

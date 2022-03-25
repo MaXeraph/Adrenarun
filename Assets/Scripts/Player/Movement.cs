@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
     public static float jumpVelocity = Mathf.Sqrt(jumpHeight * -2f * -45.81f);
 
     // MouseLook variables
-    static float mouseSensitivity = 33f;
+    public static float mouseSensitivity = 33f;
     static float xRotation = 0f;
 
     public static void RotatePlayer(GameObject player, Camera camera)

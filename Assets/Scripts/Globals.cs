@@ -5,6 +5,19 @@ using UnityEngine;
 
 public static class Globals
 {
+	public static Dictionary<PowerUpType, int> TransitionPowerUpDictionary = new Dictionary<PowerUpType, int>()
+	{
+		{PowerUpType.DAMAGE, 0},
+		{PowerUpType.FIRERATE, 0 },
+		{PowerUpType.RELOADSPD, 0 },
+		{PowerUpType.CLIPSIZE, 0 },
+		{PowerUpType.ADRENALIN, 0 },
+		{PowerUpType.SHOTGUN, 0 },
+		{PowerUpType.REPEATER, 0 },
+		{PowerUpType.PIERCING, 0 },
+		{PowerUpType.EXPLODING, 0 }
+	};
+
 	public static Dictionary<PowerUpType, AbstractStatPowerUp> StatPowerUpDictionary = new Dictionary<PowerUpType, AbstractStatPowerUp>
 	{{PowerUpType.DAMAGE, new DamagePowerUp()},
 	{PowerUpType.FIRERATE, new FireRatePowerUp()},
@@ -19,7 +32,8 @@ public static class Globals
 	};
 
 	public static Dictionary<PowerUpType, AbstractBulletPowerUp> BulletPowerUpDictionary = new Dictionary<PowerUpType, AbstractBulletPowerUp>
-	{
+	{{PowerUpType.PIERCING, new PiercingBulletPowerUp()},
+	{PowerUpType.EXPLODING, new ExplodingBulletPowerUp()}
 	};
 
 	public static Dictionary<PowerUpType, PowerUpClass> PowerUpClassDictionary = new Dictionary<PowerUpType, PowerUpClass>
@@ -29,7 +43,9 @@ public static class Globals
 	{PowerUpType.CLIPSIZE, PowerUpClass.STAT},
 	{PowerUpType.ADRENALIN, PowerUpClass.STAT},
 	{PowerUpType.SHOTGUN, PowerUpClass.FIRING},
-	{PowerUpType.REPEATER, PowerUpClass.FIRING}
+	{PowerUpType.REPEATER, PowerUpClass.FIRING},
+	{PowerUpType.PIERCING, PowerUpClass.BULLET},
+	{PowerUpType.EXPLODING, PowerUpClass.BULLET}
 	};
 
 	public static Dictionary<PowerUpType, string> PowerUpInfoDictionary = new Dictionary<PowerUpType, string>
@@ -40,7 +56,9 @@ public static class Globals
 	{PowerUpType.CLIPSIZE, "Increase gun clip size"},
 	{PowerUpType.ADRENALIN, "Reduces effect of health-based speed scaling"},
 	{PowerUpType.SHOTGUN, "Shoot more bullets with increased spread"},
-	{PowerUpType.REPEATER, "Shoot an additional bullet with each shot"}
+	{PowerUpType.REPEATER, "Shoot an additional bullet with each shot"},
+	{PowerUpType.PIERCING, "Pierce through an additional enemy with each bullet"},
+	{PowerUpType.EXPLODING, "Bullets explode on contact"}
 	};
 
 	public static Dictionary<PowerUpType, Sprite> PowerUpIconDictionary = new Dictionary<PowerUpType, Sprite>
@@ -50,7 +68,9 @@ public static class Globals
 	{PowerUpType.CLIPSIZE, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_front_spritesheet_1")[6]},
 	{PowerUpType.ADRENALIN, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_front_spritesheet_1")[4]},
 	{PowerUpType.SHOTGUN, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_side_spritesheet_1")[1]},
-	{PowerUpType.REPEATER, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_side_spritesheet_1")[7]}
+	{PowerUpType.REPEATER, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_side_spritesheet_1")[7]},
+	{PowerUpType.PIERCING, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_side_spritesheet_1")[7]},
+	{PowerUpType.EXPLODING, Resources.LoadAll<Sprite>("Textures/toon_muzzleflash_side_spritesheet_1")[4]}
 	};
 
 	public static Vector3 DirectTargeting(Transform from, Transform to)
@@ -101,19 +121,22 @@ public static class Globals
 		{ EnemyType.TURRET, "Turret" },
 		{ EnemyType.GRENADIER, "Grenadier"},
 		{ EnemyType.RANGED, "Ranged"},
-		{ EnemyType.TANK, "MeleeTank" },
 		{ EnemyType.HEALER, "Healer" },
+		{ EnemyType.TANK, "Tank" },
+		{ EnemyType.FLYING, "Flying"}
 	};
 
 	public static Dictionary<EnemyType, float> enemyBulletSpeeds = new Dictionary<EnemyType, float>() {
 		{ EnemyType.TURRET, 20f },
-		{ EnemyType.RANGED, 20f }
+		{ EnemyType.RANGED, 20f },
+		{ EnemyType.FLYING, 20f }
 	};
 }
 
 public enum EnemyType
 {
 	GRENADIER,
+	FLYING,
 	RANGED,
 	TANK,
 	HEALER,
@@ -143,7 +166,9 @@ public enum PowerUpType
 	CLIPSIZE,
 	ADRENALIN,
 	SHOTGUN,
-	REPEATER
+	REPEATER,
+	PIERCING,
+	EXPLODING
 }
 
 public enum PowerUpClass
@@ -151,4 +176,10 @@ public enum PowerUpClass
 	STAT,
 	FIRING,
 	BULLET
+}
+
+public enum PowerUpTier{
+	HIGH,
+	MID,
+	LOW
 }

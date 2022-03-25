@@ -7,7 +7,7 @@ public class SpeedManager : MonoBehaviour
     public static float coreSpeed = 1f; // 1:1 with health percentage
     public static float playerMovementScaling;
     public static float bulletSpeedScaling;
-    public static float enemySpawnScaling;
+    public static float enemySpawnScaling = 0f;
     public static float adrenalinModifier = 0f;
     public static float enemyMovementScaling;
     public static double realTime = 0;

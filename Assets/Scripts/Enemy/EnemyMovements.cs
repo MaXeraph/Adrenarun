@@ -7,7 +7,7 @@ public static class EnemyMovements
 {
 	private const float _grenadierBaseSpeed = 6f;
 	private const float _rangedBaseSpeed = 8f;
-	private const float _tankBaseSpeed = 12f;
+	private const float _tankBaseSpeed = 8f;
 
 	public static void GrenadierSetup(Vector3 transform)
 	{
@@ -61,19 +61,21 @@ public static class EnemyMovements
 	public static void TankMovement(GameObject gameObject, Vector3 playerPosition)
 	{
 		Vector3 position = gameObject.transform.position;
+		Animation anim = gameObject.transform.GetChild(0).GetComponent<Animation>();
 		NavMeshAgent navAgent = gameObject.GetComponent<NavMeshAgent>();
 		navAgent.speed = _tankBaseSpeed * SpeedManager.enemyMovementScaling;
 		float playerDistance = Vector3.Distance(position, playerPosition);
 		if (playerDistance > 0)
 		{
 			navAgent.SetDestination(playerPosition);
+			anim.Play("Tank_game_rig|shield");
 		}
 	}
 	public static void TankSetup(Vector3 transform)
 	{
 
 	}
-
+	
 	public static void HealerMovement(GameObject gameObject, Vector3 playerPosition)
 	{
 		Vector3 position = gameObject.transform.position;
@@ -85,8 +87,27 @@ public static class EnemyMovements
 			navAgent.SetDestination(playerPosition);
 		}
 	}
-	
+
 	public static void HealerSetup(Vector3 transform)
+	{
+	}
+
+	public static void FlyingMovement(GameObject gameObject, Vector3 playerPosition)
+	{
+		Vector3 position = gameObject.transform.position;
+		Animation anim = gameObject.transform.GetChild(0).GetComponent<Animation>();
+		NavMeshAgent navAgent = gameObject.GetComponent<NavMeshAgent>();
+		navAgent.speed = _grenadierBaseSpeed * SpeedManager.enemyMovementScaling;
+		float playerDistance = Vector3.Distance(position, playerPosition);
+		if (playerDistance > 7)
+		{
+			navAgent.SetDestination(playerPosition);
+			anim.Play("flying");
+		}
+
+	}
+	
+	public static void FlyingSetup(Vector3 transform) 
 	{
 
 	}
