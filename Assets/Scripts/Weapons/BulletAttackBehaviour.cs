@@ -9,7 +9,6 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
 {
 	public float _bulletSpeed;
 	public Dictionary<string, float> _hitStatsModifiers;
-	private int pierceCount = 0;
 
 	public BulletAttackBehaviour(EntityType owner, float damage = 10f, float bulletSpeed = 20f)
 		: base(owner, damage)
