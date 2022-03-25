@@ -15,6 +15,8 @@ public class WaveManager : MonoBehaviour
 	public static int currentLevelNumber = 1;
 	public static int maxLevelNumber = 5;
 	private PowerUpManager pum;
+	private float waveStartTime;
+	private float waveEndTime;
 
 	private int totalWaveNumber = 3;
 	private int enemiesPerWave = 10;
@@ -71,6 +73,7 @@ public class WaveManager : MonoBehaviour
 	{
 		if (startSpawn && !_timeout)
 		{
+			waveStartTime = Time.time;
 			SpawnWave();
 		}
 		else
@@ -81,11 +84,11 @@ public class WaveManager : MonoBehaviour
 			if (currentNumEnemies == 0 && !_timeout )
 			{
 
-
+				waveEndTime = Time.time;
 				HealingPill.DespawnPills();
 				currentWaveNumber++;
 				enemiesPerWave += enemiesPerWave;
-				pum.presentPowerUps();
+				pum.presentPowerUps(waveEndTime - waveStartTime, currentWaveNumber);
 
 				if (currentWaveNumber < totalWaveNumber) StartSpawningWave();
 				else transition.LevelComplete(this);

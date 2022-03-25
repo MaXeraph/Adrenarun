@@ -12,6 +12,10 @@ public class PowerUpManager : MonoBehaviour
     private bool includeNone = false;
     public List<AbstractBulletPowerUp> bulletPowerUps;
 
+	private List<PowerUpType> highTierPowerUps;
+	private List<PowerUpType> midTierPowerUps;
+	private List<PowerUpType> lowTierPowerUps;
+
     private Weapon _weapon;
 
     // Start is called before the first frame update
@@ -19,8 +23,31 @@ public class PowerUpManager : MonoBehaviour
     {
         generatorList = Enumerable.Range(0, System.Enum.GetNames(typeof(PowerUpType)).Length).ToArray();
         powerUpSelectionList = new PowerUpType[numPowerUpOptions];
-
+		initializePowerUpLists();
     }
+
+	private void initializePowerUpLists()
+	{
+		// Current internal power up tier list:
+
+		// High (0): Shotgun, Repeater
+		// Mid (1): Exploding, Piercing, Damage, Fire Rate
+		// Low (2): ClipSize, ReloadSpeed, Homing, Adrenalin
+
+		highTierPowerUps  = new List<PowerUpType>{PowerUpType.SHOTGUN, 
+												PowerUpType.REPEATER};
+
+		midTierPowerUps = new List<PowerUpType>{PowerUpType.DAMAGE, 
+												//PowerUpType.EXPLODING,
+												//PowerUpType.PIERCING,
+												PowerUpType.FIRERATE};
+
+		lowTierPowerUps = new List<PowerUpType>{PowerUpType.CLIPSIZE, 
+												PowerUpType.RELOADSPD, 
+												//PowerUpType.HOMING,
+												//PowerUpType.BIGBULLETS,
+												PowerUpType.ADRENALIN};
+	}
 
     // we generate powerups randomly by shuffling a premade list
     private void generatePowerUps()
@@ -44,6 +71,105 @@ public class PowerUpManager : MonoBehaviour
 
     }
 
+    private void generateTieredPowerUps(float waveTime, int waveNumber)
+    {
+		// TODO: find thresholds
+		// either through a calculation based on the enemies and which wave it is,
+		// or some static number that works
+        float highThreshold = 20f;
+		float midThreshold = 40f;
+		
+		// check which tier distribution for powerups we will use
+		// 0 = high, 1 = mid, 2 = low
+		int powerUpPool = waveTime < highThreshold ? 0 : waveTime < midThreshold ? 1 : 2;
+		
+		for (int i = 0; i < 3; i++)
+		{
+			// randomly generate the powerup tier.
+			// then, randomly select a powerup within that tier.
+			PowerUpTier powerUpTier = findPowerUpTierFromPool(powerUpPool);
+			PowerUpType powerUp = generatePowerUpFromTier(powerUpTier);
+			powerUpSelectionList[i] = powerUp;
+
+			// remove the option we just chose so we don't generate duplicates
+			if (powerUpTier == PowerUpTier.HIGH)
+			{
+				for (int j = 0; j < highTierPowerUps.Count; j++)
+				{
+					if (highTierPowerUps[j] == powerUp)
+					{
+						highTierPowerUps.Remove(highTierPowerUps[j]);
+						break;
+					}
+				}
+			}
+			else if (powerUpTier == PowerUpTier.MID)
+			{	
+				for (int j = 0; j < midTierPowerUps.Count; j++)
+				{
+					if (midTierPowerUps[j] == powerUp)
+					{
+						midTierPowerUps.Remove(midTierPowerUps[j]);
+						break;
+					}
+				}
+			}
+			else 
+			{	
+				for (int j = 0; j < lowTierPowerUps.Count; j++)
+				{
+					if (lowTierPowerUps[j] == powerUp)
+					{
+						lowTierPowerUps.Remove(lowTierPowerUps[j]);
+						break;
+					}
+				}
+			}
+		}
+		// re-initialize the power up lists
+		initializePowerUpLists();
+    }
+
+	private PowerUpTier findPowerUpTierFromPool(int pool)
+	{
+		// unityengine is inclusive both bounds
+		int randNum = UnityEngine.Random.Range(0, 99);
+		PowerUpTier powerUpTier;
+		// distribution: h 15 - m 65 - l 20
+		if (pool == 0)
+		{
+			powerUpTier = randNum < 15 ? PowerUpTier.HIGH : randNum < 80 ? PowerUpTier.MID : PowerUpTier.LOW;
+		}
+		// distribution: h 10 - m 55 - l 35
+		else if (pool == 1)
+		{
+			powerUpTier = randNum < 10 ? PowerUpTier.HIGH : randNum < 65 ? PowerUpTier.MID : PowerUpTier.LOW;
+		}
+		// distribution: h 5 - m 50 - l 45
+		else 
+		{
+			powerUpTier = randNum < 5 ? PowerUpTier.HIGH : randNum < 55 ? PowerUpTier.MID : PowerUpTier.LOW;
+		}
+		return powerUpTier;
+	}
+
+	private PowerUpType generatePowerUpFromTier(PowerUpTier tier)
+	{
+		Random randNum = new Random();
+		if (tier == PowerUpTier.HIGH && highTierPowerUps.Count > 0)
+		{
+			return highTierPowerUps[randNum.Next(highTierPowerUps.Count)];
+		}
+		else if ((tier == PowerUpTier.MID || tier == PowerUpTier.HIGH) && midTierPowerUps.Count > 0)
+		{
+			return midTierPowerUps[randNum.Next(midTierPowerUps.Count)];
+		}
+		else
+		{
+			return lowTierPowerUps[randNum.Next(lowTierPowerUps.Count)];
+		}
+	}
+
     // the knuth shuffle
     private void shuffleGeneratorList()
     {
@@ -59,16 +185,11 @@ public class PowerUpManager : MonoBehaviour
     }
 
     // call this method to present the power ups
-    public void presentPowerUps()
+    public void presentPowerUps(float waveTime, int waveNumber)
     {
-
-        generatePowerUps();
+        generateTieredPowerUps(waveTime, waveNumber);
         UIManager.showPowerups(powerUpSelectionList);
         StartCoroutine(waitForSelection());
-
-
-        // TODO: UI - display power up screen to player
-        //  the three powerups generated are in powerUpSelectionList
     }
 
     // apply stat powerups directly, or add non stat ones to a powerup list
@@ -104,15 +225,6 @@ public class PowerUpManager : MonoBehaviour
             if (UIManager.powerSelection != -1)
             {
                 selection = powerUpSelectionList[UIManager.powerSelection];
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha1)){
-                selection = powerUpSelectionList[0];
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha2)){
-                selection = powerUpSelectionList[1];
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha3)){
-                selection = powerUpSelectionList[2];
             }
             yield return null;
         }

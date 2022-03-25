@@ -176,3 +176,9 @@ public enum PowerUpClass
 	FIRING,
 	BULLET
 }
+
+public enum PowerUpTier{
+	HIGH,
+	MID,
+	LOW
+}
