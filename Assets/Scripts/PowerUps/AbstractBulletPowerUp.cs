@@ -21,7 +21,7 @@ public class ExplodingBulletPowerUp : AbstractBulletPowerUp
 
 public class PiercingBulletPowerUp : AbstractBulletPowerUp
 {
-    public PiercingBulletPowerUp(){Debug.Log("test");}
+    public PiercingBulletPowerUp(){}
 
     public override void applyPowerUp(AbstractAttackBehaviour bulletAttackBehaviour)
     {

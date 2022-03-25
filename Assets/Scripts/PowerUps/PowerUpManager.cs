@@ -35,11 +35,11 @@ public class PowerUpManager : MonoBehaviour
 		// Low (2): ClipSize, ReloadSpeed, Homing, Adrenalin
 
 		highTierPowerUps  = new List<PowerUpType>{PowerUpType.SHOTGUN, 
-												PowerUpType.REPEATER};
+												PowerUpType.REPEATER,
+												PowerUpType.EXPLODING};
 
 		midTierPowerUps = new List<PowerUpType>{PowerUpType.DAMAGE, 
-												//PowerUpType.EXPLODING,
-												//PowerUpType.PIERCING,
+												PowerUpType.PIERCING,
 												PowerUpType.FIRERATE};
 
 		lowTierPowerUps = new List<PowerUpType>{PowerUpType.CLIPSIZE, 
