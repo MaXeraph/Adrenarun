@@ -8,7 +8,11 @@ using UnityEngine.AI;
 public struct EnemyInfo
 {
 	public EnemyType enemyType;
-	public Action<GameObject, Vector3> navAgentMove;
+	private Func<Action<GameObject, Vector3>> createNavAgentMove;
+	public Action<GameObject, Vector3> navAgentMove
+	{
+		get { return createNavAgentMove();  }
+	}
 	public Func<Transform, Transform, Vector3> aim;
 	public Action<Vector3> navAgentSetup;
 	public AbstractAttackBehaviour attackBehaviour;
@@ -18,7 +22,18 @@ public struct EnemyInfo
 		Action<Vector3> navAgentSetupFunc, AbstractAttackBehaviour attackBehaviour, float fireRate)
 	{
 		enemyType = type;
-		navAgentMove = navAgentMoveFunc;
+		createNavAgentMove = () => navAgentMoveFunc;
+		aim = aimFunc;
+		navAgentSetup = navAgentSetupFunc;
+		this.attackBehaviour = attackBehaviour;
+		this.fireRate = fireRate;
+	}
+	
+	public EnemyInfo(EnemyType type, Func<Action<GameObject, Vector3>> createNavAgentMoveFunc, Func<Transform, Transform, Vector3> aimFunc,
+		Action<Vector3> navAgentSetupFunc, AbstractAttackBehaviour attackBehaviour, float fireRate)
+	{
+		enemyType = type;
+		createNavAgentMove = createNavAgentMoveFunc;
 		aim = aimFunc;
 		navAgentSetup = navAgentSetupFunc;
 		this.attackBehaviour = attackBehaviour;
@@ -52,10 +67,10 @@ public class EnemyFactory
 	{
 		// Define enemyInfo for each type.
 		AddTurretToRoster();
-		_enemyInfo.Add(EnemyType.GRENADIER, new EnemyInfo(EnemyType.GRENADIER, EnemyMovements.GrenadierMovement, Globals.GrenadierTargeting, EnemyMovements.GrenadierSetup, new ArtilleryAttackBehaviour(EntityType.ENEMY, 5f), 3f));
-		_enemyInfo.Add(EnemyType.RANGED, new EnemyInfo(EnemyType.RANGED, EnemyMovements.RangedMovement, Globals.DirectTargeting, EnemyMovements.RangedSetup, new BulletAttackBehaviour(EntityType.ENEMY, 5f, Globals.enemyBulletSpeeds[EnemyType.RANGED]), 1f));
+		_enemyInfo.Add(EnemyType.GRENADIER, new EnemyInfo(EnemyType.GRENADIER, EnemyMovements.CreateGrenadierMovement, Globals.GrenadierTargeting, EnemyMovements.GrenadierSetup, new ArtilleryAttackBehaviour(EntityType.ENEMY, 5f), 3f));
+		_enemyInfo.Add(EnemyType.RANGED, new EnemyInfo(EnemyType.RANGED, EnemyMovements.CreateRangedMovement, Globals.DirectTargeting, EnemyMovements.RangedSetup, new BulletAttackBehaviour(EntityType.ENEMY, 5f, Globals.enemyBulletSpeeds[EnemyType.RANGED]), 1f));
 		_enemyInfo.Add(EnemyType.TANK, new EnemyInfo(EnemyType.TANK, EnemyMovements.TankMovement, Globals.ForwardTargeting, EnemyMovements.TankSetup, new SweepAttackBehaviour(EntityType.ENEMY, 10f, 10f), 0.1f));
-		_enemyInfo.Add(EnemyType.FLYING, new EnemyInfo(EnemyType.FLYING, EnemyMovements.FlyingMovement, Globals.DirectTargeting, EnemyMovements.FlyingSetup, new BulletAttackBehaviour(EntityType.ENEMY, 5f, Globals.enemyBulletSpeeds[EnemyType.FLYING]), 3f));
+		_enemyInfo.Add(EnemyType.FLYING, new EnemyInfo(EnemyType.FLYING, EnemyMovements.CreateFlyingMovement, Globals.DirectTargeting, EnemyMovements.FlyingSetup, new BulletAttackBehaviour(EntityType.ENEMY, 5f, Globals.enemyBulletSpeeds[EnemyType.FLYING]), 3f));
 		AddHealerVariantToRoster();
 		_enemyPostSetups.Add(EnemyVariantType.PREDICTIVE, CreatePredictiveVariant);
 		// _enemyPostSetups.Add(EnemyVariantType.SHIELD, CreateShieldVariant);
