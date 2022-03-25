@@ -13,6 +13,7 @@ public class PauseMenu : MonoBehaviour
 	static Slider MouseSensitivity;
 
 	static float previousChange = 1;
+	static float previousCore;
 
 	int _intensityId;
 	int _colorId;
@@ -53,19 +54,28 @@ public class PauseMenu : MonoBehaviour
 		Cursor.lockState = CursorLockMode.None;
 		Cursor.visible = true;
 		PlayerCentral.paused = true;
-		Time.timeScale = 0;
-		instance.SetActive(true);
+		previousCore = SpeedManager.coreSpeed;
+		SpeedManager.coreSpeed = 0;
+		
 	}
 
 	private void show_content()
 	{
-		if (revealed) items.DOFade(1, 0.5f);
+		if (revealed) items.DOFade(1, 0.5f).OnComplete(pause);
+	}
+
+
+	private void pause()
+    {
+		Time.timeScale = 0;
+		instance.SetActive(true);
 	}
 
 	private void hide_content()
 	{
 		DOTween.To(() => blurPanel.GetColor("_Color"), x => blurPanel.SetColor("_Color", x), new Color(1, 1, 1, 0), 0.4f);
 		DOTween.To(() => blurPanel.GetFloat("_Intensity"), x => blurPanel.SetFloat("_Intensity", x), 0, 0.5f);
+		SpeedManager.coreSpeed = previousCore;
 	}
 
 	public void exit()
