@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: glow
-  m_Shader: {fileID: 4800000, guid: 481153b840b6e408da95e6afbe176397, type: 3}
+  m_Shader: {fileID: 4800000, guid: 8fa84e1c8f3a97b4bb416e8eb087630e, type: 3}
   m_ShaderKeywords: _EMISSION _SEGMENTED_ON
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
@@ -39,11 +39,19 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EmmisTex:
+        m_Texture: {fileID: 10904, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0.09, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -64,9 +72,15 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _FresnelBrightness: 1
+    - _FresnelPower: 0.533
+    - _FresnelShadowDropoff: 0
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
+    - _HighIntensity: 8.15
+    - _LightScalar: 7.32
+    - _LowIntensity: 7.54
     - _Lumin: 1.12
     - _MaxLight: 1
     - _Metallic: 0
@@ -74,7 +88,12 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Offset: 0
+    - _OutlineSize: 10
     - _Parallax: 0.02
+    - _RampLevels: 2
+    - _RimAlpha: 0.097
+    - _RimDropOff: 0
+    - _RimPower: 0
     - _Segmented: 1
     - _ShnIntense: 0
     - _ShnOverlap: 0
@@ -90,5 +109,10 @@ Material:
     m_Colors:
     - _Color: {r: 0.87838644, g: 0.9063317, b: 0.0575784, a: 1}
     - _EmissionColor: {r: 0.80065024, g: 0.80065024, b: 0.80065024, a: 1}
+    - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
+    - _HighColor: {r: 1, g: 1, b: 1, a: 1}
+    - _LowColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShnColor: {r: 1, g: 1, b: 0, a: 1}
   m_BuildTextureStacks: []

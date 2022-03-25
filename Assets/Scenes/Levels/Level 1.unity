@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogColor: {r: 0.15044188, g: 1, b: 0, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
   m_LinearFogStart: 0
@@ -23,11 +23,11 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 0.59
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
-  m_HaloStrength: 0.5
+  m_HaloStrength: 0.425
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.45118505, g: 0.5009361, b: 0.57376343, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 7d2b88c9aa7212943ac497293dc38b3d, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -602,6 +602,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NormalTree (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5260137452964570420, guid: efb0ccb72c32a7845ba0c921e57cc072, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e9bd86b8d33acf844bf5ee91426d1480, type: 2}
     - target: {fileID: 7136586390457976596, guid: efb0ccb72c32a7845ba0c921e57cc072, type: 3}
       propertyPath: m_RootOrder
       value: 34
@@ -777,6 +781,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1946609216}
     m_Modifications:
+    - target: {fileID: 897057826962109471, guid: 2faec88ec07bc3b448fa165b97920c5a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ef1a7bf03f23b97459e8989184d38bda, type: 2}
     - target: {fileID: 3141815158415432532, guid: 2faec88ec07bc3b448fa165b97920c5a, type: 3}
       propertyPath: m_Name
       value: RingTree (3)
@@ -885,6 +893,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4353003408343697741, guid: 8caeb98ef9447154c928274cd65859b9, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5313041358661717801, guid: 8caeb98ef9447154c928274cd65859b9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6100327506990864075, guid: 8caeb98ef9447154c928274cd65859b9, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6265190500835907683, guid: 8caeb98ef9447154c928274cd65859b9, type: 3}
@@ -1246,6 +1262,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OfficeBuilding (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7161641523549962212, guid: ea991a957097f5046af8613561371329, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 298925ba0fb44974dbf80189a2e51876, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea991a957097f5046af8613561371329, type: 3}
 --- !u!4 &582668991 stripped
@@ -1719,6 +1739,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OfficeBuilding (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7161641523549962212, guid: ea991a957097f5046af8613561371329, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 394d8ddadd29adf45a7c8e2d13c19efd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea991a957097f5046af8613561371329, type: 3}
 --- !u!4 &935436653 stripped
@@ -2460,6 +2484,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ApartmentBuilding
       objectReference: {fileID: 0}
+    - target: {fileID: 7062954189675086738, guid: 83be309f9c9d5c74bb0f3df130aae2a8, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: -565628966740294939, guid: 70a4316ef238dfc40a66a8584df30aad, type: 3}
     - target: {fileID: 7272651381019622836, guid: 83be309f9c9d5c74bb0f3df130aae2a8, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2578,6 +2606,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ApartmentBuilding (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7062954189675086738, guid: 83be309f9c9d5c74bb0f3df130aae2a8, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 298925ba0fb44974dbf80189a2e51876, type: 2}
     - target: {fileID: 7272651381019622836, guid: 83be309f9c9d5c74bb0f3df130aae2a8, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2684,6 +2716,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4912989598085359182, guid: bece59729368be64c8afc5b05a64d0a3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e9bd86b8d33acf844bf5ee91426d1480, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bece59729368be64c8afc5b05a64d0a3, type: 3}
 --- !u!4 &1643940837 stripped
@@ -3389,13 +3425,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047913756}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.31718457, y: -0.07057505, z: -0.2652475, w: 0.9077758}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 32.577, y: -20.593, z: -38.653}
 --- !u!4 &2060026195 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7136586390457976596, guid: efb0ccb72c32a7845ba0c921e57cc072, type: 3}
@@ -3577,7 +3613,7 @@ PrefabInstance:
     - target: {fileID: 4912989598085359182, guid: bece59729368be64c8afc5b05a64d0a3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 6266881801870219665, guid: 70a4316ef238dfc40a66a8584df30aad, type: 3}
+      objectReference: {fileID: 2100000, guid: ef1a7bf03f23b97459e8989184d38bda, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bece59729368be64c8afc5b05a64d0a3, type: 3}
 --- !u!1001 &2130049147
@@ -3591,6 +3627,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ApartmentBuilding (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7062954189675086738, guid: 83be309f9c9d5c74bb0f3df130aae2a8, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 394d8ddadd29adf45a7c8e2d13c19efd, type: 2}
     - target: {fileID: 7272651381019622836, guid: 83be309f9c9d5c74bb0f3df130aae2a8, type: 3}
       propertyPath: m_RootOrder
       value: 2
