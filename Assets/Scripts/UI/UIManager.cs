@@ -68,11 +68,9 @@ public class UIManager : MonoBehaviour
         get { return health; }
         set
         {
-            health = Mathf.Clamp(value, 0, maxHealth);
-            UI_health.setHealth(health);
-            SpeedManager.updateSpeeds(health / maxHealth);
+	        health = value;
+	        UI_health.setHealth(health);
             if (health <= 0 && !dead) deathUI.reveal(deathUI.instance);
-            
         }
     }
     private static float health;

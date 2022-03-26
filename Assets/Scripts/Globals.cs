@@ -121,6 +121,7 @@ public static class Globals
 		{ EnemyType.TURRET, "Turret" },
 		{ EnemyType.GRENADIER, "Grenadier"},
 		{ EnemyType.RANGED, "Ranged"},
+		{ EnemyType.HEALER, "Healer" },
 		{ EnemyType.TANK, "Tank" },
 		{ EnemyType.FLYING, "Flying"}
 	};
@@ -138,13 +139,13 @@ public enum EnemyType
 	FLYING,
 	RANGED,
 	TANK,
+	HEALER,
 	TURRET,
 }
 
 public enum EnemyVariantType
 {
 	NONE,
-	HEALER,
 	SET,
 	PREDICTIVE,
 	SHIELD,

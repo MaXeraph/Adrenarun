@@ -4263,7 +4263,7 @@ GameObject:
   - component: {fileID: 1844492278261277376}
   m_Layer: 0
   m_Name: City
-  m_TagString: Untagged
+  m_TagString: PlatformObjects
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

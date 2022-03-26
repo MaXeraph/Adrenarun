@@ -20,13 +20,15 @@ public static class SpawnManager {
 	private static int[,] _flyingSpawnChances 	 = {{10, 10, 10, 10, 10, 10}};
 	private static int[,] _rangedSpawnChances    = {{40, 35, 30, 30, 30, 30}};
 	private static int[,] _tankSpawnChances 	 = {{0,  10,  5,  5, 10, 10}};
-	private static int[,] _turretSpawnChances    = {{30, 30, 25, 25, 20, 20}};
+	private static int[,] _turretSpawnChances    = {{30, 25, 20, 20, 15, 15}};
+	private static int[,] _healerSpawnChances    = {{0, 5, 5, 5, 5, 5 }};
 	private static Dictionary<EnemyType, int[,]> enemySpawnChances = new Dictionary<EnemyType, int[,]>() {
 		{EnemyType.GRENADIER, _grenadierSpawnChances},
 		{EnemyType.RANGED, _rangedSpawnChances},
 		{EnemyType.FLYING, _flyingSpawnChances},
 		{EnemyType.TANK, _tankSpawnChances},
-		{EnemyType.TURRET, _turretSpawnChances}
+		{EnemyType.TURRET, _turretSpawnChances},
+		{EnemyType.HEALER, _healerSpawnChances},
 	};
 
 	public static EnemyType[] GetEnemyTypes(int level, int wave) {
@@ -47,12 +49,14 @@ public static class SpawnManager {
 	private static Func<float, Vector3>[] _rangedSpawnBehaviours = {SpawnDefault};
 	private static Func<float, Vector3>[] _tankSpawnBehaviours = {SpawnDefault};
 	private static Func<float, Vector3>[] _turretSpawnBehaviours = {SpawnTurretDefault};
+	private static Func<float, Vector3>[] _healerSpawnBehaviours = {SpawnDefault};
 	public static Dictionary<EnemyType, Func<float, Vector3>[]> enemySpawnBehaviour = new Dictionary<EnemyType, Func<float, Vector3>[]>() {
 		{EnemyType.GRENADIER, _grenadierSpawnBehaviours},
 		{EnemyType.FLYING, _flyingSpawnBehaviours},
 		{EnemyType.RANGED, _rangedSpawnBehaviours},
 		{EnemyType.TANK, _tankSpawnBehaviours},
-		{EnemyType.TURRET, _turretSpawnBehaviours}
+		{EnemyType.TURRET, _turretSpawnBehaviours},
+		{EnemyType.HEALER, _healerSpawnBehaviours},
 	};
 
 
