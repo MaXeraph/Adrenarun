@@ -1702,7 +1702,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: e606a698c409d4c4d803195edb4d9c0e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: cc01c2e742f9dbf45ba4a6281dedc2de, type: 2}
+      objectReference: {fileID: 2100000, guid: b012027a70ae90342ba1269319806cd7, type: 2}
     - target: {fileID: 919132149155446097, guid: e606a698c409d4c4d803195edb4d9c0e, type: 3}
       propertyPath: m_Name
       value: circle
