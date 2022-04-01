@@ -6,6 +6,7 @@ using UnityEngine;
 public class BulletMono : MonoBehaviour
 {
 	public BulletAttackBehaviour _attackBehaviour;
+	public HashSet<GameObject> hitObjects;
 
 	public static GameObject Create(BulletAttackBehaviour attackBehaviour, Vector3 position, Vector3 direction)
 	{
@@ -15,6 +16,7 @@ public class BulletMono : MonoBehaviour
 		newBullet.transform.position = position;
 		newBullet.transform.forward = direction;
 		if (attackBehaviour.Owner == EntityType.ENEMY) newBullet.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
+		newBullet.GetComponent<BulletMono>().hitObjects = new HashSet<GameObject>();
 
 		return newBullet;
 	}
@@ -24,6 +26,7 @@ public class BulletMono : MonoBehaviour
 		// Reset to default values
 		bullet.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
 		bullet.GetComponent<TrailRenderer>().Clear();
+		bullet.GetComponent<BulletMono>().hitObjects.Clear();
 		ObjectPool.Destroy("Bullet", bullet);
 	}
 

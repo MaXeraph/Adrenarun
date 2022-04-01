@@ -14,6 +14,7 @@ public abstract class AbstractAttackBehaviour
     }
     protected EntityType _owner;
     public float _damage;
+	public Dictionary<string, int> _hitTypeModifiers;
     
     /**
      * Called to initiate an attack from position in direction.
