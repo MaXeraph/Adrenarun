@@ -45,7 +45,7 @@ public class UIManager : MonoBehaviour
         {
             ammo = Mathf.Clamp(value, 0, ammoCapacity);
             if (ammo <= 0) { Reloading = true;}
-            else if (ammo == ammoCapacity) { Reloading = false; _weapon.finishReload(); }
+            else if (!AmmoUI.AmmoSlots[ammoCapacity-1].used) { Reloading = false; _weapon.finishReload(); }
             AmmoUI.UpdateAmmo(ammo, reloading);
 
         }

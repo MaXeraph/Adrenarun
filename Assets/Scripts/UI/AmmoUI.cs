@@ -10,9 +10,9 @@ public class AmmoUI : MonoBehaviour
     public static int AmmoCapacity = 0;
     private static int CurrentAmmo;
 
-    private static GameObject[] AmmoSlots;
+    public static ammoSlot[] AmmoSlots;
 
-    public static GameObject AmmoSlot;
+    public static ammoSlot AmmoSlot;
     public static Transform Clip;
     public static Text AmmoCounter;
     public static GameObject AmmoPanel;
@@ -27,7 +27,7 @@ public class AmmoUI : MonoBehaviour
     {
         instance = this;
         Clip = transform.GetChild(1);
-        AmmoSlot = Clip.GetChild(0).gameObject;
+        AmmoSlot = Clip.GetChild(0).GetComponent<ammoSlot>();
         AmmoCounter = transform.GetChild(0).GetComponent<Text>();
 
         AmmoPanelColor = GetComponent<Image>();
@@ -47,7 +47,7 @@ public class AmmoUI : MonoBehaviour
 
         AmmoCapacity = capacity;
         
-        AmmoSlots = new GameObject[AmmoCapacity];
+        AmmoSlots = new ammoSlot[AmmoCapacity];
 
         for (var i = 0; i < AmmoCapacity; i++)
         {
@@ -55,7 +55,7 @@ public class AmmoUI : MonoBehaviour
             else
             {
                 
-                GameObject copy = Instantiate(AmmoSlot);
+                ammoSlot copy = Instantiate(AmmoSlot);
                 copy.transform.SetParent(Clip);
                 copy.transform.localScale = AmmoSlot.transform.localScale;
                 AmmoSlots[i] = copy;
@@ -78,6 +78,8 @@ public class AmmoUI : MonoBehaviour
 
     }
 
+
+
     public static void UpdateAmmo(int current, bool reloading = false)
     {
         if (current != CurrentAmmo)
@@ -88,12 +90,18 @@ public class AmmoUI : MonoBehaviour
           
             if (reloading && current != AmmoCapacity)
             {
-                AmmoSlots[current].transform.DOScale(new Vector3(1f, 1f, 1f), 0.2f);
-                AmmoPanelColor.color = PanelColorReload;
+				//AmmoSlots[current].transform.DOScale(new Vector3(1f, 1f, 1f), 0.2f);
+				AmmoSlots[current].used = false;
+
+				AmmoPanelColor.color = PanelColorReload;
                 if (current == AmmoCapacity-1) { AmmoPanelColor.color = PanelColorNormal; }
             }
 
-            else if (current != AmmoCapacity && current <= CurrentAmmo){ AmmoSlots[current].transform.DOScale(new Vector3(0f, 0f, 0f), 0.2f); AmmoPanelColor.color = PanelColorNormal; }
+            else if (current != AmmoCapacity && current <= CurrentAmmo){
+				AmmoSlots[current].used = true;
+				//AmmoSlots[current].transform.DOScale(new Vector3(0f, 0f, 0f), 0.2f); 
+				AmmoPanelColor.color = PanelColorNormal; 
+			}
         }
     }
 
