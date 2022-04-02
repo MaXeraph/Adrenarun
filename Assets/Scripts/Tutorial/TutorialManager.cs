@@ -56,7 +56,9 @@ public class TutorialManager : MonoBehaviour
             FinalStage();
         }
         if (stage == 7) {
+            HealingPill.DespawnPills();
             ClearPowerups();
+            ObjectPool.Clear();
         }
     }
 

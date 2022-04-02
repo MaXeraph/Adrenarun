@@ -31,6 +31,7 @@ public class Weapon : MonoBehaviour
         {
             UIManager.weapon = this;
         }
+        lastShot = SpeedManager.realTime;
 
         return true;
     }
