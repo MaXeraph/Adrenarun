@@ -76,7 +76,7 @@ public class EnemyFactory
 		// _enemyPostSetups.Add(EnemyVariantType.SHIELD, CreateShieldVariant);
 	}
 
-	public GameObject CreateEnemy(Vector3 position, EnemyType enemyType, EnemyVariantType variantType = EnemyVariantType.NONE)
+	public GameObject CreateEnemy(Vector3 position, EnemyType enemyType, EnemyVariantType variantType = EnemyVariantType.NONE, float scaleFactor = 1f)
 	{
 		// Janky, find a better place for this. Unsure when the Player object is available.
 		if (_defaultTarget == null) _defaultTarget = GameObject.FindGameObjectWithTag("Player");
@@ -109,6 +109,12 @@ public class EnemyFactory
 			enemyInfo,
 			enemyWeapon);
 		if (variantType != EnemyVariantType.NONE && _enemyPostSetups.ContainsKey(variantType)) _enemyPostSetups[variantType](eb, enemyType);
+
+		// scale enemies by scaleFactor
+		enemyWeapon._attackBehaviour._damage = enemyWeapon._attackBehaviour._baseDamage * scaleFactor;
+		Stats enemyStats = newEnemyObject.GetComponent<Stats>();
+		enemyStats.maxHealth *= scaleFactor;
+		enemyStats.currentHealth = enemyStats.maxHealth;
 		
 		return newEnemyObject;
 	}

@@ -141,7 +141,7 @@ public class WaveManager : MonoBehaviour
 			variant = EnemyVariantType.SHIELD;
 		}
 		Vector3 spawnLocation = SpawnManager.enemySpawnBehaviour[enemy][Random.Range(0, SpawnManager.enemySpawnBehaviour[enemy].Length)](platformRadius);
-		EnemyFactory.Instance.CreateEnemy(spawnLocation, enemy, variant);
+		EnemyFactory.Instance.CreateEnemy(spawnLocation, enemy, variant, (currentLevelNumber + 1) / 2f);
 	}
 
 

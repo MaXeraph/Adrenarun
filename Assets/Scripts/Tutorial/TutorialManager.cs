@@ -69,7 +69,7 @@ public class TutorialManager : MonoBehaviour
     }
 
     private void CreateDummyEnemy(Vector3 enemyPosition) {
-        enemy = EnemyFactory.Instance.CreateEnemy(enemyPosition, EnemyType.TURRET);
+        enemy = EnemyFactory.Instance.CreateEnemy(enemyPosition, EnemyType.TURRET, EnemyVariantType.NONE, 1f);
         enemy.GetComponent<EnemyBehaviour>().enabled = false;
         enemy.transform.rotation = Quaternion.Euler(0, 180, 0);
 
@@ -100,9 +100,9 @@ public class TutorialManager : MonoBehaviour
     }
 
     private void SpawnEnemies() {
-        EnemyFactory.Instance.CreateEnemy(new Vector3(13, 1, 295), EnemyType.TURRET);
-        EnemyFactory.Instance.CreateEnemy(new Vector3(-13, 1, 295), EnemyType.TURRET);
-        EnemyFactory.Instance.CreateEnemy(new Vector3(0, 1, 287), EnemyType.RANGED);
+        EnemyFactory.Instance.CreateEnemy(new Vector3(13, 1, 295), EnemyType.TURRET, EnemyVariantType.NONE, 1f);
+        EnemyFactory.Instance.CreateEnemy(new Vector3(-13, 1, 295), EnemyType.TURRET, EnemyVariantType.NONE, 1f);
+        EnemyFactory.Instance.CreateEnemy(new Vector3(0, 1, 287), EnemyType.RANGED, EnemyVariantType.NONE, 1f);
     }
 
     private void FinalStage() {
