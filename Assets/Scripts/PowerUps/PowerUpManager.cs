@@ -185,7 +185,7 @@ public class PowerUpManager : MonoBehaviour
     }
 
     // call this method to present the power ups
-    public void presentPowerUps(float waveTime, int waveNumber)
+    public void presentPowerUps(float waveTime = 0, int waveNumber = 0)
     {
         generateTieredPowerUps(waveTime, waveNumber);
         UIManager.showPowerups(powerUpSelectionList);

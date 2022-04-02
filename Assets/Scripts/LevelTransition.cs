@@ -15,8 +15,6 @@ public class LevelTransition : MonoBehaviour
 
 	private Transform text;
 	private Transform player;
-	private Transform portal;
-	private Transform capsule;
 
 	//On  game started (Pressing start on the title screen)
 	public static void init()
@@ -38,8 +36,6 @@ public class LevelTransition : MonoBehaviour
 		if (transitionTo == 0) transitionTo = (Levels[progression+=1]);
 		text = transform.GetChild(0);
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-		portal = transform.GetChild(1);
-		capsule = transform.GetChild(2);
 		gameObject.SetActive(false);
 	}
 
@@ -100,7 +96,5 @@ public class LevelTransition : MonoBehaviour
 	void Update()
     {
 		text.LookAt(player.position);
-		portal.rotation *= Quaternion.AngleAxis(-5, new Vector3(0, 0, 5f));
-		capsule.rotation *= Quaternion.AngleAxis(0.1f, new Vector3(0, 0, 5f));
 	}
 }
