@@ -110,16 +110,7 @@ public class TutorialManager : MonoBehaviour
     }
 
     private void ClearPowerups() {
-        Globals.TransitionPowerUpDictionary = new Dictionary<PowerUpType, int>()
-        {
-            {PowerUpType.DAMAGE, 0},
-            {PowerUpType.FIRERATE, 0 },
-            {PowerUpType.RELOADSPD, 0 },
-            {PowerUpType.CLIPSIZE, 0 },
-            {PowerUpType.ADRENALIN, 0 },
-            {PowerUpType.SHOTGUN, 0 },
-            {PowerUpType.REPEATER, 0 }
-        };
+        Globals.TransitionPowerUpDictionary = Globals.newTransitionPowerUpDictionary();
     }
 
     private void Respawn(GameObject player) {

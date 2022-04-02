@@ -5,19 +5,23 @@ using UnityEngine;
 
 public static class Globals
 {
-	public static Dictionary<PowerUpType, int> TransitionPowerUpDictionary = new Dictionary<PowerUpType, int>()
-	{
-		{PowerUpType.DAMAGE, 0},
-		{PowerUpType.FIRERATE, 0 },
-		{PowerUpType.RELOADSPD, 0 },
-		{PowerUpType.CLIPSIZE, 0 },
-		{PowerUpType.ADRENALIN, 0 },
-		{PowerUpType.SHOTGUN, 0 },
-		{PowerUpType.REPEATER, 0 },
-		{PowerUpType.PIERCING, 0 },
-		{PowerUpType.EXPLODING, 0 },
-		{PowerUpType.DASHCD, 0}
-	};
+	public static Dictionary<PowerUpType, int> TransitionPowerUpDictionary = newTransitionPowerUpDictionary();
+
+	public static Dictionary<PowerUpType, int> newTransitionPowerUpDictionary(){
+		return new Dictionary<PowerUpType, int>()
+		{
+			{PowerUpType.DAMAGE, 0},
+			{PowerUpType.FIRERATE, 0 },
+			{PowerUpType.RELOADSPD, 0 },
+			{PowerUpType.CLIPSIZE, 0 },
+			{PowerUpType.ADRENALIN, 0 },
+			{PowerUpType.SHOTGUN, 0 },
+			{PowerUpType.REPEATER, 0 },
+			{PowerUpType.PIERCING, 0 },
+			{PowerUpType.EXPLODING, 0 },
+			{PowerUpType.DASHCD, 0}
+		};
+	}
 
 	public static Dictionary<PowerUpType, AbstractStatPowerUp> StatPowerUpDictionary = new Dictionary<PowerUpType, AbstractStatPowerUp>
 	{{PowerUpType.DAMAGE, new DamagePowerUp()},
