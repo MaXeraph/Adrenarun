@@ -20,7 +20,7 @@ public class PlayerCentral : MonoBehaviour
     bool isGrounded;
     bool canWallJump;
     bool _cooldown = false;
-    float dashCD = 3f;
+    public float dashCD = 3f;
     double lastDashTime = -3;
     float wallJumpSlope = 0.1f;
     Vector3 wallJumpVector;

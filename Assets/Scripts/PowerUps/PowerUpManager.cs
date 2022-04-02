@@ -44,8 +44,7 @@ public class PowerUpManager : MonoBehaviour
 
 		lowTierPowerUps = new List<PowerUpType>{PowerUpType.CLIPSIZE, 
 												PowerUpType.RELOADSPD, 
-												//PowerUpType.HOMING,
-												//PowerUpType.BIGBULLETS,
+												PowerUpType.DASHCD,
 												PowerUpType.ADRENALIN};
 	}
 
