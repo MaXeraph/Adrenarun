@@ -69,7 +69,7 @@ public class deathUI : MonoBehaviour
 		PauseMenu.blurPanel.SetColor("_Color", new Color(1f, 1f, 1f, 0));
 		Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        SpeedManager.updateSpeeds(1f);
+        SpeedManager.coreSpeed = 1;
         PlayerCentral.paused = false;
 
 		    UIManager.dead = false;

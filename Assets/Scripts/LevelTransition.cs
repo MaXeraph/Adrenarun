@@ -43,6 +43,7 @@ public class LevelTransition : MonoBehaviour
 	//On level complete
 	public void LevelComplete(WaveManager Spawner)
     {
+		SpeedManager.coreSpeed = 1;
 		gameObject.SetActive(true);
 		Movement.speed *= 2f;
 		//Levels[progression]
