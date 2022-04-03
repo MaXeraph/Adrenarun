@@ -70,8 +70,8 @@ public class EnemyFactory
 		_enemyInfo.Add(EnemyType.GRENADIER, new EnemyInfo(EnemyType.GRENADIER, EnemyMovements.CreateGrenadierMovement, Globals.GrenadierTargeting, EnemyMovements.GrenadierSetup, new ArtilleryAttackBehaviour(EntityType.ENEMY, 5f), 3f));
 		_enemyInfo.Add(EnemyType.RANGED, new EnemyInfo(EnemyType.RANGED, EnemyMovements.CreateRangedMovement, Globals.DirectTargeting, EnemyMovements.RangedSetup, new BulletAttackBehaviour(EntityType.ENEMY, 5f, Globals.enemyBulletSpeeds[EnemyType.RANGED]), 1f));
 		_enemyInfo.Add(EnemyType.TANK, new EnemyInfo(EnemyType.TANK, EnemyMovements.TankMovement, Globals.ForwardTargeting, EnemyMovements.TankSetup, new SweepAttackBehaviour(EntityType.ENEMY, 10f, 10f), 0.1f));
+		_enemyInfo.Add(EnemyType.HEALER, new EnemyInfo(EnemyType.HEALER, EnemyMovements.CreateHealerMovement, Globals.DirectTargeting, EnemyMovements.HealerSetup, new HealerAttackBehaviour(EntityType.ENEMY, -0.5f), 0.1f));
 		_enemyInfo.Add(EnemyType.FLYING, new EnemyInfo(EnemyType.FLYING, EnemyMovements.CreateFlyingMovement, Globals.DirectTargeting, EnemyMovements.FlyingSetup, new BulletAttackBehaviour(EntityType.ENEMY, 5f, Globals.enemyBulletSpeeds[EnemyType.FLYING]), 3f));
-		AddHealerVariantToRoster();
 		_enemyPostSetups.Add(EnemyVariantType.PREDICTIVE, CreatePredictiveVariant);
 		// _enemyPostSetups.Add(EnemyVariantType.SHIELD, CreateShieldVariant);
 	}
@@ -109,20 +109,8 @@ public class EnemyFactory
 			enemyInfo,
 			enemyWeapon);
 		if (variantType != EnemyVariantType.NONE && _enemyPostSetups.ContainsKey(variantType)) _enemyPostSetups[variantType](eb, enemyType);
-
+		
 		return newEnemyObject;
-	}
-
-	void AddHealerVariantToRoster()
-	{
-		// Set up the dictionary with methods.
-		_enemyPostSetups.Add(EnemyVariantType.HEALER, CreateHealerVariant);
-	}
-
-	void CreateHealerVariant(EnemyBehaviour eb, EnemyType et)
-	{
-		AbstractAttackBehaviour enemyAttackBehaviour = eb.GetComponent<Weapon>()._attackBehaviour;
-		if (enemyAttackBehaviour._damage > 0) enemyAttackBehaviour._damage *= -1;
 	}
 
 	void AddTurretToRoster()

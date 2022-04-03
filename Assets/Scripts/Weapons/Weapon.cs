@@ -17,7 +17,7 @@ public class Weapon : MonoBehaviour
     int _currentMagazine;
     double lastShot = 0;
 
-    public bool Initialize(AbstractAttackBehaviour attackBehaviour, float fireRate = 0.1f, int magSize = 1, float reloadSpeed = 1f)
+    public bool Initialize(AbstractAttackBehaviour attackBehaviour, float fireRate = 0.1f, int magSize = 1, float reloadSpeed = 0f)
     {
         if (_initialized) return false;
         _initialized = true;
@@ -31,6 +31,7 @@ public class Weapon : MonoBehaviour
         {
             UIManager.weapon = this;
         }
+        lastShot = SpeedManager.realTime;
 
         return true;
     }
@@ -57,7 +58,7 @@ public class Weapon : MonoBehaviour
                 {
                     StartCoroutine(ShootAfterDelay(position, attackDirections[j].Item1, attackDirections[j].Item2));
                 }
-                // _currentMagazine -= 1; // Comment out for infinite ammo
+                if (_reloadSpeed > 0) _currentMagazine -= 1; // Comment out for infinite ammo
                 if (entityType == EntityType.PLAYER)
                 {
                     AudioManager.PlayFireAudio();

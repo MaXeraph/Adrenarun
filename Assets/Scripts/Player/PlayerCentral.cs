@@ -20,7 +20,7 @@ public class PlayerCentral : MonoBehaviour
     bool isGrounded;
     bool canWallJump;
     bool _cooldown = false;
-    float dashCD = 3f;
+    public float dashCD = 3f;
     double lastDashTime = -3;
     float wallJumpSlope = 0.1f;
     Vector3 wallJumpVector;
@@ -54,7 +54,7 @@ public class PlayerCentral : MonoBehaviour
         gun = transform.GetChild(0).GetChild(0).GetChild(0).Find("gunF");
 
         _weapon = _player.AddComponent<Weapon>();
-        _weapon.Initialize(new BulletAttackBehaviour(EntityType.PLAYER, damage: 10f, bulletSpeed:30f), 0.2f, 16, 1f);
+        _weapon.Initialize(new BulletAttackBehaviour(EntityType.PLAYER, damage: 10f, bulletSpeed:45f), 0.2f, 16, 1f);
 
 		foreach (PowerUpType powerUp in Globals.TransitionPowerUpDictionary.Keys)
 		{
@@ -66,23 +66,11 @@ public class PlayerCentral : MonoBehaviour
 
 	}
 
-	private bool test = false;
-	private GameObject o = null;
-
     void Update()
     {
         if (paused) return;
 
         checkGround();
-
-		if (Input.GetKey(KeyCode.O) && !test) {
-			test = true;
-			o = EnemyFactory.Instance.CreateEnemy(new Vector3(0, 2, 8), EnemyType.TANK, EnemyVariantType.SHIELD);
-		}
-		if (Input.GetKey(KeyCode.P) && test) {
-			test = false;
-			// Destroy(o);
-		}
 
         //Look
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0) Movement.RotatePlayer(_player, _camera);

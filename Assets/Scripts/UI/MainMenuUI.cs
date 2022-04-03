@@ -7,13 +7,13 @@ using UnityEngine.SceneManagement;
 public class MainMenuUI : MonoBehaviour
 {
     public Button start;
-    public Button cont;
+    public Button tutorial;
     public Button quit;
 
     void Start()
     {
         start.onClick.AddListener(() => ButtonPress("start"));
-        cont.onClick.AddListener(() => ButtonPress("continue"));
+        tutorial.onClick.AddListener(() => ButtonPress("tutorial"));
         quit.onClick.AddListener(() => ButtonPress("quit"));
     }
 
@@ -24,9 +24,8 @@ public class MainMenuUI : MonoBehaviour
             case "start":
 				LevelTransition.init();
                 break;
-            case "continue":
-                //Possibly implement a save system...
-                Debug.Log("Continue Game...");
+            case "tutorial":
+                SceneManager.LoadScene(1);
                 break;
             case "quit":
                 Application.Quit();
