@@ -6,13 +6,14 @@ using UnityEngine;
 public class Stats : MonoBehaviour
 {
 	private float _currentHealth;
-
+	
 	public float currentHealth
 	{
 		get => _currentHealth;
 		set
 		{
-			_currentHealth = value;
+			if (value - _currentHealth < 0) _currentHealth = _currentHealth + (value - _currentHealth) * _damageTakenMultiplier;
+			else _currentHealth = value;
 			if (value <= 0 && owner == EntityType.ENEMY)
 			{
 				EnemyBehaviour.Destroy(gameObject);
@@ -24,7 +25,8 @@ public class Stats : MonoBehaviour
 			}
 			else if (owner == EntityType.PLAYER)
 			{
-				_currentHealth = Mathf.Clamp(_currentHealth, 0, maxHealth);
+				_currentHealth = Mathf.Clamp(_currentHealth, 0, maxHealth*2);
+				SpeedManager.updateSpeeds(_currentHealth / maxHealth);
 				UIManager.Health = _currentHealth;
 				if (_currentHealth == 0)
 				{
@@ -42,12 +44,30 @@ public class Stats : MonoBehaviour
 	public float maxHealth;
 	public EntityType owner;
 	bool dead = false;
+	public Dictionary<object, float> damageTakenMultipliers;
+
+	private float _damageTakenMultiplier
+	{
+		get {
+			float total = 1f;
+			Dictionary<object, float>.ValueCollection multipliers = damageTakenMultipliers.Values;
+			foreach (float mult in multipliers) {
+				total *= mult;
+			}
+			return total;
+		}
+	}
 
 	public Stats(float maxHealth = 100f)
 	{
 		this.maxHealth = maxHealth;
 	}
 
+	void Awake()
+	{
+		damageTakenMultipliers = new Dictionary<object, float>();
+	}
+	
 	void Start()
 	{
 		// TODO: refactor for more dynamic assignment
@@ -57,7 +77,7 @@ public class Stats : MonoBehaviour
 			UIManager.MaxHealth = maxHealth;
 		}
 		else owner = EntityType.ENEMY;
-		
+
 		currentHealth = maxHealth;
 	}
 
@@ -65,7 +85,6 @@ public class Stats : MonoBehaviour
 	// Better to use object pooling's subscriptions to clean this up
 	void OnEnable()
 	{
-		currentHealth = maxHealth;
+		_currentHealth = maxHealth;
 	}
-
 }

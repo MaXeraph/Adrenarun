@@ -11,9 +11,11 @@ public class SpeedManager : MonoBehaviour
     public static float adrenalinModifier = 0f;
     public static float enemyMovementScaling;
     public static double realTime = 0;
-
+    public static MonoBehaviour instance; // So we can use this monobehaviour to start coroutines in non-monos
+    
     void Start()
     {
+        instance = this;
         playerMovementScaling = coreSpeed; //TODO: determine player movement ratio based on speed
         bulletSpeedScaling = coreSpeed; //TODO: determine bullet speed ratio based on speed
         enemySpawnScaling = coreSpeed; //TODO: determine spawn rate based on speed
@@ -21,7 +23,7 @@ public class SpeedManager : MonoBehaviour
     }
     public static void updateSpeeds(float healthRatio)
     {
-        coreSpeed = 0.2f + healthRatio * 0.8f;
+        coreSpeed = 0.35f + healthRatio * 0.65f;
         if (healthRatio > 1) coreSpeed = 4 * (healthRatio - 1) * (healthRatio - 1) + 1;
         updateGameObjectSpeed();
     }

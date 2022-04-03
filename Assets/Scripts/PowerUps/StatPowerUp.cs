@@ -65,3 +65,16 @@ public class AdrenalinPowerUp : AbstractStatPowerUp
         SpeedManager.adrenalinModifier += _modifier;
     }
 }
+
+public class DashCDPowerUp : AbstractStatPowerUp
+{
+	public DashCDPowerUp(){
+		_modifier = 0.8f;
+	}
+
+	public override void applyPowerUp(Weapon weapon)
+	{
+		PlayerCentral playerCentral = GameObject.FindWithTag("Player").GetComponent<PlayerCentral>();
+		playerCentral.dashCD *= _modifier;
+	}
+}
