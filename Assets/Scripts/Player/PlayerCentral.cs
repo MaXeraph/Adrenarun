@@ -113,7 +113,7 @@ public class PlayerCentral : MonoBehaviour
         {
             Vector3 position = _camera.transform.forward + _camera.transform.position;
             Vector3 direction = _camera.transform.forward;
-            if (_weapon.Attack(position, direction, EntityType.PLAYER)) shootEffects(position + (0.22f * _camera.transform.right) + (-0.18f * _camera.transform.up));
+			if (!UIManager.Reloading)if (_weapon.Attack(position, direction, EntityType.PLAYER)) shootEffects(position + (0.22f * _camera.transform.right) + (-0.18f * _camera.transform.up));
         }
 
         //Reload
@@ -138,7 +138,7 @@ public class PlayerCentral : MonoBehaviour
     private void shootEffects(Vector3 pos)
     {
     //Update UI
-    // UIManager.Ammo -= 1;
+    UIManager.Ammo -= 1;
 
     //Muzzleflash
     GameObject flash = Instantiate(Resources.Load("Muzzleflash")) as GameObject;
