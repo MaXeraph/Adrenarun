@@ -6,25 +6,25 @@ using Random = System.Random;
 
 public class PowerUpManager : MonoBehaviour
 {
-    private int numPowerUpOptions = 3;
-    private int[] generatorList;
-    private PowerUpType[] powerUpSelectionList;
-    private bool includeNone = false;
-    public List<AbstractBulletPowerUp> bulletPowerUps;
+	private int numPowerUpOptions = 3;
+	private int[] generatorList;
+	private PowerUpType[] powerUpSelectionList;
+	private bool includeNone = false;
+	public List<AbstractBulletPowerUp> bulletPowerUps;
 
 	private List<PowerUpType> highTierPowerUps;
 	private List<PowerUpType> midTierPowerUps;
 	private List<PowerUpType> lowTierPowerUps;
 
-    private Weapon _weapon;
+	private Weapon _weapon;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        generatorList = Enumerable.Range(0, System.Enum.GetNames(typeof(PowerUpType)).Length).ToArray();
-        powerUpSelectionList = new PowerUpType[numPowerUpOptions];
+	// Start is called before the first frame update
+	void Start()
+	{
+		generatorList = Enumerable.Range(0, System.Enum.GetNames(typeof(PowerUpType)).Length).ToArray();
+		powerUpSelectionList = new PowerUpType[numPowerUpOptions];
 		initializePowerUpLists();
-    }
+	}
 
 	private void initializePowerUpLists()
 	{
@@ -34,55 +34,54 @@ public class PowerUpManager : MonoBehaviour
 		// Mid (1): Exploding, Piercing, Damage, Fire Rate
 		// Low (2): ClipSize, ReloadSpeed, Homing, Adrenalin
 
-		highTierPowerUps  = new List<PowerUpType>{PowerUpType.SHOTGUN, 
+		highTierPowerUps  = new List<PowerUpType>{PowerUpType.SHOTGUN,
 												PowerUpType.REPEATER,
 												PowerUpType.EXPLODING};
 
-		midTierPowerUps = new List<PowerUpType>{PowerUpType.DAMAGE, 
+		midTierPowerUps = new List<PowerUpType>{PowerUpType.DAMAGE,
 												PowerUpType.PIERCING,
 												PowerUpType.FIRERATE};
 
-		lowTierPowerUps = new List<PowerUpType>{PowerUpType.CLIPSIZE, 
-												PowerUpType.RELOADSPD, 
-												//PowerUpType.HOMING,
-												//PowerUpType.BIGBULLETS,
+		lowTierPowerUps = new List<PowerUpType>{PowerUpType.CLIPSIZE,
+												PowerUpType.RELOADSPD,
+												PowerUpType.DASHCD,
 												PowerUpType.ADRENALIN};
 	}
 
-    // we generate powerups randomly by shuffling a premade list
-    private void generatePowerUps()
-    {
-        shuffleGeneratorList();
-        for (int i = 0; i < 3; i++)
-        {
-            powerUpSelectionList[i] = (PowerUpType)generatorList[i];
+	// we generate powerups randomly by shuffling a premade list
+	private void generatePowerUps()
+	{
+		shuffleGeneratorList();
+		for (int i = 0; i < 3; i++)
+		{
+			powerUpSelectionList[i] = (PowerUpType)generatorList[i];
 
-            // if we don't want none, we take the next index instead
-            if(!includeNone && generatorList[i] == 0)
-            {
-                powerUpSelectionList[i] = (PowerUpType)generatorList[3];
-            }
-        }
+			// if we don't want none, we take the next index instead
+			if(!includeNone && generatorList[i] == 0)
+			{
+				powerUpSelectionList[i] = (PowerUpType)generatorList[3];
+			}
+		}
 
-        // uncomment to see what powerups are generated
-        // Debug.Log(powerUpSelectionList[0]);
-        // Debug.Log(powerUpSelectionList[1]);
-        // Debug.Log(powerUpSelectionList[2]);
+		// uncomment to see what powerups are generated
+		// Debug.Log(powerUpSelectionList[0]);
+		// Debug.Log(powerUpSelectionList[1]);
+		// Debug.Log(powerUpSelectionList[2]);
 
-    }
+	}
 
-    private void generateTieredPowerUps(float waveTime, int waveNumber)
-    {
+	private void generateTieredPowerUps(float waveTime, int waveNumber)
+	{
 		// TODO: find thresholds
 		// either through a calculation based on the enemies and which wave it is,
 		// or some static number that works
-        float highThreshold = 20f;
+		float highThreshold = 20f;
 		float midThreshold = 40f;
-		
+
 		// check which tier distribution for powerups we will use
 		// 0 = high, 1 = mid, 2 = low
 		int powerUpPool = waveTime < highThreshold ? 0 : waveTime < midThreshold ? 1 : 2;
-		
+
 		for (int i = 0; i < 3; i++)
 		{
 			// randomly generate the powerup tier.
@@ -104,7 +103,7 @@ public class PowerUpManager : MonoBehaviour
 				}
 			}
 			else if (powerUpTier == PowerUpTier.MID)
-			{	
+			{
 				for (int j = 0; j < midTierPowerUps.Count; j++)
 				{
 					if (midTierPowerUps[j] == powerUp)
@@ -114,8 +113,8 @@ public class PowerUpManager : MonoBehaviour
 					}
 				}
 			}
-			else 
-			{	
+			else
+			{
 				for (int j = 0; j < lowTierPowerUps.Count; j++)
 				{
 					if (lowTierPowerUps[j] == powerUp)
@@ -128,7 +127,7 @@ public class PowerUpManager : MonoBehaviour
 		}
 		// re-initialize the power up lists
 		initializePowerUpLists();
-    }
+	}
 
 	private PowerUpTier findPowerUpTierFromPool(int pool)
 	{
@@ -146,7 +145,7 @@ public class PowerUpManager : MonoBehaviour
 			powerUpTier = randNum < 10 ? PowerUpTier.HIGH : randNum < 65 ? PowerUpTier.MID : PowerUpTier.LOW;
 		}
 		// distribution: h 5 - m 50 - l 45
-		else 
+		else
 		{
 			powerUpTier = randNum < 5 ? PowerUpTier.HIGH : randNum < 55 ? PowerUpTier.MID : PowerUpTier.LOW;
 		}
@@ -170,66 +169,66 @@ public class PowerUpManager : MonoBehaviour
 		}
 	}
 
-    // the knuth shuffle
-    private void shuffleGeneratorList()
-    {
-        Random rand = new Random();
-        int n = generatorList.Length;
-        while (n > 1)
-        {
-            int k = rand.Next(n--);
-            int temp = generatorList[n];
-            generatorList[n] = generatorList[k];
-            generatorList[k] = temp;
-        }
-    }
+	// the knuth shuffle
+	private void shuffleGeneratorList()
+	{
+		Random rand = new Random();
+		int n = generatorList.Length;
+		while (n > 1)
+		{
+			int k = rand.Next(n--);
+			int temp = generatorList[n];
+			generatorList[n] = generatorList[k];
+			generatorList[k] = temp;
+		}
+	}
 
-    // call this method to present the power ups
-    public void presentPowerUps(float waveTime = 0f, int waveNumber = 1)
-    {
-        generateTieredPowerUps(waveTime, waveNumber);
-        UIManager.showPowerups(powerUpSelectionList);
-        StartCoroutine(waitForSelection());
-    }
+	// call this method to present the power ups
+	public void presentPowerUps(float waveTime = 0, int waveNumber = 0)
+	{
+		generateTieredPowerUps(waveTime, waveNumber);
+		UIManager.showPowerups(powerUpSelectionList);
+		StartCoroutine(waitForSelection());
+	}
 
-    // apply stat powerups directly, or add non stat ones to a powerup list
-    public void applyPowerUp(PowerUpType type)
-    {
-        _weapon = GameObject.FindWithTag("Player").GetComponent<Weapon>();
-        UIManager.powerSelection = -1;
-        switch(Globals.PowerUpClassDictionary[type])
-        {
-            case PowerUpClass.STAT:
-                AbstractStatPowerUp statPowerUp = Globals.StatPowerUpDictionary[type];
-                statPowerUp.applyPowerUp(_weapon);
-                break;
-            case PowerUpClass.FIRING:
-                AbstractFiringPowerUp firingPowerUp = Globals.FiringPowerUpDictionary[type];
-                _weapon.firingMods.Add(firingPowerUp);
-                _weapon.firingMods = _weapon.firingMods.OrderBy(powerUp => powerUp.sortOrder).ToList();
-                break;
-            case PowerUpClass.BULLET:
-                // TODO: implement bullet powerups
-                AbstractBulletPowerUp bulletPowerUp = Globals.BulletPowerUpDictionary[type];
+	// apply stat powerups directly, or add non stat ones to a powerup list
+	public void applyPowerUp(PowerUpType type)
+	{
+		_weapon = GameObject.FindWithTag("Player").GetComponent<Weapon>();
+		UIManager.powerSelection = -1;
+		switch(Globals.PowerUpClassDictionary[type])
+		{
+			case PowerUpClass.STAT:
+				AbstractStatPowerUp statPowerUp = Globals.StatPowerUpDictionary[type];
+				statPowerUp.applyPowerUp(_weapon);
+				break;
+			case PowerUpClass.FIRING:
+				AbstractFiringPowerUp firingPowerUp = Globals.FiringPowerUpDictionary[type];
+				_weapon.firingMods.Add(firingPowerUp);
+				_weapon.firingMods = _weapon.firingMods.OrderBy(powerUp => powerUp.sortOrder).ToList();
+				break;
+			case PowerUpClass.BULLET:
+				// TODO: implement bullet powerups
+				AbstractBulletPowerUp bulletPowerUp = Globals.BulletPowerUpDictionary[type];
 				bulletPowerUp.applyPowerUp(_weapon._attackBehaviour);
-                break;
-        }
-    }
+				break;
+		}
+	}
 
-    IEnumerator waitForSelection()
-    {
-        PowerUpType selection = PowerUpType.NONE;
-        Time.timeScale = 0;
-        while(selection == PowerUpType.NONE)
-        {
-            if (UIManager.powerSelection != -1)
-            {
-                selection = powerUpSelectionList[UIManager.powerSelection];
-            }
-            yield return null;
-        }
+	IEnumerator waitForSelection()
+	{
+		PowerUpType selection = PowerUpType.NONE;
+		Time.timeScale = 0;
+		while(selection == PowerUpType.NONE)
+		{
+			if (UIManager.powerSelection != -1)
+			{
+				selection = powerUpSelectionList[UIManager.powerSelection];
+			}
+			yield return null;
+		}
 		Globals.TransitionPowerUpDictionary[selection] += 1;
-        applyPowerUp(selection);
-        Time.timeScale = 1;
-    }
+		applyPowerUp(selection);
+		Time.timeScale = 1;
+	}
 }
