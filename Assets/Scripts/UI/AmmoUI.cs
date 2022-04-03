@@ -7,8 +7,8 @@ using DG.Tweening;
 public class AmmoUI : MonoBehaviour
 {
 
-    public static int AmmoCapacity = 0;
-    private static int CurrentAmmo;
+    public static int AmmoCapacity = 1;
+    private static int CurrentAmmo = 16;
 
     public static ammoSlot[] AmmoSlots;
 
@@ -20,6 +20,8 @@ public class AmmoUI : MonoBehaviour
     private static Image AmmoPanelColor;
     private static Vector4 PanelColorNormal = new Vector4(0.7f, 0.6f, 0.6f, 0.8f);
     private static Vector4 PanelColorReload = new Vector4(0.9f, 0f, 0.1f, 0.5f);
+
+	public static bool changingClip = false;
 
     public static AmmoUI instance;
 
@@ -34,35 +36,38 @@ public class AmmoUI : MonoBehaviour
         PanelColorNormal = AmmoPanelColor.color;
     }
 
-    
+    public static void resetSlots()
+    {
+		if (AmmoSlots != null) { foreach (ammoSlot child in AmmoSlots) child.used = false; }
+	}
   
     public static void UpdateAmmoCapacity(int capacity)
     {
-  
+		changingClip = true;
+		Debug.Log(capacity);
+		for (var i = AmmoCapacity; i < capacity; i++)
+		{
 
-        for (var i = 0; i < AmmoCapacity; i++)
-        {
-            if (i != 0) { Destroy(AmmoSlots[i]); }
-        }
+			ammoSlot copy = Instantiate(AmmoSlot);
+			copy.transform.SetParent(Clip);
+			copy.transform.localScale = AmmoSlot.transform.localScale;
+			if (i == capacity - 1)
+			{
+				UIManager.Ammo = capacity;
+				AmmoCapacity = capacity;
+				//Reset array
+				AmmoSlots = new ammoSlot[capacity];
+				//Add back to array
+				AmmoSlots = Clip.GetComponentsInChildren<ammoSlot>();
+				CurrentAmmo = AmmoSlots.Length;
+				changingClip = false;
+				AmmoCounter.text = capacity.ToString();
+			}
+		}
 
-        AmmoCapacity = capacity;
-        
-        AmmoSlots = new ammoSlot[AmmoCapacity];
-
-        for (var i = 0; i < AmmoCapacity; i++)
-        {
-            if (i == 0) {AmmoSlots[i] = AmmoSlot;}
-            else
-            {
-                
-                ammoSlot copy = Instantiate(AmmoSlot);
-                copy.transform.SetParent(Clip);
-                copy.transform.localScale = AmmoSlot.transform.localScale;
-                AmmoSlots[i] = copy;
-            }
-        }
-        UpdateCounter();
     }
+
+
 
     public static void UpdateCounter()
     {
@@ -90,16 +95,13 @@ public class AmmoUI : MonoBehaviour
           
             if (reloading && current != AmmoCapacity)
             {
-				//AmmoSlots[current].transform.DOScale(new Vector3(1f, 1f, 1f), 0.2f);
 				AmmoSlots[current].used = false;
-
 				AmmoPanelColor.color = PanelColorReload;
                 if (current == AmmoCapacity-1) { AmmoPanelColor.color = PanelColorNormal; }
             }
 
             else if (current != AmmoCapacity && current <= CurrentAmmo){
 				AmmoSlots[current].used = true;
-				//AmmoSlots[current].transform.DOScale(new Vector3(0f, 0f, 0f), 0.2f); 
 				AmmoPanelColor.color = PanelColorNormal; 
 			}
         }

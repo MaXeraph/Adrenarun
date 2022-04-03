@@ -19,9 +19,9 @@ public class ammoSlot : MonoBehaviour
 	void update(bool state)
     {
 		transitionTo = state;
-		int state_value = System.Convert.ToInt32(!state);
+		float state_value = System.Convert.ToInt32(!state);
 		DOTween.Kill(this);
-		transform.DOScale(new Vector3(state_value, state_value, state_value), 0.2f).OnComplete(finishState);
+		transform.DOScale(new Vector3(state_value/1.1f, state_value, state_value), 0.2f).OnComplete(finishState);
     }
 
 	void finishState()

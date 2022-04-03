@@ -51,6 +51,7 @@ public class ClipSizePowerUp : AbstractStatPowerUp
 
     public override void applyPowerUp(Weapon weapon){
         weapon._magazineSize += (int)_modifier;
+		AmmoUI.resetSlots();
         UIManager.AmmoCapacity = weapon._magazineSize;
     }
 }
