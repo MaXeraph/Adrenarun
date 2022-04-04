@@ -7,15 +7,15 @@ public static class Globals
 {
 	public static Dictionary<PowerUpType, int> TransitionPowerUpDictionary = new Dictionary<PowerUpType, int>()
 	{
-		{PowerUpType.DAMAGE, 0},
-		{PowerUpType.FIRERATE, 0 },
+		{PowerUpType.DAMAGE, 1},
+		{PowerUpType.FIRERATE, 2 },
 		{PowerUpType.RELOADSPD, 0 },
 		{PowerUpType.CLIPSIZE, 0 },
 		{PowerUpType.ADRENALIN, 0 },
-		{PowerUpType.SHOTGUN, 0 },
-		{PowerUpType.REPEATER, 0 },
-		{PowerUpType.PIERCING, 0 },
-		{PowerUpType.EXPLODING, 0 }
+		{PowerUpType.SHOTGUN, 1 },
+		{PowerUpType.REPEATER, 2 },
+		{PowerUpType.PIERCING, 1 },
+		{PowerUpType.EXPLODING, 1 }
 	};
 
 	public static Dictionary<PowerUpType, AbstractStatPowerUp> StatPowerUpDictionary = new Dictionary<PowerUpType, AbstractStatPowerUp>
