@@ -73,7 +73,7 @@ public class EnemyFactory
 		_enemyInfo.Add(EnemyType.HEALER, new EnemyInfo(EnemyType.HEALER, EnemyMovements.CreateHealerMovement, Globals.DirectTargeting, EnemyMovements.HealerSetup, new HealerAttackBehaviour(EntityType.ENEMY, -0.5f), 0.1f));
 		_enemyInfo.Add(EnemyType.FLYING, new EnemyInfo(EnemyType.FLYING, EnemyMovements.CreateFlyingMovement, Globals.DirectTargeting, EnemyMovements.FlyingSetup, new BulletAttackBehaviour(EntityType.ENEMY, 5f, Globals.enemyBulletSpeeds[EnemyType.FLYING]), 3f));
 		_enemyPostSetups.Add(EnemyVariantType.PREDICTIVE, CreatePredictiveVariant);
-		// _enemyPostSetups.Add(EnemyVariantType.SHIELD, CreateShieldVariant);
+		_enemyPostSetups.Add(EnemyVariantType.SHIELD, CreateShieldVariant);
 	}
 
 	public GameObject CreateEnemy(Vector3 position, EnemyType enemyType, EnemyVariantType variantType = EnemyVariantType.NONE)
@@ -135,8 +135,11 @@ public class EnemyFactory
 		eb.GetAimDirection = Globals.CreatePredictiveTargeting(GameObject.FindGameObjectWithTag("Player").transform, Globals.enemyBulletSpeeds[et]);
 	}
 
-	// void CreateShieldVariant(EnemyBehaviour eb, EnemyType et)
-	// {
-	// 	eb.gameObject.transform.Find("Shield").gameObject.SetActive(true);
-	// }
+	void CreateShieldVariant(EnemyBehaviour eb, EnemyType et)
+	{
+		Debug.Log("Fired");
+		eb.gameObject.transform.Find("Shield").gameObject.SetActive(true);
+	}
+	
+	
 }
