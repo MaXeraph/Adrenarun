@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 200
   owner: 0
+  moveSpeed: 8
 --- !u!1001 &2896610358563867900
 PrefabInstance:
   m_ObjectHideFlags: 0

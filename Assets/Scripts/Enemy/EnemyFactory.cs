@@ -137,9 +137,11 @@ public class EnemyFactory
 
 	void CreateShieldVariant(EnemyBehaviour eb, EnemyType et)
 	{
-		Debug.Log("Fired");
 		eb.gameObject.transform.Find("Shield").gameObject.SetActive(true);
 	}
 	
-	
+	void CreateAggressorVariant(EnemyBehaviour eb, EnemyType et)
+	{
+		eb.gameObject.GetComponent<Stats>().moveSpeed = 12f;
+	}
 }
