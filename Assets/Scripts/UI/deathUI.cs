@@ -67,8 +67,8 @@ public class deathUI : MonoBehaviour
 		CompassUI.reset();
 		PauseMenu.blurPanel.SetFloat("_Intensity", 0);
 		PauseMenu.blurPanel.SetColor("_Color", new Color(1f, 1f, 1f, 0));
-		Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+		//Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
         SpeedManager.updateSpeeds(1f);
         PlayerCentral.paused = false;
 
@@ -76,7 +76,7 @@ public class deathUI : MonoBehaviour
 		      StopAllCoroutines();
 
         gameObject.SetActive(false);
-        SceneManager.LoadScene(1, LoadSceneMode.Single);
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 
 }
