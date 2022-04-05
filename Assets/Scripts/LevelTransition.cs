@@ -68,7 +68,7 @@ public class LevelTransition : MonoBehaviour
 			{
 				Levels[index] = num;
 				index++;
-				Debug.Log(num);
+				//Debug.Log(num);
 			}
 		}
 
@@ -86,6 +86,9 @@ public class LevelTransition : MonoBehaviour
 	//Exit level
 	void OnTriggerEnter(Collider c)
 	{
+		if (SceneManager.GetActiveScene().buildIndex == 1) {
+			transitionTo = 0;
+		}
 		Stats statsComponent = c.GetComponent<Stats>();
 		if (statsComponent)
 		{
@@ -96,7 +99,7 @@ public class LevelTransition : MonoBehaviour
 				//SceneManager.LoadScene(transitionTo, LoadSceneMode.Single);
 				CompassUI.reset();
 				SceneManager.LoadScene(transitionTo, LoadSceneMode.Single);
-				Debug.Log(progression);
+				//Debug.Log(progression);
 			}
 		}
 	}

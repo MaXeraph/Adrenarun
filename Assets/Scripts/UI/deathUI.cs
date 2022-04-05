@@ -76,7 +76,8 @@ public class deathUI : MonoBehaviour
 		      StopAllCoroutines();
 
         gameObject.SetActive(false);
-        SceneManager.LoadScene(0, LoadSceneMode.Single);
+		ObjectPool.Clear();
+		SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 
 }
