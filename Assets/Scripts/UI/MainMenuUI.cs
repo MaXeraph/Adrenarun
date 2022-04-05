@@ -19,6 +19,7 @@ public class MainMenuUI : MonoBehaviour
 
     void ButtonPress(string action)
     {
+		AudioManager.PlayMenuSelectAudio();
         switch (action)
         {
             case "start":

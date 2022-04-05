@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
     private static AudioSource _reloadAudio;
     private static AudioSource _walkAudio;
     private static AudioSource _portalAudio;
+    private static AudioSource _menuSelectAudio;
 
 
     private static bool _walkAudioPlaying = false;
@@ -32,6 +33,7 @@ public class AudioManager : MonoBehaviour
         _reloadAudio = audios[5];
         _walkAudio = audios[6];
         _portalAudio = audios[7];
+        _menuSelectAudio = audios[8];
 
         player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -78,6 +80,9 @@ public class AudioManager : MonoBehaviour
         _portalAudio.Play();
     }
 
+    public static void PlayMenuSelectAudio() {
+		_menuSelectAudio.Play();
+    }	
 
 
 }
