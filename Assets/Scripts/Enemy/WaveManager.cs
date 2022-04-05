@@ -141,7 +141,12 @@ public class WaveManager : MonoBehaviour
 		}
 		else if (enemy == EnemyType.TANK)
 		{
-			variant = EnemyVariantType.SHIELD;
+			if (Random.Range(0, 2) == 0) {
+				variant = EnemyVariantType.SHIELD;
+			}
+			else {
+				variant = EnemyVariantType.AGGRESSOR;
+			}
 		}
 		Vector3 spawnLocation = SpawnManager.enemySpawnBehaviour[enemy][Random.Range(0, SpawnManager.enemySpawnBehaviour[enemy].Length)](platformRadius);
 		EnemyFactory.Instance.CreateEnemy(spawnLocation, enemy, variant);
