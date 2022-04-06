@@ -23,7 +23,6 @@ public class Portal : MonoBehaviour
 		if (target.tag == "Enemy"){
 		    NavMeshAgent navAgent = target.GetComponent<NavMeshAgent>();
 			navAgent.Warp(c.transform.position + (locationAfterTeleport * 1.05f));
-			// c.transform.position += locationAfterTeleport;
 		}
 		if (target.tag == "Player")
 		{
