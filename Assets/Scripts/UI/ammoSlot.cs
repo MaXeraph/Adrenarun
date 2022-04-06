@@ -13,7 +13,7 @@ public class ammoSlot : MonoBehaviour
 		get { return _used; }
 		set
 		{
-			update(value);
+			if (transform != null) update(value);
 		}
 	}
 
@@ -22,7 +22,6 @@ public class ammoSlot : MonoBehaviour
 		transitionTo = state;
 		float state_value = System.Convert.ToInt32(!state);
 		DOTween.Kill(this);
-		
 		transform.DOScale(new Vector3(state_value/1f, state_value, state_value), 0.2f).OnComplete(finishState);
     }
 

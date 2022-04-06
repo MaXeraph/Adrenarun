@@ -21,6 +21,7 @@ public class LevelTransition : MonoBehaviour
 	public static void init()
 	{
 		// maxLevel = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings-1;
+		WaveManager.currentLevelNumber = 1;
 		WaveManager.maxLevelNumber = maxLevel;
 		Levels = new int[3];
 		// [2, 3, 4]

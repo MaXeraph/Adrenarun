@@ -13,10 +13,9 @@ public class UIManager : MonoBehaviour
     {
         get { return _weapon; }
         set { _weapon = value;
-
-            AmmoCapacity = _weapon._magazineSize;
-            ammo = _weapon._magazineSize;
-            reloadSpeed = _weapon._reloadSpeed;
+			AmmoCapacity = _weapon._magazineSize;
+			ammo = _weapon._magazineSize;
+			reloadSpeed = _weapon._reloadSpeed;
         }
     }
     private static Weapon _weapon;

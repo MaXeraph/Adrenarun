@@ -8,7 +8,7 @@ public class AmmoUI : MonoBehaviour
 {
 
     public static int AmmoCapacity = 1;
-    private static int CurrentAmmo = 16;
+    private static int CurrentAmmo;
 
     public static ammoSlot[] AmmoSlots;
 
@@ -25,26 +25,30 @@ public class AmmoUI : MonoBehaviour
 
     public static AmmoUI instance;
 
+	public static bool has_updated = false;
+
     void Awake()
     {
-        instance = this;
-        Clip = transform.GetChild(1);
-        AmmoSlot = Clip.GetChild(0).GetComponent<ammoSlot>();
-        AmmoCounter = transform.GetChild(0).GetComponent<Text>();
-
-        AmmoPanelColor = GetComponent<Image>();
-        PanelColorNormal = AmmoPanelColor.color;
-    }
+		AmmoSlots = new ammoSlot[0];
+		AmmoCapacity = 1;
+		instance = this;
+		Clip = transform.GetChild(1);
+		AmmoSlot = Clip.GetChild(0).GetComponent<ammoSlot>();
+		AmmoCounter = transform.GetChild(0).GetComponent<Text>();
+		AmmoPanelColor = GetComponent<Image>();
+		PanelColorNormal = AmmoPanelColor.color;
+	}
 
     public static void resetSlots()
     {
-		if (AmmoSlots != null) { foreach (ammoSlot child in AmmoSlots) child.used = false; }
+		if (AmmoSlots != null && AmmoSlots.Length > 1) { foreach (ammoSlot child in AmmoSlots) child.used = false; }
 	}
   
     public static void UpdateAmmoCapacity(int capacity)
     {
+		//instance.StopAllCoroutines();
+		//resetSlots();
 		changingClip = true;
-		Debug.Log(capacity);
 		for (var i = AmmoCapacity; i < capacity; i++)
 		{
 
@@ -62,6 +66,7 @@ public class AmmoUI : MonoBehaviour
 				CurrentAmmo = AmmoSlots.Length;
 				changingClip = false;
 				AmmoCounter.text = capacity.ToString();
+				//resetSlots();
 			}
 		}
 
