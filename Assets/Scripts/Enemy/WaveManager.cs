@@ -7,7 +7,7 @@ public class WaveManager : MonoBehaviour
 	// private Vector3 _enemySpawn = Vector3.zero;
 	private bool _cooldown = false;
 	private float _cooldownDelay = SpeedManager.enemySpawnScaling;
-	private const float platformRadius = 175 / 2;
+	private float platformRadius = 175 / 2;
 
 	private bool canSpawn = false; // for within wave
 	private bool startSpawn = false; // for each wave
@@ -27,13 +27,15 @@ public class WaveManager : MonoBehaviour
 	private bool _timeout = false;
 	private bool _infinite = false;
 	private LevelTransition transition;
+	private GameObject player;
 
 
 	void Start()
 	{
 		if (LevelTransition.currentLevel == maxLevelNumber) _infinite = true;
 		transition = transform.GetChild(0).GetComponent<LevelTransition>();
-		pum = GameObject.FindGameObjectWithTag("Player").GetComponent<PowerUpManager>();
+		player = GameObject.FindGameObjectWithTag("Player");
+		pum = player.GetComponent<PowerUpManager>();
 		_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Stats>();
 		if (!_timeout)
 		{
@@ -42,6 +44,19 @@ public class WaveManager : MonoBehaviour
 
 			StartCoroutine(TimeOut());
 		}
+		GameObject platform = GameObject.FindGameObjectWithTag("Platform");
+		Mesh mesh = platform.GetComponent<MeshFilter>().mesh;
+		if (LevelTransition.currentLevel == 1)
+		{
+			platformRadius = platform.transform.localScale.x * 3; // * 4 / 2 because is pro builder platform
+		}
+		else if (LevelTransition.currentLevel == 2 || LevelTransition.currentLevel == 4) {
+			platformRadius = platform.transform.localScale.x * 5; // * 10 / 2 because is terrain not game object
+		}
+		else {
+			platformRadius = platform.transform.localScale.x / 2;
+		}
+		platformRadius *= 0.9f;
 	}
 
 
@@ -148,8 +163,8 @@ public class WaveManager : MonoBehaviour
 				variant = EnemyVariantType.AGGRESSOR;
 			}
 		}
-		Vector3 spawnLocation = SpawnManager.enemySpawnBehaviour[enemy][Random.Range(0, SpawnManager.enemySpawnBehaviour[enemy].Length)](platformRadius);
-		EnemyFactory.Instance.CreateEnemy(spawnLocation, enemy, variant);
+		Vector3 spawnLocation = SpawnManager.enemySpawnBehaviour[enemy][Random.Range(0, SpawnManager.enemySpawnBehaviour[enemy].Length)](platformRadius, player);
+		EnemyFactory.Instance.CreateEnemy(spawnLocation, enemy, variant, (currentLevelNumber + 1) / 2f);
 	}
 
 

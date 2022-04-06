@@ -47,7 +47,7 @@ public class EnemyBehaviour : MonoBehaviour
 		_targetTransform = target.GetComponent<Transform>();
 		NavAgentMove = info.navAgentMove;
 		GetAimDirection = info.aim;
-		info.navAgentSetup(new Vector3(0, 0, 0));
+		info.navAgentSetup(gameObject);
 
 		lastPosition = transform.position;
 		

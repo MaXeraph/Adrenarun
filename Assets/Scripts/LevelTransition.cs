@@ -22,7 +22,7 @@ public class LevelTransition : MonoBehaviour
 	{
 		// maxLevel = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings-1;
 		WaveManager.maxLevelNumber = maxLevel;
-		Levels = new int[4];
+		Levels = new int[3];
 		// [2, 3, 4]
 		//for (int i = 0; i < maxLevel; i++)
 		//{
@@ -35,7 +35,7 @@ public class LevelTransition : MonoBehaviour
 	//One level enter
 	void Awake()
 	{
-		if (progression != 3) transitionTo = (Levels[progression+=1]) ;
+		if (progression != 2) transitionTo = (Levels[progression+=1]) ;
 		text = transform.GetChild(0);
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 		Movement.speed = 12f;
@@ -50,6 +50,8 @@ public class LevelTransition : MonoBehaviour
 		//Levels[progression]
 		currentLevel = transitionTo;
 		Spawner.enabled = false;
+        WaveManager.currentLevelNumber++;
+
 	}
 
 	//Randomize level order (except the last level is always last)
@@ -61,7 +63,7 @@ public class LevelTransition : MonoBehaviour
 
 		int index = 0;
 
-		while (index < 3)
+		while (index < 2)
 		{
 			int num = Random.Range(2, 5);
 			if (!Levels.Contains(num))
@@ -72,7 +74,7 @@ public class LevelTransition : MonoBehaviour
 			}
 		}
 
-		Levels[3] = 5;
+		Levels[2] = 5;
 
 		//for (int t = 0; t < Levels.Length; t++)
 		//{

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random=UnityEngine.Random;
 
 public static class EnemyMovements
 {
@@ -10,7 +11,7 @@ public static class EnemyMovements
 	private const float _rangedBaseSpeed = 8f;
 	private const float _tankBaseSpeed = 8f;
 
-	public static void GrenadierSetup(Vector3 transform)
+	public static void GrenadierSetup(GameObject enemyObject)
 	{
 
 	}
@@ -45,12 +46,12 @@ public static class EnemyMovements
 	{
 
 	}
-	public static void TurretSetup(Vector3 transform)
+	public static void TurretSetup(GameObject enemyObject)
 	{
 
 	}
 
-	public static void RangedSetup(Vector3 transform)
+	public static void RangedSetup(GameObject enemyObject)
 	{
 
 	}
@@ -91,7 +92,7 @@ public static class EnemyMovements
 			anim.Play("Tank_game_rig|shield");
 		}
 	}
-	public static void TankSetup(Vector3 transform)
+	public static void TankSetup(GameObject enemyObject)
 	{
 
 	}
@@ -147,7 +148,7 @@ public static class EnemyMovements
 		};
 	}
 
-	public static void HealerSetup(Vector3 transform)
+	public static void HealerSetup(GameObject enemyObject)
 	{
 	}
 
@@ -172,7 +173,9 @@ public static class EnemyMovements
 		};
 	}
 
-	public static void FlyingSetup(Vector3 transform) 
+	public static void FlyingSetup(GameObject enemyObject) 
 	{
+        NavMeshAgent navAgent = enemyObject.GetComponent<NavMeshAgent>();
+        navAgent.baseOffset += Random.Range(-5, 5);
 	}
 }
