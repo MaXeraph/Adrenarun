@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random=UnityEngine.Random;
 
 public static class EnemyMovements
 {
@@ -10,7 +11,7 @@ public static class EnemyMovements
 	private const float _rangedBaseSpeed = 8f;
 	private const float _tankBaseSpeed = 8f;
 
-	public static void GrenadierSetup(Vector3 transform)
+	public static void GrenadierSetup(GameObject enemyObject)
 	{
 
 	}
@@ -45,12 +46,12 @@ public static class EnemyMovements
 	{
 
 	}
-	public static void TurretSetup(Vector3 transform)
+	public static void TurretSetup(GameObject enemyObject)
 	{
 
 	}
 
-	public static void RangedSetup(Vector3 transform)
+	public static void RangedSetup(GameObject enemyObject)
 	{
 
 	}
@@ -82,7 +83,8 @@ public static class EnemyMovements
 		Vector3 position = gameObject.transform.position;
 		Animation anim = gameObject.transform.GetChild(0).GetComponent<Animation>();
 		NavMeshAgent navAgent = gameObject.GetComponent<NavMeshAgent>();
-		navAgent.speed = _tankBaseSpeed * SpeedManager.enemyMovementScaling;
+		Stats statsComponent = gameObject.GetComponent<Stats>();
+		navAgent.speed = statsComponent.moveSpeed * SpeedManager.enemyMovementScaling;
 		float playerDistance = Vector3.Distance(position, playerPosition);
 		if (playerDistance > 0)
 		{
@@ -90,7 +92,7 @@ public static class EnemyMovements
 			anim.Play("Tank_game_rig|shield");
 		}
 	}
-	public static void TankSetup(Vector3 transform)
+	public static void TankSetup(GameObject enemyObject)
 	{
 
 	}
@@ -136,7 +138,7 @@ public static class EnemyMovements
 
 			vectorToEnemy.y = 0;
 			Vector3 newPosition = (Quaternion.AngleAxis(angle, Vector3.up) * vectorToEnemy) * 40 + playerPosition;
-			while (!CheckLOS(playerPosition, newPosition))
+			for (int i = 0; i < 5 && !CheckLOS(playerPosition, newPosition); i++)
 			{
 				angle = UnityEngine.Random.Range(-90, 90);
 				newPosition = (Quaternion.AngleAxis(angle, Vector3.up) * vectorToEnemy) * 40 + playerPosition;
@@ -146,7 +148,7 @@ public static class EnemyMovements
 		};
 	}
 
-	public static void HealerSetup(Vector3 transform)
+	public static void HealerSetup(GameObject enemyObject)
 	{
 	}
 
@@ -171,7 +173,9 @@ public static class EnemyMovements
 		};
 	}
 
-	public static void FlyingSetup(Vector3 transform) 
+	public static void FlyingSetup(GameObject enemyObject) 
 	{
+        NavMeshAgent navAgent = enemyObject.GetComponent<NavMeshAgent>();
+        navAgent.baseOffset += Random.Range(-5, 5);
 	}
 }
