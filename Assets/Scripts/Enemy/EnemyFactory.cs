@@ -14,12 +14,12 @@ public struct EnemyInfo
 		get { return createNavAgentMove();  }
 	}
 	public Func<Transform, Transform, Vector3> aim;
-	public Action<Vector3> navAgentSetup;
+	public Action<GameObject> navAgentSetup;
 	public AbstractAttackBehaviour attackBehaviour;
 	public float fireRate;
 
 	public EnemyInfo(EnemyType type, Action<GameObject, Vector3> navAgentMoveFunc, Func<Transform, Transform, Vector3> aimFunc,
-		Action<Vector3> navAgentSetupFunc, AbstractAttackBehaviour attackBehaviour, float fireRate)
+		Action<GameObject> navAgentSetupFunc, AbstractAttackBehaviour attackBehaviour, float fireRate)
 	{
 		enemyType = type;
 		createNavAgentMove = () => navAgentMoveFunc;
@@ -30,7 +30,7 @@ public struct EnemyInfo
 	}
 	
 	public EnemyInfo(EnemyType type, Func<Action<GameObject, Vector3>> createNavAgentMoveFunc, Func<Transform, Transform, Vector3> aimFunc,
-		Action<Vector3> navAgentSetupFunc, AbstractAttackBehaviour attackBehaviour, float fireRate)
+		Action<GameObject> navAgentSetupFunc, AbstractAttackBehaviour attackBehaviour, float fireRate)
 	{
 		enemyType = type;
 		createNavAgentMove = createNavAgentMoveFunc;
