@@ -39,6 +39,7 @@ public class HealingPill : MonoBehaviour
 			if (playerCentral.healingPills < healingPillCap){
 				playerCentral.healingPills += 1;
 				ObjectPool.Destroy("HealingPill", gameObject);
+				currentPills.Remove(gameObject);
 			}
 		}
 	}
