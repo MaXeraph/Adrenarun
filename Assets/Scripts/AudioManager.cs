@@ -14,6 +14,8 @@ public class AudioManager : MonoBehaviour
     private static AudioSource _walkAudio;
     private static AudioSource _portalAudio;
     private static AudioSource _menuSelectAudio;
+	private static AudioSource _pickUpItemAudio;
+	private static AudioSource _consumeHealthPillAudio;
 
 
     private static bool _walkAudioPlaying = false;
@@ -34,6 +36,8 @@ public class AudioManager : MonoBehaviour
         _walkAudio = audios[6];
         _portalAudio = audios[7];
         _menuSelectAudio = audios[8];
+		_pickUpItemAudio = audios[9];
+		_consumeHealthPillAudio = audios[10];
 
         player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -83,6 +87,14 @@ public class AudioManager : MonoBehaviour
     public static void PlayMenuSelectAudio() {
 		_menuSelectAudio.Play();
     }	
+
+	public static void PlayPickUpItemAudio() {
+		_pickUpItemAudio.Play();
+	}
+
+	public static void PlayConsumeHealthPillAudio() {
+		_consumeHealthPillAudio.Play();
+	}
 
 
 }

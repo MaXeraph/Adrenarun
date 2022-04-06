@@ -123,6 +123,7 @@ public class PlayerCentral : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Q) && healingPills > 0) 
 		{
 			healingPills -= 1;
+			AudioManager.PlayConsumeHealthPillAudio();
 			_player.GetComponent<Stats>().currentHealth += 15;
 		
 		}
