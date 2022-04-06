@@ -20,21 +20,21 @@ public class WaveManager : MonoBehaviour
 	private float waveEndTime;
 
 	private int totalWaveNumber = 3;
-	private int enemiesPerWave = 1;
+	private int enemiesPerWave = 100;
 	private const int spawnInterval = 0;
 	private int enemiesSpawned = 0;
 	private int currentNumEnemies = 0;
 	private bool _timeout = false;
 	private bool _infinite = false;
 	private LevelTransition transition;
-    private GameObject player;
+	private GameObject player;
 
 
 	void Start()
 	{
 		if (LevelTransition.currentLevel == maxLevelNumber) _infinite = true;
 		transition = transform.GetChild(0).GetComponent<LevelTransition>();
-    player = GameObject.FindGameObjectWithTag("Player");
+		player = GameObject.FindGameObjectWithTag("Player");
 		pum = player.GetComponent<PowerUpManager>();
 		_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Stats>();
 		if (!_timeout)
@@ -46,13 +46,17 @@ public class WaveManager : MonoBehaviour
 		}
 		GameObject platform = GameObject.FindGameObjectWithTag("Platform");
 		Mesh mesh = platform.GetComponent<MeshFilter>().mesh;
-		if (mesh.name == "Plane Instance") {
+		if (LevelTransition.currentLevel == 1)
+		{
+			platformRadius = platform.transform.localScale.x * 3; // * 4 / 2 because is pro builder platform
+		}
+		else if (LevelTransition.currentLevel == 2 || LevelTransition.currentLevel == 4) {
 			platformRadius = platform.transform.localScale.x * 5; // * 10 / 2 because is terrain not game object
 		}
-        else {
-            platformRadius = platform.transform.localScale.x / 2;
-        }
-        platformRadius *= 0.9f;
+		else {
+			platformRadius = platform.transform.localScale.x / 2;
+		}
+		platformRadius *= 0.9f;
 	}
 
 
