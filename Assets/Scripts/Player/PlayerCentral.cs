@@ -122,9 +122,12 @@ public class PlayerCentral : MonoBehaviour
 		//Healing Pill
 		if (Input.GetKeyDown(KeyCode.Q) && healingPills > 0) 
 		{
-			healingPills -= 1;
-			_player.GetComponent<Stats>().currentHealth += 15;
-		
+			Stats statsComponent = _player.GetComponent<Stats>();
+			if (statsComponent.currentHealth < statsComponent.maxHealth)
+			{
+				healingPills -= 1;
+				statsComponent.currentHealth = Mathf.Min(statsComponent.maxHealth, statsComponent.currentHealth + 15);
+			}
 		}
 
 
