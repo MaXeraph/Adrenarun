@@ -50,6 +50,8 @@ public class LevelTransition : MonoBehaviour
 		//Levels[progression]
 		currentLevel = transitionTo;
 		Spawner.enabled = false;
+        WaveManager.currentLevelNumber++;
+
 	}
 
 	//Randomize level order (except the last level is always last)
