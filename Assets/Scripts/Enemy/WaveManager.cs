@@ -6,7 +6,7 @@ public class WaveManager : MonoBehaviour
 {
 	// private Vector3 _enemySpawn = Vector3.zero;
 	private bool _cooldown = false;
-	private float _cooldownDelay = 0.001f;
+	private float _cooldownDelay = SpeedManager.enemySpawnScaling;
 	private float platformRadius = 175 / 2;
 
 	private bool canSpawn = false; // for within wave
@@ -20,7 +20,7 @@ public class WaveManager : MonoBehaviour
 	private float waveEndTime;
 
 	private int totalWaveNumber = 3;
-	private int enemiesPerWave = 300;
+	private int enemiesPerWave = 10;
 	private const int spawnInterval = 0;
 	private int enemiesSpawned = 0;
 	private int currentNumEnemies = 0;
