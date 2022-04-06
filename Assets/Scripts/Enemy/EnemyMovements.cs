@@ -136,7 +136,7 @@ public static class EnemyMovements
 
 			vectorToEnemy.y = 0;
 			Vector3 newPosition = (Quaternion.AngleAxis(angle, Vector3.up) * vectorToEnemy) * 40 + playerPosition;
-			while (!CheckLOS(playerPosition, newPosition))
+			for (int i = 0; i < 5 && !CheckLOS(playerPosition, newPosition); i++)
 			{
 				angle = UnityEngine.Random.Range(-90, 90);
 				newPosition = (Quaternion.AngleAxis(angle, Vector3.up) * vectorToEnemy) * 40 + playerPosition;
