@@ -17,9 +17,9 @@ public static class SpawnManager {
 
 
 	private static int[,] _grenadierSpawnChances = {{0, 15, 30, 30, 30, 30}};
-	private static int[,] _flyingSpawnChances 	 = {{100, 10, 10, 10, 10, 10}};
+	private static int[,] _flyingSpawnChances 	 = {{0, 10, 10, 10, 10, 10}};
 	private static int[,] _rangedSpawnChances    = {{0, 35, 30, 30, 30, 30}};
-	private static int[,] _tankSpawnChances 	 = {{0,  10,  5,  5, 10, 10}};
+	private static int[,] _tankSpawnChances 	 = {{100,  10,  5,  5, 10, 10}};
 	private static int[,] _turretSpawnChances    = {{0, 25, 20, 20, 15, 15}};
 	private static int[,] _healerSpawnChances    = {{0, 5, 5, 5, 5, 5 }};
 	private static Dictionary<EnemyType, int[,]> enemySpawnChances = new Dictionary<EnemyType, int[,]>() {
@@ -44,13 +44,13 @@ public static class SpawnManager {
 		return temp;
 	}
 
-	private static Func<float, Vector3>[] _grenadierSpawnBehaviours = {SpawnGrenadierDefault};
-	private static Func<float, Vector3>[] _flyingSpawnBehaviours = {SpawnDefault};
-	private static Func<float, Vector3>[] _rangedSpawnBehaviours = {SpawnDefault};
-	private static Func<float, Vector3>[] _tankSpawnBehaviours = {SpawnDefault};
-	private static Func<float, Vector3>[] _turretSpawnBehaviours = {SpawnTurretDefault};
-	private static Func<float, Vector3>[] _healerSpawnBehaviours = {SpawnDefault};
-	public static Dictionary<EnemyType, Func<float, Vector3>[]> enemySpawnBehaviour = new Dictionary<EnemyType, Func<float, Vector3>[]>() {
+	private static Func<float, GameObject, Vector3>[] _grenadierSpawnBehaviours = {SpawnGrenadierDefault};
+	private static Func<float, GameObject, Vector3>[] _flyingSpawnBehaviours = {SpawnDefault};
+	private static Func<float, GameObject, Vector3>[] _rangedSpawnBehaviours = {SpawnDefault};
+	private static Func<float, GameObject, Vector3>[] _tankSpawnBehaviours = {SpawnDefault, SpawnTank};
+	private static Func<float, GameObject, Vector3>[] _turretSpawnBehaviours = {SpawnTurretDefault};
+	private static Func<float, GameObject, Vector3>[] _healerSpawnBehaviours = {SpawnDefault};
+	public static Dictionary<EnemyType, Func<float, GameObject, Vector3>[]> enemySpawnBehaviour = new Dictionary<EnemyType, Func<float, GameObject, Vector3>[]>() {
 		{EnemyType.GRENADIER, _grenadierSpawnBehaviours},
 		{EnemyType.FLYING, _flyingSpawnBehaviours},
 		{EnemyType.RANGED, _rangedSpawnBehaviours},
@@ -62,7 +62,7 @@ public static class SpawnManager {
 
 
 
-    public static Vector3 SpawnDefault(float platformRadius) {
+    public static Vector3 SpawnDefault(float platformRadius, GameObject player) {
         Vector3 targetSpawn;
         if (RandomPoint(platformRadius, out targetSpawn))
         {
@@ -71,7 +71,7 @@ public static class SpawnManager {
         return new Vector3(0, 0, 0);
     }
 
-    public static Vector3 SpawnTurretDefault(float platformRadius) {
+    public static Vector3 SpawnTurretDefault(float platformRadius, GameObject player) {
 		platformRadius *= 0.6f;
         Vector3 targetSpawn;
         if (RandomPoint(platformRadius, out targetSpawn))
@@ -81,7 +81,7 @@ public static class SpawnManager {
         return new Vector3(0, 0, 0);
     }
 
-	public static Vector3 SpawnGrenadierDefault(float platformRadius) {
+	public static Vector3 SpawnGrenadierDefault(float platformRadius, GameObject player) {
 		platformRadius *= 0.8f;
 		Vector3 targetSpawn;
         if (RandomPointOnEdge(platformRadius, out targetSpawn))
@@ -92,8 +92,8 @@ public static class SpawnManager {
 		return new Vector3(0, 0, 0);
 	}
 
-    public static Vector3 SpawnTank(float platformRadius) {
-        
+    public static Vector3 SpawnTank(float platformRadius, GameObject player) {
+        return player.transform.position + (player.transform.forward * 25);
     }
 
 

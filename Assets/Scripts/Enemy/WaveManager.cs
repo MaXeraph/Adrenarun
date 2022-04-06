@@ -26,13 +26,15 @@ public class WaveManager : MonoBehaviour
 	private bool _timeout = false;
 	private bool _infinite = false;
 	private LevelTransition transition;
+    private GameObject player;
 
 
 	void Start()
 	{
 		if (LevelTransition.currentLevel == maxLevelNumber) _infinite = true;
 		transition = transform.GetChild(0).GetComponent<LevelTransition>();
-		pum = GameObject.FindGameObjectWithTag("Player").GetComponent<PowerUpManager>();
+        player = GameObject.FindGameObjectWithTag("Player");
+		pum = player.GetComponent<PowerUpManager>();
 		if (!_timeout)
 		{
 			StartSpawningWave();
@@ -149,7 +151,7 @@ public class WaveManager : MonoBehaviour
 		{
 			variant = EnemyVariantType.SHIELD;
 		}
-		Vector3 spawnLocation = SpawnManager.enemySpawnBehaviour[enemy][Random.Range(0, SpawnManager.enemySpawnBehaviour[enemy].Length)](platformRadius);
+		Vector3 spawnLocation = SpawnManager.enemySpawnBehaviour[enemy][Random.Range(0, SpawnManager.enemySpawnBehaviour[enemy].Length)](platformRadius, player);
 		EnemyFactory.Instance.CreateEnemy(spawnLocation, enemy, variant);
 	}
 
