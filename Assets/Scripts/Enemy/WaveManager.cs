@@ -20,7 +20,7 @@ public class WaveManager : MonoBehaviour
 	private float waveEndTime;
 
 	private int totalWaveNumber = 3;
-	private int enemiesPerWave = 10;
+	private int enemiesPerWave = 1;
 	private const int spawnInterval = 0;
 	private int enemiesSpawned = 0;
 	private int currentNumEnemies = 0;
@@ -152,10 +152,15 @@ public class WaveManager : MonoBehaviour
 		}
 		else if (enemy == EnemyType.TANK)
 		{
-			variant = EnemyVariantType.SHIELD;
+			if (Random.Range(0, 2) == 0) {
+				variant = EnemyVariantType.SHIELD;
+			}
+			else {
+				variant = EnemyVariantType.AGGRESSOR;
+			}
 		}
 		Vector3 spawnLocation = SpawnManager.enemySpawnBehaviour[enemy][Random.Range(0, SpawnManager.enemySpawnBehaviour[enemy].Length)](platformRadius, player);
-		EnemyFactory.Instance.CreateEnemy(spawnLocation, enemy, variant);
+		EnemyFactory.Instance.CreateEnemy(spawnLocation, enemy, variant, (currentLevelNumber + 1) / 2f);
 	}
 
 
