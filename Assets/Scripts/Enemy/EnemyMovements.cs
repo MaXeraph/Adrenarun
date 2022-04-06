@@ -82,7 +82,8 @@ public static class EnemyMovements
 		Vector3 position = gameObject.transform.position;
 		Animation anim = gameObject.transform.GetChild(0).GetComponent<Animation>();
 		NavMeshAgent navAgent = gameObject.GetComponent<NavMeshAgent>();
-		navAgent.speed = _tankBaseSpeed * SpeedManager.enemyMovementScaling;
+		Stats statsComponent = gameObject.GetComponent<Stats>();
+		navAgent.speed = statsComponent.moveSpeed * SpeedManager.enemyMovementScaling;
 		float playerDistance = Vector3.Distance(position, playerPosition);
 		if (playerDistance > 0)
 		{

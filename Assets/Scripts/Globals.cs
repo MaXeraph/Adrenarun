@@ -158,6 +158,7 @@ public enum EnemyVariantType
 	SET,
 	PREDICTIVE,
 	SHIELD,
+	AGGRESSOR
 }
 
 public enum EntityType
