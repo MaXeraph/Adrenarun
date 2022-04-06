@@ -16,6 +16,9 @@ public class AudioManager : MonoBehaviour
     private static AudioSource _menuSelectAudio;
 	private static AudioSource _pickUpItemAudio;
 	private static AudioSource _consumeHealthPillAudio;
+	public static AudioSource _nearDeathAudio;
+	public static MonoBehaviour instance; // So we can use this monobehaviour to start coroutines in non-monos
+
 
 
     private static bool _walkAudioPlaying = false;
@@ -23,6 +26,7 @@ public class AudioManager : MonoBehaviour
     void Awake()
     {
         InitComponents();
+		instance = this;
     }
 
     void InitComponents() {
@@ -38,6 +42,7 @@ public class AudioManager : MonoBehaviour
         _menuSelectAudio = audios[8];
 		_pickUpItemAudio = audios[9];
 		_consumeHealthPillAudio = audios[10];
+		_nearDeathAudio = audios[11];
 
         player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -96,5 +101,25 @@ public class AudioManager : MonoBehaviour
 		_consumeHealthPillAudio.Play();
 	}
 
+	public static void PlayNearDeathAudio() {
+		_nearDeathAudio.Play();
+	}
+
+	public static IEnumerator StopNearDeathAudio() {
+		return FadeOut(_nearDeathAudio,2f);
+	}
+
+	public static IEnumerator FadeOut (AudioSource audioSource, float FadeTime) {
+        float startVolume = audioSource.volume;
+ 
+        while (audioSource.volume > 0) {
+            audioSource.volume -= startVolume * Time.deltaTime / FadeTime;
+ 
+            yield return null;
+        }
+ 
+        audioSource.Stop();
+        audioSource.volume = startVolume;
+    }
 
 }

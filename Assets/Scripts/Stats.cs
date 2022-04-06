@@ -31,11 +31,23 @@ public class Stats : MonoBehaviour
 				if (_currentHealth == 0)
 				{
 					AudioManager.UpdateMusicAudio(1);
+					AudioManager.instance.StartCoroutine(AudioManager.StopNearDeathAudio());
 				}
 				else
 				{
 					AudioManager.UpdateMusicAudio(_currentHealth / maxHealth);
-
+					if (_currentHealth / maxHealth < 0.3f)
+					{
+						if (!AudioManager._nearDeathAudio.isPlaying)
+						{
+							AudioManager.PlayNearDeathAudio();
+						}
+					} else {
+						if (AudioManager._nearDeathAudio.isPlaying)
+						{
+							AudioManager.instance.StartCoroutine(AudioManager.StopNearDeathAudio());
+						}
+					}
 				}
 				AudioManager.PlayInjuryAudio();
 			}
