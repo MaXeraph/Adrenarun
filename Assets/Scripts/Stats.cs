@@ -57,6 +57,7 @@ public class Stats : MonoBehaviour
 	public EntityType owner;
 	bool dead = false;
 	public Dictionary<object, float> damageTakenMultipliers;
+	public float moveSpeed;
 
 	private float _damageTakenMultiplier
 	{

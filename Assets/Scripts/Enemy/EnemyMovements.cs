@@ -82,7 +82,8 @@ public static class EnemyMovements
 		Vector3 position = gameObject.transform.position;
 		Animation anim = gameObject.transform.GetChild(0).GetComponent<Animation>();
 		NavMeshAgent navAgent = gameObject.GetComponent<NavMeshAgent>();
-		navAgent.speed = _tankBaseSpeed * SpeedManager.enemyMovementScaling;
+		Stats statsComponent = gameObject.GetComponent<Stats>();
+		navAgent.speed = statsComponent.moveSpeed * SpeedManager.enemyMovementScaling;
 		float playerDistance = Vector3.Distance(position, playerPosition);
 		if (playerDistance > 0)
 		{
@@ -136,7 +137,7 @@ public static class EnemyMovements
 
 			vectorToEnemy.y = 0;
 			Vector3 newPosition = (Quaternion.AngleAxis(angle, Vector3.up) * vectorToEnemy) * 40 + playerPosition;
-			while (!CheckLOS(playerPosition, newPosition))
+			for (int i = 0; i < 5 && !CheckLOS(playerPosition, newPosition); i++)
 			{
 				angle = UnityEngine.Random.Range(-90, 90);
 				newPosition = (Quaternion.AngleAxis(angle, Vector3.up) * vectorToEnemy) * 40 + playerPosition;
