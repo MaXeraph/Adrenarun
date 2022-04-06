@@ -56,6 +56,8 @@ public class PlayerCentral : MonoBehaviour
         _weapon = _player.AddComponent<Weapon>();
         _weapon.Initialize(new BulletAttackBehaviour(EntityType.PLAYER, damage: 10f, bulletSpeed:45f), 0.2f, 16, 1f);
 
+        SpeedManager.adrenalinModifier = 0f;
+
 		foreach (PowerUpType powerUp in Globals.TransitionPowerUpDictionary.Keys)
 		{
 			for (int i = 0; i < Globals.TransitionPowerUpDictionary[powerUp]; i++)
