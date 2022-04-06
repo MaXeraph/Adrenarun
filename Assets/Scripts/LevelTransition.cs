@@ -36,6 +36,7 @@ public class LevelTransition : MonoBehaviour
 		if (transitionTo == 0) transitionTo = (Levels[progression+=1]);
 		text = transform.GetChild(0);
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+		Movement.speed = 12f;
 		gameObject.SetActive(false);
 	}
 
@@ -43,6 +44,7 @@ public class LevelTransition : MonoBehaviour
 	public void LevelComplete(WaveManager Spawner)
     {
 		gameObject.SetActive(true);
+		Movement.speed *= 2f;
 		//Levels[progression]
 		currentLevel = transitionTo;
 		Spawner.enabled = false;
