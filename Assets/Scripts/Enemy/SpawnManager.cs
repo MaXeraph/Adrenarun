@@ -99,7 +99,8 @@ public static class SpawnManager {
 
     private static bool RandomPoint(float radius, out Vector3 result)
 	{
-		Vector3 randomPoint = Random.insideUnitSphere * radius;
+		Vector2 tempPoint = Random.insideUnitCircle * radius;
+        Vector3 randomPoint = new Vector3(tempPoint.x, 0, tempPoint.y);
 		NavMeshHit hit;
 		if (NavMesh.SamplePosition(randomPoint, out hit, radius, 1))
 		{
