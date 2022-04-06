@@ -17,6 +17,8 @@ public class AudioManager : MonoBehaviour
 	private static AudioSource _pickUpItemAudio;
 	private static AudioSource _consumeHealthPillAudio;
 	public static AudioSource _nearDeathAudio;
+	private static AudioSource _enemyDeathAudio;
+	private static AudioSource _enemyTankDeathAudio;
 	public static MonoBehaviour instance; // So we can use this monobehaviour to start coroutines in non-monos
 
 
@@ -43,6 +45,8 @@ public class AudioManager : MonoBehaviour
 		_pickUpItemAudio = audios[9];
 		_consumeHealthPillAudio = audios[10];
 		_nearDeathAudio = audios[11];
+		_enemyDeathAudio = audios[12];
+		_enemyTankDeathAudio = audios[13];
 
         player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -122,4 +126,11 @@ public class AudioManager : MonoBehaviour
         audioSource.volume = startVolume;
     }
 
+	public static void PlayEnemyDeathAudio() {
+		_enemyDeathAudio.Play();
+	}
+
+	public static void PlayEnemyTankDeathAudio() {
+		_enemyTankDeathAudio.Play();
+	}
 }
