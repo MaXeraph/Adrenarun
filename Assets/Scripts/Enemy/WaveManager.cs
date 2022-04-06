@@ -6,8 +6,8 @@ public class WaveManager : MonoBehaviour
 {
 	// private Vector3 _enemySpawn = Vector3.zero;
 	private bool _cooldown = false;
-	private float _cooldownDelay = SpeedManager.enemySpawnScaling;
-	private const float platformRadius = 175 / 2;
+	private float _cooldownDelay = 0.001f;
+	private float platformRadius = 175 / 2;
 
 	private bool canSpawn = false; // for within wave
 	private bool startSpawn = false; // for each wave
@@ -19,7 +19,7 @@ public class WaveManager : MonoBehaviour
 	private float waveEndTime;
 
 	private int totalWaveNumber = 3;
-	private int enemiesPerWave = 10;
+	private int enemiesPerWave = 300;
 	private const int spawnInterval = 0;
 	private int enemiesSpawned = 0;
 	private int currentNumEnemies = 0;
@@ -40,6 +40,15 @@ public class WaveManager : MonoBehaviour
 
 			StartCoroutine(TimeOut());
 		}
+		GameObject platform = GameObject.FindGameObjectWithTag("Platform");
+		Mesh mesh = platform.GetComponent<MeshFilter>().mesh;
+		if (mesh.name == "Plane Instance") {
+			platformRadius = platform.transform.localScale.x * 5; // * 10 / 2 because is terrain not game object
+		}
+        else {
+            platformRadius = platform.transform.localScale.x / 2;
+        }
+        platformRadius *= 0.9f;
 	}
 
 

@@ -16,11 +16,11 @@ public static class SpawnManager {
 
 
 
-	private static int[,] _grenadierSpawnChances = {{20, 15, 30, 30, 30, 30}};
-	private static int[,] _flyingSpawnChances 	 = {{10, 10, 10, 10, 10, 10}};
-	private static int[,] _rangedSpawnChances    = {{40, 35, 30, 30, 30, 30}};
+	private static int[,] _grenadierSpawnChances = {{0, 15, 30, 30, 30, 30}};
+	private static int[,] _flyingSpawnChances 	 = {{100, 10, 10, 10, 10, 10}};
+	private static int[,] _rangedSpawnChances    = {{0, 35, 30, 30, 30, 30}};
 	private static int[,] _tankSpawnChances 	 = {{0,  10,  5,  5, 10, 10}};
-	private static int[,] _turretSpawnChances    = {{30, 25, 20, 20, 15, 15}};
+	private static int[,] _turretSpawnChances    = {{0, 25, 20, 20, 15, 15}};
 	private static int[,] _healerSpawnChances    = {{0, 5, 5, 5, 5, 5 }};
 	private static Dictionary<EnemyType, int[,]> enemySpawnChances = new Dictionary<EnemyType, int[,]>() {
 		{EnemyType.GRENADIER, _grenadierSpawnChances},
@@ -44,7 +44,7 @@ public static class SpawnManager {
 		return temp;
 	}
 
-	private static Func<float, Vector3>[] _grenadierSpawnBehaviours = {SpawnDefault};
+	private static Func<float, Vector3>[] _grenadierSpawnBehaviours = {SpawnGrenadierDefault};
 	private static Func<float, Vector3>[] _flyingSpawnBehaviours = {SpawnDefault};
 	private static Func<float, Vector3>[] _rangedSpawnBehaviours = {SpawnDefault};
 	private static Func<float, Vector3>[] _tankSpawnBehaviours = {SpawnDefault};
@@ -65,14 +65,14 @@ public static class SpawnManager {
     public static Vector3 SpawnDefault(float platformRadius) {
         Vector3 targetSpawn;
         if (RandomPoint(platformRadius, out targetSpawn))
-		{
+        {
             return targetSpawn;
-		}
+        }
         return new Vector3(0, 0, 0);
     }
 
     public static Vector3 SpawnTurretDefault(float platformRadius) {
-		platformRadius /= 1.5f;
+		platformRadius *= 0.6f;
         Vector3 targetSpawn;
         if (RandomPoint(platformRadius, out targetSpawn))
 		{
@@ -81,10 +81,39 @@ public static class SpawnManager {
         return new Vector3(0, 0, 0);
     }
 
+	public static Vector3 SpawnGrenadierDefault(float platformRadius) {
+		platformRadius *= 0.8f;
+		Vector3 targetSpawn;
+        if (RandomPointOnEdge(platformRadius, out targetSpawn))
+		{
+            return targetSpawn;
+		}
+
+		return new Vector3(0, 0, 0);
+	}
+
+    public static Vector3 SpawnTank(float platformRadius) {
+        
+    }
+
 
     private static bool RandomPoint(float radius, out Vector3 result)
 	{
 		Vector3 randomPoint = Random.insideUnitSphere * radius;
+		NavMeshHit hit;
+		if (NavMesh.SamplePosition(randomPoint, out hit, radius, 1))
+		{
+			result = hit.position;
+			return true;
+		}
+		result = Vector3.zero;
+		return false;
+	}
+
+	private static bool RandomPointOnEdge(float radius, out Vector3 result)
+	{
+		Vector2 tempPoint = Random.insideUnitCircle.normalized * radius;
+        Vector3 randomPoint = new Vector3(tempPoint.x, 0, tempPoint.y);
 		NavMeshHit hit;
 		if (NavMesh.SamplePosition(randomPoint, out hit, radius, 1))
 		{
