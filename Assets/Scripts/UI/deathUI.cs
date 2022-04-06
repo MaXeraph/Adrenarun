@@ -53,16 +53,7 @@ public class deathUI : MonoBehaviour
     {
 		Time.timeScale = 1f;
 
-		Globals.TransitionPowerUpDictionary = new Dictionary<PowerUpType, int>()
-	{
-		{PowerUpType.DAMAGE, 0},
-		{PowerUpType.FIRERATE, 0 },
-		{PowerUpType.RELOADSPD, 0 },
-		{PowerUpType.CLIPSIZE, 0 },
-		{PowerUpType.ADRENALIN, 0 },
-		{PowerUpType.SHOTGUN, 0 },
-		{PowerUpType.REPEATER, 0 }
-	};
+		Globals.TransitionPowerUpDictionary = Globals.newTransitionPowerUpDictionary();
 
 		CompassUI.reset();
 		PauseMenu.blurPanel.SetFloat("_Intensity", 0);
