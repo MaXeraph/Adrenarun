@@ -144,7 +144,7 @@ public class EnemyFactory
 	void CreateAggressorVariant(EnemyBehaviour eb, EnemyType et)
 	{
 		eb.gameObject.GetComponent<Stats>().moveSpeed = 14f;
-		eb.gameObject.GetComponent<Stats>().maxHealth = 100f;
-		eb.gameObject.GetComponent<Stats>().currentHealth = 100f;
+		eb.gameObject.GetComponent<Stats>().maxHealth = 250f;
+		eb.gameObject.GetComponent<Stats>().currentHealth = 250f;
 	}
 }
