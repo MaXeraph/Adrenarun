@@ -19,7 +19,7 @@ public class WaveManager : MonoBehaviour
 	private float waveStartTime;
 	private float waveEndTime;
 
-	private int totalWaveNumber = 3;
+	private int totalWaveNumber = 4;
 	private int enemiesPerWave = 10;
 	private const int spawnInterval = 0;
 	private int enemiesSpawned = 0;
@@ -33,6 +33,7 @@ public class WaveManager : MonoBehaviour
 	void Start()
 	{
 		if (LevelTransition.currentLevel == maxLevelNumber) _infinite = true;
+		enemiesPerWave += (LevelTransition.progression - 1) * 5;
 		transition = transform.GetChild(0).GetComponent<LevelTransition>();
 		player = GameObject.FindGameObjectWithTag("Player");
 		pum = player.GetComponent<PowerUpManager>();
