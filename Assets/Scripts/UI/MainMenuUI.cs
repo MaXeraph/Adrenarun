@@ -23,7 +23,9 @@ public class MainMenuUI : MonoBehaviour
 
 	void Start()
     {
-        start.onClick.AddListener(() => ButtonPress("start"));
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
+		start.onClick.AddListener(() => ButtonPress("start"));
         tutorial.onClick.AddListener(() => ButtonPress("tutorial"));
         quit.onClick.AddListener(() => ButtonPress("quit"));
 

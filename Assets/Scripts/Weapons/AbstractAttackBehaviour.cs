@@ -14,6 +14,7 @@ public abstract class AbstractAttackBehaviour
     }
     protected EntityType _owner;
     public float _damage;
+    public float _baseDamage;
 	public Dictionary<string, int> _hitTypeModifiers;
     
     /**
@@ -25,5 +26,6 @@ public abstract class AbstractAttackBehaviour
     {
         _owner = owner;
         _damage = damage;
+        _baseDamage = damage;
     }
 }
