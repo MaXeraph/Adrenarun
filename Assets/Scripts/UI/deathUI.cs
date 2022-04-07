@@ -31,6 +31,7 @@ public class deathUI : MonoBehaviour
     public static void reveal(GameObject inst)
     {
 		instance.SetActive(true);
+    HealingPill.DespawnPills();
 		DOTween.To(() => PauseMenu.blurPanel.GetColor("_Color"), x => PauseMenu.blurPanel.SetColor("_Color", x), new Color(0.98f, 0.6f, 0.6f, 1), 1f);
 		UIManager.dead = true;
 		DOTween.To(() => PauseMenu.blurPanel.GetFloat("_Intensity"), x => PauseMenu.blurPanel.SetFloat("_Intensity", x), 1, 1.5f).OnComplete(show_content);
