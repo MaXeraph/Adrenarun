@@ -110,5 +110,5 @@ public class LevelTransition : MonoBehaviour
 	void Update()
     {
 		text.LookAt(player.position);
-    }
+	}
 }

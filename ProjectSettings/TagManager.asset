@@ -12,40 +12,39 @@ TagManager:
   - Transition
   - Portal
   - Projectile
-
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Target
+  - Ground
   - Water
   - UI
-  - Character
-  - Bullet
-  - 3DIcon
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
