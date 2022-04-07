@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class MainMenuUI : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class MainMenuUI : MonoBehaviour
 		title = transform.GetChild(4).GetComponent<RectTransform>();
 		background = transform.GetChild(5);
 		_start = start.transform.GetChild(0).GetComponent<RectTransform>();
-		_cont = cont.transform.GetChild(0).GetComponent<RectTransform>();
+		_cont = tutorial.transform.GetChild(0).GetComponent<RectTransform>();
 		_quit = quit.transform.GetChild(0).GetComponent<RectTransform>();
 		title.DOJumpAnchorPos(title.anchoredPosition, 10f, 1, 1.5f).SetLoops(-1).SetEase(Ease.InOutQuad);
 	}
