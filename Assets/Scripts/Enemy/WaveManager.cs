@@ -20,7 +20,7 @@ public class WaveManager : MonoBehaviour
 	private float waveEndTime;
 
 	private int totalWaveNumber = 3;
-	private int enemiesPerWave = 1;
+	private int enemiesPerWave = 10;
 	private const int spawnInterval = 0;
 	private int enemiesSpawned = 0;
 	private int currentNumEnemies = 0;
