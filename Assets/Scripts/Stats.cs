@@ -58,6 +58,7 @@ public class Stats : MonoBehaviour
 		}
 	}
 	public float maxHealth;
+    public float baseMaxHealth;
 	public EntityType owner;
 	bool dead = false;
 	public Dictionary<object, float> damageTakenMultipliers;
@@ -78,6 +79,7 @@ public class Stats : MonoBehaviour
 	public Stats(float maxHealth = 100f)
 	{
 		this.maxHealth = maxHealth;
+        this.baseMaxHealth = maxHealth;
 	}
 
 	void Awake()

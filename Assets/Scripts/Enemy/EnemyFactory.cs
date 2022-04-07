@@ -114,7 +114,7 @@ public class EnemyFactory
 		// scale enemies by scaleFactor
 		enemyWeapon._attackBehaviour._damage = enemyWeapon._attackBehaviour._baseDamage * scaleFactor;
 		Stats enemyStats = newEnemyObject.GetComponent<Stats>();
-		enemyStats.maxHealth *= scaleFactor;
+		enemyStats.maxHealth = enemyStats.baseMaxHealth * scaleFactor;
 		enemyStats.currentHealth = enemyStats.maxHealth;
 		
 		return newEnemyObject;
@@ -151,6 +151,7 @@ public class EnemyFactory
 	{
 		eb.gameObject.GetComponent<Stats>().moveSpeed = 14f;
 		eb.gameObject.GetComponent<Stats>().maxHealth = 250f;
+		eb.gameObject.GetComponent<Stats>().baseMaxHealth = 250f;
 		eb.gameObject.GetComponent<Stats>().currentHealth = 250f;
 	}
 }
