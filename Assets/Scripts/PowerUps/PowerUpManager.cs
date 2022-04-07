@@ -76,9 +76,8 @@ public class PowerUpManager : MonoBehaviour
 		// TODO: find thresholds
 		// either through a calculation based on the enemies and which wave it is,
 		// or some static number that works
-		float highThreshold = 20f;
-		float midThreshold = 40f;
-
+		float highThreshold = 45f;
+		float midThreshold = 90f;
 		// check which tier distribution for powerups we will use
 		// 0 = high, 1 = mid, 2 = low
 		int powerUpPool = waveTime < highThreshold ? 0 : waveTime < midThreshold ? 1 : 2;

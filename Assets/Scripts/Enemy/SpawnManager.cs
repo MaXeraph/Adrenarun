@@ -15,12 +15,12 @@ public static class SpawnManager {
 	// private static int[,] _tankSpawnChances = {{0, 0, 5, 0}, {5, 5, 10, 10}, {10, 10, 10, 10}};
 
 
-	private static int[,] _grenadierSpawnChances = {{20, 15, 30, 30, 30, 30}, {20, 15, 30, 30, 30, 30}, {20, 15, 30, 30, 30, 30}};
-	private static int[,] _flyingSpawnChances 	 = {{10, 10, 10, 10, 10, 10}, {10, 10, 10, 10, 10, 10}, {10, 10, 10, 10, 10, 10}};
-	private static int[,] _rangedSpawnChances    = {{40, 35, 30, 30, 30, 30}, {40, 35, 30, 30, 30, 30}, {40, 35, 30, 30, 30, 30}};
-	private static int[,] _tankSpawnChances 	 = {{0,  10,  5,  5, 10, 10}, {0,  10,  5,  5, 10, 10}, {0,  10,  5,  5, 10, 10}};
-	private static int[,] _turretSpawnChances    = {{30, 25, 20, 20, 15, 15}, {30, 25, 20, 20, 15, 15}, {30, 25, 20, 20, 15, 15}};
-	private static int[,] _healerSpawnChances    = {{0,   5,  5,  5,  5,  5}, {0,   5,  5,  5,  5,  5}, {0,   5,  5,  5,  5,  5}};
+	private static int[,] _grenadierSpawnChances = {{20, 25, 25, 30, 30, 30}, {25, 30, 30, 30, 30, 30}, {30, 35, 35, 30, 30, 30}};
+	private static int[,] _flyingSpawnChances 	 = {{10, 14, 14, 10, 10, 10}, {15, 15, 10, 10, 10, 10}, {10, 15, 15, 10, 10, 10}};
+	private static int[,] _rangedSpawnChances    = {{40, 35, 29, 30, 30, 30}, {28, 23, 23, 30, 30, 30}, {28, 23, 23, 30, 30, 30}};
+	private static int[,] _tankSpawnChances 	 = {{0,  0,  5,  0, 0, 10},   {5,  5,  10,  5, 10, 10}, {10, 10, 10,  5, 10, 10}};
+	private static int[,] _turretSpawnChances    = {{30, 25, 25, 20, 15, 15}, {25, 25, 25, 20, 15, 15}, {20, 15, 15, 20, 15, 15}};
+	private static int[,] _healerSpawnChances    = {{0,   1,  2,  5,  5,  5}, {2,   2,  2,  5,  5,  5}, {2,   2,  2,  5,  5,  5}};
 
 	private static Dictionary<EnemyType, int[,]> enemySpawnChances = new Dictionary<EnemyType, int[,]>() {
 		{EnemyType.GRENADIER, _grenadierSpawnChances},

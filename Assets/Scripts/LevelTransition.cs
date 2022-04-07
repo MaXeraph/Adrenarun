@@ -9,7 +9,7 @@ public class LevelTransition : MonoBehaviour
 
 	public int transitionTo = 0;
 	public static int[] Levels;
-	private static int progression = 0;
+	public static int progression = 0;
 
 	public static int currentLevel = 1;
 	public static int maxLevel = 5;
