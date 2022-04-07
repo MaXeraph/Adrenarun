@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
@@ -13,7 +14,7 @@ public class MainMenuUI : MonoBehaviour
     public Button quit;
 	public static RectTransform title;
 	private static RectTransform _start;
-	private static RectTransform _cont;
+	private static RectTransform _tut;
 	private static RectTransform _quit;
 
 	public static float scale_amount = 1.25f;
@@ -33,7 +34,7 @@ public class MainMenuUI : MonoBehaviour
 		title = transform.GetChild(4).GetComponent<RectTransform>();
 		background = transform.GetChild(5);
 		_start = start.transform.GetChild(0).GetComponent<RectTransform>();
-		_cont = tutorial.transform.GetChild(0).GetComponent<RectTransform>();
+		_tut = tutorial.transform.GetChild(0).GetComponent<RectTransform>();
 		_quit = quit.transform.GetChild(0).GetComponent<RectTransform>();
 		title.DOJumpAnchorPos(title.anchoredPosition, 10f, 1, 1.5f).SetLoops(-1).SetEase(Ease.InOutQuad);
 	}
@@ -45,6 +46,7 @@ public class MainMenuUI : MonoBehaviour
 
     void ButtonPress(string action)
     {
+		AudioManager.PlayMenuSelectAudio();
         switch (action)
         {
             case "start":
@@ -72,7 +74,7 @@ public class MainMenuUI : MonoBehaviour
 				anim.Insert(0, _start.DOScale(scale_amount, 0.5f));
 				break;
 			case "continue":
-				anim.Insert(0, _cont.DOScale(scale_amount, 0.5f));
+				anim.Insert(0, _tut.DOScale(scale_amount, 0.5f));
 				break;
 			case "quit":
 				anim.Insert(0, _quit.DOScale(scale_amount, 0.5f));
@@ -93,7 +95,7 @@ public class MainMenuUI : MonoBehaviour
 				anim.Insert(0, _start.DOScale(1, 0.5f));
 				break;
 			case "continue":
-				anim.Insert(0, _cont.DOScale(1, 0.5f));
+				anim.Insert(0, _tut.DOScale(1, 0.5f));
 				break;
 			case "quit":
 				anim.Insert(0, _quit.DOScale(1, 0.5f));
