@@ -51,6 +51,7 @@ public class UpgradeUI : MonoBehaviour
 
     void choose(int num)
     { 
+		AudioManager.PlayMenuSelectAudio();
         if (num < 0 || num > 2) return;
         UIManager.powerSelection = num;
         exit();
@@ -59,8 +60,8 @@ public class UpgradeUI : MonoBehaviour
     void exit()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        UIManager.UpdateWeapon();
-        UIManager.Reloading = true;
+       // UIManager.UpdateWeapon();
+       // UIManager.Reloading = true;
         gameObject.SetActive(false);
     }
     

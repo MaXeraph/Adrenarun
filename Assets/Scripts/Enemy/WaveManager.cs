@@ -7,7 +7,7 @@ public class WaveManager : MonoBehaviour
 	// private Vector3 _enemySpawn = Vector3.zero;
 	private bool _cooldown = false;
 	private float _cooldownDelay = SpeedManager.enemySpawnScaling;
-	private const float platformRadius = 175 / 2;
+	private float platformRadius = 175 / 2;
 
 	private bool canSpawn = false; // for within wave
 	private bool startSpawn = false; // for each wave
@@ -19,7 +19,7 @@ public class WaveManager : MonoBehaviour
 	private float waveStartTime;
 	private float waveEndTime;
 
-	private int totalWaveNumber = 3;
+	private int totalWaveNumber = 4;
 	private int enemiesPerWave = 10;
 	private const int spawnInterval = 0;
 	private int enemiesSpawned = 0;
@@ -27,13 +27,16 @@ public class WaveManager : MonoBehaviour
 	private bool _timeout = false;
 	private bool _infinite = false;
 	private LevelTransition transition;
+	private GameObject player;
 
 
 	void Start()
 	{
 		if (LevelTransition.currentLevel == maxLevelNumber) _infinite = true;
+		enemiesPerWave += (LevelTransition.progression - 1) * 5;
 		transition = transform.GetChild(0).GetComponent<LevelTransition>();
-		pum = GameObject.FindGameObjectWithTag("Player").GetComponent<PowerUpManager>();
+		player = GameObject.FindGameObjectWithTag("Player");
+		pum = player.GetComponent<PowerUpManager>();
 		_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Stats>();
 		if (!_timeout)
 		{
@@ -42,6 +45,19 @@ public class WaveManager : MonoBehaviour
 
 			StartCoroutine(TimeOut());
 		}
+		GameObject platform = GameObject.FindGameObjectWithTag("Platform");
+		Mesh mesh = platform.GetComponent<MeshFilter>().mesh;
+		if (LevelTransition.currentLevel == 3)
+		{
+			platformRadius = platform.transform.localScale.x * 3; // * 4 / 2 because is pro builder platform
+		}
+		else if (LevelTransition.currentLevel == 2 || LevelTransition.currentLevel == 4) {
+			platformRadius = platform.transform.localScale.x * 5; // * 10 / 2 because is terrain not game object
+		}
+		else {
+			platformRadius = platform.transform.localScale.x / 2;
+		}
+		platformRadius *= 0.9f;
 	}
 
 
@@ -131,7 +147,7 @@ public class WaveManager : MonoBehaviour
 	{
 		EnemyVariantType variant = EnemyVariantType.NONE;
 		// 50% to be predictive if turret or ranged.
-		if ((enemy == EnemyType.TURRET || enemy == EnemyType.RANGED) && Random.Range(0, 2) == 0)
+		if ((enemy == EnemyType.TURRET || enemy == EnemyType.RANGED || enemy == EnemyType.FLYING) && Random.Range(0, 2) == 0)
 		{
 			variant = EnemyVariantType.PREDICTIVE;
 		}
@@ -141,10 +157,15 @@ public class WaveManager : MonoBehaviour
 		}
 		else if (enemy == EnemyType.TANK)
 		{
-			variant = EnemyVariantType.SHIELD;
+			if (Random.Range(0, 2) == 0) {
+				variant = EnemyVariantType.SHIELD;
+			}
+			else {
+				variant = EnemyVariantType.AGGRESSOR;
+			}
 		}
-		Vector3 spawnLocation = SpawnManager.enemySpawnBehaviour[enemy][Random.Range(0, SpawnManager.enemySpawnBehaviour[enemy].Length)](platformRadius);
-		EnemyFactory.Instance.CreateEnemy(spawnLocation, enemy, variant);
+		Vector3 spawnLocation = SpawnManager.enemySpawnBehaviour[enemy][Random.Range(0, SpawnManager.enemySpawnBehaviour[enemy].Length)](platformRadius, player);
+		EnemyFactory.Instance.CreateEnemy(spawnLocation, enemy, variant, (currentLevelNumber + 1) / 2f);
 	}
 
 

@@ -54,7 +54,9 @@ public class PlayerCentral : MonoBehaviour
         gun = transform.GetChild(0).GetChild(0).GetChild(0).Find("gunF");
 
         _weapon = _player.AddComponent<Weapon>();
-        _weapon.Initialize(new BulletAttackBehaviour(EntityType.PLAYER, damage: 10f, bulletSpeed:45f), 0.2f, 16, 1f);
+        _weapon.Initialize(new BulletAttackBehaviour(EntityType.PLAYER, damage: 10f, bulletSpeed:50f), 0.2f, 16, 1f);
+
+        SpeedManager.adrenalinModifier = 0f;
 
 		foreach (PowerUpType powerUp in Globals.TransitionPowerUpDictionary.Keys)
 		{
@@ -113,7 +115,7 @@ public class PlayerCentral : MonoBehaviour
         {
             Vector3 position = _camera.transform.forward + _camera.transform.position;
             Vector3 direction = _camera.transform.forward;
-            if (_weapon.Attack(position, direction, EntityType.PLAYER)) shootEffects(position + (0.22f * _camera.transform.right) + (-0.18f * _camera.transform.up));
+			if (!UIManager.Reloading)if (_weapon.Attack(position, direction, EntityType.PLAYER)) shootEffects(position + (0.22f * _camera.transform.right) + (-0.18f * _camera.transform.up));
         }
 
         //Reload
@@ -122,9 +124,13 @@ public class PlayerCentral : MonoBehaviour
 		//Healing Pill
 		if (Input.GetKeyDown(KeyCode.Q) && healingPills > 0) 
 		{
-			healingPills -= 1;
-			_player.GetComponent<Stats>().currentHealth += 15;
-		
+			Stats statsComponent = _player.GetComponent<Stats>();
+			if (statsComponent.currentHealth < statsComponent.maxHealth)
+			{
+				healingPills -= 1;
+				AudioManager.PlayConsumeHealthPillAudio();
+				statsComponent.currentHealth = Mathf.Min(statsComponent.maxHealth, statsComponent.currentHealth + 15);
+			}
 		}
 
 
@@ -138,7 +144,7 @@ public class PlayerCentral : MonoBehaviour
     private void shootEffects(Vector3 pos)
     {
     //Update UI
-    // UIManager.Ammo -= 1;
+    UIManager.Ammo -= 1;
 
     //Muzzleflash
     GameObject flash = Instantiate(Resources.Load("Muzzleflash")) as GameObject;

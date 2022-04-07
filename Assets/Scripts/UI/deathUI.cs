@@ -31,6 +31,7 @@ public class deathUI : MonoBehaviour
     public static void reveal(GameObject inst)
     {
 		instance.SetActive(true);
+    HealingPill.DespawnPills();
 		DOTween.To(() => PauseMenu.blurPanel.GetColor("_Color"), x => PauseMenu.blurPanel.SetColor("_Color", x), new Color(0.98f, 0.6f, 0.6f, 1), 1f);
 		UIManager.dead = true;
 		DOTween.To(() => PauseMenu.blurPanel.GetFloat("_Intensity"), x => PauseMenu.blurPanel.SetFloat("_Intensity", x), 1, 1.5f).OnComplete(show_content);
@@ -53,22 +54,13 @@ public class deathUI : MonoBehaviour
     {
 		Time.timeScale = 1f;
 
-		Globals.TransitionPowerUpDictionary = new Dictionary<PowerUpType, int>()
-	{
-		{PowerUpType.DAMAGE, 0},
-		{PowerUpType.FIRERATE, 0 },
-		{PowerUpType.RELOADSPD, 0 },
-		{PowerUpType.CLIPSIZE, 0 },
-		{PowerUpType.ADRENALIN, 0 },
-		{PowerUpType.SHOTGUN, 0 },
-		{PowerUpType.REPEATER, 0 }
-	};
+		Globals.TransitionPowerUpDictionary = Globals.newTransitionPowerUpDictionary();
 
 		CompassUI.reset();
 		PauseMenu.blurPanel.SetFloat("_Intensity", 0);
 		PauseMenu.blurPanel.SetColor("_Color", new Color(1f, 1f, 1f, 0));
-		Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+		//Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
         SpeedManager.updateSpeeds(1f);
         PlayerCentral.paused = false;
 
@@ -76,7 +68,8 @@ public class deathUI : MonoBehaviour
 		      StopAllCoroutines();
 
         gameObject.SetActive(false);
-        SceneManager.LoadScene(1, LoadSceneMode.Single);
+		ObjectPool.Clear();
+		SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 
 }

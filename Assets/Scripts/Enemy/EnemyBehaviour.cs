@@ -47,8 +47,10 @@ public class EnemyBehaviour : MonoBehaviour
 		_targetTransform = target.GetComponent<Transform>();
 		NavAgentMove = info.navAgentMove;
 		GetAimDirection = info.aim;
-		info.navAgentSetup(new Vector3(0, 0, 0));
+		info.navAgentSetup(gameObject);
 
+		lastPosition = transform.position;
+		
 		return true;
 	}
 
@@ -56,9 +58,16 @@ public class EnemyBehaviour : MonoBehaviour
 	{
 		EnemyBehaviour eb = enemy.GetComponent<EnemyBehaviour>();
 		EnemyType type = eb.enemyType;
+		if (type == EnemyType.TANK) {
+			AudioManager.PlayEnemyTankDeathAudio();
+		} else {
+			AudioManager.PlayEnemyDeathAudio();
+		}
 		Destroy(eb);
 		ObjectPool.Destroy(Globals.enemyPrefabNames[type], enemy);
 	}
+
+	private Vector3 lastPosition;
 
 	// Update is called once per frame
 	void Update()
@@ -66,12 +75,20 @@ public class EnemyBehaviour : MonoBehaviour
 		if (!_initialized) return;
 
 		Animation anim = gameObject.transform.childCount > 0 ? gameObject.transform.GetChild(0).GetComponent<Animation>() : null;
-		// Look. Determine look direction.
-		// _direction = (_targetTransform.position - transform.position).normalized;
-		// _direction.y = 0;
-		// _lookRotation = Quaternion.LookRotation(_direction);
-		// transform.rotation = _lookRotation;
+		
+		// Look. Determine look direction. Only do this if we haven't moved to not interfere with NavAgent.
+		if (transform.position == lastPosition)
+		{
+			_direction = (_targetTransform.position - transform.position).normalized;
+			_direction.y = 0;
+			// To change maximum rotation speed, lower 360f.
+			Vector3 newDirection = Vector3.RotateTowards(transform.forward, _direction, Mathf.Deg2Rad*360f*Time.deltaTime, 100f);
+			_lookRotation = Quaternion.LookRotation(newDirection);
+			transform.rotation = _lookRotation;
+		}
 
+		lastPosition = transform.position;
+		
 		NavAgentMove(this.gameObject, _targetTransform.position);
 
 		// Aim. Determine firing direction.

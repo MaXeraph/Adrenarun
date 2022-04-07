@@ -13,7 +13,7 @@ GameObject:
   m_Name: foliageinstance.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 3
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3441704253171036700
@@ -79,11 +79,11 @@ CapsuleCollider:
   m_GameObject: {fileID: 645961371358757029}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 1.1111488
+  m_Enabled: 0
+  m_Radius: 0.9
   m_Height: 8.580722
   m_Direction: 1
-  m_Center: {x: 0.55, y: -3.76, z: -0.38144836}
+  m_Center: {x: 0.55, y: -3.74, z: -0.38144836}
 --- !u!208 &6873931528281638402
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -94,11 +94,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_Extents: {x: 5.04, y: 7.185, z: 5.04}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0.51, y: -3.76, z: -0.39}
+  m_Center: {x: 0.51, y: -2.7, z: -0.39}
   m_TimeToStationary: 0.5
 --- !u!1 &1684229560508063042
 GameObject:
@@ -115,7 +115,7 @@ GameObject:
   m_Name: foliageinstance|foliage|Dupli|
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 3
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &506039342390509710
@@ -196,8 +196,8 @@ GameObject:
   m_Name: foliage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8372065538638703462
 Transform:
@@ -275,7 +275,7 @@ GameObject:
   m_Name: foliageinstance.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 3
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4579315323381630441
@@ -308,8 +308,8 @@ GameObject:
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &6344787004881676229
 Transform:
@@ -389,7 +389,7 @@ GameObject:
   m_Name: foliageinstance.001|foliage|Dupli|
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 3
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4219821837024647486
@@ -468,7 +468,7 @@ GameObject:
   m_Name: foliageinstance.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 3
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3434671409908718143
@@ -501,7 +501,7 @@ GameObject:
   m_Name: foliageinstance.003|foliage|Dupli|
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 3
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2222683494384992821
@@ -582,7 +582,7 @@ GameObject:
   m_Name: foliageinstance.002|foliage|Dupli|
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 3
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4872093419890868128
@@ -661,7 +661,7 @@ GameObject:
   m_Name: foliageinstance.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 3
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7574600798184428880
@@ -692,7 +692,7 @@ GameObject:
   m_Name: foliageinstance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 3
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7035384122611303939
@@ -725,7 +725,7 @@ GameObject:
   m_Name: foliageinstance.004|foliage|Dupli|
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 3
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8792857659359267070

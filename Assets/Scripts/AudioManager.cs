@@ -13,6 +13,14 @@ public class AudioManager : MonoBehaviour
     private static AudioSource _reloadAudio;
     private static AudioSource _walkAudio;
     private static AudioSource _portalAudio;
+    private static AudioSource _menuSelectAudio;
+	private static AudioSource _pickUpItemAudio;
+	private static AudioSource _consumeHealthPillAudio;
+	public static AudioSource _nearDeathAudio;
+	private static AudioSource _enemyDeathAudio;
+	private static AudioSource _enemyTankDeathAudio;
+	public static MonoBehaviour instance; // So we can use this monobehaviour to start coroutines in non-monos
+
 
 
     private static bool _walkAudioPlaying = false;
@@ -20,6 +28,7 @@ public class AudioManager : MonoBehaviour
     void Awake()
     {
         InitComponents();
+		instance = this;
     }
 
     void InitComponents() {
@@ -32,6 +41,12 @@ public class AudioManager : MonoBehaviour
         _reloadAudio = audios[5];
         _walkAudio = audios[6];
         _portalAudio = audios[7];
+        _menuSelectAudio = audios[8];
+		_pickUpItemAudio = audios[9];
+		_consumeHealthPillAudio = audios[10];
+		_nearDeathAudio = audios[11];
+		_enemyDeathAudio = audios[12];
+		_enemyTankDeathAudio = audios[13];
 
         player = GameObject.FindGameObjectWithTag("Player");
     }
@@ -78,6 +93,44 @@ public class AudioManager : MonoBehaviour
         _portalAudio.Play();
     }
 
+    public static void PlayMenuSelectAudio() {
+		_menuSelectAudio.Play();
+    }	
 
+	public static void PlayPickUpItemAudio() {
+		_pickUpItemAudio.Play();
+	}
 
+	public static void PlayConsumeHealthPillAudio() {
+		_consumeHealthPillAudio.Play();
+	}
+
+	public static void PlayNearDeathAudio() {
+		_nearDeathAudio.Play();
+	}
+
+	public static IEnumerator StopNearDeathAudio() {
+		return FadeOut(_nearDeathAudio,2f);
+	}
+
+	public static IEnumerator FadeOut (AudioSource audioSource, float FadeTime) {
+        float startVolume = audioSource.volume;
+ 
+        while (audioSource.volume > 0) {
+            audioSource.volume -= startVolume * Time.deltaTime / FadeTime;
+ 
+            yield return null;
+        }
+ 
+        audioSource.Stop();
+        audioSource.volume = startVolume;
+    }
+
+	public static void PlayEnemyDeathAudio() {
+		_enemyDeathAudio.Play();
+	}
+
+	public static void PlayEnemyTankDeathAudio() {
+		_enemyTankDeathAudio.Play();
+	}
 }

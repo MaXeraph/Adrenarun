@@ -12,6 +12,7 @@ public class Stats : MonoBehaviour
 		get => _currentHealth;
 		set
 		{
+			float oldHealth = _currentHealth;
 			if (value - _currentHealth < 0) _currentHealth = _currentHealth + (value - _currentHealth) * _damageTakenMultiplier;
 			else _currentHealth = value;
 			if (value <= 0 && owner == EntityType.ENEMY)
@@ -31,20 +32,37 @@ public class Stats : MonoBehaviour
 				if (_currentHealth == 0)
 				{
 					AudioManager.UpdateMusicAudio(1);
+					AudioManager.instance.StartCoroutine(AudioManager.StopNearDeathAudio());
 				}
 				else
 				{
 					AudioManager.UpdateMusicAudio(_currentHealth / maxHealth);
-
+					if (_currentHealth / maxHealth < 0.3f)
+					{
+						if (!AudioManager._nearDeathAudio.isPlaying)
+						{
+							AudioManager.PlayNearDeathAudio();
+						}
+					} else {
+						if (AudioManager._nearDeathAudio.isPlaying)
+						{
+							AudioManager.instance.StartCoroutine(AudioManager.StopNearDeathAudio());
+						}
+					}
 				}
-				AudioManager.PlayInjuryAudio();
+				if (_currentHealth - oldHealth < 0)
+				{
+					AudioManager.PlayInjuryAudio();
+				}
 			}
 		}
 	}
 	public float maxHealth;
+    public float baseMaxHealth;
 	public EntityType owner;
 	bool dead = false;
 	public Dictionary<object, float> damageTakenMultipliers;
+	public float moveSpeed;
 
 	private float _damageTakenMultiplier
 	{
@@ -61,6 +79,7 @@ public class Stats : MonoBehaviour
 	public Stats(float maxHealth = 100f)
 	{
 		this.maxHealth = maxHealth;
+        this.baseMaxHealth = maxHealth;
 	}
 
 	void Awake()

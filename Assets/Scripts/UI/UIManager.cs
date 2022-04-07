@@ -13,10 +13,9 @@ public class UIManager : MonoBehaviour
     {
         get { return _weapon; }
         set { _weapon = value;
-
-            AmmoCapacity = _weapon._magazineSize;
-            Ammo = _weapon._magazineSize;
-            reloadSpeed = _weapon._reloadSpeed;
+			AmmoCapacity = _weapon._magazineSize;
+			ammo = _weapon._magazineSize;
+			reloadSpeed = _weapon._reloadSpeed;
         }
     }
     private static Weapon _weapon;
@@ -43,11 +42,13 @@ public class UIManager : MonoBehaviour
         get { return ammo; }
         set
         {
-            ammo = Mathf.Clamp(value, 0, ammoCapacity);
-            if (ammo <= 0) { Reloading = true;}
-            else if (ammo == ammoCapacity) { Reloading = false; _weapon.finishReload(); }
-            AmmoUI.UpdateAmmo(ammo, reloading);
-
+			ammo = Mathf.Clamp(value, 0, ammoCapacity);
+			if (!AmmoUI.changingClip)
+			{
+				if (ammo <= 0 && !reloading) { Reloading = true; }
+				else if (!AmmoUI.AmmoSlots[ammoCapacity - 1].used) { Reloading = false; _weapon.finishReload(); }
+				AmmoUI.UpdateAmmo(ammo, reloading);
+			}
         }
     }
     private static int ammo;

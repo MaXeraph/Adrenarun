@@ -19,8 +19,10 @@ public class Movement : MonoBehaviour
 
     public static void RotatePlayer(GameObject player, Camera camera)
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        if (PowerUpManager.selectingPowerups) return;
+        
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * 0.01f;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * 0.01f;
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
