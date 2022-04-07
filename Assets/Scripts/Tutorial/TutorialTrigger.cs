@@ -23,7 +23,7 @@ public class TutorialTrigger : MonoBehaviour
                 tutManager.HandleEvents(stage);
                 triggered = true;
                 stage++;
-                tutManager.respawn = gameObject.transform.position;
+                tutManager.respawnLocation = gameObject.transform.position;
             }
         }
     }
