@@ -6,11 +6,12 @@ using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
-    public Vector3 respawn;
+    public Vector3 respawnLocation;
     private GameObject player;
     private Stats playerStats;
     private GameObject enemy;
     private Stats enemyStats;
+    private int currStage = 0;
     ArtilleryAttackBehaviour temp = new ArtilleryAttackBehaviour(EntityType.ENEMY, durability:100000);
 
     [SerializeField]
@@ -27,8 +28,17 @@ public class TutorialManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.transform.position.y <= -15 || playerStats.currentHealth <= 30) {
+        if (player.transform.position.y <= -15) {
             Respawn(player);
+        }
+
+        if (playerStats.currentHealth <= 30) {
+            if (currStage == 3) {
+                pool.SetActive(false);
+            }
+            else if (currStage == 5) {
+                Respawn(player);
+            }
         }
         
             
@@ -40,6 +50,7 @@ public class TutorialManager : MonoBehaviour
     }
 
     public void HandleEvents(int stage){
+        currStage = stage;
         if (stage == 2) {
             ShootStage();
         }
@@ -115,7 +126,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Respawn(GameObject player) {
         player.GetComponent<CharacterController>().enabled = false;
-        player.transform.position = respawn;
+        player.transform.position = respawnLocation;
         player.GetComponent<CharacterController>().enabled = true;
         playerStats.currentHealth = playerStats.maxHealth;
     }
