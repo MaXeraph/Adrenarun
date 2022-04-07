@@ -34,16 +34,16 @@ public class PowerUpManager : MonoBehaviour
 		// Mid (1): Exploding, Piercing, Damage, Fire Rate
 		// Low (2): ClipSize, ReloadSpeed, Homing, Adrenalin
 
-		highTierPowerUps  = new List<PowerUpType>{PowerUpType.SHOTGUN, 
+		highTierPowerUps  = new List<PowerUpType>{PowerUpType.SHOTGUN,
 												PowerUpType.REPEATER,
 												PowerUpType.EXPLODING};
 
-		midTierPowerUps = new List<PowerUpType>{PowerUpType.DAMAGE, 
+		midTierPowerUps = new List<PowerUpType>{PowerUpType.DAMAGE,
 												PowerUpType.PIERCING,
 												PowerUpType.FIRERATE};
 
-		lowTierPowerUps = new List<PowerUpType>{PowerUpType.CLIPSIZE, 
-												PowerUpType.RELOADSPD, 
+		lowTierPowerUps = new List<PowerUpType>{PowerUpType.CLIPSIZE,
+												PowerUpType.RELOADSPD,
 												PowerUpType.DASHCD,
 												PowerUpType.ADRENALIN};
 	}
@@ -77,11 +77,11 @@ public class PowerUpManager : MonoBehaviour
 		// or some static number that works
 		float highThreshold = 20f;
 		float midThreshold = 40f;
-		
+
 		// check which tier distribution for powerups we will use
 		// 0 = high, 1 = mid, 2 = low
 		int powerUpPool = waveTime < highThreshold ? 0 : waveTime < midThreshold ? 1 : 2;
-		
+
 		for (int i = 0; i < 3; i++)
 		{
 			// randomly generate the powerup tier.
@@ -103,7 +103,7 @@ public class PowerUpManager : MonoBehaviour
 				}
 			}
 			else if (powerUpTier == PowerUpTier.MID)
-			{	
+			{
 				for (int j = 0; j < midTierPowerUps.Count; j++)
 				{
 					if (midTierPowerUps[j] == powerUp)
@@ -113,8 +113,8 @@ public class PowerUpManager : MonoBehaviour
 					}
 				}
 			}
-			else 
-			{	
+			else
+			{
 				for (int j = 0; j < lowTierPowerUps.Count; j++)
 				{
 					if (lowTierPowerUps[j] == powerUp)
@@ -145,7 +145,7 @@ public class PowerUpManager : MonoBehaviour
 			powerUpTier = randNum < 10 ? PowerUpTier.HIGH : randNum < 65 ? PowerUpTier.MID : PowerUpTier.LOW;
 		}
 		// distribution: h 5 - m 50 - l 45
-		else 
+		else
 		{
 			powerUpTier = randNum < 5 ? PowerUpTier.HIGH : randNum < 55 ? PowerUpTier.MID : PowerUpTier.LOW;
 		}
