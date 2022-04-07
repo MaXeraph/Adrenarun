@@ -10,6 +10,7 @@ public class PowerUpManager : MonoBehaviour
 	private int[] generatorList;
 	private PowerUpType[] powerUpSelectionList;
 	private bool includeNone = false;
+	public static bool selectingPowerups = false;
 	public List<AbstractBulletPowerUp> bulletPowerUps;
 
 	private List<PowerUpType> highTierPowerUps;
@@ -188,6 +189,7 @@ public class PowerUpManager : MonoBehaviour
 	{
 		generateTieredPowerUps(waveTime, waveNumber);
 		UIManager.showPowerups(powerUpSelectionList);
+		selectingPowerups = true;
 		StartCoroutine(waitForSelection());
 	}
 
@@ -229,6 +231,7 @@ public class PowerUpManager : MonoBehaviour
 		}
 		Globals.TransitionPowerUpDictionary[selection] += 1;
 		applyPowerUp(selection);
+		selectingPowerups = false;
 		Time.timeScale = 1;
 	}
 }
