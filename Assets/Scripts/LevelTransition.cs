@@ -97,6 +97,8 @@ public class LevelTransition : MonoBehaviour
 		{
 			if (statsComponent.owner == EntityType.PLAYER)
 			{
+				Globals.TransitionHealth = statsComponent.currentHealth;
+				Globals.TransitionPills = c.gameObject.GetComponent<PlayerCentral>().healingPills;
 				// update the hp before we load the scene 
 				ObjectPool.Clear();
 				//SceneManager.LoadScene(transitionTo, LoadSceneMode.Single);

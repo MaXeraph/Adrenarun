@@ -140,6 +140,9 @@ public static class Globals
 		{ EnemyType.RANGED, 20f },
 		{ EnemyType.FLYING, 20f }
 	};
+
+	public static float TransitionHealth = 100f;
+	public static int TransitionPills = 0;
 }
 
 public enum EnemyType
