@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Ground
-  m_Shader: {fileID: 4800000, guid: 128c5f1edaefa4c4fb3f9f7a4615edb2, type: 3}
+  m_Shader: {fileID: 4800000, guid: 8fa84e1c8f3a97b4bb416e8eb087630e, type: 3}
   m_ShaderKeywords: _SEGMENTED_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -39,12 +39,20 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
+    - _EmmisTex:
+        m_Texture: {fileID: 2800000, guid: d5ed5a8f112b24647b4b578fcb98abbb, type: 3}
         m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: a06d0f1e9ec9ea34099d211f117cb74f, type: 3}
+        m_Scale: {x: 2, y: 2}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 2800000, guid: b4a659ae92320d44cb5a3976df384847, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -56,7 +64,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AmbientCol: 0
+    - _AmbientCol: 0.44
     - _BumpScale: 1
     - _Clipped: 0
     - _ColBright: 0
@@ -64,9 +72,15 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _FresnelBrightness: 0.25
+    - _FresnelPower: 0.454
+    - _FresnelShadowDropoff: 0.277
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _HighIntensity: 1.85
+    - _LightScalar: 0.84
+    - _LowIntensity: 4.37
     - _Lumin: 0
     - _MaxLight: 1
     - _Metallic: 0
@@ -75,7 +89,12 @@ Material:
     - _OcclusionStrength: 1
     - _Offset: 0
     - _OtlWidth: 1
+    - _OutlineSize: 0
     - _Parallax: 0.02
+    - _RampLevels: 8
+    - _RimAlpha: 0.143
+    - _RimDropOff: 0.405
+    - _RimPower: 0.266
     - _Segmented: 1
     - _ShnIntense: 0
     - _ShnOverlap: 0
@@ -84,13 +103,18 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Steps: 3
+    - _Steps: 5.4
     - _StpSmooth: 0
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.49019608, g: 0.24013337, b: 0.11372548, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FresnelColor: {r: 0.9450981, g: 0.8431373, b: 0.36078432, a: 1}
+    - _HighColor: {r: 0.9450981, g: 0.8431373, b: 0.36078432, a: 1}
+    - _LowColor: {r: 0.23584908, g: 0.07977248, b: 0.05896227, a: 1}
     - _OtlColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 0.8235295, g: 0.45098042, b: 0.14117648, a: 1}
     - _ShnColor: {r: 1, g: 1, b: 0, a: 1}
   m_BuildTextureStacks: []
