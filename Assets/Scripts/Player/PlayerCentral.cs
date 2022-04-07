@@ -58,6 +58,9 @@ public class PlayerCentral : MonoBehaviour
 
         SpeedManager.adrenalinModifier = 0f;
 
+        GetComponent<Stats>().currentHealth = Globals.TransitionHealth;
+        healingPills = Globals.TransitionPills;
+        
 		foreach (PowerUpType powerUp in Globals.TransitionPowerUpDictionary.Keys)
 		{
 			for (int i = 0; i < Globals.TransitionPowerUpDictionary[powerUp]; i++)

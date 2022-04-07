@@ -117,7 +117,9 @@ public class TutorialManager : MonoBehaviour
     }
 
     private void FinalStage() {
-        endPortal.SetActive(true); 
+        endPortal.SetActive(true);
+        playerStats.currentHealth = playerStats.maxHealth;
+        player.GetComponent<PlayerCentral>().healingPills = 0;
     }
 
     private void ClearPowerups() {
