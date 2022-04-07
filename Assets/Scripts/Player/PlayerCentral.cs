@@ -128,6 +128,7 @@ public class PlayerCentral : MonoBehaviour
 			if (statsComponent.currentHealth < statsComponent.maxHealth)
 			{
 				healingPills -= 1;
+				AudioManager.PlayConsumeHealthPillAudio();
 				statsComponent.currentHealth = Mathf.Min(statsComponent.maxHealth, statsComponent.currentHealth + 15);
 			}
 		}

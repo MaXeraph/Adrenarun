@@ -51,6 +51,7 @@ public class UpgradeUI : MonoBehaviour
 
     void choose(int num)
     { 
+		AudioManager.PlayMenuSelectAudio();
         if (num < 0 || num > 2) return;
         UIManager.powerSelection = num;
         exit();

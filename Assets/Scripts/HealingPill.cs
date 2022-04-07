@@ -37,6 +37,7 @@ public class HealingPill : MonoBehaviour
 		{
 			PlayerCentral playerCentral = other.gameObject.GetComponent<PlayerCentral>();
 			if (playerCentral.healingPills < healingPillCap){
+				AudioManager.PlayPickUpItemAudio();
 				playerCentral.healingPills += 1;
 				currentPills.Remove(gameObject);
 				ObjectPool.Destroy("HealingPill", gameObject);				

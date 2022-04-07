@@ -58,6 +58,11 @@ public class EnemyBehaviour : MonoBehaviour
 	{
 		EnemyBehaviour eb = enemy.GetComponent<EnemyBehaviour>();
 		EnemyType type = eb.enemyType;
+		if (type == EnemyType.TANK) {
+			AudioManager.PlayEnemyTankDeathAudio();
+		} else {
+			AudioManager.PlayEnemyDeathAudio();
+		}
 		Destroy(eb);
 		ObjectPool.Destroy(Globals.enemyPrefabNames[type], enemy);
 	}
