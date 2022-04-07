@@ -1706,7 +1706,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e606a698c409d4c4d803195edb4d9c0e, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e606a698c409d4c4d803195edb4d9c0e, type: 3}
       propertyPath: m_LocalScale.x
@@ -7372,7 +7372,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-187358
+  m_Name: pb_Mesh-277316
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7622,9 +7622,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal3 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1301147272669032533, guid: ac00112894387bf4695cc9b1fbe1403a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1301147272669032536, guid: ac00112894387bf4695cc9b1fbe1403a, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1301147272669032536, guid: ac00112894387bf4695cc9b1fbe1403a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7670,6 +7674,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1649108662}
+    - target: {fileID: 1301147272669032538, guid: ac00112894387bf4695cc9b1fbe1403a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3aed705d62503694d979ad94e54de629, type: 2}
     - target: {fileID: 1301147272669032539, guid: ac00112894387bf4695cc9b1fbe1403a, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -7985,7 +7993,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5841979810881545747, guid: b48c293e05f83a84cb33d1d6c25fc4a7, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5841979810881545747, guid: b48c293e05f83a84cb33d1d6c25fc4a7, type: 3}
       propertyPath: m_LocalPosition.x
