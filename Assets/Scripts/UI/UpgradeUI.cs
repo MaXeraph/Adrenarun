@@ -60,8 +60,8 @@ public class UpgradeUI : MonoBehaviour
     void exit()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        UIManager.UpdateWeapon();
-        UIManager.Reloading = true;
+       // UIManager.UpdateWeapon();
+       // UIManager.Reloading = true;
         gameObject.SetActive(false);
     }
     

@@ -46,7 +46,7 @@ public class WaveManager : MonoBehaviour
 		}
 		GameObject platform = GameObject.FindGameObjectWithTag("Platform");
 		Mesh mesh = platform.GetComponent<MeshFilter>().mesh;
-		if (LevelTransition.currentLevel == 1)
+		if (LevelTransition.currentLevel == 3)
 		{
 			platformRadius = platform.transform.localScale.x * 3; // * 4 / 2 because is pro builder platform
 		}

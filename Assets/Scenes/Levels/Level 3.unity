@@ -139,9 +139,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal
       objectReference: {fileID: 0}
+    - target: {fileID: 2929433526747698113, guid: ce07255691c1a9048af278c4448753ea, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2929433526747698126, guid: ce07255691c1a9048af278c4448753ea, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2929433526747698126, guid: ce07255691c1a9048af278c4448753ea, type: 3}
       propertyPath: m_LocalScale.z
@@ -5017,7 +5021,7 @@ Transform:
   m_LocalScale: {x: 10, y: 1, z: 9.6}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &180578228
 MeshCollider:
@@ -6671,6 +6675,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8360809652547223245, guid: 8caeb98ef9447154c928274cd65859b9, type: 3}
       propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8360809652547223245, guid: 8caeb98ef9447154c928274cd65859b9, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8360809652547223245, guid: 8caeb98ef9447154c928274cd65859b9, type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8360809652547223245, guid: 8caeb98ef9447154c928274cd65859b9, type: 3}
