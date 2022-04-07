@@ -135,6 +135,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2507396244060859075, guid: ce07255691c1a9048af278c4448753ea, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2929433526747698113, guid: ce07255691c1a9048af278c4448753ea, type: 3}
       propertyPath: m_Name
       value: Portal
@@ -204,8 +208,20 @@ PrefabInstance:
       value: -0.0058
       objectReference: {fileID: 0}
     - target: {fileID: 2929433527062935573, guid: ce07255691c1a9048af278c4448753ea, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929433527062935573, guid: ce07255691c1a9048af278c4448753ea, type: 3}
       propertyPath: reverseExitDirection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929433527062935574, guid: ce07255691c1a9048af278c4448753ea, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929433527389981256, guid: ce07255691c1a9048af278c4448753ea, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2929433527389981256, guid: ce07255691c1a9048af278c4448753ea, type: 3}
       propertyPath: reverseExitDirection
@@ -222,6 +238,14 @@ PrefabInstance:
     - target: {fileID: 2929433527389981260, guid: ce07255691c1a9048af278c4448753ea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929433527389981261, guid: ce07255691c1a9048af278c4448753ea, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3926940736362778479, guid: ce07255691c1a9048af278c4448753ea, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce07255691c1a9048af278c4448753ea, type: 3}
@@ -6181,6 +6205,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2507396244060859075, guid: ce07255691c1a9048af278c4448753ea, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2929433526747698113, guid: ce07255691c1a9048af278c4448753ea, type: 3}
       propertyPath: m_Name
       value: Portal (1)
@@ -6246,8 +6274,20 @@ PrefabInstance:
       value: -0.0025
       objectReference: {fileID: 0}
     - target: {fileID: 2929433527062935573, guid: ce07255691c1a9048af278c4448753ea, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929433527062935573, guid: ce07255691c1a9048af278c4448753ea, type: 3}
       propertyPath: reverseExitDirection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929433527062935574, guid: ce07255691c1a9048af278c4448753ea, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929433527389981256, guid: ce07255691c1a9048af278c4448753ea, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2929433527389981256, guid: ce07255691c1a9048af278c4448753ea, type: 3}
       propertyPath: reverseExitDirection
@@ -6276,6 +6316,14 @@ PrefabInstance:
     - target: {fileID: 2929433527389981260, guid: ce07255691c1a9048af278c4448753ea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929433527389981261, guid: ce07255691c1a9048af278c4448753ea, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3926940736362778479, guid: ce07255691c1a9048af278c4448753ea, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce07255691c1a9048af278c4448753ea, type: 3}
@@ -7498,6 +7546,10 @@ PrefabInstance:
     - target: {fileID: 645961371358757029, guid: f98c3b3e2cb7c7a4b97894c381441727, type: 3}
       propertyPath: m_Name
       value: BigTree
+      objectReference: {fileID: 0}
+    - target: {fileID: 645961371358757029, guid: f98c3b3e2cb7c7a4b97894c381441727, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1659850520247807543, guid: f98c3b3e2cb7c7a4b97894c381441727, type: 3}
       propertyPath: m_Enabled
