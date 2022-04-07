@@ -146,7 +146,7 @@ public class WaveManager : MonoBehaviour
 	{
 		EnemyVariantType variant = EnemyVariantType.NONE;
 		// 50% to be predictive if turret or ranged.
-		if ((enemy == EnemyType.TURRET || enemy == EnemyType.RANGED) && Random.Range(0, 2) == 0)
+		if ((enemy == EnemyType.TURRET || enemy == EnemyType.RANGED || enemy == EnemyType.FLYING) && Random.Range(0, 2) == 0)
 		{
 			variant = EnemyVariantType.PREDICTIVE;
 		}
