@@ -1473,12 +1473,13 @@ GameObject:
   - component: {fileID: 813528401}
   - component: {fileID: 813528400}
   - component: {fileID: 813528399}
+  - component: {fileID: 813528404}
   m_Layer: 2
   m_Name: FallOffCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!114 &813528399
 MonoBehaviour:
@@ -1569,6 +1570,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!208 &813528404
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813528398}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &883537563
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1590,6 +1607,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1609958084614004999, guid: 0df32bf1b87c5cc4d98543e286c98b97, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609958084614004999, guid: 0df32bf1b87c5cc4d98543e286c98b97, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188864699070137241, guid: 0df32bf1b87c5cc4d98543e286c98b97, type: 3}
+      propertyPath: m_Shape
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188864699070137241, guid: 0df32bf1b87c5cc4d98543e286c98b97, type: 3}
+      propertyPath: m_Extents.x
+      value: 0.009
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188864699070137241, guid: 0df32bf1b87c5cc4d98543e286c98b97, type: 3}
+      propertyPath: m_Extents.z
+      value: 0.009
+      objectReference: {fileID: 0}
+    - target: {fileID: 4425814030447265898, guid: 0df32bf1b87c5cc4d98543e286c98b97, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4425814030447265898, guid: 0df32bf1b87c5cc4d98543e286c98b97, type: 3}
@@ -7335,7 +7372,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-250452
+  m_Name: pb_Mesh-187358
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

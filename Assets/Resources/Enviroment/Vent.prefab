@@ -15,8 +15,8 @@ GameObject:
   m_Name: Group_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8852757715047593973
 Transform:
@@ -94,7 +94,7 @@ GameObject:
   m_Name: Vent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 3
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7725063795390243597
@@ -129,8 +129,8 @@ GameObject:
   m_Name: Grass_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8370484947208927065
 Transform:
@@ -207,12 +207,13 @@ GameObject:
   - component: {fileID: 6523912063047806842}
   - component: {fileID: 5404524434138737697}
   - component: {fileID: 7891503985253062366}
+  - component: {fileID: 5765015664363738118}
   m_Layer: 0
   m_Name: Group_002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8971971183110012050
 Transform:
@@ -291,6 +292,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -757969660878346733, guid: 6b435003a76a92f46a3962433e7a2611, type: 3}
+--- !u!208 &5765015664363738118
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406525916387182014}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.61, y: 0.102000006, z: 0.60400003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7835781674472884219
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,8 +325,8 @@ GameObject:
   m_Name: Axis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!224 &7835781674472884216
 RectTransform:
