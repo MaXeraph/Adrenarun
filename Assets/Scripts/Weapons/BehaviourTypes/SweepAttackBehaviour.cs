@@ -21,17 +21,12 @@ public class SweepAttackBehaviour : AbstractAttackBehaviour
 		halfExtents = new Vector3(boxSideLen / 2, boxSideLen / 4, boxSideLen / 2);
 	}
 
-	public override void initiateAttack(Vector3 position, Vector3 direction)
+	public override void initiateAttack(Vector3 position, Vector3 direction, EntityType entityType)
 	{
 		direction = direction.normalized;
-		Collider[] sphereCollisions = Physics.OverlapSphere(position, attackSize);
-		Collider[] boxCollisions = Physics.OverlapBox(position + direction * attackSize, halfExtents, Quaternion.Euler(0, 45, 0));
+		Collider[] sphereCollisions = Physics.OverlapSphere(position  + direction.normalized * 5f, attackSize);
 		List<Collider> collisions = new List<Collider>();
 		foreach (Collider c in sphereCollisions)
-		{
-			if (boxCollisions.Contains(c)) collisions.Add(c);
-		}
-		foreach (Collider c in collisions)
 		{
 			Stats statsComponent = c.gameObject.GetComponent<Stats>();
 			if (statsComponent && statsComponent.owner != _owner)

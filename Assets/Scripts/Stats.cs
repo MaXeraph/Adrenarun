@@ -26,7 +26,7 @@ public class Stats : MonoBehaviour
 			}
 			else if (owner == EntityType.PLAYER)
 			{
-				_currentHealth = Mathf.Clamp(_currentHealth, 0, maxHealth*2);
+				_currentHealth = Mathf.Clamp(_currentHealth, 0, maxHealth*1.2f);
 				SpeedManager.updateSpeeds(_currentHealth / maxHealth);
 				UIManager.Health = _currentHealth;
 				if (_currentHealth == 0)

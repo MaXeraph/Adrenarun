@@ -56,7 +56,7 @@ public class Weapon : MonoBehaviour
                 // for each direction, initiate an attack
                 for (int j = 0; j < attackDirections.Count; j++)
                 {
-                    StartCoroutine(ShootAfterDelay(position, attackDirections[j].Item1, attackDirections[j].Item2));
+                    StartCoroutine(ShootAfterDelay(position, attackDirections[j].Item1, attackDirections[j].Item2, entityType));
                 }
                 if (_reloadSpeed > 0) _currentMagazine -= 1; // Comment out for infinite ammo
                 if (entityType == EntityType.PLAYER)
@@ -93,9 +93,9 @@ public class Weapon : MonoBehaviour
         _currentMagazine = _magazineSize;
     }
 
-    IEnumerator ShootAfterDelay(Vector3 position, Vector3 direction, float delay)
+    IEnumerator ShootAfterDelay(Vector3 position, Vector3 direction, float delay, EntityType entityType)
     {
         yield return new WaitForSeconds(delay);
-        _attackBehaviour.initiateAttack(position, direction);
+        _attackBehaviour.initiateAttack(position, direction, entityType);
     }
 }

@@ -26,9 +26,12 @@ public class BulletAttackBehaviour : AbstractAttackBehaviour
 		};
 	}
 
-	public override void initiateAttack(Vector3 position, Vector3 direction)
+	public override void initiateAttack(Vector3 position, Vector3 direction, EntityType entityType)
 	{
-		BulletMono.Create(this, position, direction);
+		string bulletName;
+		if (entityType == EntityType.PLAYER) bulletName = "Bullet";
+		else bulletName = "EnemyBullet";
+		BulletMono.Create(this, position, direction, bulletName);
 	}
 
 	public virtual void onHit(BulletMono bm, GameObject target)

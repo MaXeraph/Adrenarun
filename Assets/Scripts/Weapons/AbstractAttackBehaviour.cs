@@ -20,7 +20,7 @@ public abstract class AbstractAttackBehaviour
     /**
      * Called to initiate an attack from position in direction.
      */
-    public abstract void initiateAttack(Vector3 position, Vector3 direction);
+    public abstract void initiateAttack(Vector3 position, Vector3 direction, EntityType entityType);
 
     protected AbstractAttackBehaviour(EntityType owner, float damage)
     {
