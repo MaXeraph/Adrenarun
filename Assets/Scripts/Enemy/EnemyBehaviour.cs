@@ -95,6 +95,11 @@ public class EnemyBehaviour : MonoBehaviour
 		Vector3 aimDirection = GetAimDirection(transform, _targetTransform);
 
 		// TODO: spawn bullet outside of model
+		if (enemyType == EnemyType.TANK && Vector3.Distance(_targetTransform.position, transform.position) < 13f){
+			anim["attack"].speed = SpeedManager.coreSpeed;
+			anim.Play("attack");
+			return;
+		}
 		if (_weapon.Attack(transform.position, aimDirection, EntityType.ENEMY) && anim)
 		{
 			foreach (AnimationState state in anim)

@@ -88,8 +88,11 @@ public static class EnemyMovements
 		float playerDistance = Vector3.Distance(position, playerPosition);
 		if (playerDistance > 0)
 		{
+			if (!anim.IsPlaying("attack"))
+			{
+				anim.Play("Tank_game_rig|shield");
+			}
 			navAgent.SetDestination(playerPosition);
-			anim.Play("Tank_game_rig|shield");
 		}
 	}
 	public static void TankSetup(GameObject enemyObject)

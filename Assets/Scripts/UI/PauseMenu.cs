@@ -95,7 +95,7 @@ public class PauseMenu : MonoBehaviour
 	void Update()
     {
 
-		if (Input.GetKeyDown(KeyCode.P) && !UIManager.dead)
+		if (Input.GetKeyDown(KeyCode.Escape) && !UIManager.dead)
 		{
 			if (!revealed) { reveal(); revealed = true; }
 			else { exit(); revealed = false; }
