@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.20608976, g: 0.20515534, b: 0.21363008, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6275,6 +6275,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 188008755483303798, guid: ce07255691c1a9048af278c4448753ea, type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2929433526747698113, guid: ce07255691c1a9048af278c4448753ea, type: 3}
       propertyPath: m_Name
       value: Portal (1)
@@ -6395,6 +6399,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 1.1712707
       objectReference: {fileID: 0}
+    - target: {fileID: 5604339619366720496, guid: ce07255691c1a9048af278c4448753ea, type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce07255691c1a9048af278c4448753ea, type: 3}
 --- !u!4 &1572829508 stripped
@@ -6490,7 +6498,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-82560
+  m_Name: pb_Mesh-3748
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
