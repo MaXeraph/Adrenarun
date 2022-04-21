@@ -21,7 +21,7 @@ public class SweepAttackBehaviour : AbstractAttackBehaviour
 		halfExtents = new Vector3(boxSideLen / 2, boxSideLen / 4, boxSideLen / 2);
 	}
 
-	public override void initiateAttack(Vector3 position, Vector3 direction)
+	public override void initiateAttack(Vector3 position, Vector3 direction, EntityType entityType)
 	{
 		direction = direction.normalized;
 		Collider[] sphereCollisions = Physics.OverlapSphere(position  + direction.normalized * 5f, attackSize);

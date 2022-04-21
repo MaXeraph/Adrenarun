@@ -12,7 +12,7 @@ public class HealerAttackBehaviour : AbstractAttackBehaviour
 	{
 	}
 
-	public override void initiateAttack(Vector3 position, Vector3 direction)
+	public override void initiateAttack(Vector3 position, Vector3 direction, EntityType entityType)
 	{
         position -= direction.normalized * 1.1f;
 		RaycastHit[] hits = Physics.RaycastAll(position, direction);

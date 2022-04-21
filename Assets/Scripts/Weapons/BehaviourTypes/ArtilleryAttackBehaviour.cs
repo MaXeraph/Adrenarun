@@ -18,7 +18,7 @@ public class ArtilleryAttackBehaviour : BulletAttackBehaviour
 		thermiteDamageCooldown = damageCooldown;
 	}
 
-	public override void initiateAttack(Vector3 position, Vector3 direction)
+	public override void initiateAttack(Vector3 position, Vector3 direction, EntityType entityType)
 	{
 		ArtilleryMono.Create(this, position, direction);
 	}
