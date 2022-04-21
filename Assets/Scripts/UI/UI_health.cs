@@ -13,6 +13,7 @@ public class UI_health : MonoBehaviour
     private static float max;
     private static Vector3 start_pos;
     private static bool dead = false;
+	private static Text ExtraHealth;
 
     private static float shake_duration = 0.075f;
     private static float fill_duration = 0.5f;
@@ -25,7 +26,9 @@ public class UI_health : MonoBehaviour
         slider = GetComponent<Slider>();
         slider_fill = GameObject.Find("Fill").GetComponent<Image>();
         slow_fill = transform.Find("Slow").GetComponent<Image>();
-    }
+		ExtraHealth = transform.Find("Extra").GetComponent<Text>();
+
+	}
 
     void Start()
     {
@@ -43,12 +46,16 @@ public class UI_health : MonoBehaviour
 
     public static void setHealth(float health)
     {
-        if (health < current)
+		if ((health - UIManager.MaxHealth) > 0) ExtraHealth.text = "+" + (health - UIManager.MaxHealth).ToString();
+		else ExtraHealth.text = "";
+		Debug.Log(ExtraHealth.text);
+		if (health < current)
         {
-                impact_fill(health);
-        }
+            impact_fill(health);
 
-        else { slow_fill.fillAmount = health / max; }
+
+		}
+		else { slow_fill.fillAmount = health / max; }
 
         current = health;
         slider.value = current;
